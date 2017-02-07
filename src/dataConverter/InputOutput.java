@@ -72,10 +72,10 @@ public class InputOutput {
 		//SUCCESS
 	
 	//TODO: Enumerate person and assets classes, and create arrays for each.
-		//STUFF
+		//DONE ELSEWHERE
 	//TODO: Determine whether or not the string we have pertains to persons or assets
-		boolean IsPerson;
-		boolean IsAsset;
+		boolean IsPerson = false;
+		boolean IsAsset = false;
 		if(title.contains("Persons.dat")||title.contains("persons.dat")){
 		System.out.println("ITS A PERSON");
 		IsPerson=true;
@@ -87,8 +87,26 @@ public class InputOutput {
 		else{
 		System.out.println("I HAVE NO IDEA WHAT THIS iS");
 		}
+		//delimeter each thing into individual arguments.
+		String delims= ";";
+		String[][] Arguments= new String[InputArrayLength][6];
+	//	String Argument;
+		for(int i=0; i<=InputArrayLength; i++){
+			for(x=0; x<=6; x++){
+				String[][] Arguments= InputArray[i].nextLine().split(";", 6);
+			}
+		}
+		
+		
 	//TODO: Based on what each is,  use methods to save delimetered strings into the correct spaces for whatever type the data is
 		
+		
+		if(IsPerson){
+			
+		}
+		else if(IsAsset){
+			
+		}
 	//TODO: Store the Persons and Assets data into a JSON file.
 		
 }
