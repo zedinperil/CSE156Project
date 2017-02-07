@@ -49,6 +49,37 @@ public class InputOutput {
 	//TODO: Enumerate person and assets classes, and create arrays for each.
 		//DONE ELSEWHERE
 	//TODO: Determine whether or not the string we have pertains to persons or assets
+<<<<<<< HEAD
+=======
+		boolean IsPerson = false;
+		boolean IsAsset = false;
+		if(title.contains("Persons.dat")||title.contains("persons.dat")){
+		System.out.println("ITS A PERSON");
+		IsPerson=true;
+		}
+		else if(title.contains("Assets.dat")||title.contains("assets.dat")){
+		System.out.println("ITS AN ASSET");
+		IsAsset=true;
+		}
+		else{
+		System.out.println("I HAVE NO IDEA WHAT THIS iS");
+		}
+		//delimeter each thing into individual arguments.
+		String delims= "[;]";
+<<<<<<< HEAD
+String[][] Arguments= new String[InputArrayLength][10000000];
+=======
+ String[] Arguments= new String[InputArrayLength];
+>>>>>>> origin/master
+//		String Argument;
+		for(int i=0; i<InputArrayLength; i++){
+			for(x=0; x<6; x++){
+				Arguments[i]=InputArray[i].split(delims);
+				System.out.println(Arguments[i][0]);
+			}
+	
+		}
+>>>>>>> origin/master
 		
 		//delimeter each thing into individual arguments.
 		String delims= "[;]";		
