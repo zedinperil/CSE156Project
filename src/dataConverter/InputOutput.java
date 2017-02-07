@@ -48,7 +48,6 @@ public class InputOutput {
 		for(int i=0; i< fileContent.length; i++){
 				if((char)fileContent[i]==SpecialChars[4]||i==fileContent.length-1){ //Checks to see if there is a newline character or if we are at the end of the data file
 					g=i;//g acts as the intger to which x will iterate
-					InputArrayLength++;	//this means a newline has been detected, and so the length of the input array goes up one
 					//Stringbuilder is used to create a string out of the characters in the fileContent array		
 					StringBuilder sb = new StringBuilder();		
 							x=d;//x is set at d so that we can continue to go through the fileContent array where we left off after making the last string
@@ -64,9 +63,15 @@ public class InputOutput {
 								}	
 								x++;//iterate x
 							}
-							InputArray[x] = sb.toString();//save the stringbuilder string into the InputArray Location
-							System.out.println(InputArray[x]);//testing
+							InputArray[InputArrayLength] = sb.toString();//save the stringbuilder string into the InputArray Location
+							System.out.println(InputArray[InputArrayLength]);//testing
+//DEBUGGING					System.out.println("g is: "+g);
+//							System.out.println("X is: " +x);
+//							System.out.println("d is: "+d);
+//							System.out.println("InputArrayLength is: "+InputArrayLength);
 							d=x;//d is set at x, so that we may reference it next loop.	
+							InputArrayLength++;	//this means a newline has been detected, and so the length of the input array goes up one
+
 				}				
 		}
 		//SUCCESS
@@ -88,13 +93,15 @@ public class InputOutput {
 		System.out.println("I HAVE NO IDEA WHAT THIS iS");
 		}
 		//delimeter each thing into individual arguments.
-		String delims= ";";
-		String[][] Arguments= new String[InputArrayLength][6];
-	//	String Argument;
-		for(int i=0; i<=InputArrayLength; i++){
-			for(x=0; x<=6; x++){
-				String[][] Arguments= InputArray[i].nextLine().split(";", 6);
+		String delims= "[;]";
+String[][] Arguments= new String[InputArrayLength][6];
+//		String Argument;
+		for(int i=0; i<InputArrayLength; i++){
+			for(x=0; x<6; x++){
+				Arguments[i]=InputArray[i].split(delims);
+				System.out.println(Arguments[i][x]);
 			}
+			System.out.println(InputArray[i]);
 		}
 		
 		
