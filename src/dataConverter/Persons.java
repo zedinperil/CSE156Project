@@ -1,5 +1,7 @@
 package dataConverter;
 
-public class Persons {
-
+private class Persons {
+	
+	private String PersonCode()
+	
 }
