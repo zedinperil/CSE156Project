@@ -1,0 +1,183 @@
+{
+"assets": [
+  {
+    "code": "wOOWoo1S",
+    "label": "Canadian National Railway",
+    "type": "S",
+    "baseRateOfReturn": 0.046,
+    "quarterlyDividend": 2.75,
+    "sharePrice": 97.75,
+    "symbol": "CNI",
+    "beta": 0.79
+  },
+  {
+    "code": "CMPROP0121",
+    "label": "Commercial Property-Red Oaks Mall",
+    "type": "P",
+    "baseRateOfReturn": 0.0535,
+    "quarterlyDividend": 14240.0,
+    "omega": 0.25,
+    "value": 1.0456E7
+  },
+  {
+    "code": "RENT445",
+    "label": "Rental Property",
+    "type": "P",
+    "baseRateOfReturn": 0.0025,
+    "quarterlyDividend": 2400.0,
+    "omega": 0.15,
+    "value": 120000.0
+  },
+  {
+    "code": "IND321",
+    "label": "Industrial Widget Manufacturers Inc.",
+    "type": "P",
+    "baseRateOfReturn": 0.02,
+    "quarterlyDividend": 10500.0,
+    "omega": -0.15,
+    "value": 4213333.0
+  },
+  {
+    "code": "BERK-B",
+    "label": "Berkshire Hathaway",
+    "type": "S",
+    "baseRateOfReturn": 0.07200000000000001,
+    "quarterlyDividend": 0.0,
+    "sharePrice": 107.04,
+    "symbol": "BRK-B",
+    "beta": 0.29
+  },
+  {
+    "code": "RIRA01",
+    "label": "Roth IRA",
+    "type": "D",
+    "apr": 0.034
+  },
+  {
+    "code": "RSTOR322",
+    "label": "7\" Vinyl Records",
+    "type": "P",
+    "baseRateOfReturn": 0.021,
+    "quarterlyDividend": 2453.21,
+    "omega": 0.54,
+    "value": 13500.0
+  },
+  {
+    "code": "GOOG001",
+    "label": "Google Inc.",
+    "type": "S",
+    "baseRateOfReturn": 0.055999999999999994,
+    "quarterlyDividend": 0.0,
+    "sharePrice": 814.708,
+    "symbol": "GOOG",
+    "beta": 1.15
+  },
+  {
+    "code": "B0oWM",
+    "label": "Costco",
+    "type": "S",
+    "baseRateOfReturn": 0.0225,
+    "quarterlyDividend": 10.0,
+    "sharePrice": 106.13,
+    "symbol": "COST",
+    "beta": 0.82
+  },
+  {
+    "code": "AGTSAV",
+    "label": "Savings Account",
+    "type": "D",
+    "apr": 0.0025
+  },
+  {
+    "code": "CD1Y3X",
+    "label": "1-year Rollover CD",
+    "type": "D",
+    "apr": 0.0275
+  },
+  {
+    "code": "321CC",
+    "label": "Coca-Cola",
+    "type": "S",
+    "baseRateOfReturn": 0.031,
+    "quarterlyDividend": 5.45,
+    "sharePrice": 41.08,
+    "symbol": "KO",
+    "beta": 0.68
+  },
+  {
+    "code": "N0TPIX",
+    "label": "3D Systems",
+    "type": "S",
+    "baseRateOfReturn": 0.0125,
+    "quarterlyDividend": 0.0,
+    "sharePrice": 35.4,
+    "symbol": "DDD",
+    "beta": 1.28
+  },
+  {
+    "code": "REALStr12",
+    "label": "Fred\u0027s Fabulous Hardware Store",
+    "type": "P",
+    "baseRateOfReturn": 0.0123,
+    "quarterlyDividend": 1232.0,
+    "omega": 0.13,
+    "value": 54300.0
+  },
+  {
+    "code": "123APP",
+    "label": "Apple",
+    "type": "S",
+    "baseRateOfReturn": 0.043,
+    "quarterlyDividend": 24.5,
+    "sharePrice": 429.8,
+    "symbol": "AAPL",
+    "beta": 1.25
+  },
+  {
+    "code": "SAVE01",
+    "label": "Online Savings A+",
+    "type": "D",
+    "apr": 0.019
+  },
+  {
+    "code": "FOOD12",
+    "label": "Cluckin\u0027s restaurant chain",
+    "type": "P",
+    "baseRateOfReturn": 0.03,
+    "quarterlyDividend": 35000.0,
+    "omega": 0.32,
+    "value": 1212500.0
+  },
+  {
+    "code": "BX001-23",
+    "label": "Money Market Savings",
+    "type": "D",
+    "apr": 0.0105
+  },
+  {
+    "code": "DIAGEO12",
+    "label": "Diageo PLC",
+    "type": "S",
+    "baseRateOfReturn": 0.032,
+    "quarterlyDividend": 12.0,
+    "sharePrice": 122.75,
+    "symbol": "DEO",
+    "beta": 1.04
+  },
+  {
+    "code": "CD99312",
+    "label": "5-year CD",
+    "type": "D",
+    "apr": 0.0435
+  },
+  {
+    "code": "No1BURR",
+    "label": "Chipotle Mexican Grill",
+    "type": "S",
+    "baseRateOfReturn": 0.0319,
+    "quarterlyDividend": 45.57,
+    "sharePrice": 341.91,
+    "symbol": "CMG",
+    "beta": 0.94
+  }
+]}

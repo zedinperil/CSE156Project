@@ -99,9 +99,9 @@ String[][] Arguments= new String[InputArrayLength][6];
 		for(int i=0; i<InputArrayLength; i++){
 			for(x=0; x<6; x++){
 				Arguments[i]=InputArray[i].split(delims);
-				System.out.println(Arguments[i][x]);
+				System.out.println(Arguments[i][0]);
 			}
-			System.out.println(InputArray[i]);
+	
 		}
 		
 		
