@@ -94,7 +94,11 @@ public class InputOutput {
 		}
 		//delimeter each thing into individual arguments.
 		String delims= "[;]";
+<<<<<<< HEAD
 String[][] Arguments= new String[InputArrayLength][10000000];
+=======
+ String[] Arguments= new String[InputArrayLength];
+>>>>>>> origin/master
 //		String Argument;
 		for(int i=0; i<InputArrayLength; i++){
 			for(x=0; x<6; x++){
