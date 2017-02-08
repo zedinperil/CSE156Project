@@ -9,7 +9,7 @@ public class Persons {
 	private Address Address;
 	private String Email;
 	
-	public Persons Persons(String PersonCode, Broker Brokerdata, Name Name, Address address, String email){
+	private Persons Persons(String PersonCode, Broker Brokerdata, Name Name, Address address, String email){
 		this.PersonCode= PersonCode;
 		this.Brokerdata= Brokerdata;
 		this.Name=Name;

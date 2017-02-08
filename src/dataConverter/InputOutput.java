@@ -39,6 +39,8 @@ public class InputOutput {
 		}
 		String fullData[] = new String[size];
 		int i = 0;
+		int x = 0;
+		int k = 0;
 		while(s.hasNext()) {
 			String line = s.nextLine(); //throw away the endline character
 			//System.out.println(line);
@@ -56,22 +58,30 @@ public class InputOutput {
 		//DONE ELSEWHERE
 	//TODO: Determine whether or not the string we have pertains to persons or assets
 
-		boolean IsPerson = false;
-		boolean IsAsset = false;
+	String DelimeteredData[][]= new String[NumberOfLines][];
 		if(fileName.contains("Persons.dat")||fileName.contains("persons.dat")){
 		System.out.println("ITS A PERSON");
-		IsPerson=true;
+			for(i=1; i<=NumberOfLines; i++){
+				for(x=0; x<length(fullData[i]); x++){
+					if(fullData[i].charAt(x)==';'){
+						DelimeteredData[i][k]=fullData[i].split(";");
+						k++;
+					}
+				}
+			}
 		}
 		else if(fileName.contains("Assets.dat")||fileName.contains("assets.dat")){
 		System.out.println("ITS AN ASSET");
-		IsAsset=true;
+			for(i=1; i<=NumberOfLines; i++){
+				
+			}
 		}
 		else{
 		System.out.println("I HAVE NO IDEA WHAT THIS iS");
 		}
 		
 	//TODO: Based on what each is,  use methods to save delimetered strings into the correct spaces for whatever type the data is
-		
+	
 	//TODO: Store the Persons and Assets data into a JSON file.
 }
 }
