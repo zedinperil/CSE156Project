@@ -1,3 +1,4 @@
+
 package dataConverter;
 
 public class Name extends Persons{
@@ -10,9 +11,11 @@ public class Name extends Persons{
 		super();
 		String delim = ",/s";
 		String[] tempName = new String[2];
-		String[] = fullName.spilt(delim)
-		this.FirstName = String[0];
-		this.LastName = String[1];
+		for(int i=0;i<2; i++){
+			tempName = fullName.split(delim);
+		}
+		this.FirstName = tempName[1];
+		this.LastName = tempName[0];
 	}
 	
 	public String getFirstName() {

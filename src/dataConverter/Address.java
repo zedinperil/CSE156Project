@@ -6,6 +6,23 @@ public class Address extends Persons {
 	private String State;
 	private String Zipcode;
 	private String Country;
+	private String fullAddress;
+	
+	public Address(String fullAddress) {
+		super();
+		String delim = ",";
+		String[] tempAddress = new String[5];
+		for(int i=0;i<5; i++){
+			tempAddress = fullAddress.split(delim);
+		}
+		this.Street = tempAddress[0];
+		this.City = tempAddress[1];
+		this.State = tempAddress[2];
+		this.Zipcode = tempAddress[3];
+		this.Country = tempAddress[4];
+		this.fullAddress = tempAddress[5];
+	}
+	
 	public String getStreet() {
 		return Street;
 	}
