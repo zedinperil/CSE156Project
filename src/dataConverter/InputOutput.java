@@ -30,8 +30,8 @@ public class InputOutput {
         int size = Integer.parseInt(text);
         size += 1;
         int NumberOfLines;
-        System.out.println(text);
- 		System.out.println(size);
+//      System.out.println(text);
+//		System.out.println(size);
 		try{
 			s = new Scanner(new File(fileName));
 		} catch(Exception e) {
@@ -57,26 +57,12 @@ public class InputOutput {
 	//TODO: Enumerate person and assets classes, and create arrays for each.
 		//DONE ELSEWHERE
 	//TODO: Determine whether or not the string we have pertains to persons or assets
-
-	String DelimeteredData[][]= new String[NumberOfLines][];
+		boolean IsPerson=false;
+		boolean[]AddBlankEmail=new boolean[NumberOfLines];
+	String DelimeteredData[][]= new String[NumberOfLines][size*5];
 		if(fileName.contains("Persons.dat")||fileName.contains("persons.dat")){
 		System.out.println("ITS A PERSON");
-			for(i=1; i<=NumberOfLines; i++){
-				for(x=0; x<fullData[i].length(); x++){
-					if(fullData[i].charAt(x)==';'){
-						DelimeteredData[i-1]=fullData[i].split(";");
-						System.out.println(DelimeteredData[i-1][k]);
-						if(x==(fullData[i].length())-1){
-							DelimeteredData[i-1]=fullData[i].split("");
-							System.out.println(DelimeteredData[i-1][k+1]);
-							System.out.println("TryinTomakeachange");
-						}
-						k++;
-					}
-		//THIS IS FOR TESTING
-				}
-				k=0;
-			}
+		IsPerson=true;
 		}
 		else if(fileName.contains("Assets.dat")||fileName.contains("assets.dat")){
 		System.out.println("ITS AN ASSET");
@@ -89,7 +75,31 @@ public class InputOutput {
 		}
 		
 	//TODO: Based on what each is,  use methods to save delimetered strings into the correct spaces for whatever type the data is
-	
+	int[] NumberOfDelims= new int[NumberOfLines];
+		for(i=1; i<=NumberOfLines; i++){
+			for(x=0; x<fullData[i].length(); x++){
+				if(fullData[i].charAt(x)==';'){
+					DelimeteredData[i-1]=fullData[i].split(";");
+//					System.out.println(DelimeteredData[i-1][k]);	
+					k++;
+					}
+					if(x==(fullData[i].length())-1 && fullData[i].lastIndexOf(";")!=fullData[i].length()-1){
+						DelimeteredData[i-1]=fullData[i].split(";");
+//					System.out.println(DelimeteredData[i-1][k]);
+						AddBlankEmail[i-1]=false;
+						k++;	
+					}
+					NumberOfDelims[i-1]=k;
+				}	
+			k=0;
+		}
+//testing to ensure it is saved correctly;		
+		for(i=0; i<NumberOfLines; i++){
+			for(x=0; x<NumberOfDelims[i]; x++){
+				System.out.println(DelimeteredData[i][x]);
+			}
+		}
+		
 	//TODO: Store the Persons and Assets data into a JSON file.
 }
 }
