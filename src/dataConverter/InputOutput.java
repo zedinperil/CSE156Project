@@ -102,10 +102,10 @@ public class InputOutput {
 				
 				if(IsPerson){
 					if(AddBlankEmail[i]){
-						PersonArray[i]= new Persons(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], DelimeteredData[i][4], HasNoData);
+						PersonArray[i]= new Persons(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][2], HasNoData);
 					}
 					else{
-						PersonArray[i]= new Persons(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], DelimeteredData[i][4], DelimeteredData[i][5]);
+						PersonArray[i]= new Persons(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][2], DelimeteredData[i][3]);
 					}
 				}
 				if(IsAsset){

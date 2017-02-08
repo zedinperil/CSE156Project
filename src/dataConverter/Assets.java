@@ -6,6 +6,10 @@ public class Assets {
 	private Deposit DepositAccount;
 	private Stock Stocks;
 	private PrivateInvestment PrivateInvestments;
+	public Assets(String string, String string2, String string3, String string4, String string5, String string6,
+			String string7) {
+		// TODO Auto-generated constructor stub
+	}
 	/**
 	 * @return the input
 	 */

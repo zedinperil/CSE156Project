@@ -8,6 +8,10 @@ public class Persons {
 	private Name Name;
 	private Address Address;
 	private String Email;
+	
+	public Persons(String string, String string2, String string3, String string4) {
+		// TODO Auto-generated constructor stub
+	}
 	//hai
 	private Persons Persons(String PersonCode, Broker Brokerdata, Name Name, Address address, String email){
 		this.PersonCode= PersonCode;
