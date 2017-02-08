@@ -64,17 +64,18 @@ public class InputOutput {
 		if(fileName.contains("Persons.dat")||fileName.contains("persons.dat")){
 		System.out.println("ITS A PERSON");
 		IsPerson=true;
-		Persons[] PersonArray= new Persons[NumberOfLines];
+		
 		}
 		else if(fileName.contains("Assets.dat")||fileName.contains("assets.dat")){
 		System.out.println("ITS AN ASSET");
 		IsAsset=true;	
-		Assets[] AssetsArray= new Assets[NumberOfLines];
+	
 		}
 		else{
 		System.out.println("I HAVE NO IDEA WHAT THIS iS");
 		}
-		
+		Persons[] PersonArray= new Persons[NumberOfLines];
+		Assets[] AssetsArray= new Assets[NumberOfLines];
 	//TODO: Based on what each is,  use methods to save delimetered strings into the correct spaces for whatever type the data is
 	int[] NumberOfDelims= new int[NumberOfLines];
 		for(i=1; i<=NumberOfLines; i++){
@@ -95,20 +96,28 @@ public class InputOutput {
 			k=0;
 		}
 //testing to ensure it is saved correctly;		
-		String HasNoEmail= "";
+		String HasNoData= "";
 		for(i=0; i<NumberOfLines; i++){
 			for(x=0; x<NumberOfDelims[i]; x++){
 				
 				if(IsPerson){
 					if(AddBlankEmail[i]){
-		//				PersonArray[i]= new Persons(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], DelimeteredData[i][4], HasNoEmail);
+						PersonArray[i]= new Persons(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], DelimeteredData[i][4], HasNoData);
 					}
 					else{
-		//				PersonArray[i]= new Persons(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], DelimeteredData[i][4], DelimeteredData[i][5]);
+						PersonArray[i]= new Persons(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], DelimeteredData[i][4], DelimeteredData[i][5]);
 					}
 				}
 				if(IsAsset){
-		//			AssetsArray[i]= new Assets(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], DelimeteredData[i][4], DelimeteredData[i][5]);
+					if(DelimeteredData[i][1].contains("D,")){
+						AssetsArray[i]= new Assets(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], HasNoData, HasNoData, HasNoData, HasNoData);
+					}
+					else if(DelimeteredData[i][1].contains("S,")){
+						AssetsArray[i]= new Assets(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], DelimeteredData[i][4], DelimeteredData[i][5], DelimeteredData[i][6], DelimeteredData[i][7]);
+					}
+					else if(DelimeteredData[i][1].contains("P,")){
+						AssetsArray[i]= new Assets(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], DelimeteredData[i][4], DelimeteredData[i][5], DelimeteredData[i][6], HasNoData);
+					}			
 				}
 				System.out.println(DelimeteredData[i][x]);
 			}
