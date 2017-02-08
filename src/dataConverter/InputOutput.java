@@ -58,17 +58,18 @@ public class InputOutput {
 		//DONE ELSEWHERE
 	//TODO: Determine whether or not the string we have pertains to persons or assets
 		boolean IsPerson=false;
+		boolean IsAsset=false;
 		boolean[]AddBlankEmail=new boolean[NumberOfLines];
 	String DelimeteredData[][]= new String[NumberOfLines][size*5];
 		if(fileName.contains("Persons.dat")||fileName.contains("persons.dat")){
 		System.out.println("ITS A PERSON");
 		IsPerson=true;
+		Persons[] PersonArray= new Persons[NumberOfLines];
 		}
 		else if(fileName.contains("Assets.dat")||fileName.contains("assets.dat")){
 		System.out.println("ITS AN ASSET");
-			for(i=1; i<=NumberOfLines; i++){
-				
-			}
+		IsAsset=true;	
+		Assets[] AssetsArray= new Assets[NumberOfLines];
 		}
 		else{
 		System.out.println("I HAVE NO IDEA WHAT THIS iS");
@@ -94,12 +95,25 @@ public class InputOutput {
 			k=0;
 		}
 //testing to ensure it is saved correctly;		
+		String HasNoEmail= "";
 		for(i=0; i<NumberOfLines; i++){
 			for(x=0; x<NumberOfDelims[i]; x++){
+				
+				if(IsPerson){
+					if(AddBlankEmail[i]){
+		//				PersonArray[i]= new Persons(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], DelimeteredData[i][4], HasNoEmail);
+					}
+					else{
+		//				PersonArray[i]= new Persons(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], DelimeteredData[i][4], DelimeteredData[i][5]);
+					}
+				}
+				if(IsAsset){
+		//			AssetsArray[i]= new Assets(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], DelimeteredData[i][4], DelimeteredData[i][5]);
+				}
 				System.out.println(DelimeteredData[i][x]);
 			}
 		}
-		
+	
 	//TODO: Store the Persons and Assets data into a JSON file.
 }
 }
