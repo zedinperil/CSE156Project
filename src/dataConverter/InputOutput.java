@@ -1,4 +1,4 @@
-//hey this is alex and tyler yo
+//hey this is alex and tyler
 //hello again
 package dataConverter;
 import java.io.File;
