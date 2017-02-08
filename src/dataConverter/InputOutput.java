@@ -62,12 +62,14 @@ public class InputOutput {
 		if(fileName.contains("Persons.dat")||fileName.contains("persons.dat")){
 		System.out.println("ITS A PERSON");
 			for(i=1; i<=NumberOfLines; i++){
-				for(x=0; x<length(fullData[i]); x++){
+				for(x=0; x<fullData[i].length(); x++){
 					if(fullData[i].charAt(x)==';'){
-						DelimeteredData[i][k]=fullData[i].split(";");
+						DelimeteredData[i-1]=fullData[i].split(";");
+						System.out.println(DelimeteredData[i-1][k]);
 						k++;
 					}
 				}
+			k = 0;
 			}
 		}
 		else if(fileName.contains("Assets.dat")||fileName.contains("assets.dat")){
