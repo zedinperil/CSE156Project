@@ -69,7 +69,7 @@ public class InputOutput {
 						if(x==(fullData[i].length())-1){
 							DelimeteredData[i-1]=fullData[i].split("");
 							System.out.println(DelimeteredData[i-1][k+1]);
-							System.out.println("TryinTomakeachange");
+							System.out.println("CHECKEROONI");
 						}
 						k++;
 					}
