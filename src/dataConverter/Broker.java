@@ -12,8 +12,8 @@ public class Broker extends Persons{
 			for(int i=0;i<2;i++){
 				pieces = fullLine.split(delim);
 			}
-			this.TypeOfBroker = fullLine[0];
-			this.SECcode = fullLine[1];
+			this.TypeOfBroker = pieces[0];
+			this.SECcode = pieces[1];
 		}
 		
 		public String getTypeOfBroker() {
