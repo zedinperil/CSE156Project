@@ -51,7 +51,7 @@ public class InputOutput {
 		NumberOfLines=Integer.parseInt(fullData[0]);
 
 		for(i=1;i<size;i++){
-			System.out.println(fullData[i]);
+		//	System.out.println(fullData[i]);
 		}
 	
 	//TODO: Enumerate person and assets classes, and create arrays for each.
@@ -62,12 +62,20 @@ public class InputOutput {
 		if(fileName.contains("Persons.dat")||fileName.contains("persons.dat")){
 		System.out.println("ITS A PERSON");
 			for(i=1; i<=NumberOfLines; i++){
-				for(x=0; x<length(fullData[i]); x++){
+				for(x=0; x<fullData[i].length(); x++){
 					if(fullData[i].charAt(x)==';'){
-						DelimeteredData[i][k]=fullData[i].split(";");
+						DelimeteredData[i-1]=fullData[i].split(";");
+						System.out.println(DelimeteredData[i-1][k]);
+						if(x==(fullData[i].length())-1){
+							DelimeteredData[i-1]=fullData[i].split("");
+							System.out.println(DelimeteredData[i-1][k+1]);
+							System.out.println("CHECKEROONI");
+						}
 						k++;
 					}
+		
 				}
+				k=0;
 			}
 		}
 		else if(fileName.contains("Assets.dat")||fileName.contains("assets.dat")){
