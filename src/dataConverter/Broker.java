@@ -1,12 +1,12 @@
 package dataConverter;
 
 public class Broker extends Persons{
-		private BrokerType TypeOfBroker;
+		private String TypeOfBroker;
 		private String SECcode;
 		public BrokerType getTypeOfBroker() {
 			return TypeOfBroker;
 		}
-		public void setTypeOfBroker(BrokerType typeOfBroker) {
+		public void setTypeOfBroker(String typeOfBroker) {
 			TypeOfBroker = typeOfBroker;
 		}
 		public String getSECcode() {
