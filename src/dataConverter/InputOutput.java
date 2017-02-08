@@ -66,16 +66,23 @@ public class InputOutput {
 					if(fullData[i].charAt(x)==';'){
 						DelimeteredData[i-1]=fullData[i].split(";");
 						System.out.println(DelimeteredData[i-1][k]);
+<<<<<<< HEAD
 						if(x==(fullData[i].length())-1){
 							DelimeteredData[i-1]=fullData[i].split("");
 							System.out.println(DelimeteredData[i-1][k+1]);
 							System.out.println("CHECKEROONI");
 						}
+=======
+>>>>>>> origin/master
 						k++;
 					}
 		
 				}
+<<<<<<< HEAD
 				k=0;
+=======
+			k = 0;
+>>>>>>> origin/master
 			}
 		}
 		else if(fileName.contains("Assets.dat")||fileName.contains("assets.dat")){
