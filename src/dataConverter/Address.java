@@ -1,24 +1,45 @@
 package dataConverter;
-
+import java.util.StringTokenizer;
 public class Address{
 	private String Street;
 	private String City;
 	private String State;
 	private String Zipcode;
 	private String Country;
-	private String fullAddress;
 	
 	public Address(String fullAddress) {
-		String delim = ",";
-		String[] tempAddress = new String[5];
-		for(int i=0;i<5; i++){
-			tempAddress = fullAddress.split(delim);
+		
+	StringTokenizer tokenizer= new StringTokenizer(fullAddress, ",");
+		if(tokenizer.hasMoreTokens()){		
+			this.Street = tokenizer.nextToken();
 		}
-		this.Street = tempAddress[0];
-		this.City = tempAddress[1];
-		this.State = tempAddress[2];
-		this.Zipcode = tempAddress[3];
-		this.Country = tempAddress[4];
+		else{
+			this.Street="";
+		}
+		if(tokenizer.hasMoreTokens()){
+			this.City = tokenizer.nextToken();
+		}
+		else{
+			this.City="";
+		}
+		if(tokenizer.hasMoreTokens()){
+			this.State = tokenizer.nextToken();		
+		}
+		else{
+			this.State="";
+		}
+		if(tokenizer.hasMoreTokens()){
+			this.Zipcode = tokenizer.nextToken();
+		}
+		else{
+			this.Zipcode="";
+		}
+		if(tokenizer.hasMoreTokens()){
+			this.Country = tokenizer.nextToken();
+		}
+		else{
+			this.Country="";
+		}
 	}
 	
 	public String getStreet() {

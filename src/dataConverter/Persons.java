@@ -1,18 +1,22 @@
 
 package dataConverter;
 
-public abstract class Persons {
+public class Persons{
 	
 	private String PersonCode;
-	private Name Name;
+	private String firstName;
+	private String lastName;
 	private Address Address;
 	private String Email;
+	private String Typeofperson;
 	
 	
-	public Persons(String PersonCode, Name Name, Address address, String email){
+	public Persons(String PersonCode, String TypeofPerson, String Name, String address, String email){
 		this.PersonCode= PersonCode;
-		this.Name=Name;
-		this.Address= address;
+		this.Typeofperson=TypeofPerson;
+		this.firstName=getFirstName(Name);
+		this.lastName=getLastName(Name);
+		this.Address=new Address(address);
 		this.Email=email;
 	}
 	public String getPersonCode() {
@@ -21,15 +25,29 @@ public abstract class Persons {
 	public void setPersonCode(String personCode) {
 		PersonCode = personCode;
 	}
-	public Name getName() {
-		return Name;
+	public String getFirstName(String Name) {
+		String delim = ",";
+		String[] tempName = new String[2];
+		for(int i=0;i<2; i++){
+			tempName = Name.split(delim);
+		}
+		this.firstName= tempName[0];
+		return this.firstName;
 	}
-	public void setName(Name name) {
-		Name = name;
+	
+	public String getLastName(String Name){
+		String delim = ",";
+		String[] tempName = new String[2];
+		for(int i=0;i<2; i++){
+			tempName = Name.split(delim);
+		}
+		this.lastName= tempName[0];
+		return this.lastName;
 	}
-	public Address getAddress() {
-		return Address;
+	public Address getAddress(){
+		return this.Address;
 	}
+		
 	public void setAddress(Address address) {
 		Address = address;
 	}

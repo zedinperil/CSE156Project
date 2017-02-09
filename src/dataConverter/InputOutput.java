@@ -2,17 +2,15 @@
 //hello again
 package dataConverter;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.io.FileReader;
 import java.io.IOException;
-import com.fasterxml.jackson.core.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
+//import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import java.util.Scanner;
 import java.io.BufferedReader;
 
 public class InputOutput {
+	@SuppressWarnings("resource")
 	public static void main(String[] args) throws IOException {		
 		
 		String fileName = args[0];
@@ -41,17 +39,16 @@ public class InputOutput {
 			
 		}
 		NumberOfLines=Integer.parseInt(fullData[0]);
-
-		for(i=1;i<size;i++){
-		//	System.out.println(fullData[i]);
-		}
+		s.close();
+		Buff.close();
+	
 	
 	//TODO: Enumerate person and assets classes, and create arrays for each.
 		//DONE ELSEWHERE
 	//TODO: Determine whether or not the string we have pertains to persons or assets
 		boolean IsPerson=false;
 		boolean IsAsset=false;
-		boolean[]AddBlankEmail=new boolean[NumberOfLines];
+		boolean[]DontAddBlankEmail=new boolean[NumberOfLines];
 	String DelimeteredData[][]= new String[NumberOfLines][5];
 		if(fileName.contains("Persons.dat")||fileName.contains("persons.dat")){
 		System.out.println("ITS A PERSON");
@@ -80,7 +77,7 @@ public class InputOutput {
 					if(x==(fullData[i].length())-1 && fullData[i].lastIndexOf(";")!=fullData[i].length()-1){
 						DelimeteredData[i-1]=fullData[i].split(";");
 //					System.out.println(DelimeteredData[i-1][k]);
-						AddBlankEmail[i-1]=false;
+						DontAddBlankEmail[i-1]=true;
 						k++;	
 					}
 					NumberOfDelims[i-1]=k;
@@ -88,46 +85,65 @@ public class InputOutput {
 			k=0;
 		}
 	
-		for(i=0;i<NumberOfLines;i++){
-			for(int j=0;j<1;j++){
-				if(DelimeteredData[i][2]!= " "){
-					Address tempaddress = new Address(DelimeteredData[i][3]);
-					Name tempName = new Name(DelimeteredData[i][2]);
-					Beneficiaries b = new Beneficiaries(DelimeteredData[i][j], tempName, tempaddress, DelimeteredData[i][j+4]);
-					System.out.println(tempName.getFirstName());
-					
-				}
-			}
-		}
+
 		ObjectMapper jsonMapper = new ObjectMapper();
-//testing to ensure it is saved correctly;		
-		//String HasNoData= "";
-		//for(i=0; i<NumberOfLines; i++){
-		//	for(x=0; x<NumberOfDelims[i]; x++){
-		//		
-		//		if(IsPerson){
-		//			if(AddBlankEmail[i]){
-		//				PersonArray[i]= new Persons(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][2], HasNoData);
-		//			}
-		//			else{
-		//				PersonArray[i]= new Persons(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][2], DelimeteredData[i][3]);
-		//			}
-		//		}
-				//if(IsAsset){
-				//	if(DelimeteredData[i][1].contains("D,")){
-				//		AssetsArray[i]= new Assets(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], HasNoData, HasNoData, HasNoData, HasNoData);
-				//	}
-				//	else if(DelimeteredData[i][1].contains("S,")){
-				//		AssetsArray[i]= new Assets(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], DelimeteredData[i][4], DelimeteredData[i][5], DelimeteredData[i][6], DelimeteredData[i][7]);
-				//	}
-				//	else if(DelimeteredData[i][1].contains("P,")){
-				//		AssetsArray[i]= new Assets(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], DelimeteredData[i][4], DelimeteredData[i][5], DelimeteredData[i][6], HasNoData);
-				//	}			
-				//}
-				//System.out.println(DelimeteredData[i][x]);
-			}
-		//}
-	
-	//TODO: Store the Persons and Assets data into a JSON file.
+//TESTING		
+for(i=0; i<NumberOfLines; i++){
+	for(x=0; x<NumberOfDelims[i]; x++){
+		System.out.println(DelimeteredData[i][x]);
+	}
 }
 
+//testing to ensure it is saved correctly;	
+		Persons[] PersonArray= new Persons[NumberOfLines];
+		Assets[] AssetsArray= new Assets[NumberOfLines];
+		String HasNoData= "";
+		for(i=0; i<NumberOfLines; i++){
+			for(x=0; x<NumberOfDelims[i]; x++){
+				
+				if(IsPerson){
+					if(DontAddBlankEmail[i]){
+						PersonArray[i]= new Persons(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][2], DelimeteredData[i][3], DelimeteredData[i][4]);
+					}
+					else{
+						PersonArray[i]= new Persons(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][2], DelimeteredData[i][3], HasNoData);
+
+					}
+				}
+				if(IsAsset){
+					if(DelimeteredData[i][1].contains("D,")){
+						AssetsArray[i]= new Assets(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], HasNoData, HasNoData, HasNoData, HasNoData);
+					}
+					else if(DelimeteredData[i][1].contains("S,")){
+						AssetsArray[i]= new Assets(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], DelimeteredData[i][4], DelimeteredData[i][5], DelimeteredData[i][6], DelimeteredData[i][7]);
+					}
+					else if(DelimeteredData[i][1].contains("P,")){
+						AssetsArray[i]= new Assets(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], DelimeteredData[i][4], DelimeteredData[i][5], DelimeteredData[i][6], HasNoData);
+					}			
+				}
+				
+			}
+		}
+	
+	
+	
+	//TODO: Store the Persons and Assets data into a JSON file.
+
+	try {  
+
+	        // Writing to a file   
+	 if(IsPerson){
+		  jsonMapper.writeValue(new File("data/Persons.json"), PersonArray);
+	 }
+	 else if(IsAsset){
+		 jsonMapper.writeValue(new File("data/Assets.json"), AssetsArray);
+	 }
+
+	    } catch (IOException e) {  
+	        e.printStackTrace();  
+	    }  
+
+
+}
+
+}
