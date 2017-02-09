@@ -1,15 +1,15 @@
 
 package dataConverter;
 
-public class Name extends Persons{
+public class Name{
 	private String FirstName;
 	private String LastName;
 	
-	private String fullName;
+	public String fullName;
 	
 	public Name(String fullName) {
-		super();
-		String delim = ",/s";
+		
+		String delim = ", ";
 		String[] tempName = new String[2];
 		for(int i=0;i<2; i++){
 			tempName = fullName.split(delim);

@@ -19,7 +19,6 @@ public class Address{
 		this.State = tempAddress[2];
 		this.Zipcode = tempAddress[3];
 		this.Country = tempAddress[4];
-		this.fullAddress = tempAddress[5];
 	}
 	
 	public String getStreet() {
