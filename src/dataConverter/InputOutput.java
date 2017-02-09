@@ -6,20 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.FileReader;
 import java.io.IOException;
-//import org.codehaus.jackson.JsonGenerationException;
-//import org.codehaus.jackson.map.JsonMappingException;
-//import org.codehaus.jackson.map.ObjectMapper;
-//import java.lang.Math;
-//import java.io.FileInputStream;
-//import java.io.FileNotFoundException;
-//import java.io.IOException;
-//import java.util.HashMap;
-//import java.util.Map;
+import com.fasterxml.jackson.core.*;
 import java.util.Scanner;
 import java.io.BufferedReader;
-//DOING A TESTING
-//import org.json.simple.JSONArray;
-//import org.json.simple.JSONObject;
+
 public class InputOutput {
 	public static void main(String[] args) throws IOException {		
 		
