@@ -5,8 +5,8 @@ public class Broker extends Persons{
 		private String SECcode;
 		private String fullLine;
 		
-		public Broker(String fullLine){
-			super();
+		public Broker(String PersonCode, Name Name, Address address, String email, String fullLine){
+			super(PersonCode, Name, address, email);
 			String delim = ",";
 			String[] pieces = new String[2];
 			for(int i=0;i<2;i++){

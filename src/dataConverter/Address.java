@@ -1,6 +1,6 @@
 package dataConverter;
 
-public class Address extends Persons {
+public class Address{
 	private String Street;
 	private String City;
 	private String State;
@@ -9,7 +9,6 @@ public class Address extends Persons {
 	private String fullAddress;
 	
 	public Address(String fullAddress) {
-		super();
 		String delim = ",";
 		String[] tempAddress = new String[5];
 		for(int i=0;i<5; i++){

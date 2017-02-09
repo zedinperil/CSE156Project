@@ -60,7 +60,7 @@ public class InputOutput {
 		boolean IsPerson=false;
 		boolean IsAsset=false;
 		boolean[]AddBlankEmail=new boolean[NumberOfLines];
-	String DelimeteredData[][]= new String[NumberOfLines][size*5];
+	String DelimeteredData[][]= new String[NumberOfLines][5];
 		if(fileName.contains("Persons.dat")||fileName.contains("persons.dat")){
 		System.out.println("ITS A PERSON");
 		IsPerson=true;
@@ -74,8 +74,8 @@ public class InputOutput {
 		else{
 		System.out.println("I HAVE NO IDEA WHAT THIS iS");
 		}
-		Persons[] PersonArray= new Persons[NumberOfLines];
-		Assets[] AssetsArray= new Assets[NumberOfLines];
+		//Persons[] PersonArray= new Persons[NumberOfLines];
+		//Assets[] AssetsArray= new Assets[NumberOfLines];
 	//TODO: Based on what each is,  use methods to save delimetered strings into the correct spaces for whatever type the data is
 	int[] NumberOfDelims= new int[NumberOfLines];
 		for(i=1; i<=NumberOfLines; i++){
@@ -95,34 +95,44 @@ public class InputOutput {
 				}	
 			k=0;
 		}
+	
+		for(i=0;i<NumberOfLines;i++){
+			for(int j=0;j<1;j++){
+				if(DelimeteredData[i][2]!= " "){
+					Address tempaddress = new Address(DelimeteredData[i][3]);
+					Name tempName = new Name(DelimeteredData[i][2]);
+					Beneficiaries b = new Beneficiaires(DelimeteredData[i][j], tempName, tempaddress, DelimeteredData[i][j+4]);
+				}
+			}
+		{	
 //testing to ensure it is saved correctly;		
-		String HasNoData= "";
-		for(i=0; i<NumberOfLines; i++){
-			for(x=0; x<NumberOfDelims[i]; x++){
-				
-				if(IsPerson){
-					if(AddBlankEmail[i]){
-						PersonArray[i]= new Persons(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][2], HasNoData);
-					}
-					else{
-						PersonArray[i]= new Persons(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][2], DelimeteredData[i][3]);
-					}
-				}
-				if(IsAsset){
-					if(DelimeteredData[i][1].contains("D,")){
-						AssetsArray[i]= new Assets(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], HasNoData, HasNoData, HasNoData, HasNoData);
-					}
-					else if(DelimeteredData[i][1].contains("S,")){
-						AssetsArray[i]= new Assets(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], DelimeteredData[i][4], DelimeteredData[i][5], DelimeteredData[i][6], DelimeteredData[i][7]);
-					}
-					else if(DelimeteredData[i][1].contains("P,")){
-						AssetsArray[i]= new Assets(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], DelimeteredData[i][4], DelimeteredData[i][5], DelimeteredData[i][6], HasNoData);
-					}			
-				}
-				System.out.println(DelimeteredData[i][x]);
+		//String HasNoData= "";
+		//for(i=0; i<NumberOfLines; i++){
+		//	for(x=0; x<NumberOfDelims[i]; x++){
+		//		
+		//		if(IsPerson){
+		//			if(AddBlankEmail[i]){
+		//				PersonArray[i]= new Persons(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][2], HasNoData);
+		//			}
+		//			else{
+		//				PersonArray[i]= new Persons(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][2], DelimeteredData[i][3]);
+		//			}
+		//		}
+				//if(IsAsset){
+				//	if(DelimeteredData[i][1].contains("D,")){
+				//		AssetsArray[i]= new Assets(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], HasNoData, HasNoData, HasNoData, HasNoData);
+				//	}
+				//	else if(DelimeteredData[i][1].contains("S,")){
+				//		AssetsArray[i]= new Assets(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], DelimeteredData[i][4], DelimeteredData[i][5], DelimeteredData[i][6], DelimeteredData[i][7]);
+				//	}
+				//	else if(DelimeteredData[i][1].contains("P,")){
+				//		AssetsArray[i]= new Assets(DelimeteredData[i][0], DelimeteredData[i][1], DelimeteredData[i][3], DelimeteredData[i][4], DelimeteredData[i][5], DelimeteredData[i][6], HasNoData);
+				//	}			
+				//}
+				//System.out.println(DelimeteredData[i][x]);
 			}
 		}
 	
 	//TODO: Store the Persons and Assets data into a JSON file.
 }
-}
+

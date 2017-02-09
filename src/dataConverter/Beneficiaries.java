@@ -1,19 +1,15 @@
-
 package dataConverter;
 
-public abstract class Persons {
-	
+public class Beneficiaries extends Persons{
+		
 	private String PersonCode;
 	private Name Name;
 	private Address Address;
 	private String Email;
 	
-	
-	public Persons(String PersonCode, Name Name, Address address, String email){
-		this.PersonCode= PersonCode;
-		this.Name=Name;
-		this.Address= address;
-		this.Email=email;
+	public Beneficiaries(String PersonCode, Name Name, Address address, String email){
+		super(PersonCode, Name, address, email);
+		
 	}
 	public String getPersonCode() {
 		return PersonCode;
@@ -40,5 +36,5 @@ public abstract class Persons {
 		Email = email;
 	}
 	
-	
 }
+
