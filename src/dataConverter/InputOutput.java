@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.FileReader;
 import java.io.IOException;
-import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import java.util.Scanner;
 import java.io.BufferedReader;
 
@@ -96,7 +98,8 @@ public class InputOutput {
 					
 				}
 			}
-		}	
+		}
+		ObjectMapper jsonMapper = new ObjectMapper();
 //testing to ensure it is saved correctly;		
 		//String HasNoData= "";
 		//for(i=0; i<NumberOfLines; i++){
