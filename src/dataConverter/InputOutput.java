@@ -101,10 +101,12 @@ public class InputOutput {
 				if(DelimeteredData[i][2]!= " "){
 					Address tempaddress = new Address(DelimeteredData[i][3]);
 					Name tempName = new Name(DelimeteredData[i][2]);
-					Beneficiaries b = new Beneficiaires(DelimeteredData[i][j], tempName, tempaddress, DelimeteredData[i][j+4]);
+					Beneficiaries b = new Beneficiaries(DelimeteredData[i][j], tempName, tempaddress, DelimeteredData[i][j+4]);
+					System.out.println(tempName.getFirstName());
+					
 				}
 			}
-		{	
+		}	
 //testing to ensure it is saved correctly;		
 		//String HasNoData= "";
 		//for(i=0; i<NumberOfLines; i++){
@@ -131,7 +133,7 @@ public class InputOutput {
 				//}
 				//System.out.println(DelimeteredData[i][x]);
 			}
-		}
+		//}
 	
 	//TODO: Store the Persons and Assets data into a JSON file.
 }
