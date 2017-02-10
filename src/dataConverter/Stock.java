@@ -1,6 +1,11 @@
 package dataConverter;
 
-public class Stock {
+public class Stock extends Assets{
+	public Stock(String input, String string3, String string4, String string5, String string6,
+			String string7, String string8) {
+		super(input, string3, string4, string5, string6, string7, string8);
+		// TODO Auto-generated constructor stub
+	}
 	private String Code;
 	private String Label;
 	private String QuarterlyDividend;
@@ -67,5 +72,20 @@ public class Stock {
 	 */
 	public void setSharePrice(String sharePrice) {
 		SharePrice = sharePrice;
+	}
+	@Override
+	public String getApr() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String getOmegaMeasure() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String getTotalValue() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

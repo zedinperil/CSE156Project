@@ -3,7 +3,7 @@ package dataConverter;
 public class Broker extends Persons{
 		private String TypeOfBroker;
 		private String SECcode;
-		private String fullLine;
+		
 		
 		public Broker(String PersonCode, Name Name, Address address, String email, String fullLine){
 			super(PersonCode, Name, address, email);

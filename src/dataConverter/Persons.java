@@ -1,62 +1,91 @@
 
 package dataConverter;
-
+import java.util.StringTokenizer;
 public class Persons{
 	
-	private String PersonCode;
-	private String firstName;
-	private String lastName;
+	private String Code;
+	private String FirstName;
+	private String LastName;
 	private Address Address;
 	private String Email;
-	private String Typeofperson;
+	private String Type;
+	private String secIdentifier;
+
 	
-	
-	public Persons(String PersonCode, String TypeofPerson, String Name, String address, String email){
-		this.PersonCode= PersonCode;
-		this.Typeofperson=TypeofPerson;
-		this.firstName=getFirstName(Name);
-		this.lastName=getLastName(Name);
+	public Persons(String PersonCode, String TypeofPerson, String name, String address, String email){
+		
+		this.Code= PersonCode;
+		 
+				StringTokenizer tokenizer= new StringTokenizer(TypeofPerson, ",");
+				if(tokenizer.hasMoreTokens()){		
+					this.Type = tokenizer.nextToken();
+					
+					if(tokenizer.hasMoreTokens()){
+						this.secIdentifier = tokenizer.nextToken();
+					}
+					else{
+						this.secIdentifier=null;
+					}
+				}
+		 
+				StringTokenizer twokenizer= new StringTokenizer(name, ",");
+				if(twokenizer.hasMoreTokens()){		
+					this.LastName = twokenizer.nextToken();
+				}
+				else{
+					this.LastName="";
+				}
+				if(twokenizer.hasMoreTokens()){
+					this.FirstName = twokenizer.nextToken();
+				}
+				else{
+					this.FirstName="";
+				}
 		this.Address=new Address(address);
+		
 		this.Email=email;
 	}
-	public String getPersonCode() {
-		return PersonCode;
+	public Persons(String personCode2, dataConverter.Name name, dataConverter.Address address2, String email2) {
+		// TODO Auto-generated constructor stub
 	}
-	public void setPersonCode(String personCode) {
-		PersonCode = personCode;
+	public String getPersonCode(){
+		return this.Code;
 	}
-	public String getFirstName(String Name) {
-		String delim = ",";
-		String[] tempName = new String[2];
-		for(int i=0;i<2; i++){
-			tempName = Name.split(delim);
-		}
-		this.firstName= tempName[0];
-		return this.firstName;
+	public String getStreet() {
+		return Address.getStreet();
 	}
-	
-	public String getLastName(String Name){
-		String delim = ",";
-		String[] tempName = new String[2];
-		for(int i=0;i<2; i++){
-			tempName = Name.split(delim);
-		}
-		this.lastName= tempName[0];
-		return this.lastName;
+	public String getCity() {
+		return Address.getCity();
 	}
-	public Address getAddress(){
-		return this.Address;
+
+	public String getState() {
+		return Address.getState();
 	}
-		
-	public void setAddress(Address address) {
-		Address = address;
+
+	public String getZipcode() {
+		return Address.getZipcode();
+	}
+	public String getCountry() {
+		return Address.getCountry();
 	}
 	public String getEmail() {
-		return Email;
+		return this.Email;
 	}
 	public void setEmail(String email) {
-		Email = email;
+		this.Email = email;
 	}
 	
-	
+	public String getType(){
+		return this.Type;
+	}
+	public String getSEC(){
+		return this.secIdentifier;
+	}
+
+	public String getFirstName(){
+		return this.FirstName;
+	}
+	public String getLastName(){
+		return this.LastName;
+	}
 }

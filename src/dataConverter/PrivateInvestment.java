@@ -1,6 +1,6 @@
 package dataConverter;
 
-public class PrivateInvestment {
+public class PrivateInvestment extends Assets{
 	private String Code;
 	private String Label;
 	private String QuarterlyDividend;
@@ -8,40 +8,69 @@ public class PrivateInvestment {
 	private String OmegaMeasure;
 	private String TotalValue;
 	
+	public PrivateInvestment(String input, String code, String label, String quarterlydividend, String baserateofreturn, String omegameasure, String totalvalue){
+		super(input, code, label, quarterlydividend, baserateofreturn, omegameasure, totalvalue);
+		this.Code=code;
+		this.Label=label;
+		this.QuarterlyDividend=quarterlydividend;
+		this.BaseRateOfReturn=baserateofreturn;
+		this.OmegaMeasure=omegameasure;
+		this.TotalValue=totalvalue;
+	}
+		
+	@Override
 	public String getCode() {
 		return Code;
 	}
-	public void setCode(String code) {
-		Code = code;
-	}
+
+	@Override
 	public String getLabel() {
 		return Label;
 	}
-	public void setLabel(String label) {
-		Label = label;
-	}
+	
+	@Override
 	public String getQuarterlyDividend() {
 		return QuarterlyDividend;
 	}
-	public void setQuarterlyDividend(String quarterlyDividend) {
-		QuarterlyDividend = quarterlyDividend;
-	}
+
+	@Override
 	public String getBaseRateOfReturn() {
 		return BaseRateOfReturn;
 	}
-	public void setBaseRateOfReturn(String baseRateOfReturn) {
-		BaseRateOfReturn = baseRateOfReturn;
-	}
+	
+	@Override
 	public String getOmegaMeasure() {
 		return OmegaMeasure;
 	}
-	public void setOmegaMeasure(String omegaMeasure) {
-		OmegaMeasure = omegaMeasure;
-	}
+
+	@Override
 	public String getTotalValue() {
 		return TotalValue;
 	}
-	public void setTotalValue(String totalValue) {
-		TotalValue = totalValue;
+
+	@Override
+	public String getApr() {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	@Override
+	public String getBetaMeasure() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getStockSymbol() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getSharePrice() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
 }

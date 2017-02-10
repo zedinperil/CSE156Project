@@ -1,73 +1,29 @@
 package dataConverter;
 
-public class Assets {
+public abstract class Assets {
 	private String input;
-	private String TypeOfAsset;
-	private Deposit DepositAccount;
-	private Stock Stocks;
-	private PrivateInvestment PrivateInvestments;
-	public Assets(String string, String string2, String string3, String string4, String string5, String string6,
-			String string7) {
-		// TODO Auto-generated constructor stub
+
+
+	public Assets(String input, String string3, String string4, String string5, String string6,
+			String string7, String string8) {
+		super();
+		this.input= input;
+	
 	}
-	/**
-	 * @return the input
-	 */
+	
+	public abstract String getCode();
+	public abstract String getLabel();
+	public abstract String getApr();
+	public abstract String getQuarterlyDividend();
+	public abstract String getBaseRateOfReturn();
+	public abstract String getBetaMeasure();
+	public abstract String getStockSymbol();
+	public abstract String getSharePrice();
+	public abstract String getOmegaMeasure();
+	public abstract String getTotalValue();
+	
+	
 	public String getInput() {
 		return input;
-	}
-	/**
-	 * @param input the input to set
-	 */
-	public void setInput(String input) {
-		this.input = input;
-	}
-	/**
-	 * @return the typeOfAsset
-	 */
-	public String getTypeOfAsset() {
-		return TypeOfAsset;
-	}
-	/**
-	 * @param typeOfAsset the typeOfAsset to set
-	 */
-	public void setTypeOfAsset(String typeOfAsset) {
-		TypeOfAsset = typeOfAsset;
-	}
-	/**
-	 * @return the depositAccount
-	 */
-	public Deposit getDepositAccount() {
-		return DepositAccount;
-	}
-	/**
-	 * @param depositAccount the depositAccount to set
-	 */
-	public void setDepositAccount(Deposit depositAccount) {
-		DepositAccount = depositAccount;
-	}
-	/**
-	 * @return the stocks
-	 */
-	public Stock getStocks() {
-		return Stocks;
-	}
-	/**
-	 * @param stocks the stocks to set
-	 */
-	public void setStocks(Stock stocks) {
-		Stocks = stocks;
-	}
-	/**
-	 * @return the privateInvestments
-	 */
-	public PrivateInvestment getPrivateInvestments() {
-		return PrivateInvestments;
-	}
-	/**
-	 * @param privateInvestments the privateInvestments to set
-	 */
-	public void setPrivateInvestments(PrivateInvestment privateInvestments) {
-		PrivateInvestments = privateInvestments;
 	}
 }

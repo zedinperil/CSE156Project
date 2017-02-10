@@ -1,7 +1,12 @@
 package dataConverter;
 
-public class Deposit {
- private String Code;
+public class Deposit extends Assets{
+ public Deposit(String input, String code, String label, String apr, String string6,
+			String string7, String string8) {
+		super(input, code, label, apr, string6, string7, string8);
+		// TODO Auto-generated constructor stub
+	}
+private String Code;
  private String Label;
  private String Apr;
 /**
@@ -39,6 +44,41 @@ public String getApr() {
  */
 public void setApr(String apr) {
 	Apr = apr;
+}
+@Override
+public String getQuarterlyDividend() {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+public String getBaseRateOfReturn() {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+public String getBetaMeasure() {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+public String getStockSymbol() {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+public String getSharePrice() {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+public String getOmegaMeasure() {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+public String getTotalValue() {
+	// TODO Auto-generated method stub
+	return null;
 }
  
 }
