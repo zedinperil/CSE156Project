@@ -115,7 +115,7 @@ public class InputOutput {
 						k++;	
 						test=true;
 				testing=g-1;
-						System.out.println("g is:"+testing);
+						System.out.println("g is:"+testing+ " and k is "+k);
 				}
 					
 					NumberOfDelims[i][g-1]=k;
