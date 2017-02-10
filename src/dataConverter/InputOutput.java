@@ -10,14 +10,12 @@ import java.util.Scanner;
 import java.io.BufferedReader;
 
 public class InputOutput {
-	@SuppressWarnings("resource")
 	public static void main(String[] args) throws IOException {		
 		int NumOfFiles= args.length;
 		String[] fileName = new String[NumOfFiles];
 		int i=0;
 		int g=0;
 		int x = 0;
-		int k = 0;	
 		int[] size= new int[NumOfFiles];
 		int NumberOfLines[]= new int[NumOfFiles];
 		int sizable=0;
@@ -39,32 +37,21 @@ public class InputOutput {
 		} catch(Exception e) {
 			throw new RuntimeException(e);
 		}
-		x=0;
-		
+		x=0;		
 		while(s.hasNext()) {
 			String line = s.nextLine(); //throw away the endline character
-			//System.out.println(line);
 			fullData[i][x] = line;
 			NumOfChars[x]=0;
-		for(int q=0; q<=x; q++){
-			
-			if(fullData[i][x].charAt(q)!='\u0000'){
-				NumOfChars[x]++;	
-
+		for(int q=0; q<=x; q++){	
+				if(fullData[i][x].charAt(q)!='\u0000'){
+					NumOfChars[x]++;	
+				}
 			}
-		}
-			
 			x++;
-		
-		
 		}
-		
 		NumberOfLines[i]=Integer.parseInt(fullData[i][0]);
 		s.close();
-		
 	    }
-	
-	
 	//TODO: Enumerate person and assets classes, and create arrays for each.
 		//DONE ELSEWHERE
 	//TODO: Determine whether or not the string we have pertains to persons or assets
@@ -80,83 +67,52 @@ public class InputOutput {
 		for(i=0; i<NumOfFiles; i++){
 
 			if(fileName[i].contains("Persons.dat")||fileName[i].contains("persons.dat")){
-			System.out.println("ITS A PERSON");
+//			System.out.println("ITS A PERSON");
 			IsPerson[i]=true;
 			
 			}
 			else if(fileName[i].contains("Assets.dat")||fileName[i].contains("assets.dat")){
-			System.out.println("ITS AN ASSET");
+//			System.out.println("ITS AN ASSET");
 			IsAsset[i]=true;	
 		
 			}
 			else{
-			System.out.println("I HAVE NO IDEA WHAT THIS iS");
+			System.out.println("WRONG TYPE OF FILE");
 			}
 		}
 		//Persons[] PersonArray= new Persons[NumberOfLines];
 		//Assets[] AssetsArray= new Assets[NumberOfLines];
 	//TODO: Based on what each is,  use methods to save delimetered strings into the correct spaces for whatever type the data is
 	int[][] NumberOfDelims= new int[NumOfFiles][1000];
-	boolean test=false;
-	int testing;
 	for(i=0; i<NumOfFiles; i++){
 		for( g=1; g<=NumberOfLines[i]; g++){
-			for(x=0; x<NumOfChars[g]; x++){
-			
+			for(x=0; x<=NumOfChars[g]; x++){
 				if(fullData[i][g].charAt(x)==';'){
-					DelimeteredData[i][g-1]=fullData[i][g-1].split(";");	
-					k++;
-					test=true;
+					DelimeteredData[i][g-1]=fullData[i][g].split(";");	
 				}
-				
-				else if(x==(NumOfChars[g-1])-1 && fullData[i][g-1].lastIndexOf(";")!=NumOfChars[g-1]-1){
-						DelimeteredData[i][g-1]=fullData[i][g-1].split(";");
-						DontAddBlankEmail[i][g-1]=true;
-						k++;	
-						test=true;
-				testing=g-1;
-						System.out.println("g is:"+testing+ " and k is "+k);
-				}
-					
-					NumberOfDelims[i][g-1]=k;
-				//	System.out.println("x is:"+x);
-				//	System.out.println("k is:"+k);
-				//	System.out.println("g is:"+g);
-				
-				
+				if(x==(NumOfChars[g])-1 && fullData[i][g].lastIndexOf(";")!=NumOfChars[g]-1){
+						DelimeteredData[i][g-1]=fullData[i][g].split(";");						
 				}	
-//			if(test){
-//				int q=0;
-//				for(q=0; q<DelimeteredData[i][g-1].length; q++){
-//					if(g-1>0)
-//					System.out.println(DelimeteredData[i][g-1][q]);
-//					
-//					}
-//				if(g-1>0)
-//				System.out.println("Q is"+q);
-//			}
-			test=false;
-			k=0;
+					NumberOfDelims[i][g-1]=DelimeteredData[i][g-1].length;	
+			}
+//			if(NumberOfDelims[i][g-1]>1){
+//				System.out.println("x is:"+x);
+//				System.out.println("Num of delims is:"+NumberOfDelims[i][g-1]);
+//				System.out.println("Number of chars:"+NumOfChars[g]);
+//				System.out.println("THE BIT: "+DelimeteredData[i][g-1][0]+DelimeteredData[i][g-1][1]+DelimeteredData[i][g-1][2]);
+//				}
 		}
-
 	}
-	
 		ObjectMapper jsonMapper = new ObjectMapper();
-
-
 //testing to ensure it is saved correctly;	
 		Persons[][] PersonArray= new Persons[NumOfFiles][1000];
 		Assets[][] AssetsArray= new Assets[NumOfFiles][1000];
 		String HasNoData= "";
 		for(i=0; i<NumOfFiles; i++){
-			for(g=1; g<NumberOfLines[i]; g++){
-				for(x=0; x<NumberOfDelims[i][g]; x++){
-					if(IsPerson[i]){
-						if(DontAddBlankEmail[i][g]){
-							if(DelimeteredData[i][g].length>4){
-								System.out.println("G IS:" +g);
-								PersonArray[i][g]= new Persons(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4]);
-							}
+			for(g=0; g<NumberOfLines[i]; g++){
+					if(IsPerson[i]){						
+						if(NumberOfDelims[i][g]==5){	
+							PersonArray[i][g]= new Persons(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4]);
 						}
 						else{
 							PersonArray[i][g]= new Persons(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData);
@@ -164,16 +120,16 @@ public class InputOutput {
 					}
 					if(IsAsset[i]){
 						if(DelimeteredData[i][g][1].contains("D,")){
-							AssetsArray[i][g]= new Deposit(DelimeteredData[i][g][0], DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData, HasNoData, HasNoData, HasNoData);				
+							AssetsArray[i][g-1]= new Deposit(DelimeteredData[i][g][0], DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData, HasNoData, HasNoData, HasNoData);				
 						}
 						else if(DelimeteredData[i][g][1].contains("S,")){
-							AssetsArray[i][g]= new Stock(DelimeteredData[i][g][0], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6], DelimeteredData[i][g][7]);
+							AssetsArray[i][g-1]= new Stock(DelimeteredData[i][g][0], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6], DelimeteredData[i][g][7]);
 						}
 						else if(DelimeteredData[i][g][1].contains("P,")){
-							AssetsArray[i][g]= new PrivateInvestment(DelimeteredData[i][g][0], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6], HasNoData);
+							AssetsArray[i][g-1]= new PrivateInvestment(DelimeteredData[i][g][0], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6], HasNoData);
 						}			
 					}	
-				}
+		
 			}
 		}
 	
