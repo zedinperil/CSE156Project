@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+
+import org.codehaus.jackson.util.*;
 import org.codehaus.jackson.map.ObjectMapper;
 import java.util.Scanner;
 import java.io.BufferedReader;
@@ -131,9 +133,11 @@ for(g=0; g<NumOfFiles;g++){
 }
 
 		try {  
-		       // Writing to a file
-			 jsonMapper.writeValue(new FileOutputStream("./data/Persons.json"), PersonArray);
-			 jsonMapper.writeValue(new File("./data/Assets.json"), AssetsArray);
+			DefaultPrettyPrinter pp= new DefaultPrettyPrinter();
+//			pp.indentArraysWith(new Lf2SpacesIndenter());
+			// Writing to a file
+			 jsonMapper.writer(pp).writeValue(new FileOutputStream("./data/Persons.json"), PersonArray);
+			 jsonMapper.writer(pp).writeValue(new File("./data/Assets.json"), AssetsArray);
 		    } catch (IOException e) {  
 		        e.printStackTrace();  
 		    }  
