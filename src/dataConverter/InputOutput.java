@@ -98,6 +98,7 @@ public class InputOutput {
 	//TODO: Based on what each is,  use methods to save delimetered strings into the correct spaces for whatever type the data is
 	int[][] NumberOfDelims= new int[NumOfFiles][1000];
 	boolean test=false;
+	int testing;
 	for(i=0; i<NumOfFiles; i++){
 		for( g=1; g<=NumberOfLines[i]; g++){
 			for(x=0; x<NumOfChars[g]; x++){
@@ -113,6 +114,8 @@ public class InputOutput {
 						DontAddBlankEmail[i][g-1]=true;
 						k++;	
 						test=true;
+				testing=g-1;
+						System.out.println("g is:"+testing);
 				}
 					
 					NumberOfDelims[i][g-1]=k;
@@ -122,16 +125,16 @@ public class InputOutput {
 				
 				
 				}	
-			if(test){
-				int q=0;
-				for(q=0; q<DelimeteredData[i][g-1].length; q++){
-					if(g-1>0)
-					System.out.println(DelimeteredData[i][g-1][q]);
-					
-					}
-				if(g-1>0)
-				System.out.println("Q is"+q);
-			}
+//			if(test){
+//				int q=0;
+//				for(q=0; q<DelimeteredData[i][g-1].length; q++){
+//					if(g-1>0)
+//					System.out.println(DelimeteredData[i][g-1][q]);
+//					
+//					}
+//				if(g-1>0)
+//				System.out.println("Q is"+q);
+//			}
 			test=false;
 			k=0;
 		}
@@ -149,17 +152,14 @@ public class InputOutput {
 			for(g=1; g<NumberOfLines[i]; g++){
 				for(x=0; x<NumberOfDelims[i][g]; x++){
 					if(IsPerson[i]){
-						System.out.println(NumberOfDelims[i][g+1]);
 						if(DontAddBlankEmail[i][g]){
 							if(DelimeteredData[i][g].length>4){
 								System.out.println("G IS:" +g);
 								PersonArray[i][g]= new Persons(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4]);
-							
 							}
 						}
 						else{
 							PersonArray[i][g]= new Persons(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData);
-	
 						}
 					}
 					if(IsAsset[i]){
@@ -172,8 +172,7 @@ public class InputOutput {
 						else if(DelimeteredData[i][g][1].contains("P,")){
 							AssetsArray[i][g]= new PrivateInvestment(DelimeteredData[i][g][0], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6], HasNoData);
 						}			
-					}
-					
+					}	
 				}
 			}
 		}
@@ -184,10 +183,10 @@ public class InputOutput {
 //	System.out.println( PersonArray[i].getStreet()+PersonArray[i].getCity()+PersonArray[i].getState()+PersonArray[i].getZipcode()+PersonArray[i].getCountry());
 //}		
 	for(i=0; i<NumOfFiles; i++){
-		for(g=0; g<NumberOfLines[i]; g++){
-		System.out.println(PersonArray[i][g]);
-		System.out.println(AssetsArray[i][g]);
-		}
+//		for(g=0; g<NumberOfLines[i]; g++){
+//		System.out.println(PersonArray[i][g]);
+//		System.out.println(AssetsArray[i][g]);
+//		}
 		try {  
 	
 		       // Writing to a file   
