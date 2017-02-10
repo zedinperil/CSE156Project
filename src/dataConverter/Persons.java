@@ -13,9 +13,7 @@ public class Persons{
 
 	
 	public Persons(String PersonCode, String TypeofPerson, String name, String address, String email){
-		
 		this.Code= PersonCode;
-		 
 				StringTokenizer tokenizer= new StringTokenizer(TypeofPerson, ",");
 				if(tokenizer.hasMoreTokens()){		
 					this.Type = tokenizer.nextToken();
@@ -24,8 +22,12 @@ public class Persons{
 						this.secIdentifier = tokenizer.nextToken();
 					}
 					else{
-						this.secIdentifier=null;
+						this.secIdentifier="";
 					}
+				}
+				else{
+					this.Type="";
+					this.secIdentifier="";
 				}
 		 
 				StringTokenizer twokenizer= new StringTokenizer(name, ",");
@@ -71,10 +73,6 @@ public class Persons{
 	public String getEmail() {
 		return this.Email;
 	}
-	public void setEmail(String email) {
-		this.Email = email;
-	}
-	
 	public String getType(){
 		return this.Type;
 	}

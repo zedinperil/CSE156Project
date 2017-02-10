@@ -2,9 +2,9 @@
 //hello again
 package dataConverter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-//import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import java.util.Scanner;
 import java.io.BufferedReader;
@@ -12,21 +12,40 @@ import java.io.BufferedReader;
 public class InputOutput {
 	public static void main(String[] args) throws IOException {		
 		int NumOfFiles= args.length;
-		String[] fileName = new String[NumOfFiles];
 		int i=0;
 		int g=0;
-		int x = 0;
-		int[] size= new int[NumOfFiles];
-		int NumberOfLines[]= new int[NumOfFiles];
-		int sizable=0;
-		int[] NumOfChars= new int[10000];
+		int x=0;
+		boolean[] IsPerson=new boolean[NumOfFiles];
+		boolean[] IsAsset=new boolean[NumOfFiles];
+		String[] fileName = new String[NumOfFiles];
 		for(i=0; i<NumOfFiles; i++){
 			fileName[i]=args[i];
+			if(fileName[i].contains("Persons")||fileName[i].contains("persons")){
+			IsPerson[i]=true;
+			}
+			else if(fileName[i].contains("Assets")||fileName[i].contains("assets")){
+			IsAsset[i]=true;	
+			}
+			else{
+			System.out.println("WRONG TYPE OF FILE");
+			}
+		}
+		int PersonSize=0;
+		int AssetSize=0;
+		int[] size= new int[NumOfFiles];
+		int NumberOfLines[]= new int[NumOfFiles];
+		int[] NumOfChars= new int[10000];
+		for(i=0; i<NumOfFiles; i++){
 			BufferedReader Buff = new BufferedReader(new FileReader(args[i]));
 	        String text = Buff.readLine();
 	        size[i] = Integer.parseInt(text);
 	        size[i] += 1;
-	        sizable += size[i];
+	        if(IsPerson[i]){
+	        	PersonSize=size[i];
+	        }
+	        if(IsAsset[i]){
+	        	AssetSize=size[i];
+	        }
 	        Buff.close();
 		}
 		String fullData[][] = new String[NumOfFiles][1000];
@@ -54,34 +73,7 @@ public class InputOutput {
 	    }
 	//TODO: Enumerate person and assets classes, and create arrays for each.
 		//DONE ELSEWHERE
-	//TODO: Determine whether or not the string we have pertains to persons or assets
-		boolean[] IsPerson=new boolean[NumOfFiles];
-		boolean[] IsAsset=new boolean[NumOfFiles];
-		boolean[][]DontAddBlankEmail=new boolean[NumOfFiles][sizable];
-		for(i=0; i<NumOfFiles; i++){
-			for(x=0; x<sizable; x++){
-				DontAddBlankEmail[i][x]=false;
-			}
-		}
-	String DelimeteredData[][][]= new String[NumOfFiles][1000][5];
-		for(i=0; i<NumOfFiles; i++){
-
-			if(fileName[i].contains("Persons.dat")||fileName[i].contains("persons.dat")){
-//			System.out.println("ITS A PERSON");
-			IsPerson[i]=true;
-			
-			}
-			else if(fileName[i].contains("Assets.dat")||fileName[i].contains("assets.dat")){
-//			System.out.println("ITS AN ASSET");
-			IsAsset[i]=true;	
-		
-			}
-			else{
-			System.out.println("WRONG TYPE OF FILE");
-			}
-		}
-		//Persons[] PersonArray= new Persons[NumberOfLines];
-		//Assets[] AssetsArray= new Assets[NumberOfLines];
+		String DelimeteredData[][][]= new String[NumOfFiles][1000][5];
 	//TODO: Based on what each is,  use methods to save delimetered strings into the correct spaces for whatever type the data is
 	int[][] NumberOfDelims= new int[NumOfFiles][1000];
 	for(i=0; i<NumOfFiles; i++){
@@ -105,8 +97,8 @@ public class InputOutput {
 	}
 		ObjectMapper jsonMapper = new ObjectMapper();
 //testing to ensure it is saved correctly;	
-		Persons[][] PersonArray= new Persons[NumOfFiles][1000];
-		Assets[][] AssetsArray= new Assets[NumOfFiles][1000];
+		Persons[][] PersonArray= new Persons[NumOfFiles][PersonSize];
+		Assets[][] AssetsArray= new Assets[NumOfFiles][AssetSize];
 		String HasNoData= "";
 		for(i=0; i<NumOfFiles; i++){
 			for(g=0; g<NumberOfLines[i]; g++){
@@ -129,34 +121,24 @@ public class InputOutput {
 							AssetsArray[i][g-1]= new PrivateInvestment(DelimeteredData[i][g][0], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6], HasNoData);
 						}			
 					}	
-		
 			}
 		}
-	
-	
 	//TODO: Store the Persons and Assets data into a JSON file. FORMAT IT
-//for(i=0; i<NumberOfLines; i++){
-//	System.out.println( PersonArray[i].getStreet()+PersonArray[i].getCity()+PersonArray[i].getState()+PersonArray[i].getZipcode()+PersonArray[i].getCountry());
-//}		
-	for(i=0; i<NumOfFiles; i++){
-//		for(g=0; g<NumberOfLines[i]; g++){
-//		System.out.println(PersonArray[i][g]);
-//		System.out.println(AssetsArray[i][g]);
-//		}
+for(g=0; g<NumOfFiles;g++){
+	for(i=0; i<NumberOfLines[g]; i++){
+//		System.out.println(PersonArray[g][i].getPersonCode()+", "+PersonArray[g][i].getType()+", "+PersonArray[g][i].getSEC()+", "+PersonArray[g][i].getLastName()+", "+PersonArray[g][i].getFirstName()+", "+ PersonArray[g][i].getStreet()+", "+PersonArray[g][i].getCity()+", "+PersonArray[g][i].getState()+", "+PersonArray[g][i].getZipcode()+", "+PersonArray[g][i].getCountry()+", "+PersonArray[g][i].getEmail());
+	}		
+}
+
 		try {  
-	
-		       // Writing to a file   
-		 
-			 jsonMapper.writeValue(new File("./data/Persons.json"), PersonArray[i]);
-		 
-		 
-			 jsonMapper.writeValue(new File("./data/Assets.json"), AssetsArray[i]);
-		 
-	
+		       // Writing to a file
+			 jsonMapper.writeValue(new FileOutputStream("./data/Persons.json"), PersonArray);
+			 jsonMapper.writeValue(new File("./data/Assets.json"), AssetsArray);
 		    } catch (IOException e) {  
 		        e.printStackTrace();  
 		    }  
 		}
-	}
+	
+	
 
 }
