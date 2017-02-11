@@ -12,6 +12,7 @@ public class Stock extends Assets{
 		this.QuarterlyDividend=quarterlydividend;
 		this.BaseRateOfReturn=Double.parseDouble(baserateofreturn)/100;
 		this.BetaMeasure=betameasure;
+		this.StockSymbol=stocksymbol;
 		this.SharePrice=shareprice;
 	}
 	public String getQuarterlyDividend() {

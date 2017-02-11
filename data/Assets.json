@@ -29,81 +29,81 @@
   "code" : "RIRA01",
   "label" : "Roth IRA"
 }, {
+  "stockSymbol" : "GOOG",
   "betaMeasure" : "1.15",
   "sharePrice" : "814.708",
-  "stockSymbol" : null,
   "quarterlyDividend" : "0.0",
   "baseRateOfReturn" : 0.055999999999999994,
   "type" : "S",
   "code" : "GOOG001",
   "label" : "Google Inc."
 }, {
+  "stockSymbol" : "DEO",
   "betaMeasure" : "1.04",
   "sharePrice" : "122.75",
-  "stockSymbol" : null,
   "quarterlyDividend" : "12.00",
   "baseRateOfReturn" : 0.032,
   "type" : "S",
   "code" : "DIAGEO12",
   "label" : "Diageo PLC"
 }, {
+  "stockSymbol" : "AAPL",
   "betaMeasure" : "1.25",
   "sharePrice" : "429.80",
-  "stockSymbol" : null,
   "quarterlyDividend" : "24.50",
   "baseRateOfReturn" : 0.043,
   "type" : "S",
   "code" : "123APP",
   "label" : "Apple"
 }, {
+  "stockSymbol" : "KO",
   "betaMeasure" : "0.68",
   "sharePrice" : "41.08",
-  "stockSymbol" : null,
   "quarterlyDividend" : "5.45",
   "baseRateOfReturn" : 0.031,
   "type" : "S",
   "code" : "321CC",
   "label" : "Coca-Cola"
 }, {
+  "stockSymbol" : "CMG",
   "betaMeasure" : ".94",
   "sharePrice" : "341.91",
-  "stockSymbol" : null,
   "quarterlyDividend" : "45.57",
   "baseRateOfReturn" : 0.0319,
   "type" : "S",
   "code" : "No1BURR",
   "label" : "Chipotle Mexican Grill"
 }, {
+  "stockSymbol" : "COST",
   "betaMeasure" : "0.82",
   "sharePrice" : "106.13",
-  "stockSymbol" : null,
   "quarterlyDividend" : "10.00",
   "baseRateOfReturn" : 0.0225,
   "type" : "S",
   "code" : "B0oWM",
   "label" : "Costco"
 }, {
+  "stockSymbol" : "DDD",
   "betaMeasure" : "1.28",
   "sharePrice" : "35.40",
-  "stockSymbol" : null,
   "quarterlyDividend" : "0.0",
   "baseRateOfReturn" : 0.0125,
   "type" : "S",
   "code" : "N0TPIX",
   "label" : "3D Systems"
 }, {
+  "stockSymbol" : "CNI",
   "betaMeasure" : "0.79",
   "sharePrice" : "97.75",
-  "stockSymbol" : null,
   "quarterlyDividend" : "2.75",
   "baseRateOfReturn" : 0.046,
   "type" : "S",
   "code" : "wOOWoo1S",
   "label" : "Canadian National Railway"
 }, {
+  "stockSymbol" : "BRK-B",
   "betaMeasure" : "0.29",
   "sharePrice" : "107.04",
-  "stockSymbol" : null,
   "quarterlyDividend" : "0.0",
   "baseRateOfReturn" : 0.07200000000000001,
   "type" : "S",
