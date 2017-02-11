@@ -1,160 +1,160 @@
 [ [ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ], [ {
   "apr" : 0.0025,
   "type" : "D",
-  "label" : "Savings Account",
-  "code" : "AGTSAV"
+  "code" : "AGTSAV",
+  "label" : "Savings Account"
 }, {
   "apr" : 0.0105,
   "type" : "D",
-  "label" : "Money Market Savings",
-  "code" : "BX001-23"
+  "code" : "BX001-23",
+  "label" : "Money Market Savings"
 }, {
   "apr" : 0.0435,
   "type" : "D",
-  "label" : "5-year CD",
-  "code" : "CD99312"
+  "code" : "CD99312",
+  "label" : "5-year CD"
 }, {
   "apr" : 0.019,
   "type" : "D",
-  "label" : "Online Savings A+",
-  "code" : "SAVE01"
+  "code" : "SAVE01",
+  "label" : "Online Savings A+"
 }, {
   "apr" : 0.0275,
   "type" : "D",
-  "label" : "1-year Rollover CD",
-  "code" : "CD1Y3X"
+  "code" : "CD1Y3X",
+  "label" : "1-year Rollover CD"
 }, {
   "apr" : 0.034,
   "type" : "D",
-  "label" : "Roth IRA",
-  "code" : "RIRA01"
+  "code" : "RIRA01",
+  "label" : "Roth IRA"
 }, {
-  "quarterlyDividend" : "0.0",
-  "baseRateOfReturn" : 0.055999999999999994,
   "sharePrice" : "814.708",
+  "stockSymbol" : null,
   "betaMeasure" : "1.15",
-  "stockSymbol" : null,
+  "baseRateOfReturn" : 0.055999999999999994,
+  "quarterlyDividend" : "0.0",
   "type" : "S",
-  "label" : "Google Inc.",
-  "code" : "GOOG001"
+  "code" : "GOOG001",
+  "label" : "Google Inc."
 }, {
-  "quarterlyDividend" : "12.00",
-  "baseRateOfReturn" : 0.032,
   "sharePrice" : "122.75",
+  "stockSymbol" : null,
   "betaMeasure" : "1.04",
-  "stockSymbol" : null,
+  "baseRateOfReturn" : 0.032,
+  "quarterlyDividend" : "12.00",
   "type" : "S",
-  "label" : "Diageo PLC",
-  "code" : "DIAGEO12"
+  "code" : "DIAGEO12",
+  "label" : "Diageo PLC"
 }, {
-  "quarterlyDividend" : "24.50",
-  "baseRateOfReturn" : 0.043,
   "sharePrice" : "429.80",
+  "stockSymbol" : null,
   "betaMeasure" : "1.25",
-  "stockSymbol" : null,
+  "baseRateOfReturn" : 0.043,
+  "quarterlyDividend" : "24.50",
   "type" : "S",
-  "label" : "Apple",
-  "code" : "123APP"
+  "code" : "123APP",
+  "label" : "Apple"
 }, {
-  "quarterlyDividend" : "5.45",
-  "baseRateOfReturn" : 0.031,
   "sharePrice" : "41.08",
+  "stockSymbol" : null,
   "betaMeasure" : "0.68",
-  "stockSymbol" : null,
+  "baseRateOfReturn" : 0.031,
+  "quarterlyDividend" : "5.45",
   "type" : "S",
-  "label" : "Coca-Cola",
-  "code" : "321CC"
+  "code" : "321CC",
+  "label" : "Coca-Cola"
 }, {
-  "quarterlyDividend" : "45.57",
-  "baseRateOfReturn" : 0.0319,
   "sharePrice" : "341.91",
+  "stockSymbol" : null,
   "betaMeasure" : ".94",
-  "stockSymbol" : null,
+  "baseRateOfReturn" : 0.0319,
+  "quarterlyDividend" : "45.57",
   "type" : "S",
-  "label" : "Chipotle Mexican Grill",
-  "code" : "No1BURR"
+  "code" : "No1BURR",
+  "label" : "Chipotle Mexican Grill"
 }, {
-  "quarterlyDividend" : "10.00",
-  "baseRateOfReturn" : 0.0225,
   "sharePrice" : "106.13",
+  "stockSymbol" : null,
   "betaMeasure" : "0.82",
-  "stockSymbol" : null,
+  "baseRateOfReturn" : 0.0225,
+  "quarterlyDividend" : "10.00",
   "type" : "S",
-  "label" : "Costco",
-  "code" : "B0oWM"
+  "code" : "B0oWM",
+  "label" : "Costco"
 }, {
-  "quarterlyDividend" : "0.0",
-  "baseRateOfReturn" : 0.0125,
   "sharePrice" : "35.40",
+  "stockSymbol" : null,
   "betaMeasure" : "1.28",
-  "stockSymbol" : null,
-  "type" : "S",
-  "label" : "3D Systems",
-  "code" : "N0TPIX"
-}, {
-  "quarterlyDividend" : "2.75",
-  "baseRateOfReturn" : 0.046,
-  "sharePrice" : "97.75",
-  "betaMeasure" : "0.79",
-  "stockSymbol" : null,
-  "type" : "S",
-  "label" : "Canadian National Railway",
-  "code" : "wOOWoo1S"
-}, {
+  "baseRateOfReturn" : 0.0125,
   "quarterlyDividend" : "0.0",
-  "baseRateOfReturn" : 0.07200000000000001,
-  "sharePrice" : "107.04",
-  "betaMeasure" : "0.29",
-  "stockSymbol" : null,
   "type" : "S",
-  "label" : "Berkshire Hathaway",
-  "code" : "BERK-B"
+  "code" : "N0TPIX",
+  "label" : "3D Systems"
 }, {
-  "quarterlyDividend" : "2400.00",
-  "baseRateOfReturn" : 0.0025,
-  "omegaMeasure" : "0.15",
+  "sharePrice" : "97.75",
+  "stockSymbol" : null,
+  "betaMeasure" : "0.79",
+  "baseRateOfReturn" : 0.046,
+  "quarterlyDividend" : "2.75",
+  "type" : "S",
+  "code" : "wOOWoo1S",
+  "label" : "Canadian National Railway"
+}, {
+  "sharePrice" : "107.04",
+  "stockSymbol" : null,
+  "betaMeasure" : "0.29",
+  "baseRateOfReturn" : 0.07200000000000001,
+  "quarterlyDividend" : "0.0",
+  "type" : "S",
+  "code" : "BERK-B",
+  "label" : "Berkshire Hathaway"
+}, {
   "totalValue" : "120000",
+  "omegaMeasure" : "0.15",
+  "baseRateOfReturn" : 0.0025,
+  "quarterlyDividend" : "2400.00",
   "type" : "P",
-  "label" : "Rental Property",
-  "code" : "RENT445"
+  "code" : "RENT445",
+  "label" : "Rental Property"
 }, {
-  "quarterlyDividend" : "14240",
-  "baseRateOfReturn" : 0.0535,
-  "omegaMeasure" : "0.25",
   "totalValue" : "10456000",
+  "omegaMeasure" : "0.25",
+  "baseRateOfReturn" : 0.0535,
+  "quarterlyDividend" : "14240",
   "type" : "P",
-  "label" : "Commercial Property-Red Oaks Mall",
-  "code" : "CMPROP0121"
+  "code" : "CMPROP0121",
+  "label" : "Commercial Property-Red Oaks Mall"
 }, {
-  "quarterlyDividend" : "35000.00",
-  "baseRateOfReturn" : 0.03,
-  "omegaMeasure" : "0.32",
   "totalValue" : "1212500.00",
+  "omegaMeasure" : "0.32",
+  "baseRateOfReturn" : 0.03,
+  "quarterlyDividend" : "35000.00",
   "type" : "P",
-  "label" : "Cluckin's restaurant chain",
-  "code" : "FOOD12"
+  "code" : "FOOD12",
+  "label" : "Cluckin's restaurant chain"
 }, {
-  "quarterlyDividend" : "1232",
-  "baseRateOfReturn" : 0.0123,
-  "omegaMeasure" : "0.13",
   "totalValue" : "54300.00",
+  "omegaMeasure" : "0.13",
+  "baseRateOfReturn" : 0.0123,
+  "quarterlyDividend" : "1232",
   "type" : "P",
-  "label" : "Fred's Fabulous Hardware Store",
-  "code" : "REALStr12"
+  "code" : "REALStr12",
+  "label" : "Fred's Fabulous Hardware Store"
 }, {
-  "quarterlyDividend" : "10500",
-  "baseRateOfReturn" : 0.02,
-  "omegaMeasure" : "-0.15",
   "totalValue" : "4213333",
+  "omegaMeasure" : "-0.15",
+  "baseRateOfReturn" : 0.02,
+  "quarterlyDividend" : "10500",
   "type" : "P",
-  "label" : "Industrial Widget Manufacturers Inc.",
-  "code" : "IND321"
+  "code" : "IND321",
+  "label" : "Industrial Widget Manufacturers Inc."
 }, {
-  "quarterlyDividend" : "2453.21",
-  "baseRateOfReturn" : 0.021,
-  "omegaMeasure" : "0.54",
   "totalValue" : "13500.00",
+  "omegaMeasure" : "0.54",
+  "baseRateOfReturn" : 0.021,
+  "quarterlyDividend" : "2453.21",
   "type" : "P",
-  "label" : "7\" Vinyl Records",
-  "code" : "RSTOR322"
+  "code" : "RSTOR322",
+  "label" : "7\" Vinyl Records"
 }, null ] ]
