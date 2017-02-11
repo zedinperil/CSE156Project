@@ -1,4 +1,5 @@
 
+//NOTE, We wanted to make this abstract and create a subclass, but we had several problems with it and decided to keep it simpler
 package dataConverter;
 import java.util.StringTokenizer;
 public class Persons{

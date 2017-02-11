@@ -8,20 +8,29 @@ import org.codehaus.jackson.util.DefaultPrettyPrinter;
 import org.codehaus.jackson.map.ObjectMapper;
 import java.util.Scanner;
 import java.io.BufferedReader;
-
+//The plan
+//Start with grabbing the file and making classes
+//You have Persons and Assets
+//Which are further broken down into their own subclasses
+//So we bring the file in here
+//BIG NOTE: We should have used array lists. We are simply stubborn to switch from arrays
 public class InputOutput {
 	public static void main(String[] args) throws IOException {		
+		//ints for further use
 		int NumOfFiles= 2;
 		int i=0;
 		int g=0;
 		int x=0;
+		//booleans to keep track if file is person or assett
 		boolean[] IsPerson=new boolean[NumOfFiles];
 		boolean[] IsAsset=new boolean[NumOfFiles];
 		String[] fileName = new String[2];
+		//the filenames
 		fileName[0]= "data/Persons.dat";
 		fileName[1]= "data/Assets.dat";
 		for(i=0; i<NumOfFiles; i++){
 //			fileName[i]=args[i];
+			//checks if file is a person or an asset
 			if(fileName[i].contains("Persons")||fileName[i].contains("persons")){
 			IsPerson[i]=true;
 			}
@@ -32,12 +41,15 @@ public class InputOutput {
 			System.out.println("WRONG TYPE OF FILE");
 			}
 		}
+		//variables/arrays for storing purposes
+		//
 		int PersonSize=0;
 		int AssetSize=0;
 		int[] size= new int[NumOfFiles];
 		int NumberOfLines[]= new int[NumOfFiles];
 		int[] NumOfChars= new int[10000];
 		for(i=0; i<NumOfFiles; i++){
+			//gets the size of the file, we don't want to store it with the data
 			BufferedReader Buff = new BufferedReader(new FileReader(fileName[i]));
 	        String text = Buff.readLine();
 	        size[i] = Integer.parseInt(text);
@@ -48,17 +60,21 @@ public class InputOutput {
 	        if(IsAsset[i]){
 	        	AssetSize=size[i];
 	        }
+	        //close the buffer
 	        Buff.close();
 		}
+		//create a string to store every piece of data pulled in
 		String fullData[][] = new String[NumOfFiles][1000];
 	        Scanner s = null;
 	    for(i=0; i<NumOfFiles; i++){
-		try{
+	    	//try catch to check there is a file
+	    	try{
 			s = new Scanner(new File(fileName[i]));
 		} catch(Exception e) {
 			throw new RuntimeException(e);
 		}
-		x=0;		
+		x=0;
+		//read file to the end of the line and remove the endline character
 		while(s.hasNext()) {
 			String line = s.nextLine(); //throw away the endline character
 			fullData[i][x] = line;
@@ -75,7 +91,7 @@ public class InputOutput {
 	    }
 	//TODO: Enumerate person and assets classes, and create arrays for each.
 		//DONE ELSEWHERE
-		String DelimeteredData[][][]= new String[NumOfFiles][1000][100];
+		String DelimeteredData[][][]= new String[2][1000][100];
 	//TODO: Based on what each is,  use methods to save delimetered strings into the correct spaces for whatever type the data is
 	int[][] NumberOfDelims= new int[NumOfFiles][1000];
 	for(i=0; i<NumOfFiles; i++){
