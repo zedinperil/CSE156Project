@@ -13,9 +13,9 @@ public abstract class Assets {
 	
 	public abstract String getCode();
 	public abstract String getLabel();
-	public abstract String getApr();
+	public abstract double getApr();
 	public abstract String getQuarterlyDividend();
-	public abstract String getBaseRateOfReturn();
+	public abstract double getBaseRateOfReturn();
 	public abstract String getBetaMeasure();
 	public abstract String getStockSymbol();
 	public abstract String getSharePrice();

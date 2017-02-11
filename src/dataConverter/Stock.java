@@ -1,18 +1,20 @@
 package dataConverter;
 
 public class Stock extends Assets{
+	
+	private String Code;
+	private String Label;
+	private String QuarterlyDividend;
+	private double BaseRateOfReturn;
+	private String BetaMeasure;
+	private String StockSymbol;
+	private String SharePrice;
 	public Stock(String input, String string3, String string4, String string5, String string6,
 			String string7, String string8) {
 		super(input, string3, string4, string5, string6, string7, string8);
 		// TODO Auto-generated constructor stub
+		this.BaseRateOfReturn=(double)Integer.parseInt(string5);
 	}
-	private String Code;
-	private String Label;
-	private String QuarterlyDividend;
-	private String BaseRateOfReturn;
-	private String BetaMeasure;
-	private String StockSymbol;
-	private String SharePrice;
 	public String getCode() {
 		return Code;
 	}
@@ -31,10 +33,10 @@ public class Stock extends Assets{
 	public void setQuarterlyDividend(String quarterlyDividend) {
 		QuarterlyDividend = quarterlyDividend;
 	}
-	public String getBaseRateOfReturn() {
+	public double getBaseRateOfReturn() {
 		return BaseRateOfReturn;
 	}
-	public void setBaseRateOfReturn(String baseRateOfReturn) {
+	public void setBaseRateOfReturn(double baseRateOfReturn) {
 		BaseRateOfReturn = baseRateOfReturn;
 	}
 	/**
@@ -73,11 +75,7 @@ public class Stock extends Assets{
 	public void setSharePrice(String sharePrice) {
 		SharePrice = sharePrice;
 	}
-	@Override
-	public String getApr() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	@Override
 	public String getOmegaMeasure() {
 		// TODO Auto-generated method stub
@@ -87,5 +85,10 @@ public class Stock extends Assets{
 	public String getTotalValue() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public double getApr() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

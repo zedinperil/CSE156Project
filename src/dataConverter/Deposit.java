@@ -1,15 +1,17 @@
 package dataConverter;
 
 public class Deposit extends Assets{
+
+private String Code;
+ private String Label;
+ private double Apr;
  public Deposit(String input, String code, String label, String apr, String string6,
 			String string7, String string8) {
 		super(input, code, label, apr, string6, string7, string8);
+		this.Apr=(double)Integer.parseInt(apr)/100;
 		// TODO Auto-generated constructor stub
 	}
-private String Code;
- private String Label;
- private String Apr;
-/**
+ /**
  * @return the code
  */
 public String getCode() {
@@ -36,13 +38,13 @@ public void setLabel(String label) {
 /**
  * @return the apr
  */
-public String getApr() {
+public double getApr() {
 	return Apr;
 }
 /**
  * @param apr the apr to set
  */
-public void setApr(String apr) {
+public void setApr(double apr) {
 	Apr = apr;
 }
 @Override
@@ -51,9 +53,9 @@ public String getQuarterlyDividend() {
 	return null;
 }
 @Override
-public String getBaseRateOfReturn() {
+public double getBaseRateOfReturn() {
 	// TODO Auto-generated method stub
-	return null;
+	return 0;
 }
 @Override
 public String getBetaMeasure() {

@@ -4,7 +4,7 @@ public class PrivateInvestment extends Assets{
 	private String Code;
 	private String Label;
 	private String QuarterlyDividend;
-	private String BaseRateOfReturn;
+	private double BaseRateOfReturn;
 	private String OmegaMeasure;
 	private String TotalValue;
 	
@@ -13,7 +13,7 @@ public class PrivateInvestment extends Assets{
 		this.Code=code;
 		this.Label=label;
 		this.QuarterlyDividend=quarterlydividend;
-		this.BaseRateOfReturn=baserateofreturn;
+		this.BaseRateOfReturn=(double)Integer.parseInt(baserateofreturn)/100;
 		this.OmegaMeasure=omegameasure;
 		this.TotalValue=totalvalue;
 	}
@@ -34,7 +34,7 @@ public class PrivateInvestment extends Assets{
 	}
 
 	@Override
-	public String getBaseRateOfReturn() {
+	public double getBaseRateOfReturn() {
 		return BaseRateOfReturn;
 	}
 	
@@ -49,9 +49,9 @@ public class PrivateInvestment extends Assets{
 	}
 
 	@Override
-	public String getApr() {
+	public double getApr() {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
