@@ -1,5 +1,3 @@
-//hey this is alex and tyler
-//hello again
 package dataConverter;
 import java.io.File;
 import java.io.FileReader;
@@ -29,7 +27,6 @@ public class InputOutput {
 		fileName[0]= "data/Persons.dat";
 		fileName[1]= "data/Assets.dat";
 		for(i=0; i<NumOfFiles; i++){
-//			fileName[i]=args[i];
 			//checks if file is a person or an asset
 			if(fileName[i].contains("Persons")||fileName[i].contains("persons")){
 			IsPerson[i]=true;
@@ -80,46 +77,43 @@ public class InputOutput {
 			fullData[i][x] = line;
 			NumOfChars[x]=0;
 		for(int q=0; q<=x; q++){	
+			//this counts number of chars that are not null, to be used for later incrementing
 				if(fullData[i][x].charAt(q)!='\u0000'){
 					NumOfChars[x]++;	
 				}
 			}
-			x++;
+			x++;//increment
 		}
-		NumberOfLines[i]=Integer.parseInt(fullData[i][0]);
-		s.close();
+		NumberOfLines[i]=Integer.parseInt(fullData[i][0]);//number of lines
+		s.close();//close s
 	    }
 	//TODO: Enumerate person and assets classes, and create arrays for each.
 		//DONE ELSEWHERE
 		String DelimeteredData[][][]= new String[2][1000][100];
-	//TODO: Based on what each is,  use methods to save delimetered strings into the correct spaces for whatever type the data is
+	//TODO: Based on what each is,  use increments to save delimetered strings into the correct spaces for whatever type the data is
 	int[][] NumberOfDelims= new int[NumOfFiles][1000];
 	for(i=0; i<NumOfFiles; i++){
 		for( g=1; g<=NumberOfLines[i]; g++){
 			for(x=0; x<=NumOfChars[g]; x++){
+				//split it every time a semicolon appears, and also at the end of the line if there is no semicolon
 				if(fullData[i][g].charAt(x)==';'){
 					DelimeteredData[i][g-1]=fullData[i][g].split(";");	
 				}
 				if(x==(NumOfChars[g])-1 && fullData[i][g].lastIndexOf(";")!=NumOfChars[g]-1){
 						DelimeteredData[i][g-1]=fullData[i][g].split(";");						
 				}	
-					NumberOfDelims[i][g-1]=DelimeteredData[i][g-1].length;	
 			}
-//			if(NumberOfDelims[i][g-1]>1){
-//				System.out.println("x is:"+x);
-//				System.out.println("Num of delims is:"+NumberOfDelims[i][g-1]);
-//				System.out.println("Number of chars:"+NumOfChars[g]);
-//				System.out.println("THE BIT: "+DelimeteredData[i][g-1][0]+DelimeteredData[i][g-1][1]+DelimeteredData[i][g-1][2]);
-//				}
+			NumberOfDelims[i][g-1]=DelimeteredData[i][g-1].length;	//this is how many delimeters we have
 		}
 	}
-		ObjectMapper jsonMapper = new ObjectMapper();
-//testing to ensure it is saved correctly;	
+//Persons array of arrays. Its an array of persons arrays, that can handle as many persons arrays as you need!		
 		Persons[][] PersonArray= new Persons[NumOfFiles][PersonSize];
+//Assets array of arrays. Its an array of assets arrays, that can handle as many assets arrays as you need!		
 		Assets[][] AssetsArray= new Assets[NumOfFiles][AssetSize];
-		String HasNoData= "";
+		String HasNoData= "";//this is a string to be put in the event that a person does not have an email address.
 		for(i=0; i<NumOfFiles; i++){
 			for(g=0; g<NumberOfLines[i]; g++){
+				//check to see that it is a person, if so, check to see how many delimeters the delimetered data corresponding to the person has, and put construct a person with the appropriate inputs
 					if(IsPerson[i]){						
 						if(NumberOfDelims[i][g]==5){	
 							PersonArray[i][g]= new Persons(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4]);
@@ -128,6 +122,7 @@ public class InputOutput {
 							PersonArray[i][g]= new Persons(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData);
 						}
 					}
+				//check to see that it is an asset, and if so, check to see if the delimetered data for that asset that corresponds to type contains the character corresponding to each type of asset. Then, create a new asset of the correct type with the correct inputs for that type of asset
 					if(IsAsset[i]){
 						if(DelimeteredData[i][g][1].contains("D")){
 							AssetsArray[i][g]= new Deposit(DelimeteredData[i][g][0], DelimeteredData[i][g][1],DelimeteredData[i][g][2], DelimeteredData[i][g][3]);				
@@ -141,20 +136,18 @@ public class InputOutput {
 					}	
 			}
 		}
-//	//TODO: Store the Persons and Assets data into a JSON file. FORMAT IT
-for(g=0; g<NumOfFiles;g++){
-	for(i=0; i<NumberOfLines[g]; i++){
-//	System.out.println(PersonArray[g][i].getPersonCode()+", "+PersonArray[g][i].getType()+", "+PersonArray[g][i].getSEC()+", "+PersonArray[g][i].getLastName()+", "+PersonArray[g][i].getFirstName()+", "+ PersonArray[g][i].getStreet()+", "+PersonArray[g][i].getCity()+", "+PersonArray[g][i].getState()+", "+PersonArray[g][i].getZipcode()+", "+PersonArray[g][i].getCountry()+", "+PersonArray[g][i].getEmail());
-//	System.out.println(Arrays.toString(PrivateArray[i][g]));
-	}		
-}
+//	//TODO: Store the Persons and Assets data into a JSON file. FORMAT IT. We use Objectwriter to write values to the desired output and use prettyprinter to make it look (Marginally) better
+//use prettyprinter to make this more well formatted (Although we know that there are still nulls. We honestly could not find the source of it.
+		ObjectMapper jsonMapper = new ObjectMapper();
 		try {  
 			DefaultPrettyPrinter pp= new DefaultPrettyPrinter();
-//			pp.indentArraysWith(new Lf2SpacesIndenter());
 			// Writing to a file
-			 jsonMapper.writer(pp).writeValue(new File("./data/Persons.json"), PersonArray);
-			 jsonMapper.writer(pp).writeValue(new File("./data/Assets.json"), AssetsArray);
-		    } catch (IOException e) {  
+			//write person and assets arrays into json files
+			 jsonMapper.writer(pp).writeValue(new File("data/Persons.json"), PersonArray);
+			 jsonMapper.writer(pp).writeValue(new File("data/Assets.json"), AssetsArray);
+		    } 
+		//exception handling
+		catch (IOException e) {  
 		        e.printStackTrace();  
 		    }  
 		}

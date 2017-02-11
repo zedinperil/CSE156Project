@@ -30,130 +30,130 @@
   "label" : "Roth IRA"
 }, {
   "betaMeasure" : "1.15",
-  "stockSymbol" : null,
   "sharePrice" : "814.708",
-  "baseRateOfReturn" : 0.055999999999999994,
+  "stockSymbol" : null,
   "quarterlyDividend" : "0.0",
+  "baseRateOfReturn" : 0.055999999999999994,
   "type" : "S",
   "code" : "GOOG001",
   "label" : "Google Inc."
 }, {
   "betaMeasure" : "1.04",
-  "stockSymbol" : null,
   "sharePrice" : "122.75",
-  "baseRateOfReturn" : 0.032,
+  "stockSymbol" : null,
   "quarterlyDividend" : "12.00",
+  "baseRateOfReturn" : 0.032,
   "type" : "S",
   "code" : "DIAGEO12",
   "label" : "Diageo PLC"
 }, {
   "betaMeasure" : "1.25",
-  "stockSymbol" : null,
   "sharePrice" : "429.80",
-  "baseRateOfReturn" : 0.043,
+  "stockSymbol" : null,
   "quarterlyDividend" : "24.50",
+  "baseRateOfReturn" : 0.043,
   "type" : "S",
   "code" : "123APP",
   "label" : "Apple"
 }, {
   "betaMeasure" : "0.68",
-  "stockSymbol" : null,
   "sharePrice" : "41.08",
-  "baseRateOfReturn" : 0.031,
+  "stockSymbol" : null,
   "quarterlyDividend" : "5.45",
+  "baseRateOfReturn" : 0.031,
   "type" : "S",
   "code" : "321CC",
   "label" : "Coca-Cola"
 }, {
   "betaMeasure" : ".94",
-  "stockSymbol" : null,
   "sharePrice" : "341.91",
-  "baseRateOfReturn" : 0.0319,
+  "stockSymbol" : null,
   "quarterlyDividend" : "45.57",
+  "baseRateOfReturn" : 0.0319,
   "type" : "S",
   "code" : "No1BURR",
   "label" : "Chipotle Mexican Grill"
 }, {
   "betaMeasure" : "0.82",
-  "stockSymbol" : null,
   "sharePrice" : "106.13",
-  "baseRateOfReturn" : 0.0225,
+  "stockSymbol" : null,
   "quarterlyDividend" : "10.00",
+  "baseRateOfReturn" : 0.0225,
   "type" : "S",
   "code" : "B0oWM",
   "label" : "Costco"
 }, {
   "betaMeasure" : "1.28",
-  "stockSymbol" : null,
   "sharePrice" : "35.40",
-  "baseRateOfReturn" : 0.0125,
+  "stockSymbol" : null,
   "quarterlyDividend" : "0.0",
+  "baseRateOfReturn" : 0.0125,
   "type" : "S",
   "code" : "N0TPIX",
   "label" : "3D Systems"
 }, {
   "betaMeasure" : "0.79",
-  "stockSymbol" : null,
   "sharePrice" : "97.75",
-  "baseRateOfReturn" : 0.046,
+  "stockSymbol" : null,
   "quarterlyDividend" : "2.75",
+  "baseRateOfReturn" : 0.046,
   "type" : "S",
   "code" : "wOOWoo1S",
   "label" : "Canadian National Railway"
 }, {
   "betaMeasure" : "0.29",
-  "stockSymbol" : null,
   "sharePrice" : "107.04",
-  "baseRateOfReturn" : 0.07200000000000001,
+  "stockSymbol" : null,
   "quarterlyDividend" : "0.0",
+  "baseRateOfReturn" : 0.07200000000000001,
   "type" : "S",
   "code" : "BERK-B",
   "label" : "Berkshire Hathaway"
 }, {
-  "omegaMeasure" : "0.15",
   "totalValue" : "120000",
-  "baseRateOfReturn" : 0.0025,
+  "omegaMeasure" : "0.15",
   "quarterlyDividend" : "2400.00",
+  "baseRateOfReturn" : 0.0025,
   "type" : "P",
   "code" : "RENT445",
   "label" : "Rental Property"
 }, {
-  "omegaMeasure" : "0.25",
   "totalValue" : "10456000",
-  "baseRateOfReturn" : 0.0535,
+  "omegaMeasure" : "0.25",
   "quarterlyDividend" : "14240",
+  "baseRateOfReturn" : 0.0535,
   "type" : "P",
   "code" : "CMPROP0121",
   "label" : "Commercial Property-Red Oaks Mall"
 }, {
-  "omegaMeasure" : "0.32",
   "totalValue" : "1212500.00",
-  "baseRateOfReturn" : 0.03,
+  "omegaMeasure" : "0.32",
   "quarterlyDividend" : "35000.00",
+  "baseRateOfReturn" : 0.03,
   "type" : "P",
   "code" : "FOOD12",
   "label" : "Cluckin's restaurant chain"
 }, {
-  "omegaMeasure" : "0.13",
   "totalValue" : "54300.00",
-  "baseRateOfReturn" : 0.0123,
+  "omegaMeasure" : "0.13",
   "quarterlyDividend" : "1232",
+  "baseRateOfReturn" : 0.0123,
   "type" : "P",
   "code" : "REALStr12",
   "label" : "Fred's Fabulous Hardware Store"
 }, {
-  "omegaMeasure" : "-0.15",
   "totalValue" : "4213333",
-  "baseRateOfReturn" : 0.02,
+  "omegaMeasure" : "-0.15",
   "quarterlyDividend" : "10500",
+  "baseRateOfReturn" : 0.02,
   "type" : "P",
   "code" : "IND321",
   "label" : "Industrial Widget Manufacturers Inc."
 }, {
-  "omegaMeasure" : "0.54",
   "totalValue" : "13500.00",
-  "baseRateOfReturn" : 0.021,
+  "omegaMeasure" : "0.54",
   "quarterlyDividend" : "2453.21",
+  "baseRateOfReturn" : 0.021,
   "type" : "P",
   "code" : "RSTOR322",
   "label" : "7\" Vinyl Records"
