@@ -10,7 +10,7 @@ public class PrivateInvestment extends Assets{
 	public PrivateInvestment(String code, String type, String label, String quarterlydividend, String baserateofreturn, String omegameasure, String totalvalue){
 		super(code, type, label);
 		this.setQuarterlyDividend(quarterlydividend);
-		this.setBaseRateOfReturn((double)Integer.parseInt(baserateofreturn)/100);
+		this.setBaseRateOfReturn(Double.parseDouble(baserateofreturn)/100);
 		this.setOmegaMeasure(omegameasure);
 		this.setTotalValue(totalvalue);
 	}

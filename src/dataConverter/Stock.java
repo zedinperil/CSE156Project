@@ -10,7 +10,7 @@ public class Stock extends Assets{
 	public Stock(String code, String type, String label, String quarterlydividend, String baserateofreturn,String betameasure,String stocksymbol, String shareprice){
 		super(code,type,label);
 		this.QuarterlyDividend=quarterlydividend;
-		this.BaseRateOfReturn=(double)Integer.parseInt(baserateofreturn)/100;
+		this.BaseRateOfReturn=Double.parseDouble(baserateofreturn)/100;
 		this.BetaMeasure=betameasure;
 		this.SharePrice=shareprice;
 	}
