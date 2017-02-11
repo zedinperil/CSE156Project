@@ -100,7 +100,13 @@ public class InputOutput {
 		ObjectMapper jsonMapper = new ObjectMapper();
 //testing to ensure it is saved correctly;	
 		Persons[][] PersonArray= new Persons[NumOfFiles][PersonSize];
-		Assets[][] AssetsArray= new Assets[NumOfFiles][AssetSize];
+		Assets[][][] AssetsArray= new Assets[3][NumOfFiles][AssetSize];
+		Deposit[][] DepositArray= new Deposit[NumOfFiles][AssetSize];
+		Stock[][]StockArray= new Stock[NumOfFiles][AssetSize];
+		PrivateInvestment[][] PrivateArray= new PrivateInvestment[NumOfFiles][AssetSize];
+		AssetsArray[0]=DepositArray;
+		AssetsArray[1]=StockArray;
+		AssetsArray[2]=PrivateArray;
 		String HasNoData= "";
 		for(i=0; i<NumOfFiles; i++){
 			for(g=0; g<NumberOfLines[i]; g++){
@@ -114,30 +120,30 @@ public class InputOutput {
 					}
 					if(IsAsset[i]){
 						if(DelimeteredData[i][g][1].contains("D,")){
-							AssetsArray[i][g-1]= new Deposit(DelimeteredData[i][g][0], DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData, HasNoData, HasNoData, HasNoData);				
+							DepositArray[i][g-1]= new Deposit(DelimeteredData[i][g][0], DelimeteredData[i][g][1],DelimeteredData[i][g][2], DelimeteredData[i][g][3]);				
 						}
 						else if(DelimeteredData[i][g][1].contains("S,")){
-							AssetsArray[i][g-1]= new Stock(DelimeteredData[i][g][0], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6], DelimeteredData[i][g][7]);
+							StockArray[i][g-1]= new Stock(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6], DelimeteredData[i][g][7]);
 						}
 						else if(DelimeteredData[i][g][1].contains("P,")){
-							AssetsArray[i][g-1]= new PrivateInvestment(DelimeteredData[i][g][0], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6], HasNoData);
+							PrivateArray[i][g-1]= new PrivateInvestment(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6]);
 						}			
 					}	
 			}
 		}
-	//TODO: Store the Persons and Assets data into a JSON file. FORMAT IT
-for(g=0; g<NumOfFiles;g++){
-	for(i=0; i<NumberOfLines[g]; i++){
-//		System.out.println(PersonArray[g][i].getPersonCode()+", "+PersonArray[g][i].getType()+", "+PersonArray[g][i].getSEC()+", "+PersonArray[g][i].getLastName()+", "+PersonArray[g][i].getFirstName()+", "+ PersonArray[g][i].getStreet()+", "+PersonArray[g][i].getCity()+", "+PersonArray[g][i].getState()+", "+PersonArray[g][i].getZipcode()+", "+PersonArray[g][i].getCountry()+", "+PersonArray[g][i].getEmail());
-	}		
-}
+//	//TODO: Store the Persons and Assets data into a JSON file. FORMAT IT
+//for(g=0; g<NumOfFiles;g++){
+//	for(i=0; i<NumberOfLines[g]; i++){
+////		System.out.println(PersonArray[g][i].getPersonCode()+", "+PersonArray[g][i].getType()+", "+PersonArray[g][i].getSEC()+", "+PersonArray[g][i].getLastName()+", "+PersonArray[g][i].getFirstName()+", "+ PersonArray[g][i].getStreet()+", "+PersonArray[g][i].getCity()+", "+PersonArray[g][i].getState()+", "+PersonArray[g][i].getZipcode()+", "+PersonArray[g][i].getCountry()+", "+PersonArray[g][i].getEmail());
+//	}		
+//}
 
 		try {  
 			DefaultPrettyPrinter pp= new DefaultPrettyPrinter();
 //			pp.indentArraysWith(new Lf2SpacesIndenter());
 			// Writing to a file
 			 jsonMapper.writer(pp).writeValue(new FileOutputStream("./data/Persons.json"), PersonArray);
-			 jsonMapper.writer(pp).writeValue(new File("./data/Assets.json"), AssetsArray);
+			 jsonMapper.writer(pp).writeValue(new FileOutputStream("./data/Assets.json"), AssetsArray);
 		    } catch (IOException e) {  
 		        e.printStackTrace();  
 		    }  

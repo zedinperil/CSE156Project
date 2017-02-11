@@ -1,29 +1,41 @@
 package dataConverter;
 
 public abstract class Assets {
-	private String input;
+	private String Code;
+	private String Type;
+	private String Label;
 
-
-	public Assets(String input, String string3, String string4, String string5, String string6,
-			String string7, String string8) {
+	public Assets(String code, String type, String label) {
 		super();
-		this.input= input;
-	
+		this.Code = code;
+		this.Type = type;
+		this.Label = label;
+	}
+
+	public String getCode() {
+		return Code;
+	}
+
+	public void setCode(String code) {
+		Code = code;
+	}
+
+	public String getType() {
+		return Type;
+	}
+
+	public void setType(String type) {
+		Type = type;
+	}
+
+	public String getLabel() {
+		return Label;
+	}
+
+	public void setLabel(String label) {
+		Label = label;
 	}
 	
-	public abstract String getCode();
-	public abstract String getLabel();
-	public abstract double getApr();
-	public abstract String getQuarterlyDividend();
-	public abstract double getBaseRateOfReturn();
-	public abstract String getBetaMeasure();
-	public abstract String getStockSymbol();
-	public abstract String getSharePrice();
-	public abstract String getOmegaMeasure();
-	public abstract String getTotalValue();
 	
 	
-	public String getInput() {
-		return input;
-	}
 }
