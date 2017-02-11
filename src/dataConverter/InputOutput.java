@@ -2,7 +2,6 @@
 //hello again
 package dataConverter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import org.codehaus.jackson.util.DefaultPrettyPrinter;
@@ -12,15 +11,17 @@ import java.io.BufferedReader;
 
 public class InputOutput {
 	public static void main(String[] args) throws IOException {		
-		int NumOfFiles= args.length;
+		int NumOfFiles= 2;
 		int i=0;
 		int g=0;
 		int x=0;
 		boolean[] IsPerson=new boolean[NumOfFiles];
 		boolean[] IsAsset=new boolean[NumOfFiles];
-		String[] fileName = new String[NumOfFiles];
+		String[] fileName = new String[2];
+		fileName[0]= "data/Persons.dat";
+		fileName[1]= "data/Assets.dat";
 		for(i=0; i<NumOfFiles; i++){
-			fileName[i]=args[i];
+//			fileName[i]=args[i];
 			if(fileName[i].contains("Persons")||fileName[i].contains("persons")){
 			IsPerson[i]=true;
 			}
@@ -37,7 +38,7 @@ public class InputOutput {
 		int NumberOfLines[]= new int[NumOfFiles];
 		int[] NumOfChars= new int[10000];
 		for(i=0; i<NumOfFiles; i++){
-			BufferedReader Buff = new BufferedReader(new FileReader(args[i]));
+			BufferedReader Buff = new BufferedReader(new FileReader(fileName[i]));
 	        String text = Buff.readLine();
 	        size[i] = Integer.parseInt(text);
 	        size[i] += 1;
