@@ -5,8 +5,7 @@ import java.util.StringTokenizer;
 public class Persons{
 	
 	private String Code;
-	private String FirstName;
-	private String LastName;
+	private Name Name;
 	private Address Address;
 	private String Email;
 	private String Type;
@@ -31,19 +30,20 @@ public class Persons{
 					this.secIdentifier="";
 				}
 		 
-				StringTokenizer twokenizer= new StringTokenizer(name, ",");
-				if(twokenizer.hasMoreTokens()){		
-					this.LastName = twokenizer.nextToken();
-				}
-				else{
-					this.LastName="";
-				}
-				if(twokenizer.hasMoreTokens()){
-					this.FirstName = twokenizer.nextToken();
-				}
-				else{
-					this.FirstName="";
-				}
+				this.Name= new Name(name);
+//				StringTokenizer twokenizer= new StringTokenizer(name, ",");
+//				if(twokenizer.hasMoreTokens()){		
+//					this.LastName = twokenizer.nextToken();
+//				}
+//				else{
+//					this.LastName="";
+//				}
+//				if(twokenizer.hasMoreTokens()){
+//					this.FirstName = twokenizer.nextToken();
+//				}
+//				else{
+//					this.FirstName="";
+//				}
 		this.Address=new Address(address);
 		
 		this.Email=email;
@@ -82,9 +82,10 @@ public class Persons{
 	}
 
 	public String getFirstName(){
-		return this.FirstName;
+		return this.Name.getFirstName();
 	}
 	public String getLastName(){
-		return this.LastName;
+		return this.Name.getLastName();
 	}
+
 }
