@@ -2,10 +2,13 @@ package dataConverter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import org.codehaus.jackson.util.DefaultPrettyPrinter;
-import org.codehaus.jackson.map.ObjectMapper;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.io.BufferedReader;
+import javax.json.*;
+import javax.json.stream.JsonGenerator;
 //The plan
 //Start with grabbing the file and making classes
 //You have Persons and Assets
@@ -13,6 +16,7 @@ import java.io.BufferedReader;
 //So we bring the file in here
 //BIG NOTE: We should have used array lists. We are simply stubborn to switch from arrays
 public class InputOutput {
+	
 	public static void main(String[] args) throws IOException {		
 		//ints for further use
 		int NumOfFiles= 2;
@@ -111,44 +115,130 @@ public class InputOutput {
 //Assets array of arrays. Its an array of assets arrays, that can handle as many assets arrays as you need!		
 		Assets[][] AssetsArray= new Assets[NumOfFiles][AssetSize];
 		String HasNoData= "";//this is a string to be put in the event that a person does not have an email address.
+		
+		JsonArrayBuilder Personbuilder= Json.createArrayBuilder();
+		JsonArrayBuilder Assetbuilder= Json.createArrayBuilder();
 		for(i=0; i<NumOfFiles; i++){
 			for(g=0; g<NumberOfLines[i]; g++){
 				//check to see that it is a person, if so, check to see how many delimeters the delimetered data corresponding to the person has, and put construct a person with the appropriate inputs
 					if(IsPerson[i]){						
 						if(NumberOfDelims[i][g]==5){	
 							PersonArray[i][g]= new Persons(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4]);
+							
 						}
 						else{
 							PersonArray[i][g]= new Persons(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData);
 						}
+							JsonObject tempmodel = Json.createObjectBuilder()
+								   .add("code", PersonArray[i][g].getPersonCode())
+								   .add("secIdentifier", PersonArray[i][g].getSEC())
+								   .add("type", PersonArray[i][g].getType())
+								   .add("firstName", PersonArray[i][g].getFirstName())
+								   .add("lastName", PersonArray[i][g].getLastName())
+								   .add("address", Json.createArrayBuilder()
+								      .add(Json.createObjectBuilder()
+								         .add("street", PersonArray[i][g].getStreet())
+								         .add("city", PersonArray[i][g].getCity())
+								         .add("state", PersonArray[i][g].getState())
+								         .add("country", PersonArray[i][g].getCountry())
+								         .add("zipcode", PersonArray[i][g].getZipcode())))
+								   		 .add("emails", PersonArray[i][g].getEmail())
+								   .build();
+					
+						Personbuilder.add(tempmodel);
+					
 					}
 				//check to see that it is an asset, and if so, check to see if the delimetered data for that asset that corresponds to type contains the character corresponding to each type of asset. Then, create a new asset of the correct type with the correct inputs for that type of asset
 					if(IsAsset[i]){
 						if(DelimeteredData[i][g][1].contains("D")){
 							AssetsArray[i][g]= new Deposit(DelimeteredData[i][g][0], DelimeteredData[i][g][1],DelimeteredData[i][g][2], DelimeteredData[i][g][3]);				
+							//TODO: fix this for assets
+							JsonObject tempmodel = Json.createObjectBuilder()
+									   .add("code", AssetsArray[i][g].getCode())
+									   .add("label", AssetsArray[i][g].getLabel())
+									   .add("type", AssetsArray[i][g].getType())
+									   .add("apr", AssetsArray[i][g].getApr())
+									   .build();
+						
+							Assetbuilder.add(tempmodel);
+						
 						}
 						else if(DelimeteredData[i][g][1].contains("S")){
 							AssetsArray[i][g]= new Stock(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6], DelimeteredData[i][g][7]);
+							//TODO: fix this for assets
+							JsonObject tempmodel = Json.createObjectBuilder()
+									   .add("code", AssetsArray[i][g].getCode())
+									   .add("label", AssetsArray[i][g].getLabel())
+									   .add("type", AssetsArray[i][g].getType())
+								
+									   .build();
+						
+							Assetbuilder.add(tempmodel);
+						
 						}
 						else if(DelimeteredData[i][g][1].contains("P")){
 							AssetsArray[i][g]= new PrivateInvestment(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6]);
-						}			
+							//TODO: fix this for assets
+							JsonObject tempmodel = Json.createObjectBuilder()
+									   .add("code", AssetsArray[i][g].getCode())
+									   .add("label", AssetsArray[i][g].getLabel())
+									   .add("type", AssetsArray[i][g].getType())
+									   .build();
+						
+							Assetbuilder.add(tempmodel);
+						
+						}	
+				
 					}	
 			}
 		}
+
+JsonArray Persons= Personbuilder.build();
+JsonArray Assets= Assetbuilder.build();				
+				//A simple object containing Json array
+//				JsonObject personObject = Json.createObjectBuilder()
+//				.add("Person", (JsonValue)PersonsArray)
+//				.build();
+		// config Map is created for pretty printing.
+		  Map<String, Boolean> config = new HashMap<>();
+
+		  // Pretty printing feature is added.
+		  config.put(JsonGenerator.PRETTY_PRINTING, true);
+
+		  // PrintWriter and JsonWriter is being created
+		  // in try-with-resources
+		  try (PrintWriter printWriter = new PrintWriter("data/PersonsTest.json");
+		JsonWriter jsonWriter = Json.createWriterFactory(config).createWriter(printWriter)){
+
+		     // Json object is being sent into file system
+		     
+			  jsonWriter.write(Persons);
+		     
+		     
+		  }
+		  try (PrintWriter printWriter = new PrintWriter("data/AssetsTest.json");
+					JsonWriter jsonWriter = Json.createWriterFactory(config).createWriter(printWriter)){
+
+					     // Json object is being sent into file system
+					     
+						  jsonWriter.write(Assets);
+					     
+					     
+					  }
+
 //	//TODO: Store the Persons and Assets data into a JSON file. FORMAT IT. We use Objectwriter to write values to the desired output and use prettyprinter to make it look (Marginally) better
 //use prettyprinter to make this more well formatted (Although we know that there are still nulls. We honestly could not find the source of it.
-		ObjectMapper jsonMapper = new ObjectMapper();
-		try {  
-			DefaultPrettyPrinter pp= new DefaultPrettyPrinter();
-			// Writing to a file
-			//write person and assets arrays into json files
-			 jsonMapper.writer(pp).writeValue(new File("data/Persons.json"), PersonArray);
-			 jsonMapper.writer(pp).writeValue(new File("data/Assets.json"), AssetsArray);
-		    } 
-		//exception handling
-		catch (IOException e) {  
-		        e.printStackTrace();  
-		    }  
-		}
-}
+//		ObjectMapper jsonMapper = new ObjectMapper();
+//		try {  
+//			DefaultPrettyPrinter pp= new DefaultPrettyPrinter();
+//			// Writing to a file
+//			//write person and assets arrays into json files
+//			 jsonMapper.writer(pp).writeValue(new File("data/Persons.json"), PersonArray);
+//			 jsonMapper.writer(pp).writeValue(new File("data/Assets.json"), AssetsArray);
+//		    } 
+//		//exception handling
+//		catch (IOException e) {  
+//		        e.printStackTrace();  
+//		    }  
+//		}
+}}

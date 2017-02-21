@@ -13,33 +13,33 @@ public class Address{
 		if(tokenizer.hasMoreTokens()){		
 			this.Street = tokenizer.nextToken();
 		}
-//		else{
-//			this.Street=null;
-//		}
+		else{
+			this.Street="";
+		}
 		if(tokenizer.hasMoreTokens()){
 			this.City = tokenizer.nextToken();
 		}
-//		else{
-//			this.City=null;
-//		}
+		else{
+			this.City="";
+		}
 		if(tokenizer.hasMoreTokens()){
 			this.State = tokenizer.nextToken();		
 		}
-//		else{
-//			this.State=null;
-//		}
+		else{
+			this.State="";
+		}
 		if(tokenizer.hasMoreTokens()){
 			this.Zipcode = tokenizer.nextToken();
 		}
-//		else{
-//			this.Zipcode=null;
-//		}
+		else{
+			this.Zipcode="";
+		}
 		if(tokenizer.hasMoreTokens()){
 			this.Country = tokenizer.nextToken();
 		}
-//		else{
-//			this.Country=null;
-//		}
+		else{
+			this.Country="";
+		}
 	}
 	
 	public String getStreet() {

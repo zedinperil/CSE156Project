@@ -16,25 +16,16 @@ public abstract class Assets {
 		return Code;
 	}
 
-	public void setCode(String code) {
-		Code = code;
-	}
 
 	public String getType() {
 		return Type;
-	}
-
-	public void setType(String type) {
-		Type = type;
 	}
 
 	public String getLabel() {
 		return Label;
 	}
 
-	public void setLabel(String label) {
-		Label = label;
-	}
+
 	
 	
 	
