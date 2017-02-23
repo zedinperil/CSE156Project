@@ -209,7 +209,7 @@ JsonArray Assets= Assetbuilder.build();
 
 		  // PrintWriter and JsonWriter is being created
 		  // in try-with-resources
-		  try (PrintWriter printWriter = new PrintWriter("data/PersonsTest.json");
+		  try (PrintWriter printWriter = new PrintWriter("data/Persons.json");
 		JsonWriter jsonWriter = Json.createWriterFactory(config).createWriter(printWriter)){
 
 		     // Json object is being sent into file system
@@ -218,7 +218,7 @@ JsonArray Assets= Assetbuilder.build();
 		     
 		     
 		  }
-		  try (PrintWriter printWriter = new PrintWriter("data/AssetsTest.json");
+		  try (PrintWriter printWriter = new PrintWriter("data/Assets.json");
 					JsonWriter jsonWriter = Json.createWriterFactory(config).createWriter(printWriter)){
 
 					     // Json object is being sent into file system
