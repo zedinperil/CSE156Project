@@ -12,7 +12,7 @@ public class Persons{
 	private String Email;
 	
 	
-	public Persons(String PersonCode, String TypeofPerson, String name, String address, String email){
+	public Persons(String PersonCode, String name, String address, String email){
 		this.Code= PersonCode;		 
 		this.Name= new Name(name);						
 		this.Address=new Address(address);

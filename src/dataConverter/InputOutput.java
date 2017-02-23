@@ -16,7 +16,6 @@ import javax.json.stream.JsonGenerator;
 //So we bring the file in here
 //BIG NOTE: We should have used array lists. We are simply stubborn to switch from arrays
 public class InputOutput {
-	
 	public static void main(String[] args) throws IOException {		
 		//ints for further use
 		int NumOfFiles= 2;
@@ -83,12 +82,8 @@ public class InputOutput {
 		}
 		NumberOfLines[i]=Integer.parseInt(fullData[i][0]);//number of lines
 		s.close();//close s
-			x++;
-			
-		}
-		
-	
-	    
+			x++;	
+		}   
 	//TODO: Enumerate person and assets classes, and create arrays for each.
 		//DONE ELSEWHERE
 		String DelimeteredData[][][]= new String[2][1000][100];
@@ -108,7 +103,6 @@ public class InputOutput {
 			NumberOfDelims[i][g-1]=DelimeteredData[i][g-1].length;	//this is how many delimeters we have
 		}
 	}
-
 //Temp variables for persons, deposits, stocks, and privateinvestments		
 		Persons tempPerson;
 		Broker tempBroker;
@@ -119,14 +113,11 @@ public class InputOutput {
 		JsonArrayBuilder Portfoliobuilder= Json.createArrayBuilder();
 		JsonArrayBuilder Personbuilder= Json.createArrayBuilder();
 		JsonArrayBuilder Assetbuilder= Json.createArrayBuilder();
-	
-//testing to ensure it is saved correctly;	
+//Debug in case we need to use the arrays later;	
 //		Persons[][] PersonArray= new Persons[NumOfFiles][PersonSize];
 //		Assets[][] AssetsArray= new Assets[NumOfFiles][AssetSize];
-		
 		for(i=0; i<NumOfFiles; i++){
 			for(g=0; g<NumberOfLines[i]; g++){
-					
 					if(IsPerson[i]){						
 						if(DelimeteredData[i][g][1].equals("")){
 							if(NumberOfDelims[i][g]==5){	
@@ -159,7 +150,7 @@ public class InputOutput {
 								}
 								JsonObject tempmodel = Json.createObjectBuilder()
 									   .add("code", tempBroker.getPersonCode())
-									   .add("secIdentifier", tempBroker.getSEC())
+									   .add("secIdentifier", tempBroker.getSecIdentifier())
 									   .add("type", tempBroker.getType())
 									   .add("firstName", tempBroker.getFirstName())
 									   .add("lastName", tempBroker.getLastName())
@@ -216,45 +207,34 @@ public class InputOutput {
 									   .add("value", tempPrivateInvestment.getTotalValue())
 									   .build();
 							Assetbuilder.add(tempmodel);
-						}	
-				
+						}			
 					}	
 			}
 		}
-
-
 JsonArray Persons= Personbuilder.build();
 JsonArray Assets= Assetbuilder.build();				
-
+JsonArray Portfolio= Portfoliobuilder.build();
 		// config Map is created for pretty printing.
 		  Map<String, Boolean> config = new HashMap<>();
-
 		  // Pretty printing feature is added.
 		  config.put(JsonGenerator.PRETTY_PRINTING, true);
-
 		  // PrintWriter and JsonWriter is being created
 		  // in try-with-resources
 		  try (PrintWriter printWriter = new PrintWriter("data/Persons.json");
 		JsonWriter jsonWriter = Json.createWriterFactory(config).createWriter(printWriter)){
-
 		     // Json object is being sent into file system
-		     
 			  jsonWriter.write(Persons);
-		     
-		     
 		  }
 		  try (PrintWriter printWriter = new PrintWriter("data/Assets.json");
 					JsonWriter jsonWriter = Json.createWriterFactory(config).createWriter(printWriter)){
-
 					     // Json object is being sent into file system
-					     
 						  jsonWriter.write(Assets);
-					     
-					     
 					  }
-
-
-
-
+		  try (PrintWriter printWriter = new PrintWriter("data/Portfolio.txt");
+					JsonWriter jsonWriter = Json.createWriterFactory(config).createWriter(printWriter)){
+					     // Json object is being sent into file system
+						  jsonWriter.write(Portfolio);					     
+					  }
 	}
 }
+//TODO: IMPLEMENT WHAT WE NEED TO WITH THE PORTFOLIO STUFF. WE MADE GOOD PROGRESS IN MAKING OUR CODE LESS SHIT

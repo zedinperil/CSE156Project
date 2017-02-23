@@ -2,8 +2,6 @@
 [
     {
         "code":"944c",
-        "secIdentifier":"",
-        "type":"",
         "firstName":" Starlin",
         "lastName":"Castro",
         "address":[
@@ -19,8 +17,6 @@
     },
     {
         "code":"306a",
-        "secIdentifier":"",
-        "type":"",
         "firstName":" Brock",
         "lastName":"Sampson",
         "address":[
@@ -36,8 +32,6 @@
     },
     {
         "code":"2342",
-        "secIdentifier":"",
-        "type":"",
         "firstName":" Miles",
         "lastName":"O'Brien",
         "address":[
@@ -87,8 +81,6 @@
     },
     {
         "code":"ma12",
-        "secIdentifier":"",
-        "type":"",
         "firstName":" Dale",
         "lastName":"Sveum",
         "address":[
@@ -104,8 +96,6 @@
     },
     {
         "code":"321nd",
-        "secIdentifier":"",
-        "type":"",
         "firstName":" William",
         "lastName":"Hartnell",
         "address":[
@@ -121,8 +111,6 @@
     },
     {
         "code":"nf32a",
-        "secIdentifier":"",
-        "type":"",
         "firstName":" Patrick",
         "lastName":"Troughton",
         "address":[
@@ -206,8 +194,6 @@
     },
     {
         "code":"1svndr",
-        "secIdentifier":"",
-        "type":"",
         "firstName":"Sylvester",
         "lastName":"McCoy",
         "address":[
@@ -257,8 +243,6 @@
     },
     {
         "code":"2ndbestd",
-        "secIdentifier":"",
-        "type":"",
         "firstName":" David",
         "lastName":"Tennant",
         "address":[
@@ -274,8 +258,6 @@
     },
     {
         "code":"wrddoc",
-        "secIdentifier":"",
-        "type":"",
         "firstName":" Matt",
         "lastName":"Smith",
         "address":[
@@ -291,8 +273,6 @@
     },
     {
         "code":"bbchar",
-        "secIdentifier":"",
-        "type":"",
         "firstName":" Kaylee",
         "lastName":"Ehrmantraut",
         "address":[
@@ -308,8 +288,6 @@
     },
     {
         "code":"doc05",
-        "secIdentifier":"",
-        "type":"",
         "firstName":" Peter",
         "lastName":"Davison",
         "address":[
