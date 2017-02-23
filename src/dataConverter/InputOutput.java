@@ -79,10 +79,19 @@ public class InputOutput {
 					NumOfChars[x]++;	
 				}
 			}
+<<<<<<< HEAD
 			x++;//increment
 		}
 		NumberOfLines[i]=Integer.parseInt(fullData[i][0]);//number of lines
 		s.close();//close s
+=======
+			x++;
+			
+		}
+		
+		NumberOfLines[i]=Integer.parseInt(fullData[i][0]);
+		s.close();
+>>>>>>> origin/master
 	    }
 	//TODO: Enumerate person and assets classes, and create arrays for each.
 		//DONE ELSEWHERE
@@ -103,6 +112,7 @@ public class InputOutput {
 			NumberOfDelims[i][g-1]=DelimeteredData[i][g-1].length;	//this is how many delimeters we have
 		}
 	}
+<<<<<<< HEAD
 //Temp variables for persons, deposits, stocks, and privateinvestments		
 		Persons tempPerson;
 		Deposit tempDeposit;
@@ -115,6 +125,16 @@ public class InputOutput {
 		for(i=0; i<NumOfFiles; i++){
 			for(g=0; g<NumberOfLines[i]; g++){
 				//check to see that it is a person, if so, check to see how many delimeters the delimetered data corresponding to the person has, and put construct a person with the appropriate inputs
+=======
+	
+//testing to ensure it is saved correctly;	
+		Persons[][] PersonArray= new Persons[NumOfFiles][PersonSize];
+		Assets[][] AssetsArray= new Assets[NumOfFiles][AssetSize];
+		String HasNoData= "";
+		for(i=0; i<NumOfFiles; i++){
+			for(g=0; g<NumberOfLines[i]; g++){
+					System.out.println(NumberOfLines[i]);
+>>>>>>> origin/master
 					if(IsPerson[i]){						
 						if(NumberOfDelims[i][g]==5){	
 							tempPerson= new Persons(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4]);							
@@ -185,6 +205,7 @@ public class InputOutput {
 					}	
 			}
 		}
+<<<<<<< HEAD
 
 JsonArray Persons= Personbuilder.build();
 JsonArray Assets= Assetbuilder.build();				
@@ -235,3 +256,19 @@ JsonArray Assets= Assetbuilder.build();
 //		    }  
 //		}
 }}
+=======
+//	//TODO: Store the Persons and Assets data into a JSON file. FORMAT IT
+		ObjectMapper jsonMapper = new ObjectMapper();
+		
+		try {  
+			DefaultPrettyPrinter pp= new DefaultPrettyPrinter();
+//			pp.indentArraysWith(new Lf2SpacesIndenter());
+			// Writing to a file
+			 jsonMapper.writer(pp).writeValue(new File("./data/Persons.json"), PersonArray);
+			 jsonMapper.writer(pp).writeValue(new File("./data/Assets.json"), AssetsArray);
+		    } catch (IOException e) {  
+		        e.printStackTrace();  
+		    }  
+		}
+}
+>>>>>>> origin/master
