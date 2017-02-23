@@ -18,20 +18,25 @@ import javax.json.stream.JsonGenerator;
 public class InputOutput {
 	public static void main(String[] args) throws IOException {		
 		//ints for further use
-		int NumOfFiles= 2;
+		int NumOfFiles= 3;
 		int i=0;
 		int g=0;
 		int x=0;
 		//booleans to keep track if file is person or assett
 		boolean[] IsPerson=new boolean[NumOfFiles];
 		boolean[] IsAsset=new boolean[NumOfFiles];
-		String[] fileName = new String[2];
+		boolean[] IsPortfolio=new boolean[NumOfFiles];
+		String[] fileName = new String[3];
 		//the filenames
 		fileName[0]= "data/Persons.dat";
 		fileName[1]= "data/Assets.dat";
+		fileName[2]= "data/Portfolios.dat";
 		for(i=0; i<NumOfFiles; i++){
 			//checks if file is a person or an asset
-			if(fileName[i].contains("Persons")||fileName[i].contains("persons")){
+			if(fileName[i].contains("Portfolios")||fileName[i].contains("portfolios")){
+			IsPortfolio[i]=true;	
+			}
+			else if(fileName[i].contains("Persons")||fileName[i].contains("persons")){
 			IsPerson[i]=true;
 			}
 			else if(fileName[i].contains("Assets")||fileName[i].contains("assets")){
@@ -72,7 +77,8 @@ public class InputOutput {
 			String line = s.nextLine(); //throw away the endline character
 			fullData[i][x] = line;
 			NumOfChars[x]=0;
-		for(int q=0; q<=x; q++){	
+		
+			for(int q=0; q<=x; q++){	
 			//this counts number of chars that are not null, to be used for later incrementing
 				if(fullData[i][x].charAt(q)!='\u0000'){
 					NumOfChars[x]++;	
@@ -83,10 +89,11 @@ public class InputOutput {
 		NumberOfLines[i]=Integer.parseInt(fullData[i][0]);//number of lines
 		s.close();//close s
 			x++;	
+			
 		}   
 	//TODO: Enumerate person and assets classes, and create arrays for each.
 		//DONE ELSEWHERE
-		String DelimeteredData[][][]= new String[2][1000][100];
+		String DelimeteredData[][][]= new String[4][1000][100];
 	//TODO: Based on what each is,  use increments to save delimetered strings into the correct spaces for whatever type the data is
     int[][] NumberOfDelims= new int[NumOfFiles][1000];
 	for(i=0; i<NumOfFiles; i++){
@@ -99,8 +106,10 @@ public class InputOutput {
 				if(x==(NumOfChars[g])-1 && fullData[i][g].lastIndexOf(";")!=NumOfChars[g]-1){
 						DelimeteredData[i][g-1]=fullData[i][g].split(";");						
 				}	
+		
 			}
 			NumberOfDelims[i][g-1]=DelimeteredData[i][g-1].length;	//this is how many delimeters we have
+		
 		}
 	}
 //Temp variables for persons, deposits, stocks, and privateinvestments		
@@ -108,6 +117,7 @@ public class InputOutput {
 		Broker tempBroker;
 		Deposit tempDeposit;
 		Stock tempStock;
+//		Portfolio tempPortfolio;
 		PrivateInvestment tempPrivateInvestment;
 		String HasNoData= "";//this is a string to be put in the event that a person does not have an email address.
 		JsonArrayBuilder Portfoliobuilder= Json.createArrayBuilder();
@@ -118,6 +128,18 @@ public class InputOutput {
 //		Assets[][] AssetsArray= new Assets[NumOfFiles][AssetSize];
 		for(i=0; i<NumOfFiles; i++){
 			for(g=0; g<NumberOfLines[i]; g++){
+				//MAKE TEMP PORTFOLIO
+//				tempPortfolio= new Portfolio();
+				if(i==2){
+					for(int k=0; k<NumberOfDelims[i][g]; k++){
+					System.out.print(DelimeteredData[i][g][k]+ " ");
+					}
+					System.out.println();
+				}
+				if(IsPortfolio[i]){
+					System.out.println("YEAH");
+				}
+				
 					if(IsPerson[i]){						
 						if(DelimeteredData[i][g][1].equals("")){
 							if(NumberOfDelims[i][g]==5){	
@@ -210,6 +232,17 @@ public class InputOutput {
 						}			
 					}	
 			}
+//build portfolio, add to portfoliobuilder
+			JsonObject tempPort = Json.createObjectBuilder()
+//					   .add("code", tempPrivateInvestment.getCode())
+//					   .add("label", tempPrivateInvestment.getLabel())
+//					   .add("type", tempPrivateInvestment.getType())
+//					   .add("baseRateOfReturn", tempPrivateInvestment.getBaseRateOfReturn())
+//					   .add("quarterlyDividend", tempPrivateInvestment.getQuarterlyDividend())
+//					   .add("omega", tempPrivateInvestment.getOmegaMeasure())
+//					   .add("value", tempPrivateInvestment.getTotalValue())
+					   .build();
+			Portfoliobuilder.add(tempPort);
 		}
 JsonArray Persons= Personbuilder.build();
 JsonArray Assets= Assetbuilder.build();				
