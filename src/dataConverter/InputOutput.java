@@ -109,7 +109,7 @@ public class InputOutput {
 		Stock tempStock;
 		PrivateInvestment tempPrivateInvestment;
 		String HasNoData= "";//this is a string to be put in the event that a person does not have an email address.
-		
+		JsonArrayBuilder Portfoliobuilder= Json.createArrayBuilder();
 		JsonArrayBuilder Personbuilder= Json.createArrayBuilder();
 		JsonArrayBuilder Assetbuilder= Json.createArrayBuilder();
 		for(i=0; i<NumOfFiles; i++){
@@ -137,9 +137,7 @@ public class InputOutput {
 								         .add("zipcode", tempPerson.getZipcode())))
 								   		 .add("emails", tempPerson.getEmail())
 								   .build();
-					
 						Personbuilder.add(tempmodel);
-					
 					}
 				//check to see that it is an asset, and if so, check to see if the delimetered data for that asset that corresponds to type contains the character corresponding to each type of asset. Then, create a new asset of the correct type with the correct inputs for that type of asset
 					if(IsAsset[i]){
@@ -152,9 +150,7 @@ public class InputOutput {
 									   .add("type", tempDeposit.getType())
 									   .add("apr", tempDeposit.getApr())
 									   .build();
-						
 							Assetbuilder.add(tempmodel);
-						
 						}
 						else if(DelimeteredData[i][g][1].contains("S")){
 							tempStock= new Stock(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6], DelimeteredData[i][g][7]);
@@ -168,11 +164,8 @@ public class InputOutput {
 									   .add("sharePrice", tempStock.getSharePrice())
 									   .add("symbol", tempStock.getStockSymbol())
 									   .add("beta", tempStock.getBetaMeasure())
-								
 									   .build();
-						
 							Assetbuilder.add(tempmodel);
-						
 						}
 						else if(DelimeteredData[i][g][1].contains("P")){
 							tempPrivateInvestment= new PrivateInvestment(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6]);
@@ -186,9 +179,7 @@ public class InputOutput {
 									   .add("omega", tempPrivateInvestment.getOmegaMeasure())
 									   .add("value", tempPrivateInvestment.getTotalValue())
 									   .build();
-						
 							Assetbuilder.add(tempmodel);
-						
 						}	
 				
 					}	
