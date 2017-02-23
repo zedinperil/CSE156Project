@@ -44,8 +44,6 @@ public class InputOutput {
 		}
 		//variables/arrays for storing purposes
 		//
-		int PersonSize=0;
-		int AssetSize=0;
 		int[] size= new int[NumOfFiles];
 		int NumberOfLines[]= new int[NumOfFiles];
 		int[] NumOfChars= new int[10000];
@@ -55,12 +53,7 @@ public class InputOutput {
 	        String text = Buff.readLine();
 	        size[i] = Integer.parseInt(text);
 	        size[i] += 1;
-	        if(IsPerson[i]){
-	        	PersonSize=size[i];
-	        }
-	        if(IsAsset[i]){
-	        	AssetSize=size[i];
-	        }
+
 	        //close the buffer
 	        Buff.close();
 		}
@@ -110,10 +103,11 @@ public class InputOutput {
 			NumberOfDelims[i][g-1]=DelimeteredData[i][g-1].length;	//this is how many delimeters we have
 		}
 	}
-//Persons array of arrays. Its an array of persons arrays, that can handle as many persons arrays as you need!		
-		Persons[][] PersonArray= new Persons[NumOfFiles][PersonSize];
-//Assets array of arrays. Its an array of assets arrays, that can handle as many assets arrays as you need!		
-		Assets[][] AssetsArray= new Assets[NumOfFiles][AssetSize];
+//Temp variables for persons, deposits, stocks, and privateinvestments		
+		Persons tempPerson;
+		Deposit tempDeposit;
+		Stock tempStock;
+		PrivateInvestment tempPrivateInvestment;
 		String HasNoData= "";//this is a string to be put in the event that a person does not have an email address.
 		
 		JsonArrayBuilder Personbuilder= Json.createArrayBuilder();
@@ -123,26 +117,25 @@ public class InputOutput {
 				//check to see that it is a person, if so, check to see how many delimeters the delimetered data corresponding to the person has, and put construct a person with the appropriate inputs
 					if(IsPerson[i]){						
 						if(NumberOfDelims[i][g]==5){	
-							PersonArray[i][g]= new Persons(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4]);
-							
+							tempPerson= new Persons(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4]);							
 						}
 						else{
-							PersonArray[i][g]= new Persons(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData);
+							tempPerson= new Persons(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData);
 						}
 							JsonObject tempmodel = Json.createObjectBuilder()
-								   .add("code", PersonArray[i][g].getPersonCode())
-								   .add("secIdentifier", PersonArray[i][g].getSEC())
-								   .add("type", PersonArray[i][g].getType())
-								   .add("firstName", PersonArray[i][g].getFirstName())
-								   .add("lastName", PersonArray[i][g].getLastName())
+								   .add("code", tempPerson.getPersonCode())
+								   .add("secIdentifier", tempPerson.getSEC())
+								   .add("type", tempPerson.getType())
+								   .add("firstName", tempPerson.getFirstName())
+								   .add("lastName", tempPerson.getLastName())
 								   .add("address", Json.createArrayBuilder()
 								      .add(Json.createObjectBuilder()
-								         .add("street", PersonArray[i][g].getStreet())
-								         .add("city", PersonArray[i][g].getCity())
-								         .add("state", PersonArray[i][g].getState())
-								         .add("country", PersonArray[i][g].getCountry())
-								         .add("zipcode", PersonArray[i][g].getZipcode())))
-								   		 .add("emails", PersonArray[i][g].getEmail())
+								         .add("street", tempPerson.getStreet())
+								         .add("city", tempPerson.getCity())
+								         .add("state", tempPerson.getState())
+								         .add("country", tempPerson.getCountry())
+								         .add("zipcode", tempPerson.getZipcode())))
+								   		 .add("emails", tempPerson.getEmail())
 								   .build();
 					
 						Personbuilder.add(tempmodel);
@@ -151,25 +144,30 @@ public class InputOutput {
 				//check to see that it is an asset, and if so, check to see if the delimetered data for that asset that corresponds to type contains the character corresponding to each type of asset. Then, create a new asset of the correct type with the correct inputs for that type of asset
 					if(IsAsset[i]){
 						if(DelimeteredData[i][g][1].contains("D")){
-							AssetsArray[i][g]= new Deposit(DelimeteredData[i][g][0], DelimeteredData[i][g][1],DelimeteredData[i][g][2], DelimeteredData[i][g][3]);				
+							tempDeposit= new Deposit(DelimeteredData[i][g][0], DelimeteredData[i][g][1],DelimeteredData[i][g][2], DelimeteredData[i][g][3]);				
 							//TODO: fix this for assets
 							JsonObject tempmodel = Json.createObjectBuilder()
-									   .add("code", AssetsArray[i][g].getCode())
-									   .add("label", AssetsArray[i][g].getLabel())
-									   .add("type", AssetsArray[i][g].getType())
-									   .add("apr", AssetsArray[i][g].getApr())
+									   .add("code", tempDeposit.getCode())
+									   .add("label", tempDeposit.getLabel())
+									   .add("type", tempDeposit.getType())
+									   .add("apr", tempDeposit.getApr())
 									   .build();
 						
 							Assetbuilder.add(tempmodel);
 						
 						}
 						else if(DelimeteredData[i][g][1].contains("S")){
-							AssetsArray[i][g]= new Stock(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6], DelimeteredData[i][g][7]);
+							tempStock= new Stock(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6], DelimeteredData[i][g][7]);
 							//TODO: fix this for assets
 							JsonObject tempmodel = Json.createObjectBuilder()
-									   .add("code", AssetsArray[i][g].getCode())
-									   .add("label", AssetsArray[i][g].getLabel())
-									   .add("type", AssetsArray[i][g].getType())
+									   .add("code", tempStock.getCode())
+									   .add("label", tempStock.getLabel())
+									   .add("type", tempStock.getType())
+									   .add("baseRateOfReturn", tempStock.getBaseRateOfReturn())
+									   .add("quarterlyDividend", tempStock.getQuarterlyDividend())
+									   .add("sharePrice", tempStock.getSharePrice())
+									   .add("symbol", tempStock.getStockSymbol())
+									   .add("beta", tempStock.getBetaMeasure())
 								
 									   .build();
 						
@@ -177,12 +175,16 @@ public class InputOutput {
 						
 						}
 						else if(DelimeteredData[i][g][1].contains("P")){
-							AssetsArray[i][g]= new PrivateInvestment(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6]);
+							tempPrivateInvestment= new PrivateInvestment(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6]);
 							//TODO: fix this for assets
 							JsonObject tempmodel = Json.createObjectBuilder()
-									   .add("code", AssetsArray[i][g].getCode())
-									   .add("label", AssetsArray[i][g].getLabel())
-									   .add("type", AssetsArray[i][g].getType())
+									   .add("code", tempPrivateInvestment.getCode())
+									   .add("label", tempPrivateInvestment.getLabel())
+									   .add("type", tempPrivateInvestment.getType())
+									   .add("baseRateOfReturn", tempPrivateInvestment.getBaseRateOfReturn())
+									   .add("quarterlyDividend", tempPrivateInvestment.getQuarterlyDividend())
+									   .add("omega", tempPrivateInvestment.getOmegaMeasure())
+									   .add("value", tempPrivateInvestment.getTotalValue())
 									   .build();
 						
 							Assetbuilder.add(tempmodel);
