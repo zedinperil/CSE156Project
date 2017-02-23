@@ -113,23 +113,19 @@ public class InputOutput {
 		}
 	}
 //Temp variables for persons, deposits, stocks, and privateinvestments		
-		Persons tempPerson;
-		Broker tempBroker;
-		Deposit tempDeposit;
-		Stock tempStock;
-//		Portfolio tempPortfolio;
-		PrivateInvestment tempPrivateInvestment;
+		
 		String HasNoData= "";//this is a string to be put in the event that a person does not have an email address.
 		JsonArrayBuilder Portfoliobuilder= Json.createArrayBuilder();
 		JsonArrayBuilder Personbuilder= Json.createArrayBuilder();
 		JsonArrayBuilder Assetbuilder= Json.createArrayBuilder();
 //Debug in case we need to use the arrays later;	
-//		Persons[][] PersonArray= new Persons[NumOfFiles][PersonSize];
-//		Assets[][] AssetsArray= new Assets[NumOfFiles][AssetSize];
+		Persons[][] PersonArray= new Persons[NumOfFiles][100];
+		Assets[][] AssetsArray= new Assets[NumOfFiles][100];
+		Portfolio[][] PortfolioArray= new Portfolio[NumOfFiles][100];
 		for(i=0; i<NumOfFiles; i++){
 			for(g=0; g<NumberOfLines[i]; g++){
 				//MAKE TEMP PORTFOLIO
-//				tempPortfolio= new Portfolio();
+
 				if(i==2){
 					for(int k=0; k<NumberOfDelims[i][g]; k++){
 					System.out.print(DelimeteredData[i][g][k]+ " ");
@@ -137,53 +133,61 @@ public class InputOutput {
 					System.out.println();
 				}
 				if(IsPortfolio[i]){
-					System.out.println("YEAH");
-				}
+					if(NumberOfDelims[i][g]==5){
+						PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4]);
+					}
+					else if(NumberOfDelims[i][g]==4){
+						PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], HasNoData, DelimeteredData[i][g][3]);	
+					}
+					else{
+						PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], HasNoData, HasNoData);
+					}
 				
+				}
 					if(IsPerson[i]){						
 						if(DelimeteredData[i][g][1].equals("")){
 							if(NumberOfDelims[i][g]==5){	
-								tempPerson= new Persons(DelimeteredData[i][g][0],  DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4]);							
+								PersonArray[i][g]= new Beneficiaries(DelimeteredData[i][g][0],  DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4]);							
 							}
 							else{
-								tempPerson= new Persons(DelimeteredData[i][g][0],  DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData);
+								PersonArray[i][g]= new Beneficiaries(DelimeteredData[i][g][0],  DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData);
 							}
 								JsonObject tempmodel = Json.createObjectBuilder()
-									   .add("code", tempPerson.getPersonCode())									
-									   .add("firstName", tempPerson.getFirstName())
-									   .add("lastName", tempPerson.getLastName())
+									   .add("code", PersonArray[i][g].getPersonCode())									
+									   .add("firstName", PersonArray[i][g].getFirstName())
+									   .add("lastName", PersonArray[i][g].getLastName())
 									   .add("address", Json.createArrayBuilder()
 									      .add(Json.createObjectBuilder()
-									         .add("street", tempPerson.getStreet())
-									         .add("city", tempPerson.getCity())
-									         .add("state", tempPerson.getState())
-									         .add("country", tempPerson.getCountry())
-									         .add("zipcode", tempPerson.getZipcode())))
-									   		 .add("emails", tempPerson.getEmail())
+									         .add("street", PersonArray[i][g].getStreet())
+									         .add("city", PersonArray[i][g].getCity())
+									         .add("state", PersonArray[i][g].getState())
+									         .add("country", PersonArray[i][g].getCountry())
+									         .add("zipcode", PersonArray[i][g].getZipcode())))
+									   		 .add("emails", PersonArray[i][g].getEmail())
 									   .build();
 							Personbuilder.add(tempmodel);
 						}
 						else{
 							if(NumberOfDelims[i][g]==5){	
-								tempBroker= new Broker(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4]);							
+								PersonArray[i][g]= new Broker(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4]);							
 							}
 							else{
-									tempBroker= new Broker(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData);
+									PersonArray[i][g]= new Broker(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData);
 								}
 								JsonObject tempmodel = Json.createObjectBuilder()
-									   .add("code", tempBroker.getPersonCode())
-									   .add("secIdentifier", tempBroker.getSecIdentifier())
-									   .add("type", tempBroker.getType())
-									   .add("firstName", tempBroker.getFirstName())
-									   .add("lastName", tempBroker.getLastName())
+									   .add("code", PersonArray[i][g].getPersonCode())
+									   .add("secIdentifier", PersonArray[i][g].getSecIdentifier())
+									   .add("type", PersonArray[i][g].getType())
+									   .add("firstName", PersonArray[i][g].getFirstName())
+									   .add("lastName", PersonArray[i][g].getLastName())
 									   .add("address", Json.createArrayBuilder()
 									      .add(Json.createObjectBuilder()
-									         .add("street", tempBroker.getStreet())
-									         .add("city", tempBroker.getCity())
-									         .add("state", tempBroker.getState())
-									         .add("country", tempBroker.getCountry())
-									         .add("zipcode", tempBroker.getZipcode())))
-									   		 .add("emails", tempBroker.getEmail())
+									         .add("street", PersonArray[i][g].getStreet())
+									         .add("city", PersonArray[i][g].getCity())
+									         .add("state", PersonArray[i][g].getState())
+									         .add("country", PersonArray[i][g].getCountry())
+									         .add("zipcode", PersonArray[i][g].getZipcode())))
+									   		 .add("emails", PersonArray[i][g].getEmail())
 									   .build();
 							Personbuilder.add(tempmodel);
 						}
@@ -191,42 +195,42 @@ public class InputOutput {
 				//check to see that it is an asset, and if so, check to see if the delimetered data for that asset that corresponds to type contains the character corresponding to each type of asset. Then, create a new asset of the correct type with the correct inputs for that type of asset
 					if(IsAsset[i]){
 						if(DelimeteredData[i][g][1].contains("D")){
-							tempDeposit= new Deposit(DelimeteredData[i][g][0], DelimeteredData[i][g][1],DelimeteredData[i][g][2], DelimeteredData[i][g][3]);				
+							AssetsArray[i][g]= new Deposit(DelimeteredData[i][g][0], DelimeteredData[i][g][1],DelimeteredData[i][g][2], DelimeteredData[i][g][3]);				
 							//TODO: fix this for assets
 							JsonObject tempmodel = Json.createObjectBuilder()
-									   .add("code", tempDeposit.getCode())
-									   .add("label", tempDeposit.getLabel())
-									   .add("type", tempDeposit.getType())
-									   .add("apr", tempDeposit.getApr())
+									   .add("code", AssetsArray[i][g].getCode())
+									   .add("label", AssetsArray[i][g].getLabel())
+									   .add("type", AssetsArray[i][g].getType())
+									   .add("apr", AssetsArray[i][g].getApr())
 									   .build();
 							Assetbuilder.add(tempmodel);
 						}
 						else if(DelimeteredData[i][g][1].contains("S")){
-							tempStock= new Stock(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6], DelimeteredData[i][g][7]);
+							AssetsArray[i][g]= new Stock(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6], DelimeteredData[i][g][7]);
 							//TODO: fix this for assets
 							JsonObject tempmodel = Json.createObjectBuilder()
-									   .add("code", tempStock.getCode())
-									   .add("label", tempStock.getLabel())
-									   .add("type", tempStock.getType())
-									   .add("baseRateOfReturn", tempStock.getBaseRateOfReturn())
-									   .add("quarterlyDividend", tempStock.getQuarterlyDividend())
-									   .add("sharePrice", tempStock.getSharePrice())
-									   .add("symbol", tempStock.getStockSymbol())
-									   .add("beta", tempStock.getBetaMeasure())
+									   .add("code", AssetsArray[i][g].getCode())
+									   .add("label", AssetsArray[i][g].getLabel())
+									   .add("type", AssetsArray[i][g].getType())
+									   .add("baseRateOfReturn", AssetsArray[i][g].getBaseRateOfReturn())
+									   .add("quarterlyDividend", AssetsArray[i][g].getQuarterlyDividend())
+									   .add("sharePrice", AssetsArray[i][g].getSharePrice())
+									   .add("symbol", AssetsArray[i][g].getStockSymbol())
+									   .add("beta", AssetsArray[i][g].getBetaMeasure())
 									   .build();
 							Assetbuilder.add(tempmodel);
 						}
 						else if(DelimeteredData[i][g][1].contains("P")){
-							tempPrivateInvestment= new PrivateInvestment(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6]);
+							AssetsArray[i][g]= new PrivateInvestment(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6]);
 							//TODO: fix this for assets
 							JsonObject tempmodel = Json.createObjectBuilder()
-									   .add("code", tempPrivateInvestment.getCode())
-									   .add("label", tempPrivateInvestment.getLabel())
-									   .add("type", tempPrivateInvestment.getType())
-									   .add("baseRateOfReturn", tempPrivateInvestment.getBaseRateOfReturn())
-									   .add("quarterlyDividend", tempPrivateInvestment.getQuarterlyDividend())
-									   .add("omega", tempPrivateInvestment.getOmegaMeasure())
-									   .add("value", tempPrivateInvestment.getTotalValue())
+									   .add("code", AssetsArray[i][g].getCode())
+									   .add("label", AssetsArray[i][g].getLabel())
+									   .add("type", AssetsArray[i][g].getType())
+									   .add("baseRateOfReturn", AssetsArray[i][g].getBaseRateOfReturn())
+									   .add("quarterlyDividend", AssetsArray[i][g].getQuarterlyDividend())
+									   .add("omega", AssetsArray[i][g].getOmegaMeasure())
+									   .add("value", AssetsArray[i][g].getTotalValue())
 									   .build();
 							Assetbuilder.add(tempmodel);
 						}			

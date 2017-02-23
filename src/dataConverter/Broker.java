@@ -3,7 +3,8 @@ package dataConverter;
 import java.util.StringTokenizer;
 
 public class Broker extends Persons{
-		private String secIdentifier;
+
+	private String secIdentifier;
 		private String Type;
 		
 		public Broker(String Code, String TypeofPerson, String Name, String address, String email){
@@ -41,5 +42,6 @@ public class Broker extends Persons{
 		public void setType(String type) {
 			Type = type;
 		}
+	
 	
 }
