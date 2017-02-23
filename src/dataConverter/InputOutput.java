@@ -111,6 +111,7 @@ public class InputOutput {
 
 //Temp variables for persons, deposits, stocks, and privateinvestments		
 		Persons tempPerson;
+		Broker tempBroker;
 		Deposit tempDeposit;
 		Stock tempStock;
 		PrivateInvestment tempPrivateInvestment;
@@ -127,28 +128,52 @@ public class InputOutput {
 			for(g=0; g<NumberOfLines[i]; g++){
 					
 					if(IsPerson[i]){						
-						if(NumberOfDelims[i][g]==5){	
-							tempPerson= new Persons(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4]);							
+						if(DelimeteredData[i][g][1].equals("")){
+							if(NumberOfDelims[i][g]==5){	
+								tempPerson= new Persons(DelimeteredData[i][g][0],  DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4]);							
+							}
+							else{
+								tempPerson= new Persons(DelimeteredData[i][g][0],  DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData);
+							}
+								JsonObject tempmodel = Json.createObjectBuilder()
+									   .add("code", tempPerson.getPersonCode())									
+									   .add("firstName", tempPerson.getFirstName())
+									   .add("lastName", tempPerson.getLastName())
+									   .add("address", Json.createArrayBuilder()
+									      .add(Json.createObjectBuilder()
+									         .add("street", tempPerson.getStreet())
+									         .add("city", tempPerson.getCity())
+									         .add("state", tempPerson.getState())
+									         .add("country", tempPerson.getCountry())
+									         .add("zipcode", tempPerson.getZipcode())))
+									   		 .add("emails", tempPerson.getEmail())
+									   .build();
+							Personbuilder.add(tempmodel);
 						}
 						else{
-							tempPerson= new Persons(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData);
+							if(NumberOfDelims[i][g]==5){	
+								tempBroker= new Broker(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4]);							
+							}
+							else{
+									tempBroker= new Broker(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData);
+								}
+								JsonObject tempmodel = Json.createObjectBuilder()
+									   .add("code", tempBroker.getPersonCode())
+									   .add("secIdentifier", tempBroker.getSEC())
+									   .add("type", tempBroker.getType())
+									   .add("firstName", tempBroker.getFirstName())
+									   .add("lastName", tempBroker.getLastName())
+									   .add("address", Json.createArrayBuilder()
+									      .add(Json.createObjectBuilder()
+									         .add("street", tempBroker.getStreet())
+									         .add("city", tempBroker.getCity())
+									         .add("state", tempBroker.getState())
+									         .add("country", tempBroker.getCountry())
+									         .add("zipcode", tempBroker.getZipcode())))
+									   		 .add("emails", tempBroker.getEmail())
+									   .build();
+							Personbuilder.add(tempmodel);
 						}
-							JsonObject tempmodel = Json.createObjectBuilder()
-								   .add("code", tempPerson.getPersonCode())
-								   .add("secIdentifier", tempPerson.getSEC())
-								   .add("type", tempPerson.getType())
-								   .add("firstName", tempPerson.getFirstName())
-								   .add("lastName", tempPerson.getLastName())
-								   .add("address", Json.createArrayBuilder()
-								      .add(Json.createObjectBuilder()
-								         .add("street", tempPerson.getStreet())
-								         .add("city", tempPerson.getCity())
-								         .add("state", tempPerson.getState())
-								         .add("country", tempPerson.getCountry())
-								         .add("zipcode", tempPerson.getZipcode())))
-								   		 .add("emails", tempPerson.getEmail())
-								   .build();
-						Personbuilder.add(tempmodel);
 					}
 				//check to see that it is an asset, and if so, check to see if the delimetered data for that asset that corresponds to type contains the character corresponding to each type of asset. Then, create a new asset of the correct type with the correct inputs for that type of asset
 					if(IsAsset[i]){
