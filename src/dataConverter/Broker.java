@@ -1,28 +1,29 @@
 package dataConverter;
 
+import java.util.StringTokenizer;
+
 public class Broker extends Persons{
-		private String TypeOfBroker;
-		private String SECcode;
-		
-		
-		public Broker(String Code, String Type, String Name, String address, String email){
-			super(Code, Type, Name, address, email);
-			String delim = ",";
-			String[] pieces = new String[2];
-			for(int i=0;i<2;i++){
+	
+		public Broker(String Code, String TypeofPerson, String Name, String address, String email){
+			super(Code, TypeofPerson, Name, address, email);
+			StringTokenizer tokenizer= new StringTokenizer(TypeofPerson, ",");
+			if(tokenizer.hasMoreTokens()){		
+				this.Type = tokenizer.nextToken();
 				
+				if(tokenizer.hasMoreTokens()){
+					this.secIdentifier = tokenizer.nextToken();
+				}
+				else{
+					this.secIdentifier="";
+				}
 			}
-			this.TypeOfBroker = pieces[0];
-			this.SECcode = pieces[1];
+			else{
+				this.Type="";
+				this.secIdentifier="";
+			}
+	 
+			this.Name= new Name(name);
 		}
 		
-		public String getTypeOfBroker() {
-			return TypeOfBroker;
-		}
 	
-		public String getSECcode() {
-			return SECcode;
-		}
-	
-		
 }
