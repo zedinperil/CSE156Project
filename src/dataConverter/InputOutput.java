@@ -79,25 +79,21 @@ public class InputOutput {
 					NumOfChars[x]++;	
 				}
 			}
-<<<<<<< HEAD
 			x++;//increment
 		}
 		NumberOfLines[i]=Integer.parseInt(fullData[i][0]);//number of lines
 		s.close();//close s
-=======
 			x++;
 			
 		}
 		
-		NumberOfLines[i]=Integer.parseInt(fullData[i][0]);
-		s.close();
->>>>>>> origin/master
-	    }
+	
+	    
 	//TODO: Enumerate person and assets classes, and create arrays for each.
 		//DONE ELSEWHERE
 		String DelimeteredData[][][]= new String[2][1000][100];
 	//TODO: Based on what each is,  use increments to save delimetered strings into the correct spaces for whatever type the data is
-	int[][] NumberOfDelims= new int[NumOfFiles][1000];
+    int[][] NumberOfDelims= new int[NumOfFiles][1000];
 	for(i=0; i<NumOfFiles; i++){
 		for( g=1; g<=NumberOfLines[i]; g++){
 			for(x=0; x<=NumOfChars[g]; x++){
@@ -112,7 +108,7 @@ public class InputOutput {
 			NumberOfDelims[i][g-1]=DelimeteredData[i][g-1].length;	//this is how many delimeters we have
 		}
 	}
-<<<<<<< HEAD
+
 //Temp variables for persons, deposits, stocks, and privateinvestments		
 		Persons tempPerson;
 		Deposit tempDeposit;
@@ -122,19 +118,14 @@ public class InputOutput {
 		JsonArrayBuilder Portfoliobuilder= Json.createArrayBuilder();
 		JsonArrayBuilder Personbuilder= Json.createArrayBuilder();
 		JsonArrayBuilder Assetbuilder= Json.createArrayBuilder();
-		for(i=0; i<NumOfFiles; i++){
-			for(g=0; g<NumberOfLines[i]; g++){
-				//check to see that it is a person, if so, check to see how many delimeters the delimetered data corresponding to the person has, and put construct a person with the appropriate inputs
-=======
 	
 //testing to ensure it is saved correctly;	
-		Persons[][] PersonArray= new Persons[NumOfFiles][PersonSize];
-		Assets[][] AssetsArray= new Assets[NumOfFiles][AssetSize];
-		String HasNoData= "";
+//		Persons[][] PersonArray= new Persons[NumOfFiles][PersonSize];
+//		Assets[][] AssetsArray= new Assets[NumOfFiles][AssetSize];
+		
 		for(i=0; i<NumOfFiles; i++){
 			for(g=0; g<NumberOfLines[i]; g++){
-					System.out.println(NumberOfLines[i]);
->>>>>>> origin/master
+					
 					if(IsPerson[i]){						
 						if(NumberOfDelims[i][g]==5){	
 							tempPerson= new Persons(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4]);							
@@ -205,14 +196,11 @@ public class InputOutput {
 					}	
 			}
 		}
-<<<<<<< HEAD
+
 
 JsonArray Persons= Personbuilder.build();
 JsonArray Assets= Assetbuilder.build();				
-				//A simple object containing Json array
-//				JsonObject personObject = Json.createObjectBuilder()
-//				.add("Person", (JsonValue)PersonsArray)
-//				.build();
+
 		// config Map is created for pretty printing.
 		  Map<String, Boolean> config = new HashMap<>();
 
@@ -240,35 +228,8 @@ JsonArray Assets= Assetbuilder.build();
 					     
 					  }
 
-//	//TODO: Store the Persons and Assets data into a JSON file. FORMAT IT. We use Objectwriter to write values to the desired output and use prettyprinter to make it look (Marginally) better
-//use prettyprinter to make this more well formatted (Although we know that there are still nulls. We honestly could not find the source of it.
-//		ObjectMapper jsonMapper = new ObjectMapper();
-//		try {  
-//			DefaultPrettyPrinter pp= new DefaultPrettyPrinter();
-//			// Writing to a file
-//			//write person and assets arrays into json files
-//			 jsonMapper.writer(pp).writeValue(new File("data/Persons.json"), PersonArray);
-//			 jsonMapper.writer(pp).writeValue(new File("data/Assets.json"), AssetsArray);
-//		    } 
-//		//exception handling
-//		catch (IOException e) {  
-//		        e.printStackTrace();  
-//		    }  
-//		}
-}}
-=======
-//	//TODO: Store the Persons and Assets data into a JSON file. FORMAT IT
-		ObjectMapper jsonMapper = new ObjectMapper();
-		
-		try {  
-			DefaultPrettyPrinter pp= new DefaultPrettyPrinter();
-//			pp.indentArraysWith(new Lf2SpacesIndenter());
-			// Writing to a file
-			 jsonMapper.writer(pp).writeValue(new File("./data/Persons.json"), PersonArray);
-			 jsonMapper.writer(pp).writeValue(new File("./data/Assets.json"), AssetsArray);
-		    } catch (IOException e) {  
-		        e.printStackTrace();  
-		    }  
-		}
+
+
+
+	}
 }
->>>>>>> origin/master
