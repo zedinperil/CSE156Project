@@ -5,9 +5,10 @@ public class Portfolio {
 	private String OwnerCode;
 	private String ManagerCode;
 	private String BeneficiaryCode;
-	private String Assets;
+	private String[] Assets;
 	
-	public Portfolio(String portCode, String ownCode, String managCode, String beneficiaryCode, String assets) {
+	public Portfolio(String portCode, String ownCode, String managCode,
+					 String beneficiaryCode, String[] assets, int[] UsefulNumber, int assetsize) {
 		super();
 		String delimeter = ":";
 		this.PortfolioCode = portCode;
@@ -15,11 +16,10 @@ public class Portfolio {
 		this.ManagerCode = managCode;
 		this.BeneficiaryCode = beneficiaryCode;
 		int i;
-//		for(i=0;i< assetsize; i++){
-		this.Assets = assets;
-		
+		for(i=0;i< assetsize; i++){
+		this.Assets[i] = assets[i];
+		}
 	}
-
 
 	public String getPortfolioCode() {
 		return PortfolioCode;
@@ -54,11 +54,11 @@ public class Portfolio {
 		BeneficiaryCode = beneficiaryCode;
 	}
 
-	public String getAssets() {
+	public String[] getAssets() {
 		return Assets;
 	}
 
-	public void setAssets(String assets) {
+	public void setAssets(String[] assets) {
 		Assets = assets;
 	}
 

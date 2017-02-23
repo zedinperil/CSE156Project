@@ -4,15 +4,15 @@ package dataConverter;
 import java.util.StringTokenizer;
 
 
-public abstract class Persons{
+public class Persons{
 	
-private String Code;
-private Name Name;
-private Address Address;
-private String Email;
+	private String Code;
+	private Name Name;
+	private Address Address;
+	private String Email;
+	
 	
 	public Persons(String PersonCode, String name, String address, String email){
-		super();
 		this.Code= PersonCode;		 
 		this.Name= new Name(name);						
 		this.Address=new Address(address);
@@ -37,7 +37,9 @@ private String Email;
 		temparray+= " ]";
 		this.Email=String.format(temparray);
 	}
-
+	public Persons(String personCode2, dataConverter.Name name, dataConverter.Address address2, String email2) {
+		// TODO Auto-generated constructor stub
+	}
 	public String getPersonCode(){
 		return this.Code;
 	}
@@ -67,7 +69,5 @@ private String Email;
 	public String getLastName(){
 		return this.Name.getLastName();
 	}
-	public abstract String getSecIdentifier();
-	public abstract String getType();
 
 }
