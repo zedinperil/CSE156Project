@@ -5,18 +5,23 @@ public class Portfolio {
 	private String OwnerCode;
 	private String ManagerCode;
 	private String BeneficiaryCode;
-	private String Assets;
+	private String Assetss;
+	private Assets[][] Ass;
+	private Persons[][] Per;
 	
-	public Portfolio(String portCode, String ownCode, String managCode, String beneficiaryCode, String assets) {
+	public Portfolio(String portCode, String ownCode, String managCode, String beneficiaryCode, 
+					 String assetsA, Persons[][] persons, Assets[][] asset) {
 		super();
-		String delimeter = ":";
+		
 		this.PortfolioCode = portCode;
 		this.OwnerCode = ownCode;
 		this.ManagerCode = managCode;
 		this.BeneficiaryCode = beneficiaryCode;
-		int i;
-//		for(i=0;i< assetsize; i++){
-		this.Assets = assets;
+		this.Assetss = assetsA;
+		this.Ass = asset;
+		this.Per = persons;
+		
+
 		
 	}
 
