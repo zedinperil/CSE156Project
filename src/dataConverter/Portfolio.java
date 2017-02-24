@@ -1,5 +1,7 @@
 package dataConverter;
 
+import java.util.StringTokenizer;
+import java.math.*;
 public class Portfolio {
 	private String PortfolioCode;
 	private String OwnerCode;
@@ -21,6 +23,11 @@ public class Portfolio {
 	private int personcount;
 	private int assetcount;
 	
+	private String[] AssetName= new String[100];
+	private double[] AssetValue=new double[100];
+	private String[] temporaryString=new String[1000];
+	private int OccuranceOfAssetCount=0;
+	
 	public Portfolio(String portCode, String ownCode, String managCode, String beneficiaryCode, 
 					 String assetsA, Persons[][] persons, Assets[][] asset, int PersonsCount, int AssetsCount) {
 		super();
@@ -34,8 +41,18 @@ public class Portfolio {
 		this.Per = persons;
 		this.personcount = PersonsCount;
 		this.assetcount = AssetsCount;
-		
-
+		int i=0;
+		int k;
+		StringTokenizer tokenizer= new StringTokenizer(assetsA, ",");
+		while(tokenizer.hasMoreTokens()){
+			temporaryString[i]= tokenizer.nextToken();
+			i++;
+		}
+		for(k=0; k<=i; k++){
+			StringTokenizer twokenizer= new StringTokenizer(temporaryString[i], ":");
+			AssetName[k]= twokenizer.nextToken();
+			AssetValue[k]= Double.parseDouble(twokenizer.nextToken());
+		}
 		
 	}
 
@@ -79,9 +96,16 @@ public class Portfolio {
 		for(int i=0; i<2; i++){
 			for(int k=0; k<=assetcount; k++){
 				if(Ass[i][k].getType().contains("P")){
-					if(Ass[i][k].getCode().equals())
-					Riskp= Ass[i][k].getOmegaMeasure()+ exp(e,(-100000/(Ass[i][k].getTotalValue()*PercentOwned)));
+					if(Ass[i][k].getCode().equals(AssetName[k]))
+					Risk = Double.parseDouble(Ass[i][k].getOmegaMeasure())+ Math.pow(java.lang.Math.E,(-100000/(Double.parseDouble(Ass[i][k].getTotalValue())*AssetValue[k]*.01)));
 				}
+				if(Ass[i][k].getType().contains("S")){
+					if(Ass[i][k].getCode().equals(AssetName[k]))
+					Risk = Double.parseDouble(Ass[i][k].getBetaMeasure());
+				}
+				if(Ass[i][k].getType().contains("D")){
+					if(Ass[i][k].getCode().equals(AssetName[k]))
+					Risk = 0;
 			}
 		}
 		
@@ -112,6 +136,21 @@ public class Portfolio {
 		return assetcount;
 	}
 
+	public String getAssetName() {
+		return AssetName;
+	}
+
+	public double getAssetValue() {
+		return AssetValue;
+	}
+
+	public String[] getTemporaryString() {
+		return temporaryString;
+	}
+
+	public int getOccuranceOfAssetCount() {
+		return OccuranceOfAssetCount;
+	}
 
 	
 	
