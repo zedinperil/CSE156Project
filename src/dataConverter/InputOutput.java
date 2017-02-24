@@ -16,6 +16,8 @@ import javax.json.stream.JsonGenerator;
 //So we bring the file in here
 //BIG NOTE: We should have used array lists. We are simply stubborn to switch from arrays
 public class InputOutput {
+	
+
 	public static void main(String[] args) throws IOException {		
 		//ints for further use
 		int NumOfFiles= 3;
@@ -26,6 +28,7 @@ public class InputOutput {
 		boolean[] IsPerson=new boolean[NumOfFiles];
 		boolean[] IsAsset=new boolean[NumOfFiles];
 		boolean[] IsPortfolio=new boolean[NumOfFiles];
+		boolean[] PortfolioHasAssets = new boolean[NumOfFiles];
 		String[] fileName = new String[3];
 		//the filenames
 		fileName[0]= "data/Persons.dat";
@@ -104,7 +107,12 @@ public class InputOutput {
 					DelimeteredData[i][g-1]=fullData[i][g].split(";");	
 				}
 				if(x==(NumOfChars[g])-1 && fullData[i][g].lastIndexOf(";")!=NumOfChars[g]-1){
-						DelimeteredData[i][g-1]=fullData[i][g].split(";");						
+						DelimeteredData[i][g-1]=fullData[i][g].split(";");	
+						if(IsPortfolio[i]){
+							if(DelimeteredData[i][g-1][x]==""){
+								PortfolioHasAssets[i]=true;
+							}
+						}
 				}	
 		
 			}
@@ -118,28 +126,33 @@ public class InputOutput {
 		JsonArrayBuilder Portfoliobuilder= Json.createArrayBuilder();
 		JsonArrayBuilder Personbuilder= Json.createArrayBuilder();
 		JsonArrayBuilder Assetbuilder= Json.createArrayBuilder();
+		int Personcount=0;
+		int Assetscount=0;
 //Debug in case we need to use the arrays later;	
 		Persons[][] PersonArray= new Persons[NumOfFiles][100];
 		Assets[][] AssetsArray= new Assets[NumOfFiles][100];
 		Portfolio[][] PortfolioArray= new Portfolio[NumOfFiles][100];
 		for(i=0; i<NumOfFiles; i++){
 			for(g=0; g<NumberOfLines[i]; g++){
-				//MAKE TEMP PORTFOLIO
-
-			
 				if(IsPortfolio[i]){
 					if(NumberOfDelims[i][g]==5){
-						PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], PersonArray, AssetsArray);
+						PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], PersonArray, AssetsArray, Personcount, Assetscount);
 					}
 					else if(NumberOfDelims[i][g]==4){
-						PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], HasNoData, DelimeteredData[i][g][3], PersonArray, AssetsArray);	
+						if(PortfolioHasAssets[g]){
+							PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData, PersonArray, AssetsArray, Personcount, Assetscount);	
+						}
+						else{
+							PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", DelimeteredData[i][g][3], PersonArray, AssetsArray, Personcount, Assetscount);	
+						}	
 					}
 					else{
-						PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], HasNoData, HasNoData, PersonArray, AssetsArray);
+						PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", HasNoData, PersonArray, AssetsArray, Personcount, Assetscount);
 					}
 			
 				}
-					if(IsPerson[i]){						
+					if(IsPerson[i]){
+						Personcount++;
 						if(DelimeteredData[i][g][1].equals("")){
 							if(NumberOfDelims[i][g]==5){	
 								PersonArray[i][g]= new Beneficiaries(DelimeteredData[i][g][0],  DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4]);							
@@ -189,6 +202,7 @@ public class InputOutput {
 					}
 				//check to see that it is an asset, and if so, check to see if the delimetered data for that asset that corresponds to type contains the character corresponding to each type of asset. Then, create a new asset of the correct type with the correct inputs for that type of asset
 					if(IsAsset[i]){
+						Assetscount++;
 						if(DelimeteredData[i][g][1].contains("D")){
 							AssetsArray[i][g]= new Deposit(DelimeteredData[i][g][0], DelimeteredData[i][g][1],DelimeteredData[i][g][2], DelimeteredData[i][g][3]);				
 							//TODO: fix this for assets
