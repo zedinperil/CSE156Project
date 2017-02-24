@@ -28,7 +28,7 @@ public class InputOutput {
 		boolean[] IsPerson=new boolean[NumOfFiles];
 		boolean[] IsAsset=new boolean[NumOfFiles];
 		boolean[] IsPortfolio=new boolean[NumOfFiles];
-		boolean[] PortfolioHasAssets = new boolean[NumOfFiles];
+	
 		String[] fileName = new String[3];
 		//the filenames
 		fileName[0]= "data/Persons.dat";
@@ -64,6 +64,7 @@ public class InputOutput {
 	        //close the buffer
 	        Buff.close();
 		}
+		boolean[] PortfolioHasAssets = new boolean[size[2]];
 		//create a string to store every piece of data pulled in
 		String fullData[][] = new String[NumOfFiles][1000];
 	        Scanner s = null;
@@ -109,7 +110,7 @@ public class InputOutput {
 				if(x==(NumOfChars[g])-1 && fullData[i][g].lastIndexOf(";")!=NumOfChars[g]-1){
 						DelimeteredData[i][g-1]=fullData[i][g].split(";");	
 						if(IsPortfolio[i]){
-							if(DelimeteredData[i][g-1][x]==""){
+							if(DelimeteredData[i][g-1][DelimeteredData[i][g-1].length-1]==""){
 								PortfolioHasAssets[i]=true;
 							}
 						}
