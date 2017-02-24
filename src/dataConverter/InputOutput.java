@@ -169,7 +169,9 @@ public class InputOutput {
 				System.out.println(PortfolioArray[i][g].getAss());
 				System.out.println(PortfolioArray[i][g].getPer());
 				System.out.println(PortfolioArray[i][g].getFees());
+				System.out.println("TEST");
 				System.out.println(PortfolioArray[i][g].getCommisions());
+				System.out.println("TEST");
 				System.out.println(PortfolioArray[i][g].getRisk());
 				System.out.println(PortfolioArray[i][g].getValue());
 				System.out.println(PortfolioArray[i][g].getAnnualReturn());

@@ -147,25 +147,28 @@ public class Portfolio {
 		int i=0;
 		int k=0;
 		for(i=0; i<2; i++){
-			for(k=0; k<=personcount; k++){
+			while(k<=personcount){				
 				if(Per[i][k].getPersonCode().equals(ManagerCode)){
-					if(Per[i][k].getType().equals("E")){
-						fees = 20 * OccuranceOfAssetCount;
-					}
-					if(Per[i][k].getType().equals("J")){
-						fees = 50 * OccuranceOfAssetCount;
-					}
+							if(Per[i][k].getType().equals("E")){
+								fees = 20 * OccuranceOfAssetCount;
+							}
+							if(Per[i][k].getType().equals("J")){
+								fees = 50 * OccuranceOfAssetCount;
+							}
+							k=personcount;
 				}
-			}
+				k++;	
+			}		
 		}
-		
 		return fees;
 	}
 
 	public double getCommisions() {
-	for(int i=0;i<2; i++){
-		for(int k=0; k<=assetcount; k++){
-			for(int o=0;o<=getManagerCount(); o++){
+	int o=0;
+	int k=0;
+		for(int i=0;i<2; i++){
+		while(k<assetcount){
+			while(o<getManagerCount()){
 				if(Ass[i][k].getCode().equals(AssetName[o])){
 					for(int q=0; i<2; i++){
 						for(int r=0; k<=assetcount; k++){
@@ -196,7 +199,9 @@ public class Portfolio {
 						commisions = .02 * sumOfAnnualReturn;
 					}
 				}
+			o++;
 			}
+		k++;
 		}
 	}
 		
@@ -302,7 +307,7 @@ public class Portfolio {
 	}
 
 	public String getAssetName(int u) {
-		int g;
+		int g=0;
 		for(int i=0; i<2; i++){
 			for(int k=0; k<=assetcount; k++){
 					if(Ass[i][u].getCode().equals(AssetName[k])){
@@ -314,7 +319,7 @@ public class Portfolio {
 	}
 
 	public double getAssetValue(int u) {
-		int g;
+		int g=0;
 		for(int i=0; i<2; i++){
 			for(int k=0; k<=assetcount; k++){
 					if(Ass[i][u].getCode().equals(AssetName[k])){
@@ -334,10 +339,12 @@ public class Portfolio {
 	}
 
 	public int getManagerCount() {
+		int k=0;
 		for(int i=0; i<2; i++){
-			for(int k=0; k<=personcount; k++){
-				if(Per[i][k].getPersonCode().equals(ManagerCode)){
+			while(k<personcount){			
+				if(Per[i][k].getPersonCode().equals(this.OwnerCode)){
 					ManagerCount++;
+				k=personcount;
 				}
 			}
 		}
