@@ -50,10 +50,6 @@ public class Portfolio {
 				i++;
 			}
 		}
-		else{
-			temporaryString[i]="";
-			i++;
-		}
 			for(k=0; k<i; k++){
 				 StringTokenizer twokenizer= new StringTokenizer(temporaryString[k], ":");
 					 if(twokenizer.hasMoreTokens()){
