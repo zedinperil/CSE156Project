@@ -1,7 +1,7 @@
 package dataConverter;
 
 import java.util.StringTokenizer;
-import java.math.*;
+
 public class Portfolio {
 	private String PortfolioCode;
 	private String OwnerCode;
@@ -77,12 +77,13 @@ public class Portfolio {
 	}
 	
 	public String getOwnerName(){
-		int i=0;
+		int i;
 		int k=0;
 		for(i=0; i<2; i++){
-			for(k=0; k<=personcount; k++){
-				if(Per[i][k].getPersonCode().equals(OwnerCode)){
-					ownerName= (Per[i][k].getFirstName()+" "+Per[i][k].getLastName());
+			while(k<personcount){			
+				if(Per[i][k].getPersonCode().equals(this.OwnerCode)){
+					ownerName=(Per[i][k].getFirstName()+" "+Per[i][k].getLastName());
+				k=personcount;
 				}
 			}
 		}
@@ -93,9 +94,12 @@ public class Portfolio {
 		int i=0;
 		int k=0;
 		for(i=0; i<2; i++){
-			for(k=0; k<=personcount; k++){
-				if(Per[i][k].getPersonCode().equals(ManagerCode)){
-					managerName= (Per[i][k].getFirstName()+" "+Per[i][k].getLastName());
+			for(i=0; i<2; i++){
+				while(k<personcount){			
+					if(Per[i][k].getPersonCode().equals(this.OwnerCode)){
+						managerName=(Per[i][k].getFirstName()+" "+Per[i][k].getLastName());
+					k=personcount;
+					}
 				}
 			}
 		}
@@ -106,9 +110,10 @@ public class Portfolio {
 		int i=0;
 		int k=0;
 		for(i=0; i<2; i++){
-			for(k=0; k<=personcount; k++){
-				if(Per[i][k].getPersonCode().equals(BeneficiaryCode)){
-					beneficiaryName= (Per[i][k].getFirstName()+" "+Per[i][k].getLastName());
+			while(k<personcount){			
+				if(Per[i][k].getPersonCode().equals(this.OwnerCode)){
+					beneficiaryName=(Per[i][k].getFirstName()+" "+Per[i][k].getLastName());
+				k=personcount;
 				}
 			}
 		}
@@ -183,14 +188,20 @@ public class Portfolio {
 					sumOfAnnualReturn+= AnnualReturn;
 						
 				}
-
+				if(Per[i][k].getPersonCode().equals(ManagerCode)){
+					if(Per[i][k].getType().equals("E")){
+						commisions = .05 * sumOfAnnualReturn;
+					}
+					if(Per[i][k].getType().equals("J")){
+						commisions = .02 * sumOfAnnualReturn;
+					}
+				}
 			}
 		}
 	}
 		
 		return commisions;
 	}
-
 	public double getRisk() {
 		for(int i=0; i<2; i++){
 			for(int k=0; k<=assetcount; k++){
@@ -209,10 +220,8 @@ public class Portfolio {
 		}
 		}
 		return Risk;
-	
 }
 	public double getValue() {
-		
 		for(int i=0; i<2; i++){
 			for(int k=0; k<=assetcount; k++){
 				if(Ass[i][k].getType().contains("P")){
@@ -229,12 +238,10 @@ public class Portfolio {
 				}
 			}
 		}
-	
 		return Value;
 	}
 
 	public double getAnnualReturn() {
-		
 		for(int i=0; i<2; i++){
 			for(int k=0; k<=assetcount; k++){
 				if(Ass[i][k].getType().contains("P")){
@@ -263,18 +270,22 @@ public class Portfolio {
 					if(Ass[i][k].getCode().equals(AssetName[k]))
 					AnnualReturn = (Ass[i][k].getBaseRateOfReturn()* (Double.parseDouble(Ass[i][k].getTotalValue()) * AssetValue[k] * .01)
 							+ 4 *(Double.parseDouble(Ass[i][k].getQuarterlyDividend()) * AssetValue[k] * .01))/(Double.parseDouble(Ass[i][k].getTotalValue()) * AssetValue[k] * .01);
+					ReturnRate= AnnualReturn/this.getValue();
 				}
 				if(Ass[i][k].getType().contains("S")){
 					if(Ass[i][k].getCode().equals(AssetName[k]))
 					AnnualReturn = (Ass[i][k].getBaseRateOfReturn()* (Double.parseDouble(Ass[i][k].getSharePrice()) * AssetValue[k])
 							+ 4 *(Double.parseDouble(Ass[i][k].getQuarterlyDividend()) * AssetValue[k] * .01))/(Double.parseDouble(Ass[i][k].getSharePrice()) * AssetValue[k]);
+					ReturnRate= AnnualReturn/this.getValue();
 				}
 				if(Ass[i][k].getType().contains("D")){
 					if(Ass[i][k].getCode().equals(AssetName[k]))
 					AnnualReturn = Ass[i][k].getApr();
+					ReturnRate= AnnualReturn/this.getValue();
 				}
 			}
 		}
+		
 		return ReturnRate;
 	}
 
@@ -290,12 +301,28 @@ public class Portfolio {
 		return assetcount;
 	}
 
-	public String getAssetName() {
-		return AssetName;
+	public String getAssetName(int u) {
+		int g;
+		for(int i=0; i<2; i++){
+			for(int k=0; k<=assetcount; k++){
+					if(Ass[i][u].getCode().equals(AssetName[k])){
+					g=k;
+					}
+			}
+		}
+		return AssetName[g];
 	}
 
-	public double getAssetValue() {
-		return AssetValue;
+	public double getAssetValue(int u) {
+		int g;
+		for(int i=0; i<2; i++){
+			for(int k=0; k<=assetcount; k++){
+					if(Ass[i][u].getCode().equals(AssetName[k])){
+					g=k;
+					}
+			}
+		}
+		return AssetValue[g];
 	}
 
 	public String[] getTemporaryString() {
