@@ -64,7 +64,7 @@ public class InputOutput {
 	        //close the buffer
 	        Buff.close();
 		}
-		boolean[] PortfolioHasAssets = new boolean[size[2]];
+		boolean[] PortfolioHasNoBeneficiary = new boolean[size[2]];
 		//create a string to store every piece of data pulled in
 		String fullData[][] = new String[NumOfFiles][1000];
 	        Scanner s = null;
@@ -110,15 +110,13 @@ public class InputOutput {
 				if(x==(NumOfChars[g])-1 && fullData[i][g].lastIndexOf(";")!=NumOfChars[g]-1){
 						DelimeteredData[i][g-1]=fullData[i][g].split(";");	
 						if(IsPortfolio[i]){
-							if(DelimeteredData[i][g-1][DelimeteredData[i][g-1].length-1]==""){
-								PortfolioHasAssets[i]=true;
+							if(DelimeteredData[i][g-1][DelimeteredData[i][g-1].length-2].equals("")){
+								PortfolioHasNoBeneficiary[g]=true;
 							}
 						}
 				}	
-		
 			}
 			NumberOfDelims[i][g-1]=DelimeteredData[i][g-1].length;	//this is how many delimeters we have
-		
 		}
 	}
 //Temp variables for persons, deposits, stocks, and privateinvestments		
@@ -136,21 +134,28 @@ public class InputOutput {
 		for(i=0; i<NumOfFiles; i++){
 			for(g=0; g<NumberOfLines[i]; g++){
 				if(IsPortfolio[i]){
-					if(NumberOfDelims[i][g]==5){
-						PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], PersonArray, AssetsArray, Personcount, Assetscount);
-					}
-					else if(NumberOfDelims[i][g]==4){
-						if(PortfolioHasAssets[g]){
-							PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData, PersonArray, AssetsArray, Personcount, Assetscount);	
+					if(PortfolioHasNoBeneficiary[g]){
+						if(NumberOfDelims[i][g]==5){
+							PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", DelimeteredData[i][g][3], PersonArray, AssetsArray, Personcount, Assetscount);
+						}
+						else if(NumberOfDelims[i][g]==4){
+								PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", DelimeteredData[i][g][3], PersonArray, AssetsArray, Personcount, Assetscount);	
 						}
 						else{
-							PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", DelimeteredData[i][g][3], PersonArray, AssetsArray, Personcount, Assetscount);	
-						}	
+							PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", HasNoData, PersonArray, AssetsArray, Personcount, Assetscount);
+						}
 					}
 					else{
-						PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", HasNoData, PersonArray, AssetsArray, Personcount, Assetscount);
+						if(NumberOfDelims[i][g]==5){
+							PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], PersonArray, AssetsArray, Personcount, Assetscount);
+						}
+						else if(NumberOfDelims[i][g]==4){
+								PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", DelimeteredData[i][g][3], PersonArray, AssetsArray, Personcount, Assetscount);	
+						}
+						else{
+							PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", HasNoData, PersonArray, AssetsArray, Personcount, Assetscount);
+						}
 					}
-			
 				}
 					if(IsPerson[i]){
 						Personcount++;
