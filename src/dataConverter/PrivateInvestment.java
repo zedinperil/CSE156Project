@@ -46,6 +46,30 @@ public class PrivateInvestment extends Assets{
 	public void setTotalValue(String totalValue) {
 		TotalValue = totalValue;
 	}
+
+	@Override
+	public double getApr() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getBetaMeasure() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getStockSymbol() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getSharePrice() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 		
 	
 

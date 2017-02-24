@@ -126,23 +126,18 @@ public class InputOutput {
 			for(g=0; g<NumberOfLines[i]; g++){
 				//MAKE TEMP PORTFOLIO
 
-				if(i==2){
-					for(int k=0; k<NumberOfDelims[i][g]; k++){
-					System.out.print(DelimeteredData[i][g][k]+ " ");
-					}
-					System.out.println();
-				}
+			
 				if(IsPortfolio[i]){
 					if(NumberOfDelims[i][g]==5){
-						PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4]);
+						PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], PersonArray, AssetsArray);
 					}
 					else if(NumberOfDelims[i][g]==4){
-						PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], HasNoData, DelimeteredData[i][g][3]);	
+						PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], HasNoData, DelimeteredData[i][g][3], PersonArray, AssetsArray);	
 					}
 					else{
-						PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], HasNoData, HasNoData);
+						PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], HasNoData, HasNoData, PersonArray, AssetsArray);
 					}
-				
+			
 				}
 					if(IsPerson[i]){						
 						if(DelimeteredData[i][g][1].equals("")){

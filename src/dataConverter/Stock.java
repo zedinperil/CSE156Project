@@ -46,5 +46,20 @@ public class Stock extends Assets{
 	public String getSharePrice() {
 		return SharePrice;
 	}
+	@Override
+	public double getApr() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public String getOmegaMeasure() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String getTotalValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

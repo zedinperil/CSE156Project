@@ -5,7 +5,7 @@ public class Portfolio {
 	private String OwnerCode;
 	private String ManagerCode;
 	private String BeneficiaryCode;
-	private String Assetss;
+	private String Asset;
 	private Assets[][] Ass;
 	private Persons[][] Per;
 	
@@ -17,7 +17,7 @@ public class Portfolio {
 		this.OwnerCode = ownCode;
 		this.ManagerCode = managCode;
 		this.BeneficiaryCode = beneficiaryCode;
-		this.Assetss = assetsA;
+		this.Asset = assetsA;
 		this.Ass = asset;
 		this.Per = persons;
 		
@@ -60,11 +60,11 @@ public class Portfolio {
 	}
 
 	public String getAssets() {
-		return Assets;
+		return Asset;
 	}
 
 	public void setAssets(String assets) {
-		Assets = assets;
+		Asset = assets;
 	}
 
 	
