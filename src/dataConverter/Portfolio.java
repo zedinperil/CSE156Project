@@ -176,30 +176,25 @@ public class Portfolio {
 					for(int q=1; q<2; q++){
 						r=0;
 						while(r<assetcount){
-//							System.out.println(r);
-//							System.out.println(o);
-//							System.out.println(assetcount);
-//							System.out.println(Ass[q][r].getCode());
-//							System.out.println(AssetName[o]);
 							if(Ass[q][r].getType().equals("P")){
 								if(Ass[q][r].getCode().equals(AssetName[o])){
 								AnnualReturn = getAnnualReturn(r, o);
 								sumOfAnnualReturn+= AnnualReturn;
-								System.out.println("GOO"+sumOfAnnualReturn);
+							
 								}
 							}
 							if(Ass[q][r].getType().equals("S")){
 								if(Ass[q][r].getCode().equals(AssetName[o])){
 								AnnualReturn = getAnnualReturn(r, o);
 								sumOfAnnualReturn+= AnnualReturn;
-								System.out.println("GOO"+sumOfAnnualReturn);
+							
 								}
 							}
 							if(Ass[q][r].getType().equals("D")){
 								if(Ass[q][r].getCode().equals(AssetName[o])){
 								AnnualReturn = getAnnualReturn(r, o);
 								sumOfAnnualReturn+= AnnualReturn;
-								System.out.println("GOO"+sumOfAnnualReturn);
+							
 								}
 							}
 						r++;
@@ -210,12 +205,17 @@ public class Portfolio {
 				}
 				
 				if(k<personcount){
+				
 				if(Per[0][k].getPersonCode().equals(ManagerCode)){
 					if(Per[0][k].getType().equals("E")){
+						System.out.println("GOO"+sumOfAnnualReturn);
 						commisions = .05 * sumOfAnnualReturn;
+						System.out.println("yee"+commisions);
 					}
 					if(Per[0][k].getType().equals("J")){
 						commisions = .02 * sumOfAnnualReturn;
+						System.out.println("yoo"+commisions);
+
 					}
 				}
 				}
@@ -284,11 +284,11 @@ public class Portfolio {
 				if(Ass[i][k].getType().contains("D")){
 						if(Ass[i][k].getCode().equals(AssetName[o])){
 							AnnualReturn = (Math.pow(Math.E, Ass[i][k].getApr()) - 1)*AssetValue[o];
-						System.out.println(AnnualReturn);
+			//			System.out.println(AnnualReturn);
 						}
 				}
 		}
-		System.out.println("woo"+ AnnualReturn);
+//		System.out.println("woo"+ AnnualReturn);
 		return AnnualReturn;
 	}
 
