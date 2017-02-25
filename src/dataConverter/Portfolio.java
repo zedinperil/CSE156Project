@@ -185,21 +185,21 @@ public class Portfolio {
 								if(Ass[q][r].getCode().equals(AssetName[o])){
 								AnnualReturn = getAnnualReturn(r, o);
 								sumOfAnnualReturn+= AnnualReturn;
-//								System.out.println(sumOfAnnualReturn);
+								System.out.println("GOO"+sumOfAnnualReturn);
 								}
 							}
 							if(Ass[q][r].getType().equals("S")){
 								if(Ass[q][r].getCode().equals(AssetName[o])){
 								AnnualReturn = getAnnualReturn(r, o);
 								sumOfAnnualReturn+= AnnualReturn;
-//								System.out.println(sumOfAnnualReturn);
+								System.out.println("GOO"+sumOfAnnualReturn);
 								}
 							}
 							if(Ass[q][r].getType().equals("D")){
 								if(Ass[q][r].getCode().equals(AssetName[o])){
 								AnnualReturn = getAnnualReturn(r, o);
 								sumOfAnnualReturn+= AnnualReturn;
-//								System.out.println(sumOfAnnualReturn);
+								System.out.println("GOO"+sumOfAnnualReturn);
 								}
 							}
 						r++;
@@ -274,25 +274,27 @@ public class Portfolio {
 				if(Ass[i][k].getType().contains("P")){
 						if(Ass[i][k].getCode().equals(AssetName[o])){
 							AnnualReturn = Ass[i][k].getBaseRateOfReturn()* (Double.parseDouble(Ass[i][k].getTotalValue()) * AssetValue[k] * .01)
-											+ 4 *(Double.parseDouble(Ass[i][k].getQuarterlyDividend()) * AssetValue[k] * .01);
+											+ 4 *(Double.parseDouble(Ass[i][k].getQuarterlyDividend()) * AssetValue[o] * .01);
 				
 						}
 					}
 				if(Ass[i][k].getType().contains("S")){
 						if(Ass[i][k].getCode().equals(AssetName[o])){
 							AnnualReturn = Ass[i][k].getBaseRateOfReturn()* (Double.parseDouble(Ass[i][k].getSharePrice()) * AssetValue[k])
-									+ 4 *(Double.parseDouble(Ass[i][k].getQuarterlyDividend()) * AssetValue[k] );
-							
+									+ 4 *(Double.parseDouble(Ass[i][k].getQuarterlyDividend()) * AssetValue[o] );
+						System.out.println("YOO");	
 						}
 				}
 				if(Ass[i][k].getType().contains("D")){
 						if(Ass[i][k].getCode().equals(AssetName[o])){
-							AnnualReturn = (Math.pow(Math.E, Ass[i][k].getApr()) - 1);
+							AnnualReturn = (Math.pow(Math.E, Ass[i][k].getApr()) - 1)*AssetValue[o];
+						System.out.println(AnnualReturn);
 						
+							System.out.println("YEE");
 						}
 				}
 		}
-		System.out.println(AnnualReturn);
+		System.out.println("woo"+ AnnualReturn);
 		return AnnualReturn;
 	}
 
