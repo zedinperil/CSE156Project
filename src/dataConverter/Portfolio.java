@@ -166,12 +166,18 @@ public class Portfolio {
 	public double getCommisions() {
 	int o=0;
 	int k=0;
-		for(int i=0;i<2; i++){
-		while(k<assetcount){
+		for(int i=1;i<2; i++){
+		k=0;
+			while(k<assetcount){
+			o=0;
 			while(o<getManagerCount()){
-				if(Ass[i][k].getCode().equals(AssetName[o])){
-					for(int q=0; i<2; i++){
-						for(int r=0; k<=assetcount; k++){
+				System.out.println(getManagerCount());
+				System.out.println(o);
+				System.out.println(AssetName[o]);
+				System.out.println(Ass[1][k].getCode());
+				if(Ass[1][k].getCode().equals(AssetName[o])){
+					for(int q=1; i<2; i++){
+						for(int r=0; r<assetcount; r++){
 							if(Ass[q][r].getType().contains("P")){
 								if(Ass[q][r].getCode().equals(AssetName[r]))
 								AnnualReturn = Ass[q][r].getBaseRateOfReturn()* (Double.parseDouble(Ass[q][r].getTotalValue()) * AssetValue[r] * .01)
@@ -189,10 +195,10 @@ public class Portfolio {
 						}
 					}
 					sumOfAnnualReturn+= AnnualReturn;
-						
+				System.out.println(sumOfAnnualReturn);		
 				}
-				if(Per[i][k].getPersonCode().equals(ManagerCode)){
-					if(Per[i][k].getType().equals("E")){
+				if(Per[0][k].getPersonCode().equals(ManagerCode)){
+					if(Per[0][k].getType().equals("E")){
 						commisions = .05 * sumOfAnnualReturn;
 					}
 					if(Per[i][k].getType().equals("J")){
@@ -341,6 +347,7 @@ public class Portfolio {
 	public int getManagerCount() {
 		int k=0;
 		for(int i=0; i<2; i++){
+			k=0;
 			while(k<personcount){			
 				if(Per[i][k].getPersonCode().equals(this.OwnerCode)){
 					ManagerCount++;
