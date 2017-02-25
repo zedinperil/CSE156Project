@@ -20,6 +20,41 @@ public class Portfolio {
 	private double AnnualReturn;
 	private double ReturnRate;
 	
+	/**
+	 * @return the risk
+	 */
+	public double getRisk() {
+		return Risk;
+	}
+
+	/**
+	 * @return the annualReturn
+	 */
+	public double getAnnualReturn() {
+		return AnnualReturn;
+	}
+
+	/**
+	 * @return the sumOfAnnualReturn
+	 */
+	public double getSumOfAnnualReturn() {
+		return sumOfAnnualReturn;
+	}
+
+	/**
+	 * @return the assetName
+	 */
+	public String[] getAssetName() {
+		return AssetName;
+	}
+
+	/**
+	 * @return the assetValue
+	 */
+	public double[] getAssetValue() {
+		return AssetValue;
+	}
+
 	private double AggRisk;
 	private int personcount;
 	private int assetcount;
@@ -56,14 +91,14 @@ public class Portfolio {
 				i++;
 			}
 		}
-		OccuranceOfAssetCount=i;
+		this.OccuranceOfAssetCount=i;
 			for(k=0; k<i; k++){
 				 StringTokenizer twokenizer= new StringTokenizer(temporaryString[k], ":");
 					 if(twokenizer.hasMoreTokens()){
-						 AssetName[k]= twokenizer.nextToken();
+						 this.AssetName[k]= twokenizer.nextToken();
 					 }
 					 if(twokenizer.hasMoreTokens()){
-						 AssetValue[k]= Double.parseDouble(twokenizer.nextToken());
+						this.AssetValue[k]= Double.parseDouble(twokenizer.nextToken());
 					 }
 				 }
 	}
@@ -73,7 +108,9 @@ public class Portfolio {
 	}
 
 	public String getOwnerCode() {
+		System.out.println("WTF");
 		return OwnerCode;
+		
 	}
 	
 	public String getOwnerName(){
@@ -117,18 +154,28 @@ public class Portfolio {
 				}
 			}
 		}
-		if(BeneficiaryCode.equals("none")){
-			return "none";
+		if(getBeneficiaryCode().equals("none")){
+			beneficiaryName="none";
 		}
 		return beneficiaryName;
 	}
 	
 	public String getManagerCode() {
+		System.out.println(ManagerCode);
 		return ManagerCode;
 	}
 
 	public String getBeneficiaryCode() {
+		System.out.println("HELP");
+		if(BeneficiaryCode.equals("")){
+			System.out.println("yes");
+			return "none";
+			
+		}
+		else{
+			System.out.println("no");
 		return BeneficiaryCode;
+		}
 	}
 
 	public String getAsset() {
@@ -179,75 +226,69 @@ public class Portfolio {
 							if(Ass[q][r].getType().equals("P")){
 								if(Ass[q][r].getCode().equals(AssetName[o])){
 								AnnualReturn = getAnnualReturn(r, o);
-								sumOfAnnualReturn+= AnnualReturn;
-							
+								sumOfAnnualReturn+= AnnualReturn;		
 								}
 							}
 							if(Ass[q][r].getType().equals("S")){
 								if(Ass[q][r].getCode().equals(AssetName[o])){
 								AnnualReturn = getAnnualReturn(r, o);
 								sumOfAnnualReturn+= AnnualReturn;
-							
 								}
 							}
 							if(Ass[q][r].getType().equals("D")){
 								if(Ass[q][r].getCode().equals(AssetName[o])){
 								AnnualReturn = getAnnualReturn(r, o);
-								sumOfAnnualReturn+= AnnualReturn;
-							
+								sumOfAnnualReturn+= AnnualReturn;		
 								}
 							}
 						r++;
 						}
 					}
-					
-
-				}
-				
-				if(k<personcount){
-				
-				if(Per[0][k].getPersonCode().equals(ManagerCode)){
-					if(Per[0][k].getType().equals("E")){
-						System.out.println("GOO"+sumOfAnnualReturn);
-						commisions = .05 * sumOfAnnualReturn;
-						System.out.println("yee"+commisions);
-					}
-					if(Per[0][k].getType().equals("J")){
-						commisions = .02 * sumOfAnnualReturn;
-						System.out.println("yoo"+commisions);
-
-					}
-				}
-				}
+				}		
 			o++;
 			}
 		k++;
 		}
 	}
+	k=0; 
+	while(k<personcount){
+	if(Per[0][k].getPersonCode().equals(ManagerCode)){
+		if(Per[0][k].getType().equals("E")){
+			commisions = .05 * sumOfAnnualReturn;
+		}
+		if(Per[0][k].getType().equals("J")){
+			commisions = .02 * sumOfAnnualReturn;
+		}
+	}
+	k++;
+	}	
 		return commisions;
 	}
-	public double getRisk() {
-		for(int i=0; i<2; i++){
-			for(int k=0; k<=assetcount; k++){
+	public double getRisk(int u) {
+	int k;
+	int i=1;	
+			k=0;
+			while(k<assetcount){
 				if(Ass[i][k].getType().contains("P")){
-					if(Ass[i][k].getCode().equals(AssetName[k]))
+					if(Ass[i][k].getCode().equals(AssetName[u]))
 					Risk = Double.parseDouble(Ass[i][k].getOmegaMeasure())+ Math.pow(java.lang.Math.E,(-100000/(Double.parseDouble(Ass[i][k].getTotalValue())*AssetValue[k]*.01)));
 				}
 				if(Ass[i][k].getType().contains("S")){
-					if(Ass[i][k].getCode().equals(AssetName[k]))
+					if(Ass[i][k].getCode().equals(AssetName[u]))
 					Risk = Double.parseDouble(Ass[i][k].getBetaMeasure());
 				}
 				if(Ass[i][k].getType().contains("D")){
-					if(Ass[i][k].getCode().equals(AssetName[k]))
+					if(Ass[i][k].getCode().equals(AssetName[u]))
 					Risk = 0;
 				}
-		}
-		}
+			k++;
+			}
+		
 		return Risk;
 }
 	public double getValue() {
-		for(int i=0; i<2; i++){
-			for(int k=0; k<=assetcount; k++){
+		int i=1;
+			for(int k=0; k<assetcount; k++){
 				if(Ass[i][k].getType().contains("P")){
 					if(Ass[i][k].getCode().equals(AssetName[k]))
 					Value = Double.parseDouble(Ass[i][k].getTotalValue()) * AssetValue[k] * .01;
@@ -261,16 +302,12 @@ public class Portfolio {
 					Value = AssetValue[k];
 				}
 			}
-		}
+		
 		return Value;
 	}
 
 	public double getAnnualReturn(int k, int o) {
-		for(int i=1; i<2; i++){
-//			System.out.println(k);
-//			System.out.println(Ass[i][k].getType());
-//			System.out.println(Ass[i][k].getCode());
-//			System.out.println(AssetName[k]);
+		int i=1;
 				if(Ass[i][k].getType().contains("P")){
 						if(Ass[i][k].getCode().equals(AssetName[o])){
 							AnnualReturn = Ass[i][k].getBaseRateOfReturn()* (Double.parseDouble(Ass[i][k].getTotalValue()) * AssetValue[o] * .01)+ (4 *(Double.parseDouble(Ass[i][k].getQuarterlyDividend()) * AssetValue[o] * .01));
@@ -284,17 +321,16 @@ public class Portfolio {
 				if(Ass[i][k].getType().contains("D")){
 						if(Ass[i][k].getCode().equals(AssetName[o])){
 							AnnualReturn = (Math.pow(Math.E, Ass[i][k].getApr()) - 1)*AssetValue[o];
-			//			System.out.println(AnnualReturn);
 						}
 				}
-		}
+		
 //		System.out.println("woo"+ AnnualReturn);
 		return AnnualReturn;
 	}
 
 	public double getReturnRate() {
-		for(int i=0; i<2; i++){
-			for(int k=0; k<=assetcount; k++){
+		int i=1;
+			for(int k=0; k<assetcount; k++){
 				if(Ass[i][k].getType().contains("P")){
 					if(Ass[i][k].getCode().equals(AssetName[k]))
 					AnnualReturn = (Ass[i][k].getBaseRateOfReturn()* (Double.parseDouble(Ass[i][k].getTotalValue()) * AssetValue[k] * .01)
@@ -313,7 +349,7 @@ public class Portfolio {
 					ReturnRate= AnnualReturn/this.getValue();
 				}
 			}
-		}
+		
 		
 		return ReturnRate;
 	}
@@ -332,25 +368,25 @@ public class Portfolio {
 
 	public String getAssetName(int u) {
 		int g=0;
-		for(int i=0; i<2; i++){
-			for(int k=0; k<=assetcount; k++){
+		int i=1; 
+		for(int k=0; k<assetcount; k++){
 					if(Ass[i][u].getCode().equals(AssetName[k])){
 					g=k;
 					}
 			}
-		}
+		
 		return AssetName[g];
 	}
 
 	public double getAssetValue(int u) {
 		int g=0;
-		for(int i=0; i<2; i++){
-			for(int k=0; k<=assetcount; k++){
+		int i=1;
+		for(int k=0; k<assetcount; k++){
 					if(Ass[i][u].getCode().equals(AssetName[k])){
 					g=k;
 					}
 			}
-		}
+		
 		return AssetValue[g];
 	}
 
@@ -359,7 +395,7 @@ public class Portfolio {
 	}
 
 	public int getOccuranceOfAssetCount() {
-		return OccuranceOfAssetCount;
+		return this.OccuranceOfAssetCount;
 	}
 
 	public int getManagerCount() {

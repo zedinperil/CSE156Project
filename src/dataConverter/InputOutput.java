@@ -135,27 +135,55 @@ public class InputOutput {
 			for(g=0; g<NumberOfLines[i]; g++){
 				if(IsPortfolio[i]){
 					if(PortfolioHasNoBeneficiary[g]){
+					System.out.println("CHECK1");
 						if(NumberOfDelims[i][g]==5){
+							System.out.println("CHECK2");
+
 							PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", DelimeteredData[i][g][3], PersonArray, AssetsArray, Personcount, Assetscount);
 						}
 						else if(NumberOfDelims[i][g]==4){
-								PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", DelimeteredData[i][g][3], PersonArray, AssetsArray, Personcount, Assetscount);	
+							System.out.println("CHECK3");
+
+							PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", DelimeteredData[i][g][3], PersonArray, AssetsArray, Personcount, Assetscount);	
 						}
 						else{
+							System.out.println("CHECK4");
+
 							PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", HasNoData, PersonArray, AssetsArray, Personcount, Assetscount);
 						}
 					}
 					else{
+						System.out.println("CHECK5");
+
 						if(NumberOfDelims[i][g]==5){
+							System.out.println("CHECK6");
+
 							PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], PersonArray, AssetsArray, Personcount, Assetscount);
 						}
 						else if(NumberOfDelims[i][g]==4){
-								PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", DelimeteredData[i][g][3], PersonArray, AssetsArray, Personcount, Assetscount);	
+							System.out.println("CHECK7");
+
+							PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", DelimeteredData[i][g][3], PersonArray, AssetsArray, Personcount, Assetscount);	
 						}
 						else{
+							System.out.println("CHECK8");
+
 							PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", HasNoData, PersonArray, AssetsArray, Personcount, Assetscount);
+			
 						}
 					}
+				System.out.println("NEW PORTFOLIO");
+				System.out.println(PortfolioArray[i][g].getPortfolioCode());
+	//			System.out.println(PortfolioArray[i][g].getOwnerCode());
+				System.out.println("YO");
+				System.out.println(PortfolioArray[i][g].getManagerCode());
+				
+				System.out.println(PortfolioArray[i][g].getBeneficiaryCode());
+				System.out.println(PortfolioArray[i][g].getAsset());
+				System.out.println(PortfolioArray[i][g].getPersoncount());
+				System.out.println(PortfolioArray[i][g].getAssetcount());
+			
+				System.out.println("GETTER TESTS");
 					System.out.println(Personcount);
 					System.out.println(Assetscount);
 				System.out.println(PortfolioArray[i][g].getPortfolioCode());
@@ -169,25 +197,26 @@ public class InputOutput {
 				System.out.println(PortfolioArray[i][g].getAss());
 				System.out.println(PortfolioArray[i][g].getPer());
 				System.out.println(PortfolioArray[i][g].getFees());
-				System.out.println("TEST");
 				System.out.println(PortfolioArray[i][g].getCommisions());
-				System.out.println("TEST");
-				System.out.println(PortfolioArray[i][g].getRisk());
+				for(int u=0; u<PortfolioArray[i][g].getAssetcount(); u++){
+					System.out.println("U is"+u);
+						System.out.println(PortfolioArray[i][g].getAssetName(u));
+						System.out.println(PortfolioArray[i][g].getAssetValue(u));
+						System.out.println(PortfolioArray[i][g].getRisk(u));
+						System.out.println(PortfolioArray[i][g].getAnnualReturn(u, u));
+					}
 				System.out.println(PortfolioArray[i][g].getValue());
-			
+
 				System.out.println(PortfolioArray[i][g].getReturnRate());
 				System.out.println(PortfolioArray[i][g].getAggRisk());
 				System.out.println(PortfolioArray[i][g].getPersoncount());
 				System.out.println(PortfolioArray[i][g].getAssetcount());
-				for(int u=0; u<=PortfolioArray[i][g].getAssetcount(); u++){
-				System.out.println(PortfolioArray[i][g].getAssetName(u));
-				System.out.println(PortfolioArray[i][g].getAssetValue(u));
-				System.out.println(PortfolioArray[i][g].getAnnualReturn(u, 0));
-				}
-				
+			
+
 				System.out.println(PortfolioArray[i][g].getOccuranceOfAssetCount());
 				System.out.println(PortfolioArray[i][g].getManagerCount());
-
+System.out.println("END OF PORTFOLIO");
+System.out.println("");
 				}
 					if(IsPerson[i]){
 						Personcount++;
