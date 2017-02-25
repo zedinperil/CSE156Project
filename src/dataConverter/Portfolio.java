@@ -166,51 +166,66 @@ public class Portfolio {
 	public double getCommisions() {
 	int o=0;
 	int k=0;
+	int r=0;
 		for(int i=1;i<2; i++){
 		k=0;
 			while(k<assetcount){
 			o=0;
-			while(o<getManagerCount()){
-				System.out.println(getManagerCount());
-				System.out.println(o);
-				System.out.println(AssetName[o]);
-				System.out.println(Ass[1][k].getCode());
+			while(o<=getManagerCount()){
 				if(Ass[1][k].getCode().equals(AssetName[o])){
-					for(int q=1; i<2; i++){
-						for(int r=0; r<assetcount; r++){
-							if(Ass[q][r].getType().contains("P")){
-								if(Ass[q][r].getCode().equals(AssetName[r]))
+					for(int q=1; q<2; q++){
+						r=0;
+						while(r<assetcount){
+//							System.out.println(r);
+//							System.out.println(o);
+//							System.out.println(assetcount);
+			//				System.out.println(Ass[q][r].getCode());
+//							System.out.println(AssetName[o]);
+							if(Ass[q][r].getType().equals("P")){
+								if(Ass[q][r].getCode().equals(AssetName[o])){
 								AnnualReturn = Ass[q][r].getBaseRateOfReturn()* (Double.parseDouble(Ass[q][r].getTotalValue()) * AssetValue[r] * .01)
 												+ 4 *(Double.parseDouble(Ass[q][r].getQuarterlyDividend()) * AssetValue[r] * .01);
+								sumOfAnnualReturn+= AnnualReturn;
+								System.out.println(sumOfAnnualReturn);
+								}
 							}
-							if(Ass[q][r].getType().contains("S")){
-								if(Ass[q][r].getCode().equals(AssetName[r]))
+							if(Ass[q][r].getType().equals("S")){
+								if(Ass[q][r].getCode().equals(AssetName[o])){
 								AnnualReturn = Ass[q][r].getBaseRateOfReturn()* (Double.parseDouble(Ass[q][r].getSharePrice()) * AssetValue[r])
 										+ 4 *(Double.parseDouble(Ass[q][r].getQuarterlyDividend()) * AssetValue[r] * .01);
+								sumOfAnnualReturn+= AnnualReturn;
+								System.out.println(sumOfAnnualReturn);
+								}
 							}
-							if(Ass[q][r].getType().contains("D")){
-								if(Ass[q][r].getCode().equals(AssetName[r]))
+							if(Ass[q][r].getType().equals("D")){
+								if(Ass[q][r].getCode().equals(AssetName[o])){
 								AnnualReturn = (Math.pow(Math.E, Ass[q][r].getApr()) - 1);
+								sumOfAnnualReturn+= AnnualReturn;
+								System.out.println(sumOfAnnualReturn);
+								}
 							}
+						r++;
 						}
 					}
 					sumOfAnnualReturn+= AnnualReturn;
-				System.out.println(sumOfAnnualReturn);		
+System.out.println(sumOfAnnualReturn);
 				}
+				
+				if(k<personcount){
 				if(Per[0][k].getPersonCode().equals(ManagerCode)){
 					if(Per[0][k].getType().equals("E")){
 						commisions = .05 * sumOfAnnualReturn;
 					}
-					if(Per[i][k].getType().equals("J")){
+					if(Per[0][k].getType().equals("J")){
 						commisions = .02 * sumOfAnnualReturn;
 					}
+				}
 				}
 			o++;
 			}
 		k++;
 		}
 	}
-		
 		return commisions;
 	}
 	public double getRisk() {
@@ -345,14 +360,16 @@ public class Portfolio {
 	}
 
 	public int getManagerCount() {
+		ManagerCount=0;
 		int k=0;
 		for(int i=0; i<2; i++){
 			k=0;
 			while(k<personcount){			
-				if(Per[i][k].getPersonCode().equals(this.OwnerCode)){
+				if(Per[0][k].getPersonCode().equals(this.OwnerCode)){
 					ManagerCount++;
 				k=personcount;
 				}
+				k++;
 			}
 		}
 		return ManagerCount;
