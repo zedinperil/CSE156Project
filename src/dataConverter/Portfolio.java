@@ -207,7 +207,7 @@ public class Portfolio {
 						r++;
 						}
 					}
-					sumOfAnnualReturn+= AnnualReturn;
+					
 System.out.println(sumOfAnnualReturn);
 				}
 				
