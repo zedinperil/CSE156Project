@@ -194,7 +194,7 @@ public class InputOutput {
 //						System.out.println("Risk "+PortfolioArray[i][g].getRisk(u));
 //					//	System.out.println(PortfolioArray[i][g].getAnnualReturn(u, u));
 //					}
-				System.out.println("Value "+PortfolioArray[i][g].getValue());
+//				System.out.println("Value "+PortfolioArray[i][g].getValue(u));
 				System.out.println("ReturnRate "+PortfolioArray[i][g].getReturnRate());
 				System.out.println("Aggregaterisk "+PortfolioArray[i][g].getAggRisk());
 				System.out.println("Personcount "+PortfolioArray[i][g].getPersoncount());
@@ -300,7 +300,7 @@ System.out.println("");
 						}			
 					}	
 			}
-			System.out.println("OUT OF PORTFOLIOS");
+		
 //build portfolio, add to portfoliobuilder
 			JsonObject tempPort = Json.createObjectBuilder()
 //					   .add("code", tempPrivateInvestment.getCode())
@@ -313,6 +313,7 @@ System.out.println("");
 					   .build();
 			Portfoliobuilder.add(tempPort);
 		}
+		System.out.println("OUT OF PORTFOLIOS");
 JsonArray Persons= Personbuilder.build();
 JsonArray Assets= Assetbuilder.build();				
 JsonArray Portfolio= Portfoliobuilder.build();
