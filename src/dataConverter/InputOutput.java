@@ -174,37 +174,35 @@ public class InputOutput {
 					}
 				System.out.println("NEW PORTFOLIO");
 			
-					System.out.println(Personcount);
-					System.out.println(Assetscount);
-				System.out.println(PortfolioArray[i][g].getPortfolioCode());
-				System.out.println(PortfolioArray[i][g].getOwnerCode());
-				System.out.println(PortfolioArray[i][g].getOwnerName());
-				System.out.println(PortfolioArray[i][g].getManagerName());
-				System.out.println(PortfolioArray[i][g].getBeneficiaryName());
-				System.out.println(PortfolioArray[i][g].getManagerCode());
-				System.out.println(PortfolioArray[i][g].getBeneficiaryCode());
-				System.out.println(PortfolioArray[i][g].getAsset());
-				System.out.println(PortfolioArray[i][g].getAss());
-				System.out.println(PortfolioArray[i][g].getPer());
-				System.out.println(PortfolioArray[i][g].getFees());
-				System.out.println(PortfolioArray[i][g].getCommisions());
-				for(int u=0; u<PortfolioArray[i][g].getAssetcount(); u++){
-					System.out.println("U is"+u);
-						System.out.println(PortfolioArray[i][g].getAssetName(u));
-						System.out.println(PortfolioArray[i][g].getAssetValue(u));
-						System.out.println(PortfolioArray[i][g].getRisk(u));
-					//	System.out.println(PortfolioArray[i][g].getAnnualReturn(u, u));
-					}
-				System.out.println(PortfolioArray[i][g].getValue());
-
-				System.out.println(PortfolioArray[i][g].getReturnRate());
-				System.out.println(PortfolioArray[i][g].getAggRisk());
-				System.out.println(PortfolioArray[i][g].getPersoncount());
-				System.out.println(PortfolioArray[i][g].getAssetcount());
+					
+				System.out.println("portCode "+PortfolioArray[i][g].getPortfolioCode());
+				System.out.println("Ownercode "+PortfolioArray[i][g].getOwnerCode());
+				System.out.println("Ownername "+PortfolioArray[i][g].getOwnerName());
+				System.out.println("Managername "+PortfolioArray[i][g].getManagerName());
+				System.out.println("Beneficiaryname "+PortfolioArray[i][g].getBeneficiaryName());
+				System.out.println("Managetcode "+PortfolioArray[i][g].getManagerCode());
+				System.out.println("Beneficiarycode "+PortfolioArray[i][g].getBeneficiaryCode());
+				System.out.println("Assetstring "+PortfolioArray[i][g].getAsset());
+				System.out.println("ass "+PortfolioArray[i][g].getAss());
+				System.out.println("per "+PortfolioArray[i][g].getPer());
+				System.out.println("Fees "+PortfolioArray[i][g].getFees());
+				System.out.println("Commisions "+PortfolioArray[i][g].getCommisions());
+//				for(int u=0; u<PortfolioArray[i][g].getAssetcount(); u++){
+//					System.out.println("U is"+u);
+//						System.out.println("AssetName "+PortfolioArray[i][g].getAssetName(u));
+//						System.out.println("AssetValue "+PortfolioArray[i][g].getAssetValue(u));
+//						System.out.println("Risk "+PortfolioArray[i][g].getRisk(u));
+//					//	System.out.println(PortfolioArray[i][g].getAnnualReturn(u, u));
+//					}
+				System.out.println("Value "+PortfolioArray[i][g].getValue());
+				System.out.println("ReturnRate "+PortfolioArray[i][g].getReturnRate());
+				System.out.println("Aggregaterisk "+PortfolioArray[i][g].getAggRisk());
+				System.out.println("Personcount "+PortfolioArray[i][g].getPersoncount());
+				System.out.println("Assetcount "+PortfolioArray[i][g].getAssetcount());
 			
 
-				System.out.println(PortfolioArray[i][g].getOccuranceOfAssetCount());
-				System.out.println(PortfolioArray[i][g].getManagerCount());
+				System.out.println("Occurranceofassetcount "+PortfolioArray[i][g].getOccuranceOfAssetCount());
+				System.out.println("managercount "+PortfolioArray[i][g].getManagerCount());
 System.out.println("END OF PORTFOLIO");
 System.out.println("");
 				}
@@ -302,6 +300,7 @@ System.out.println("");
 						}			
 					}	
 			}
+			System.out.println("OUT OF PORTFOLIOS");
 //build portfolio, add to portfoliobuilder
 			JsonObject tempPort = Json.createObjectBuilder()
 //					   .add("code", tempPrivateInvestment.getCode())

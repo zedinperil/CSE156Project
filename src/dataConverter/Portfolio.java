@@ -162,19 +162,18 @@ public class Portfolio {
 	}
 	
 	public String getManagerCode() {
-		System.out.println(ManagerCode);
 		return ManagerCode;
 	}
 
 	public String getBeneficiaryCode() {
-		System.out.println("HELP");
+		
 		if(BeneficiaryCode.equals("")){
-			System.out.println("yes");
+		
 			return "none";
 			
 		}
 		else{
-			System.out.println("no");
+		
 		return BeneficiaryCode;
 		}
 	}
