@@ -335,7 +335,7 @@ public class Portfolio {
 		
 				
 				o=0;
-				while(o<assetcount){
+				while(o<OccurancceOfAsset){
 
 								if(Ass[1][r].getType().equals("P")){
 									if(Ass[1][r].getCode().equals(AssetName[o])){
