@@ -173,17 +173,7 @@ public class InputOutput {
 						}
 					}
 				System.out.println("NEW PORTFOLIO");
-				System.out.println(PortfolioArray[i][g].getPortfolioCode());
-	//			System.out.println(PortfolioArray[i][g].getOwnerCode());
-				System.out.println("YO");
-				System.out.println(PortfolioArray[i][g].getManagerCode());
-				
-				System.out.println(PortfolioArray[i][g].getBeneficiaryCode());
-				System.out.println(PortfolioArray[i][g].getAsset());
-				System.out.println(PortfolioArray[i][g].getPersoncount());
-				System.out.println(PortfolioArray[i][g].getAssetcount());
 			
-				System.out.println("GETTER TESTS");
 					System.out.println(Personcount);
 					System.out.println(Assetscount);
 				System.out.println(PortfolioArray[i][g].getPortfolioCode());
@@ -203,7 +193,7 @@ public class InputOutput {
 						System.out.println(PortfolioArray[i][g].getAssetName(u));
 						System.out.println(PortfolioArray[i][g].getAssetValue(u));
 						System.out.println(PortfolioArray[i][g].getRisk(u));
-						System.out.println(PortfolioArray[i][g].getAnnualReturn(u, u));
+					//	System.out.println(PortfolioArray[i][g].getAnnualReturn(u, u));
 					}
 				System.out.println(PortfolioArray[i][g].getValue());
 

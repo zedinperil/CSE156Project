@@ -108,7 +108,6 @@ public class Portfolio {
 	}
 
 	public String getOwnerCode() {
-		System.out.println("WTF");
 		return OwnerCode;
 		
 	}
@@ -120,8 +119,10 @@ public class Portfolio {
 			while(k<personcount){			
 				if(Per[i][k].getPersonCode().equals(this.OwnerCode)){
 					ownerName=(Per[i][k].getFirstName()+" "+Per[i][k].getLastName());
+				
 				k=personcount;
 				}
+				k++;
 			}
 		}
 		return ownerName;
@@ -130,30 +131,30 @@ public class Portfolio {
 	public String getManagerName(){
 		int i=0;
 		int k=0;
-		for(i=0; i<2; i++){
-			for(i=0; i<2; i++){
 				while(k<personcount){			
-					if(Per[i][k].getPersonCode().equals(this.OwnerCode)){
+					if(Per[i][k].getPersonCode().equals(this.ManagerCode)){
 						managerName=(Per[i][k].getFirstName()+" "+Per[i][k].getLastName());
 					k=personcount;
+					
 					}
+					k++;
 				}
-			}
-		}
 		return managerName;
 	}
 	
 	public String getBeneficiaryName(){
 		int i=0;
 		int k=0;
-		for(i=0; i<2; i++){
+		
 			while(k<personcount){			
-				if(Per[i][k].getPersonCode().equals(this.OwnerCode)){
+				if(Per[i][k].getPersonCode().equals(this.BeneficiaryCode)){
 					beneficiaryName=(Per[i][k].getFirstName()+" "+Per[i][k].getLastName());
 				k=personcount;
+				
 				}
+				k++;
 			}
-		}
+		
 		if(getBeneficiaryCode().equals("none")){
 			beneficiaryName="none";
 		}
