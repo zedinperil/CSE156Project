@@ -179,36 +179,34 @@ public class Portfolio {
 //							System.out.println(r);
 //							System.out.println(o);
 //							System.out.println(assetcount);
-			//				System.out.println(Ass[q][r].getCode());
+//							System.out.println(Ass[q][r].getCode());
 //							System.out.println(AssetName[o]);
 							if(Ass[q][r].getType().equals("P")){
 								if(Ass[q][r].getCode().equals(AssetName[o])){
-								AnnualReturn = Ass[q][r].getBaseRateOfReturn()* (Double.parseDouble(Ass[q][r].getTotalValue()) * AssetValue[r] * .01)
-												+ 4 *(Double.parseDouble(Ass[q][r].getQuarterlyDividend()) * AssetValue[r] * .01);
+								AnnualReturn = getAnnualReturn(r, o);
 								sumOfAnnualReturn+= AnnualReturn;
-								System.out.println(sumOfAnnualReturn);
+//								System.out.println(sumOfAnnualReturn);
 								}
 							}
 							if(Ass[q][r].getType().equals("S")){
 								if(Ass[q][r].getCode().equals(AssetName[o])){
-								AnnualReturn = Ass[q][r].getBaseRateOfReturn()* (Double.parseDouble(Ass[q][r].getSharePrice()) * AssetValue[r])
-										+ 4 *(Double.parseDouble(Ass[q][r].getQuarterlyDividend()) * AssetValue[r] * .01);
+								AnnualReturn = getAnnualReturn(r, o);
 								sumOfAnnualReturn+= AnnualReturn;
-								System.out.println(sumOfAnnualReturn);
+//								System.out.println(sumOfAnnualReturn);
 								}
 							}
 							if(Ass[q][r].getType().equals("D")){
 								if(Ass[q][r].getCode().equals(AssetName[o])){
-								AnnualReturn = (Math.pow(Math.E, Ass[q][r].getApr()) - 1);
+								AnnualReturn = getAnnualReturn(r, o);
 								sumOfAnnualReturn+= AnnualReturn;
-								System.out.println(sumOfAnnualReturn);
+//								System.out.println(sumOfAnnualReturn);
 								}
 							}
 						r++;
 						}
 					}
 					
-System.out.println(sumOfAnnualReturn);
+
 				}
 				
 				if(k<personcount){
@@ -267,25 +265,34 @@ System.out.println(sumOfAnnualReturn);
 		return Value;
 	}
 
-	public double getAnnualReturn() {
-		for(int i=0; i<2; i++){
-			for(int k=0; k<=assetcount; k++){
+	public double getAnnualReturn(int k, int o) {
+		for(int i=1; i<2; i++){
+//			System.out.println(k);
+//			System.out.println(Ass[i][k].getType());
+//			System.out.println(Ass[i][k].getCode());
+//			System.out.println(AssetName[k]);
 				if(Ass[i][k].getType().contains("P")){
-					if(Ass[i][k].getCode().equals(AssetName[k]))
-					AnnualReturn = Ass[i][k].getBaseRateOfReturn()* (Double.parseDouble(Ass[i][k].getTotalValue()) * AssetValue[k] * .01)
-									+ 4 *(Double.parseDouble(Ass[i][k].getQuarterlyDividend()) * AssetValue[k] * .01);
-				}
+						if(Ass[i][k].getCode().equals(AssetName[o])){
+							AnnualReturn = Ass[i][k].getBaseRateOfReturn()* (Double.parseDouble(Ass[i][k].getTotalValue()) * AssetValue[k] * .01)
+											+ 4 *(Double.parseDouble(Ass[i][k].getQuarterlyDividend()) * AssetValue[k] * .01);
+				
+						}
+					}
 				if(Ass[i][k].getType().contains("S")){
-					if(Ass[i][k].getCode().equals(AssetName[k]))
-					AnnualReturn = Ass[i][k].getBaseRateOfReturn()* (Double.parseDouble(Ass[i][k].getSharePrice()) * AssetValue[k])
-							+ 4 *(Double.parseDouble(Ass[i][k].getQuarterlyDividend()) * AssetValue[k] * .01);
+						if(Ass[i][k].getCode().equals(AssetName[o])){
+							AnnualReturn = Ass[i][k].getBaseRateOfReturn()* (Double.parseDouble(Ass[i][k].getSharePrice()) * AssetValue[k])
+									+ 4 *(Double.parseDouble(Ass[i][k].getQuarterlyDividend()) * AssetValue[k] );
+							
+						}
 				}
 				if(Ass[i][k].getType().contains("D")){
-					if(Ass[i][k].getCode().equals(AssetName[k]))
-					AnnualReturn = (Math.pow(Math.E, Ass[i][k].getApr()) - 1);
+						if(Ass[i][k].getCode().equals(AssetName[o])){
+							AnnualReturn = (Math.pow(Math.E, Ass[i][k].getApr()) - 1);
+						
+						}
 				}
-			}
 		}
+		System.out.println(AnnualReturn);
 		return AnnualReturn;
 	}
 
