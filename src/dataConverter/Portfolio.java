@@ -18,7 +18,7 @@ public class Portfolio {
 	private double Risk;
 	private double Value;
 	private double AnnualReturn;
-	private double ReturnRate;
+	private double[] ReturnRate;
 	
 	/**
 	 * @return the risk
@@ -326,28 +326,25 @@ public class Portfolio {
 		return AnnualReturn;
 	}
 
-	public double getReturnRate(int r) {
-	
-		int o=0;
-		
-
-		
-		
-				
+	public double[] getReturnRate() {
+		int o=0;	
+		int r=0;
 				o=0;
 				while(o<OccuranceOfAssetCount){
-
+					r=0;
+					while(r<assetcount){
+					System.out.println("YO"+getAnnualReturn(o,r));
 								if(Ass[1][r].getType().equals("P")){
 									if(Ass[1][r].getCode().equals(AssetName[o])){
 									AnnualReturn = getAnnualReturn(r, o);
-									ReturnRate= AnnualReturn/getValue(o);		
+									ReturnRate[o]= AnnualReturn/getValue(o);		
 									
 									}
 								}
 								if(Ass[1][r].getType().equals("S")){
 									if(Ass[1][r].getCode().equals(AssetName[o])){
 										AnnualReturn = getAnnualReturn(r, o);
-										ReturnRate= AnnualReturn/getValue(o);		
+										ReturnRate[o]= AnnualReturn/getValue(o);		
 									
 
 									}
@@ -355,11 +352,13 @@ public class Portfolio {
 								if(Ass[1][r].getType().equals("D")){
 									if(Ass[1][r].getCode().equals(AssetName[o])){
 										AnnualReturn = getAnnualReturn(r, o);
-										ReturnRate= AnnualReturn/getValue(o);		
+										ReturnRate[o]= AnnualReturn/getValue(o);		
 											
 
 									}
 								}
+					r++;			
+					}
 				o++;
 				}		
 		return ReturnRate;

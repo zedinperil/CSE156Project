@@ -196,8 +196,9 @@ public class InputOutput {
 //					}
 //				System.out.println("Value "+PortfolioArray[i][g].getValue(u));
 				int u=0;
-				while(u<=PortfolioArray[i][g].getOccuranceOfAssetCount()){
-				System.out.println("ReturnRate "+PortfolioArray[i][g].getReturnRate(u));
+				while(u<PortfolioArray[i][g].getOccuranceOfAssetCount()){
+				System.out.println(PortfolioArray[i][g].getOccuranceOfAssetCount());
+					System.out.println("ReturnRate "+PortfolioArray[i][g].getReturnRate());
 				u++;
 				}
 				System.out.println("Aggregaterisk "+PortfolioArray[i][g].getAggRisk());
