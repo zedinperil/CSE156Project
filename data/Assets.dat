@@ -18,5 +18,5 @@ RENT445;P;Rental Property;2400.00;0.25;0.15;120000
 CMPROP0121;P;Commercial Property-Red Oaks Mall;14240;5.35;0.25;10456000
 FOOD12;P;Cluckin's restaurant chain;35000.00;3.0;0.32;1212500.00
 REALStr12;P;Fred's Fabulous Hardware Store;1232;1.23;0.13;54300.00
-IND321;P;Industrial Widget Manufacturers Inc.;10500;2;-0.15;4213333
+IND321;P;Industrial Widget Manufacturers Inc.;10500;2;0.15;4213333
 RSTOR322;P;7" Vinyl Records;2453.21;2.1;0.54;13500.00
