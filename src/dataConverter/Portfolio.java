@@ -300,7 +300,7 @@ public class Portfolio {
 				}
 				if(Ass[i][k].getType().contains("D")){
 					if(Ass[i][k].getCode().equals(AssetName[o]))
-					Value = AssetValue[k];
+					Value = AssetValue[o];
 				}
 			}
 		
