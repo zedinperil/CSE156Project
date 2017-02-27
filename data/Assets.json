@@ -168,7 +168,7 @@
         "type":"P",
         "baseRateOfReturn":0.02,
         "quarterlyDividend":"10500",
-        "omega":"-0.15",
+        "omega":"0.15",
         "value":"4213333"
     },
     {

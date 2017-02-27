@@ -272,7 +272,7 @@ public class Portfolio {
 			while(k<assetcount){
 				if(Ass[i][k].getType().contains("P")){
 					if(Ass[i][k].getCode().equals(AssetName[u]))
-					Risk = Double.parseDouble(Ass[i][k].getOmegaMeasure())+ Math.pow(java.lang.Math.E,(-100000/(Double.parseDouble(Ass[i][k].getTotalValue())*AssetValue[u]*.01)));
+					Risk = Double.parseDouble(Ass[i][k].getOmegaMeasure())+ Math.pow(java.lang.Math.E,(-100000/(Double.parseDouble(Ass[i][k].getTotalValue()))));
 				}
 				if(Ass[i][k].getType().contains("S")){
 					if(Ass[i][k].getCode().equals(AssetName[u]))
