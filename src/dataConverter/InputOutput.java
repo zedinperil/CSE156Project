@@ -127,46 +127,57 @@ public class InputOutput {
 		JsonArrayBuilder Assetbuilder= Json.createArrayBuilder();
 		int Personcount=0;
 		int Assetscount=0;
-//Debug in case we need to use the arrays later;	
-		Persons[][] PersonArray= new Persons[NumOfFiles][100];
-		Assets[][] AssetsArray= new Assets[NumOfFiles][100];
-		Portfolio[][] PortfolioArray= new Portfolio[NumOfFiles][100];
+		double FeesSum=0;
+		double CommissionsSum=0;
+		double TotalValueSum=0;
+		double AnnualReturnSum=0;
+	
+		Persons[][] PersonArray= new Persons[NumOfFiles][NumberOfLines[0]];
+		Assets[][] AssetsArray= new Assets[NumOfFiles][NumberOfLines[1]];
+		Portfolio[][] PortfolioArray= new Portfolio[NumOfFiles][NumberOfLines[2]];
+		
+		System.out.println("############################################################################################################################################################################################################################################################################################################");
+		System.out.println();
+		System.out.println("A Collection of "+NumberOfLines[2]+" Portfolios");
+		System.out.println();
+		System.out.println("=================================================================================================================================================================================================================================================================================================");
+		System.out.println();
 		for(i=0; i<NumOfFiles; i++){
 			for(g=0; g<NumberOfLines[i]; g++){
 				if(IsPortfolio[i]){
 					if(PortfolioHasNoBeneficiary[g]){
-					System.out.println("CHECK1");
+//					System.out.println("CHECK1");
 						if(NumberOfDelims[i][g]==5){
-							System.out.println("CHECK2");
+//							System.out.println("CHECK2");
 
 							PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], PersonArray, AssetsArray, Personcount, Assetscount);
 						}
 						else if(NumberOfDelims[i][g]==4){
-							System.out.println("CHECK3");
+//							System.out.println("CHECK3");
 
 							PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", DelimeteredData[i][g][3], PersonArray, AssetsArray, Personcount, Assetscount);	
 						}
 						else{
-							System.out.println("CHECK4");
+//							System.out.println("CHECK4");
 
 							PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", HasNoData, PersonArray, AssetsArray, Personcount, Assetscount);
 						}
 					}
 					else{
-						System.out.println("CHECK5");
+//						System.out.println("CHECK5");
 
 						if(NumberOfDelims[i][g]==5){
-							System.out.println("CHECK6");
+//							System.out.println("CHECK6");
 
 							PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], PersonArray, AssetsArray, Personcount, Assetscount);
 						}
 						else if(NumberOfDelims[i][g]==4){
-							System.out.println("CHECK7");
+//							System.out.println("CHECK7");
 
 							PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", DelimeteredData[i][g][3], PersonArray, AssetsArray, Personcount, Assetscount);	
 						}
 						else{
-							System.out.println("CHECK8");
+//							System.out.println("CHECK8");
 
 							PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", HasNoData, PersonArray, AssetsArray, Personcount, Assetscount);
 			
@@ -174,53 +185,73 @@ public class InputOutput {
 					}
 				System.out.println("NEW PORTFOLIO");
 			
-					
-				System.out.println("portCode "+PortfolioArray[i][g].getPortfolioCode());
-				System.out.println("Ownercode "+PortfolioArray[i][g].getOwnerCode());
-				System.out.println("Ownername "+PortfolioArray[i][g].getOwnerName());
-				System.out.println("Managername "+PortfolioArray[i][g].getManagerName());
-				System.out.println("Beneficiaryname "+PortfolioArray[i][g].getBeneficiaryName());
-				System.out.println("Managetcode "+PortfolioArray[i][g].getManagerCode());
-				System.out.println("Beneficiarycode "+PortfolioArray[i][g].getBeneficiaryCode());
-				System.out.println("Assetstring "+PortfolioArray[i][g].getAsset());
-			
-				System.out.println("Fees "+PortfolioArray[i][g].getFees());
-				System.out.println("Commisions "+PortfolioArray[i][g].getCommisions());
-//				for(int u=0; u<PortfolioArray[i][g].getAssetcount(); u++){
-//					System.out.println("U is"+u);
-//						System.out.println("AssetName "+PortfolioArray[i][g].getAssetName(u));
-//						System.out.println("AssetValue "+PortfolioArray[i][g].getAssetValue(u));
-//						System.out.println("Risk "+PortfolioArray[i][g].getRisk(u));
-//					//	System.out.println(PortfolioArray[i][g].getAnnualReturn(u, u));
-//					}
-//				System.out.println("Value "+PortfolioArray[i][g].getValue(u));
-			int checker=1000000;
-			double tempAnnualReturn=100000000;
-				for(int u=0; u<=PortfolioArray[i][g].getOccuranceOfAssetCount(); u++){
-					for(int t=0; t<=PortfolioArray[i][g].getAssetcount(); t++){
-						if(PortfolioArray[i][g].getAnnualReturn(u,t)!= tempAnnualReturn){
-										System.out.println("AnnualReturn "+PortfolioArray[i][g].getAnnualReturn(u, t));
-						}
-						tempAnnualReturn=PortfolioArray[i][g].getAnnualReturn(u,t);
-						}
-				}	
-				
-				
-				int u=0;
-				while(u<PortfolioArray[i][g].getOccuranceOfAssetCount()){
-				System.out.println(PortfolioArray[i][g].getOccuranceOfAssetCount());
-				System.out.println("Risk "+PortfolioArray[i][g].getRisk(u));	
-				System.out.println("ReturnRate "+PortfolioArray[i][g].getReturnRate()[u]);
-				u++;
+				System.out.println();
+				System.out.println("Portfolio #"+(g+1)+"/"+NumberOfLines[i]);
+				System.out.println();
+				System.out.println("Portfolio Code :"+PortfolioArray[i][g].getPortfolioCode());
+				System.out.println("Owner :"+PortfolioArray[i][g].getOwnerName());
+				System.out.println("Owner Code :"+PortfolioArray[i][g].getOwnerCode());
+				System.out.println("Manager :"+PortfolioArray[i][g].getManagerName());
+				System.out.println("Manager Code :"+PortfolioArray[i][g].getManagerCode());
+				System.out.println("Beneficiary :"+PortfolioArray[i][g].getBeneficiaryName());
+				if(!(PortfolioArray[i][g].getBeneficiaryName().equals("none"))){
+				System.out.println("Beneficiary Code :"+PortfolioArray[i][g].getBeneficiaryCode());
 				}
-				System.out.println("Aggregaterisk "+PortfolioArray[i][g].getAggRisk());
-				System.out.println("Personcount "+PortfolioArray[i][g].getPersoncount());
-				System.out.println("Assetcount "+PortfolioArray[i][g].getAssetcount());
-			
-
-				System.out.println("Occurranceofassetcount "+PortfolioArray[i][g].getOccuranceOfAssetCount());
-				System.out.println("managercount "+PortfolioArray[i][g].getManagerCount());
+				System.out.println("Assets List And Modifier Variables :"+PortfolioArray[i][g].getAsset());
+				System.out.println("# Of Persons from the Persons Datafile :"+PortfolioArray[i][g].getPersoncount());
+				System.out.println("# Of Assets from the Assets Datafile :"+PortfolioArray[i][g].getAssetcount());
+				System.out.println("# Of Assets within the Portfolio :"+PortfolioArray[i][g].getOccuranceOfAssetCount());
+				System.out.println();
+				System.out.println("FINANCIAL INFORMATION");
+				System.out.println();
+				System.out.println("Individual Asset Information:");
+				System.out.println();
+				System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+				System.out.println();
+				int q=0;
+				for(int u=0; u<PortfolioArray[i][g].getOccuranceOfAssetCount(); u++){
+						System.out.println("Asset #"+(u+1)+"/"+PortfolioArray[i][g].getOccuranceOfAssetCount() +" Of Portfolio "+PortfolioArray[i][g].getPortfolioCode()+" #"+(g+1)+"/"+NumberOfLines[i] );
+						System.out.println("Asset Name :"+PortfolioArray[i][g].getAssetName(u));
+						q=0;
+						while(q<PortfolioArray[i][g].getAssetcount()){
+							if(PortfolioArray[i][g].getAssetName(u).equals(AssetsArray[1][q].getCode())){
+								System.out.println("Asset Type :"+ AssetsArray[1][q].getType());
+								q++;
+							}
+							else{
+								q++;
+							}
+						}
+						System.out.println("Asset Value Modifier :"+PortfolioArray[i][g].getAssetValue(u));
+						q=0;
+						while(q<PortfolioArray[i][g].getAssetcount()){
+							if(PortfolioArray[i][g].getAssetName(u).equals(AssetsArray[1][q].getCode())){
+								System.out.println("Annual Return :"+PortfolioArray[i][g].getAnnualReturn(u,q));
+								AnnualReturnSum+=PortfolioArray[i][g].getAnnualReturn(u,q);
+								q++;
+							}
+							else{
+								q++;
+							}
+						}
+						System.out.println("Risk :"+PortfolioArray[i][g].getRisk(u));
+						System.out.println("Value :"+PortfolioArray[i][g].getValue(u));
+						System.out.println("Return Rate :"+PortfolioArray[i][g].getReturnRate()[u]);	
+						System.out.println();
+						System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+						System.out.println();
+					}
+				System.out.println("SUMMATIVE FINANCIAL INFORMATION");
+				System.out.println("Total Value :"+PortfolioArray[i][g].getTotalValue());
+				TotalValueSum+=PortfolioArray[i][g].getTotalValue();
+				System.out.println("Aggregate Risk :"+PortfolioArray[i][g].getAggRisk());
+				System.out.println("Total Fees :"+PortfolioArray[i][g].getFees());
+				FeesSum+=PortfolioArray[i][g].getFees();
+				System.out.println("Commissions :"+PortfolioArray[i][g].getCommissions());
+				CommissionsSum+=PortfolioArray[i][g].getCommissions();
+				System.out.println();
 System.out.println("END OF PORTFOLIO");
+System.out.println("=================================================================================================================================================================================================================================================================================================");
 System.out.println("");
 				}
 					if(IsPerson[i]){
@@ -330,7 +361,17 @@ System.out.println("");
 					   .build();
 			Portfoliobuilder.add(tempPort);
 		}
-		System.out.println("OUT OF PORTFOLIOS");
+		System.out.println("ALL PORTFOLIOS READ");
+		System.out.println();
+		System.out.println("SUMS OF PORTFOLIO VALUES");
+		System.out.println();
+		System.out.println("Sum of All Portfolio Total Asset Values :"+TotalValueSum);
+		System.out.println("Sum of All Portfolio Annual Returns :"+AnnualReturnSum);
+		System.out.println("Sum of All Portfolio Commissions :"+CommissionsSum);
+		System.out.println("Sum of All Portfolio Fees :"+FeesSum);
+		System.out.println();
+		System.out.println("################################################################################################################################################################################################33");
+	
 JsonArray Persons= Personbuilder.build();
 JsonArray Assets= Assetbuilder.build();				
 JsonArray Portfolio= Portfoliobuilder.build();

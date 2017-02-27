@@ -10,59 +10,21 @@ public class Portfolio {
 	private String Asset;
 	private Assets[][] Ass;
 	private Persons[][] Per;
-	
 	private String ownerName;
 	private double fees;
 	private double commisions;
-	
 	private double Risk;
 	private double Value;
+	private double TotalValue;
 	private double AnnualReturn;
-	private double[] ReturnRate;
-	
-	/**
-	 * @return the risk
-	 */
-	public double getRisk() {
-		return Risk;
-	}
-
-	/**
-	 * @return the annualReturn
-	 */
-	public double getAnnualReturn() {
-		return AnnualReturn;
-	}
-
-	/**
-	 * @return the sumOfAnnualReturn
-	 */
-	public double getSumOfAnnualReturn() {
-		return sumOfAnnualReturn;
-	}
-
-	/**
-	 * @return the assetName
-	 */
-	public String[] getAssetName() {
-		return AssetName;
-	}
-
-	/**
-	 * @return the assetValue
-	 */
-	public double[] getAssetValue() {
-		return AssetValue;
-	}
-
+	private double[] ReturnRate; 
 	private double AggRisk;
 	private int personcount;
 	private int assetcount;
 	private String managerName;
 	private String beneficiaryName;
 	private int ManagerCount=0;
-	private double sumOfAnnualReturn;
-	
+	private double sumOfAnnualReturn;	
 	private String[] AssetName= new String[100];
 	private double[] AssetValue=new double[100];
 	private String[] temporaryString=new String[1000];
@@ -101,7 +63,7 @@ public class Portfolio {
 						this.AssetValue[k]= Double.parseDouble(twokenizer.nextToken());
 					 }
 				 }
-			ReturnRate =new double[OccuranceOfAssetCount];
+			ReturnRate =new double[OccuranceOfAssetCount+1];
 	}
 	
 	public String getPortfolioCode() {
@@ -112,9 +74,44 @@ public class Portfolio {
 		return OwnerCode;
 		
 	}
+	/**
+	 * @return the risk
+	 */
+	public double getRisk() {
+		return Risk;
+	}
+
+	/**
+	 * @return the annualReturn
+	 */
+	public double getAnnualReturn() {
+		return AnnualReturn;
+	}
+
+	/**
+	 * @return the sumOfAnnualReturn
+	 */
+	public double getSumOfAnnualReturn() {
+		return sumOfAnnualReturn;
+	}
+
+	/**
+	 * @return the assetName
+	 */
+	public String[] getAssetName() {
+		return AssetName;
+	}
+
+	/**
+	 * @return the assetValue
+	 */
+	public double[] getAssetValue() {
+		return AssetValue;
+	}
+
 	
 	public String getOwnerName(){
-		int i;
+		int i=1;
 		int k=0;
 		for(i=0; i<2; i++){
 			while(k<personcount){			
@@ -195,7 +192,7 @@ public class Portfolio {
 		int i=0;
 		int k=0;
 		for(i=0; i<2; i++){
-			while(k<=personcount){				
+			while(k<personcount){				
 				if(Per[i][k].getPersonCode().equals(ManagerCode)){
 							if(Per[i][k].getType().equals("E")){
 								fees = 10 * OccuranceOfAssetCount;
@@ -211,7 +208,7 @@ public class Portfolio {
 		return fees;
 	}
 
-	public double getCommisions() {
+	public double getCommissions() {
 	int o=0;
 	int k=0;
 	int r=0;
@@ -306,7 +303,13 @@ public class Portfolio {
 		
 		return Value;
 	}
-
+	public double getTotalValue(){
+	for(int o=0; o<=OccuranceOfAssetCount; o++){
+		TotalValue+=getValue(o);
+		}
+		return TotalValue;
+	}
+	
 	public double getAnnualReturn(int k, int o) {
 		int i=1;
 				if(Ass[i][k].getType().contains("P")){
@@ -371,6 +374,21 @@ public class Portfolio {
 	}
 
 	public double getAggRisk() {
+		double temprisk;
+		int o=0;	
+		int r=0;
+				o=0;
+				while(o<=OccuranceOfAssetCount){
+					r=0;
+					while(r<assetcount){							
+									if(Ass[1][r].getCode().equals(AssetName[o])){
+									temprisk= (getRisk(o)*getValue(o))/getTotalValue();
+									AggRisk+= temprisk;		
+									}
+					r++;			
+					}
+				o++;
+				}
 		return AggRisk;
 	}
 
