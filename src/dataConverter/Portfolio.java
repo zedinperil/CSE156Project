@@ -101,6 +101,7 @@ public class Portfolio {
 						this.AssetValue[k]= Double.parseDouble(twokenizer.nextToken());
 					 }
 				 }
+			ReturnRate =new double[OccuranceOfAssetCount];
 	}
 	
 	public String getPortfolioCode() {
@@ -333,9 +334,10 @@ public class Portfolio {
 				while(o<OccuranceOfAssetCount){
 					r=0;
 					while(r<assetcount){
-					System.out.println("YO"+getAnnualReturn(o,r));
+				
 								if(Ass[1][r].getType().equals("P")){
 									if(Ass[1][r].getCode().equals(AssetName[o])){
+				//						System.out.println("YO "+getAnnualReturn(r,o));
 									AnnualReturn = getAnnualReturn(r, o);
 									ReturnRate[o]= AnnualReturn/getValue(o);		
 									
@@ -343,6 +345,8 @@ public class Portfolio {
 								}
 								if(Ass[1][r].getType().equals("S")){
 									if(Ass[1][r].getCode().equals(AssetName[o])){
+				//						System.out.println("YO "+getAnnualReturn(r,o));
+
 										AnnualReturn = getAnnualReturn(r, o);
 										ReturnRate[o]= AnnualReturn/getValue(o);		
 									
@@ -351,6 +355,8 @@ public class Portfolio {
 								}
 								if(Ass[1][r].getType().equals("D")){
 									if(Ass[1][r].getCode().equals(AssetName[o])){
+				//						System.out.println("YO "+getAnnualReturn(r,o));
+
 										AnnualReturn = getAnnualReturn(r, o);
 										ReturnRate[o]= AnnualReturn/getValue(o);		
 											
