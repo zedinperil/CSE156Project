@@ -331,14 +331,14 @@ public class Portfolio {
 		int o=0;	
 		int r=0;
 				o=0;
-				while(o<OccuranceOfAssetCount){
+				while(o<=OccuranceOfAssetCount){
 					r=0;
 					while(r<assetcount){
 				
 								if(Ass[1][r].getType().equals("P")){
 									if(Ass[1][r].getCode().equals(AssetName[o])){
 				//						System.out.println("YO "+getAnnualReturn(r,o));
-									AnnualReturn = getAnnualReturn(r, o);
+									AnnualReturn = getAnnualReturn(o, r);
 									ReturnRate[o]= AnnualReturn/getValue(o);		
 									
 									}
@@ -347,7 +347,7 @@ public class Portfolio {
 									if(Ass[1][r].getCode().equals(AssetName[o])){
 				//						System.out.println("YO "+getAnnualReturn(r,o));
 
-										AnnualReturn = getAnnualReturn(r, o);
+										AnnualReturn = getAnnualReturn(o, r);
 										ReturnRate[o]= AnnualReturn/getValue(o);		
 									
 
@@ -357,7 +357,7 @@ public class Portfolio {
 									if(Ass[1][r].getCode().equals(AssetName[o])){
 				//						System.out.println("YO "+getAnnualReturn(r,o));
 
-										AnnualReturn = getAnnualReturn(r, o);
+										AnnualReturn = getAnnualReturn(o, r);
 										ReturnRate[o]= AnnualReturn/getValue(o);		
 											
 

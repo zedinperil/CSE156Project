@@ -139,7 +139,7 @@ public class InputOutput {
 						if(NumberOfDelims[i][g]==5){
 							System.out.println("CHECK2");
 
-							PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", DelimeteredData[i][g][3], PersonArray, AssetsArray, Personcount, Assetscount);
+							PortfolioArray[i][g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], PersonArray, AssetsArray, Personcount, Assetscount);
 						}
 						else if(NumberOfDelims[i][g]==4){
 							System.out.println("CHECK3");
