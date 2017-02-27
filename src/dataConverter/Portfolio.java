@@ -54,10 +54,11 @@ public class Portfolio {
 			}
 		}
 		this.OccuranceOfAssetCount=i;
-			for(k=0; k<i; k++){
+			for(k=0; k<this.OccuranceOfAssetCount; k++){
 				 StringTokenizer twokenizer= new StringTokenizer(temporaryString[k], ":");
 					 if(twokenizer.hasMoreTokens()){
 						 this.AssetName[k]= twokenizer.nextToken();
+
 					 }
 					 if(twokenizer.hasMoreTokens()){
 						this.AssetValue[k]= Double.parseDouble(twokenizer.nextToken());
@@ -404,11 +405,10 @@ public class Portfolio {
 		int g=0;
 		int i=1; 
 		for(int k=0; k<assetcount; k++){
-					if(Ass[i][u].getCode().equals(AssetName[k])){
-					g=k;
+					if(Ass[i][k].getCode().equals(AssetName[u])){
+						g=u;
 					}
 			}
-		
 		return AssetName[g];
 	}
 
@@ -416,8 +416,8 @@ public class Portfolio {
 		int g=0;
 		int i=1;
 		for(int k=0; k<assetcount; k++){
-					if(Ass[i][u].getCode().equals(AssetName[k])){
-					g=k;
+					if(Ass[i][k].getCode().equals(AssetName[u])){
+					g=u;
 					}
 			}
 		
