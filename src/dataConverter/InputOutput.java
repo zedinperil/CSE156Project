@@ -183,8 +183,7 @@ public class InputOutput {
 				System.out.println("Managetcode "+PortfolioArray[i][g].getManagerCode());
 				System.out.println("Beneficiarycode "+PortfolioArray[i][g].getBeneficiaryCode());
 				System.out.println("Assetstring "+PortfolioArray[i][g].getAsset());
-				System.out.println("ass "+PortfolioArray[i][g].getAss());
-				System.out.println("per "+PortfolioArray[i][g].getPer());
+			
 				System.out.println("Fees "+PortfolioArray[i][g].getFees());
 				System.out.println("Commisions "+PortfolioArray[i][g].getCommisions());
 //				for(int u=0; u<PortfolioArray[i][g].getAssetcount(); u++){
@@ -195,10 +194,23 @@ public class InputOutput {
 //					//	System.out.println(PortfolioArray[i][g].getAnnualReturn(u, u));
 //					}
 //				System.out.println("Value "+PortfolioArray[i][g].getValue(u));
+			int checker=1000000;
+			double tempAnnualReturn=100000000;
+				for(int u=0; u<=PortfolioArray[i][g].getOccuranceOfAssetCount(); u++){
+					for(int t=0; t<=PortfolioArray[i][g].getAssetcount(); t++){
+						if(PortfolioArray[i][g].getAnnualReturn(u,t)!= tempAnnualReturn){
+										System.out.println("AnnualReturn "+PortfolioArray[i][g].getAnnualReturn(u, t));
+						}
+						tempAnnualReturn=PortfolioArray[i][g].getAnnualReturn(u,t);
+						}
+				}	
+				
+				
 				int u=0;
 				while(u<PortfolioArray[i][g].getOccuranceOfAssetCount()){
 				System.out.println(PortfolioArray[i][g].getOccuranceOfAssetCount());
-					System.out.println("ReturnRate "+PortfolioArray[i][g].getReturnRate()[u]);
+				System.out.println("Risk "+PortfolioArray[i][g].getRisk(u));	
+				System.out.println("ReturnRate "+PortfolioArray[i][g].getReturnRate()[u]);
 				u++;
 				}
 				System.out.println("Aggregaterisk "+PortfolioArray[i][g].getAggRisk());

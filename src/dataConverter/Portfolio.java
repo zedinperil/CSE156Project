@@ -338,7 +338,7 @@ public class Portfolio {
 								if(Ass[1][r].getType().equals("P")){
 									if(Ass[1][r].getCode().equals(AssetName[o])){
 				//						System.out.println("YO "+getAnnualReturn(r,o));
-									AnnualReturn = getAnnualReturn(o, r);
+									AnnualReturn = getAnnualReturn(r, o);
 									ReturnRate[o]= AnnualReturn/getValue(o);		
 									
 									}
@@ -347,7 +347,7 @@ public class Portfolio {
 									if(Ass[1][r].getCode().equals(AssetName[o])){
 				//						System.out.println("YO "+getAnnualReturn(r,o));
 
-										AnnualReturn = getAnnualReturn(o, r);
+										AnnualReturn = getAnnualReturn(r, o);
 										ReturnRate[o]= AnnualReturn/getValue(o);		
 									
 
@@ -357,7 +357,7 @@ public class Portfolio {
 									if(Ass[1][r].getCode().equals(AssetName[o])){
 				//						System.out.println("YO "+getAnnualReturn(r,o));
 
-										AnnualReturn = getAnnualReturn(o, r);
+										AnnualReturn = getAnnualReturn(r, o);
 										ReturnRate[o]= AnnualReturn/getValue(o);		
 											
 
