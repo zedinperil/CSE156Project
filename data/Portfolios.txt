@@ -64,7 +64,7 @@ SUMMATIVE FINANCIAL INFORMATION FOR PORTFOLIO #1/10
 Total Value :42203.78
 Aggregate Risk :0.2578
 Total Fees :30.0
-Commissions :1.27
+Commissions :4.59
 Portfolio Sum of Annual Returns :5390.28
 
 END OF PORTFOLIO #1/10
@@ -115,7 +115,7 @@ SUMMATIVE FINANCIAL INFORMATION FOR PORTFOLIO #2/10
 Total Value :112516.32
 Aggregate Risk :0.2897
 Total Fees :20.0
-Commissions :0.07
+Commissions :404.68
 Portfolio Sum of Annual Returns :8093.530000000001
 
 END OF PORTFOLIO #2/10
@@ -167,7 +167,7 @@ SUMMATIVE FINANCIAL INFORMATION FOR PORTFOLIO #3/10
 Total Value :544375.0
 Aggregate Risk :1.0961
 Total Fees :100.0
-Commissions :198.0
+Commissions :1432.63
 Portfolio Sum of Annual Returns :71631.25
 
 END OF PORTFOLIO #3/10
@@ -390,7 +390,7 @@ SUMMATIVE FINANCIAL INFORMATION FOR PORTFOLIO #8/10
 Total Value :2879363.5
 Aggregate Risk :1.1576
 Total Fees :40.0
-Commissions :11536.74
+Commissions :18778.92
 Portfolio Sum of Annual Returns :377024.8
 
 END OF PORTFOLIO #8/10
@@ -517,7 +517,7 @@ SUMMATIVE FINANCIAL INFORMATION FOR PORTFOLIO #10/10
 Total Value :1948104.05
 Aggregate Risk :0.9367
 Total Fees :300.0
-Commissions :631.33
+Commissions :833.26
 Portfolio Sum of Annual Returns :173827.31999999995
 
 END OF PORTFOLIO #10/10
@@ -529,7 +529,7 @@ SUMS OF PORTFOLIO VALUES
 
 Sum of All Portfolio Total Asset Values :5529385.71
 Sum of All Portfolio Annual Returns :636600.54
-Sum of All Portfolio Commissions :24796.019999999997
+Sum of All Portfolio Commissions :42969.35
 Sum of All Portfolio Fees :560.0
 
 ################################################################################################################################################################################################33

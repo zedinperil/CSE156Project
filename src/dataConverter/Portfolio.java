@@ -194,33 +194,18 @@ public class Portfolio {
 
 	public double getCommissions() {
 	int o=0;
-	int k=0;
-	
+	int k=0;	
 			while(o<getManagerCount()){
-			
+			k=0;
 			while(k<assetcount){
-						if(Ass[k].getCode().equals(AssetName[o])){	
-							
-								if(Ass[k].getType().equals("P")){
-									AnnualReturn = getAnnualReturn(o);
-									sumOfAnnualReturn+= AnnualReturn;		
-	
-								}
-								if(Ass[k].getType().equals("S")){
-									AnnualReturn = getAnnualReturn(o);
-									sumOfAnnualReturn+= AnnualReturn;
-								}
-								if(Ass[k].getType().equals("D")){
-									AnnualReturn = getAnnualReturn(o);
-									sumOfAnnualReturn+= AnnualReturn;		
-								}						
-											
-							}
+				if(Ass[k].getCode().equals(AssetName[o])){	
+					AnnualReturn = getAnnualReturn(o);
+					sumOfAnnualReturn+= AnnualReturn;		
+				}
 			k++;
 			}
 		o++;
 		}
-	
 	k=0; 
 	while(k<personcount){
 	if(Per[k].getPersonCode().equals(ManagerCode)){
@@ -306,18 +291,8 @@ public class Portfolio {
 					r=0;
 					while(r<assetcount){
 						if(Ass[r].getCode().equals(AssetName[o])){
-								if(Ass[r].getType().equals("P")){
-									AnnualReturn = getAnnualReturn(o);
-									ReturnRate[o]= round((AnnualReturn/getValue(o)),2);			
-								}
-								if(Ass[r].getType().equals("S")){
-										AnnualReturn = getAnnualReturn(o);
-										ReturnRate[o]= round((AnnualReturn/getValue(o)),2);		
-								}
-								if(Ass[r].getType().equals("D")){
-										AnnualReturn = getAnnualReturn(o);
-										ReturnRate[o]= round((AnnualReturn/getValue(o)),2);		
-								}
+							AnnualReturn = getAnnualReturn(o);
+							ReturnRate[o]= round((AnnualReturn/getValue(o)),2);			
 						}
 					r++;			
 					}
