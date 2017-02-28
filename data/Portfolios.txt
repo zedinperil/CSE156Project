@@ -29,7 +29,7 @@ Asset Code :BX001-23
 Asset Name :Money Market Savings
 Asset Type :D
 Asset Value Modifier :2403.32
-Annual Return :66.41851354896667
+Annual Return :25.367807925300948
 Risk :0.0
 Value :2403.32
 Return Rate :1.055531844502644%
@@ -41,7 +41,7 @@ Asset Code :AGTSAV
 Asset Name :Savings Account
 Asset Type :D
 Asset Value Modifier :26534.21
-Annual Return :25.367807925300948
+Annual Return :66.41851354896667
 Risk :0.0
 Value :26534.21
 Return Rate :0.25031276057951857%
@@ -92,7 +92,7 @@ Asset Code :BX001-23
 Asset Name :Money Market Savings
 Asset Type :D
 Asset Value Modifier :124.32
-Annual Return :0.0
+Annual Return :1.312237189085687
 Risk :0.0
 Value :124.32
 Return Rate :1.055531844502644%
@@ -116,7 +116,7 @@ Total Value :224908.32
 Aggregate Risk :0.036229962502054174
 Total Fees :20.0
 Commissions :404.67681185945435
-Portfolio Sum of Annual Returns :8092.224000000001
+Portfolio Sum of Annual Returns :8093.536237189087
 
 END OF PORTFOLIO #2/10
 =================================================================================================================================================================================================================================================================================================
@@ -144,7 +144,7 @@ Asset Code :RENT445
 Asset Name :Rental Property
 Asset Type :P
 Asset Value Modifier :100.0
-Annual Return :0.0
+Annual Return :9900.0
 Risk :0.5845982085070782
 Value :120000.0
 Return Rate :8.25%
@@ -168,7 +168,7 @@ Total Value :968750.0
 Aggregate Risk :0.16002971324038773
 Total Fees :100.0
 Commissions :1432.625
-Portfolio Sum of Annual Returns :61731.25
+Portfolio Sum of Annual Returns :71631.25
 
 END OF PORTFOLIO #3/10
 =================================================================================================================================================================================================================================================================================================
@@ -196,7 +196,7 @@ Asset Code :321CC
 Asset Name :Coca-Cola
 Asset Type :S
 Asset Value Modifier :25.5
-Annual Return :0.0
+Annual Return :588.37374
 Risk :0.68
 Value :1047.54
 Return Rate :56.16718597857838%
@@ -208,7 +208,7 @@ Total Value :2095.08
 Aggregate Risk :0.11333333333333334
 Total Fees :10.0
 Commissions :29.418687000000002
-Portfolio Sum of Annual Returns :0.0
+Portfolio Sum of Annual Returns :588.37374
 
 END OF PORTFOLIO #4/10
 =================================================================================================================================================================================================================================================================================================
@@ -236,7 +236,7 @@ Asset Code :N0TPIX
 Asset Name :3D Systems
 Asset Type :S
 Asset Value Modifier :21.0
-Annual Return :0.0
+Annual Return :9.2925
 Risk :1.28
 Value :743.4
 Return Rate :1.25%
@@ -248,7 +248,7 @@ Total Value :1486.8
 Aggregate Risk :0.21333333333333335
 Total Fees :10.0
 Commissions :0.46462500000000007
-Portfolio Sum of Annual Returns :0.0
+Portfolio Sum of Annual Returns :9.2925
 
 END OF PORTFOLIO #5/10
 =================================================================================================================================================================================================================================================================================================
@@ -276,7 +276,7 @@ Asset Code :RIRA01
 Asset Name :Roth IRA
 Asset Type :D
 Asset Value Modifier :1032.12
-Annual Return :0.0
+Annual Return :35.69546429622506
 Risk :0.0
 Value :1032.12
 Return Rate :3.4584606728117917%
@@ -288,7 +288,7 @@ Total Value :2064.24
 Aggregate Risk :0.0
 Total Fees :50.0
 Commissions :0.7139092859245012
-Portfolio Sum of Annual Returns :0.0
+Portfolio Sum of Annual Returns :35.69546429622506
 
 END OF PORTFOLIO #6/10
 =================================================================================================================================================================================================================================================================================================
@@ -343,7 +343,7 @@ Asset Code :321CC
 Asset Name :Coca-Cola
 Asset Type :S
 Asset Value Modifier :10000.0
-Annual Return :0.0
+Annual Return :230734.8
 Risk :0.68
 Value :410800.0
 Return Rate :56.16718597857838%
@@ -355,7 +355,7 @@ Asset Code :CMPROP0121
 Asset Name :Commercial Property-Red Oaks Mall
 Asset Type :P
 Asset Value Modifier :23.5
-Annual Return :774.825
+Annual Return :144843.66
 Risk :1.2404817017512118
 Value :2457160.0
 Return Rate :5.894758990053558%
@@ -367,7 +367,7 @@ Asset Code :REALStr12
 Asset Name :Fred's Fabulous Hardware Store
 Asset Type :P
 Asset Value Modifier :12.0
-Annual Return :774.825
+Annual Return :671.5068
 Risk :0.2885602508816707
 Value :6516.0
 Return Rate :10.305506445672192%
@@ -391,7 +391,7 @@ Total Value :2884251.0
 Aggregate Risk :0.29683607417929325
 Total Fees :40.0
 Commissions :18812.49834
-Portfolio Sum of Annual Returns :2324.4750000000004
+Portfolio Sum of Annual Returns :377024.79179999995
 
 END OF PORTFOLIO #8/10
 =================================================================================================================================================================================================================================================================================================
@@ -403,9 +403,10 @@ Owner : Richard Hurndall
 Owner Code :6doc
 Manager : Chris Eccleston
 Manager Code :nwdoc1
-Beneficiary :none
-Assets List And Modifier Variables :bbchar
-# Of Assets within the Portfolio :1
+Beneficiary : Kaylee Ehrmantraut
+Beneficiary Code :bbchar
+Assets List And Modifier Variables :
+# Of Assets within the Portfolio :0
 
 FINANCIAL INFORMATION
 
@@ -413,19 +414,10 @@ Individual Asset Information:
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Asset #1/1 Of Portfolio PF200 #9/10
-Asset Code :bbchar
-Asset Value Modifier :0.0
-Risk :0.0
-Value :0.0
-Return Rate :0.0%
-
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 SUMMATIVE FINANCIAL INFORMATION FOR PORTFOLIO #9/10
 Total Value :0.0
 Aggregate Risk :0.0
-Total Fees :50.0
+Total Fees :0.0
 Commissions :0.0
 Portfolio Sum of Annual Returns :0.0
 
@@ -454,7 +446,7 @@ Asset Code :IND321
 Asset Name :Industrial Widget Manufacturers Inc.
 Asset Type :P
 Asset Value Modifier :25.0
-Annual Return :0.0
+Annual Return :31566.665
 Risk :1.1265452614064708
 Value :1053333.25
 Return Rate :2.9968355219015446%
@@ -466,7 +458,7 @@ Asset Code :RSTOR322
 Asset Name :7" Vinyl Records
 Asset Type :P
 Asset Value Modifier :100.0
-Annual Return :4150.15280737415
+Annual Return :10096.34
 Risk :0.5406067416911922
 Value :13500.0
 Return Rate :74.7877037037037%
@@ -478,7 +470,7 @@ Asset Code :123APP
 Asset Name :Apple
 Asset Type :S
 Asset Value Modifier :1000.0
-Annual Return :4150.15280737415
+Annual Return :116481.4
 Risk :1.25
 Value :429800.0
 Return Rate :27.101302931596088%
@@ -490,7 +482,7 @@ Asset Code :GOOG001
 Asset Name :Google Inc.
 Asset Type :S
 Asset Value Modifier :100.0
-Annual Return :4150.15280737415
+Annual Return :4562.364799999999
 Risk :1.15
 Value :81470.8
 Return Rate :5.599999999999999%
@@ -526,22 +518,18 @@ Total Value :2068104.05
 Aggregate Risk :0.25164706368440876
 Total Fees :300.0
 Commissions :3162.8881
-Portfolio Sum of Annual Returns :23571.015006309783
+Portfolio Sum of Annual Returns :173827.32638418733
 
 END OF PORTFOLIO #10/10
 =================================================================================================================================================================================================================================================================================================
 
 ALL 10 PORTFOLIOS READ
 
-Quick Summary of all Portfolios
-
-Portfolios :
-
 SUMS OF PORTFOLIO VALUES
 
 Sum of All Portfolio Total Asset Values :1.241425904E7
-Sum of All Portfolio Annual Returns :101109.24095278404
+Sum of All Portfolio Annual Returns :636600.5430721468
 Sum of All Portfolio Commissions :48225.59864093818
-Sum of All Portfolio Fees :610.0
+Sum of All Portfolio Fees :560.0
 
 ################################################################################################################################################################################################33
