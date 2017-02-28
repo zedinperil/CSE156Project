@@ -301,9 +301,8 @@ public class InputOutput {
 		System.out.println();
 		System.out.println("=================================================================================================================================================================================================================================================================================================");
 		System.out.println();
-		i=2;
-		for(g=0; g<NumberOfLines[i]; g++){
-		System.out.println("PORTFOLIO #"+(g+1)+"/"+NumberOfLines[i]);
+		for(g=0; g<NumberOfLines[2]; g++){
+		System.out.println("PORTFOLIO #"+(g+1)+"/"+NumberOfLines[2]);
 		System.out.println();
 		System.out.println("Portfolio Code :"+PortfolioArray[g].getPortfolioCode());
 		System.out.println("Owner :"+PortfolioArray[g].getOwnerName());
@@ -325,7 +324,7 @@ public class InputOutput {
 		System.out.println();
 		int q=0;
 		for(int u=0; u<PortfolioArray[g].getOccuranceOfAssetCount(); u++){
-				System.out.println("Asset #"+(u+1)+"/"+PortfolioArray[g].getOccuranceOfAssetCount() +" Of Portfolio "+PortfolioArray[g].getPortfolioCode()+" #"+(g+1)+"/"+NumberOfLines[i] );
+				System.out.println("Asset #"+(u+1)+"/"+PortfolioArray[g].getOccuranceOfAssetCount() +" Of Portfolio "+PortfolioArray[g].getPortfolioCode()+" #"+(g+1)+"/"+NumberOfLines[2] );
 				System.out.println("Asset Code :"+PortfolioArray[g].getAssetName(u));
 				q=0;
 				while(q<PortfolioArray[g].getAssetcount()){
@@ -358,14 +357,16 @@ public class InputOutput {
 				System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 				System.out.println();
 			}
-		System.out.println("SUMMATIVE FINANCIAL INFORMATION FOR PORTFOLIO #"+(g+1)+"/"+NumberOfLines[i]);
+		System.out.println("SUMMATIVE FINANCIAL INFORMATION FOR PORTFOLIO #"+(g+1)+"/"+NumberOfLines[2]);
 		System.out.println("Total Value :"+PortfolioArray[g].getTotalValue());
 		TotalValueSum+=PortfolioArray[g].getTotalValue();
 		System.out.println("Aggregate Risk :"+PortfolioArray[g].getAggRisk());
 		System.out.println("Total Fees :"+PortfolioArray[g].getFees());
 		FeesSum+=PortfolioArray[g].getFees();
 		System.out.println("Commissions :"+PortfolioArray[g].getCommissions());
+		
 		CommissionsSum+=PortfolioArray[g].getCommissions();
+		
 		System.out.println("Portfolio Sum of Annual Returns :"+PortfolioAnnualReturnSum[g]);
 
 		System.out.println();
