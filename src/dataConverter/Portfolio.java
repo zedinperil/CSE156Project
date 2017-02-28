@@ -146,9 +146,7 @@ public class Portfolio {
 	public String getBeneficiaryCode() {
 		
 		if(BeneficiaryCode.equals("")){
-		
 			return "none";
-			
 		}
 		else{
 		
@@ -305,35 +303,20 @@ public class Portfolio {
 				while(o<=OccuranceOfAssetCount){
 					r=0;
 					while(r<assetcount){
-				
+						if(Ass[r].getCode().equals(AssetName[o])){
 								if(Ass[r].getType().equals("P")){
-									if(Ass[r].getCode().equals(AssetName[o])){
-				//						System.out.println("YO "+getAnnualReturn(r,o));
 									AnnualReturn = getAnnualReturn(o);
-									ReturnRate[o]= AnnualReturn/getValue(o);		
-									
-									}
+									ReturnRate[o]= AnnualReturn/getValue(o);			
 								}
 								if(Ass[r].getType().equals("S")){
-									if(Ass[r].getCode().equals(AssetName[o])){
-				//						System.out.println("YO "+getAnnualReturn(r,o));
-
 										AnnualReturn = getAnnualReturn(o);
 										ReturnRate[o]= AnnualReturn/getValue(o);		
-									
-
-									}
 								}
 								if(Ass[r].getType().equals("D")){
-									if(Ass[r].getCode().equals(AssetName[o])){
-				//						System.out.println("YO "+getAnnualReturn(r,o));
-
 										AnnualReturn = getAnnualReturn(o);
 										ReturnRate[o]= AnnualReturn/getValue(o);		
-											
-
-									}
 								}
+						}
 					r++;			
 					}
 				o++;
@@ -349,10 +332,10 @@ public class Portfolio {
 				while(o<=OccuranceOfAssetCount){
 					r=0;
 					while(r<assetcount){							
-									if(Ass[r].getCode().equals(AssetName[o])){
-									temprisk= (getRisk(o)*getValue(o))/getTotalValue();
-									AggRisk+= temprisk;		
-									}
+						if(Ass[r].getCode().equals(AssetName[o])){
+							temprisk= (getRisk(o)*getValue(o))/getTotalValue();
+							AggRisk+= temprisk;		
+						}
 					r++;			
 					}
 				o++;
