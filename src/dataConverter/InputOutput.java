@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -19,9 +20,18 @@ import javax.json.stream.JsonGenerator;
 //BIG NOTE: We should have used array lists. We are simply stubborn to switch from arrays
 public class InputOutput {
 	
-
 	public static void main(String[] args) throws IOException {			
+		//formatting for doubles
+		DecimalFormat DoubleFormat = new DecimalFormat();
+		DoubleFormat.setMaximumFractionDigits(2);
+		DoubleFormat.setMinimumFractionDigits(2);
+		//format just for the risks
+		DecimalFormat RiskFormat = new DecimalFormat();
+		RiskFormat.setMaximumFractionDigits(4);
+		RiskFormat.setMinimumFractionDigits(4);
+		
 		//ints for further use
+		
 		int NumOfFiles= 3;
 		int i=0;
 		int g=0;
@@ -275,18 +285,6 @@ public class InputOutput {
 						}			
 					}	
 			}
-		
-//build portfolio, add to portfoliobuilder
-//			JsonObject tempPort = Json.createObjectBuilder()
-//					   .add("code", tempPrivateInvestment.getCode())
-//					   .add("label", tempPrivateInvestment.getLabel())
-//					   .add("type", tempPrivateInvestment.getType())
-//					   .add("baseRateOfReturn", tempPrivateInvestment.getBaseRateOfReturn())
-//					   .add("quarterlyDividend", tempPrivateInvestment.getQuarterlyDividend())
-//					   .add("omega", tempPrivateInvestment.getOmegaMeasure())
-//					   .add("value", tempPrivateInvestment.getTotalValue())
-//					   .build();
-//			Portfoliobuilder.add(tempPort);
 		}
 		  //Takes our formatted console output and saves it as a portfolio.txt file
 		double[] PortfolioAnnualReturnSum= new double[NumberOfLines[2]];
@@ -302,86 +300,83 @@ public class InputOutput {
 		System.out.println("=================================================================================================================================================================================================================================================================================================");
 		System.out.println();
 		for(g=0; g<NumberOfLines[2]; g++){
-		System.out.println("PORTFOLIO #"+(g+1)+"/"+NumberOfLines[2]);
-		System.out.println();
-		System.out.println("Portfolio Code :"+PortfolioArray[g].getPortfolioCode());
-		System.out.println("Owner :"+PortfolioArray[g].getOwnerName());
-		System.out.println("Owner Code :"+PortfolioArray[g].getOwnerCode());
-		System.out.println("Manager :"+PortfolioArray[g].getManagerName());
-		System.out.println("Manager Code :"+PortfolioArray[g].getManagerCode());
-		System.out.println("Beneficiary :"+PortfolioArray[g].getBeneficiaryName());
-		if(!(PortfolioArray[g].getBeneficiaryName().equals("none"))){
-		System.out.println("Beneficiary Code :"+PortfolioArray[g].getBeneficiaryCode());
-		}
-		System.out.println("Assets List And Modifier Variables :"+PortfolioArray[g].getAsset());
-		System.out.println("# Of Assets within the Portfolio :"+PortfolioArray[g].getOccuranceOfAssetCount());
-		System.out.println();
-		System.out.println("FINANCIAL INFORMATION");
-		System.out.println();
-		System.out.println("Individual Asset Information:");
-		System.out.println();
-		System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-		System.out.println();
-		int q=0;
-		for(int u=0; u<PortfolioArray[g].getOccuranceOfAssetCount(); u++){
-				System.out.println("Asset #"+(u+1)+"/"+PortfolioArray[g].getOccuranceOfAssetCount() +" Of Portfolio "+PortfolioArray[g].getPortfolioCode()+" #"+(g+1)+"/"+NumberOfLines[2] );
-				System.out.println("Asset Code :"+PortfolioArray[g].getAssetName(u));
-				q=0;
-				while(q<PortfolioArray[g].getAssetcount()){
-					if(PortfolioArray[g].getAssetName(u).equals(AssetsArray[q].getCode())){
-						System.out.println("Asset Name :"+ AssetsArray[q].getLabel());
-						System.out.println("Asset Type :"+ AssetsArray[q].getType());
-						q++;
-					}
-					else{
-						q++;
-					}
-				}
-				System.out.println("Asset Value Modifier :"+PortfolioArray[g].getAssetValue(u));
-				q=0;
-				while(q<PortfolioArray[g].getAssetcount()){
-					if(PortfolioArray[g].getAssetName(u).equals(AssetsArray[q].getCode())){
-						System.out.println("Annual Return :"+PortfolioArray[g].getAnnualReturn(u));
-						PortfolioAnnualReturnSum[g]+=PortfolioArray[g].getAnnualReturn(u);
-						AnnualReturnSum+=PortfolioArray[g].getAnnualReturn(u);
-						q++;
-					}
-					else{
-						q++;
-					}
-				}
-				System.out.println("Risk :"+PortfolioArray[g].getRisk(u));
-				System.out.println("Value :"+PortfolioArray[g].getValue(u));
-				System.out.println("Return Rate :"+(PortfolioArray[g].getReturnRate()[u]*100)+"%");	
-				System.out.println();
-				System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-				System.out.println();
+			System.out.println("PORTFOLIO #"+(g+1)+"/"+NumberOfLines[2]);
+			System.out.println();
+			System.out.println("Portfolio Code :"+PortfolioArray[g].getPortfolioCode());
+			System.out.println("Owner :"+PortfolioArray[g].getOwnerName());
+			System.out.println("Owner Code :"+PortfolioArray[g].getOwnerCode());
+			System.out.println("Manager :"+PortfolioArray[g].getManagerName());
+			System.out.println("Manager Code :"+PortfolioArray[g].getManagerCode());
+			System.out.println("Beneficiary :"+PortfolioArray[g].getBeneficiaryName());
+			if(!(PortfolioArray[g].getBeneficiaryName().equals("none"))){
+				System.out.println("Beneficiary Code :"+PortfolioArray[g].getBeneficiaryCode());
 			}
-		System.out.println("SUMMATIVE FINANCIAL INFORMATION FOR PORTFOLIO #"+(g+1)+"/"+NumberOfLines[2]);
-		System.out.println("Total Value :"+PortfolioArray[g].getTotalValue());
-		TotalValueSum+=PortfolioArray[g].getTotalValue();
-		System.out.println("Aggregate Risk :"+PortfolioArray[g].getAggRisk());
-		System.out.println("Total Fees :"+PortfolioArray[g].getFees());
-		FeesSum+=PortfolioArray[g].getFees();
-		System.out.println("Commissions :"+PortfolioArray[g].getCommissions());
-		
-		CommissionsSum+=PortfolioArray[g].getCommissions();
-		
-		System.out.println("Portfolio Sum of Annual Returns :"+PortfolioAnnualReturnSum[g]);
-
-		System.out.println();
-		System.out.println("END OF PORTFOLIO #"+(g+1)+"/"+NumberOfLines[2]);
-		System.out.println("=================================================================================================================================================================================================================================================================================================");
-		System.out.println("");
+			System.out.println("Assets List And Modifier Variables :"+PortfolioArray[g].getAsset());
+			System.out.println("# Of Assets within the Portfolio :"+PortfolioArray[g].getOccuranceOfAssetCount());
+			System.out.println();
+			System.out.println("FINANCIAL INFORMATION");
+			System.out.println();
+			System.out.println("Individual Asset Information:");
+			System.out.println();
+			System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println();
+			int q=0;
+			for(int u=0; u<PortfolioArray[g].getOccuranceOfAssetCount(); u++){
+					System.out.println("Asset #"+(u+1)+"/"+PortfolioArray[g].getOccuranceOfAssetCount() +" Of Portfolio "+PortfolioArray[g].getPortfolioCode()+" #"+(g+1)+"/"+NumberOfLines[2] );
+					System.out.println("Asset Code :"+PortfolioArray[g].getAssetName(u));
+					q=0;
+					while(q<PortfolioArray[g].getAssetcount()){
+						if(PortfolioArray[g].getAssetName(u).equals(AssetsArray[q].getCode())){
+							System.out.println("Asset Name :"+ AssetsArray[q].getLabel());
+							System.out.println("Asset Type :"+ AssetsArray[q].getType());
+							q++;
+						}
+						else{
+							q++;
+						}
+					}
+					System.out.println("Asset Value Modifier :"+PortfolioArray[g].getAssetValue(u));
+					q=0;
+					while(q<PortfolioArray[g].getAssetcount()){
+						if(PortfolioArray[g].getAssetName(u).equals(AssetsArray[q].getCode())){
+							System.out.println("Annual Return :$"+DoubleFormat.format(PortfolioArray[g].getAnnualReturn(u)));
+							PortfolioAnnualReturnSum[g]+=PortfolioArray[g].getAnnualReturn(u);
+							AnnualReturnSum+=PortfolioArray[g].getAnnualReturn(u);
+							q++;
+						}
+						else{
+							q++;
+						}
+					}
+					System.out.println("Risk :"+DoubleFormat.format(PortfolioArray[g].getRisk(u)));
+					System.out.println("Value :$"+DoubleFormat.format(PortfolioArray[g].getValue(u)));
+					System.out.println("Return Rate :"+DoubleFormat.format((PortfolioArray[g].getReturnRate()[u]*100))+"%");	
+					System.out.println();
+					System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+					System.out.println();
+				}
+			System.out.println("SUMMATIVE FINANCIAL INFORMATION FOR PORTFOLIO "+PortfolioArray[g].getPortfolioCode()+" #"+(g+1)+"/"+NumberOfLines[2]);
+			System.out.println("Total Value :$"+DoubleFormat.format(+PortfolioArray[g].getTotalValue()));
+			TotalValueSum+=PortfolioArray[g].getTotalValue();
+			System.out.println("Aggregate Risk :"+RiskFormat.format(PortfolioArray[g].getAggRisk()));
+			System.out.println("Total Fees :$"+DoubleFormat.format(PortfolioArray[g].getFees()));
+			FeesSum+=PortfolioArray[g].getFees();
+			System.out.println("Commissions :$"+DoubleFormat.format(PortfolioArray[g].getCommissions()));
+			CommissionsSum+=PortfolioArray[g].getCommissions()/2;
+			System.out.println("Portfolio Sum of Annual Returns :$"+DoubleFormat.format(PortfolioAnnualReturnSum[g]));
+			System.out.println();
+			System.out.println("END OF PORTFOLIO #"+(g+1)+"/"+NumberOfLines[2]);
+			System.out.println("=================================================================================================================================================================================================================================================================================================");
+			System.out.println("");
 		}
 		System.out.println("ALL "+NumberOfLines[2]+" PORTFOLIOS READ");
 		System.out.println();
 		System.out.println("SUMS OF PORTFOLIO VALUES");
 		System.out.println();
-		System.out.println("Sum of All Portfolio Total Asset Values :"+TotalValueSum);
-		System.out.println("Sum of All Portfolio Annual Returns :"+AnnualReturnSum);
-		System.out.println("Sum of All Portfolio Commissions :"+CommissionsSum);
-		System.out.println("Sum of All Portfolio Fees :"+FeesSum);
+		System.out.println("Sum of All Portfolio Total Asset Values :$"+DoubleFormat.format(TotalValueSum));
+		System.out.println("Sum of All Portfolio Annual Returns :$"+DoubleFormat.format(AnnualReturnSum));
+		System.out.println("Sum of All Portfolio Commissions :$"+DoubleFormat.format(CommissionsSum));
+		System.out.println("Sum of All Portfolio Fees :$"+DoubleFormat.format(FeesSum));
 		System.out.println();
 		System.out.println("################################################################################################################################################################################################33");
 		portfolio.close();

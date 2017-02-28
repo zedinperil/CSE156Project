@@ -30,15 +30,8 @@ public class Portfolio {
 	private String[] temporaryString=new String[1000];
 	private int OccuranceOfAssetCount=0;
 	
-	public static double round(double value, int places) {
-	    if (places < 0) throw new IllegalArgumentException();
 
-	    long factor = (long) Math.pow(10, places);
-	    value = value * factor;
-	    long tmp = Math.round(value);
-	    return (double) tmp / factor;
-	}
-	
+
 	public Portfolio(String portCode, String ownCode, String managCode, String beneficiaryCode, 
 					 String assetsA, Persons[] persons, Assets[] asset, int PersonsCount, int AssetsCount) {
 		super();
@@ -101,7 +94,6 @@ public class Portfolio {
 
 	
 	public String getOwnerName(){
-		int i=1;
 		int k=0;
 			while(k<personcount){			
 				if(Per[k].getPersonCode().equals(this.OwnerCode)){
@@ -175,7 +167,6 @@ public class Portfolio {
 	}
 
 	public double getFees() {
-		int i=0;
 		int k=0;
 			while(k<personcount){				
 				if(Per[k].getPersonCode().equals(ManagerCode)){
@@ -189,18 +180,18 @@ public class Portfolio {
 				}
 				k++;	
 			}		
-		return round(fees,2);
+		return fees;
 	}
 
 	public double getCommissions() {
 	int o=0;
 	int k=0;	
-			while(o<getManagerCount()){
+			while(o<OccuranceOfAssetCount){
 			k=0;
 			while(k<assetcount){
 				if(Ass[k].getCode().equals(AssetName[o])){	
 					AnnualReturn = getAnnualReturn(o);
-					sumOfAnnualReturn+= AnnualReturn;		
+					sumOfAnnualReturn+= AnnualReturn;
 				}
 			k++;
 			}
@@ -218,27 +209,24 @@ public class Portfolio {
 	}
 	k++;
 	}	
-		return round(commissions,2);
+		return commissions;
 	}
 	public double getRisk(int u) {
-	int k=0;
-			while(k<assetcount){
-				if(Ass[k].getType().contains("P")){
-					if(Ass[k].getCode().equals(AssetName[u]))
-					Risk = Double.parseDouble(Ass[k].getOmegaMeasure())+ Math.pow(java.lang.Math.E,(-100000/(Double.parseDouble(Ass[k].getTotalValue()))));
+
+			for(int k=0; k<assetcount; k++){
+				if(Ass[k].getCode().equals(AssetName[u])){
+					if(Ass[k].getType().equals("P")){
+						Risk = Double.parseDouble(Ass[k].getOmegaMeasure())+ Math.pow(java.lang.Math.E,(-100000/(Double.parseDouble(Ass[k].getTotalValue()))));
+					}
+					if(Ass[k].getType().equals("S")){
+						Risk = Double.parseDouble(Ass[k].getBetaMeasure());
+					}
+					if(Ass[k].getType().equals("D")){
+						Risk = 0;
+					}
 				}
-				if(Ass[k].getType().contains("S")){
-					if(Ass[k].getCode().equals(AssetName[u]))
-					Risk = Double.parseDouble(Ass[k].getBetaMeasure());
-				}
-				if(Ass[k].getType().contains("D")){
-					if(Ass[k].getCode().equals(AssetName[u]))
-					Risk = 0;
-				}
-			k++;
 			}
-		
-		return round(Risk,4);
+		return Risk;
 }
 	public double getValue(int o) {
 			for(int k=0; k<assetcount; k++){
@@ -255,7 +243,7 @@ public class Portfolio {
 				}
 			}
 		
-		return round(Value,2);
+		return Value;
 	}
 	public double getTotalValue(){
 		double tempvalue=0;
@@ -263,7 +251,7 @@ public class Portfolio {
 			tempvalue+=getValue(o);
 		}
 		TotalValue= tempvalue;
-		return round(TotalValue,2);
+		return TotalValue;
 	}
 	
 	public double getAnnualReturn(int o) {
@@ -280,7 +268,7 @@ public class Portfolio {
 					}
 				}
 		}
-		return round(AnnualReturn,2);
+		return AnnualReturn;
 	}
 
 	public double[] getReturnRate() {
@@ -292,7 +280,7 @@ public class Portfolio {
 					while(r<assetcount){
 						if(Ass[r].getCode().equals(AssetName[o])){
 							AnnualReturn = getAnnualReturn(o);
-							ReturnRate[o]= round((AnnualReturn/getValue(o)),2);			
+							ReturnRate[o]= AnnualReturn/getValue(o);			
 						}
 					r++;			
 					}
@@ -303,14 +291,14 @@ public class Portfolio {
 
 	public double getAggRisk() {
 		double temprisk=0;
+		double risksum=0;
 		AggRisk=0;
-		int o=0;	
-				while(o<OccuranceOfAssetCount){
+			for(int o=0; o<OccuranceOfAssetCount; o++){
 					temprisk= (getRisk(o)*getValue(o))/getTotalValue();
-					AggRisk+= temprisk;					
-					o++;
+					risksum+=temprisk;
 				}
-		return round(AggRisk,4);
+			AggRisk=risksum;
+		return AggRisk;
 	}
 
 	public int getPersoncount() {
