@@ -1,14 +1,15 @@
 package dataConverter;
 import java.util.StringTokenizer;
 public class Address{
+	//string variables for various parts of an address
 	private String Street;
 	private String City;
 	private String State;
 	private String Zipcode;
 	private String Country;
-	
+	//constructor
 	public Address(String fullAddress) {
-		
+	//string tokenizer that will get the various parts of an address based on if the stringtokenizer has more tokens. if it doesn't, we set each part as a blank space	
 	StringTokenizer tokenizer= new StringTokenizer(fullAddress, ",");
 		if(tokenizer.hasMoreTokens()){		
 			this.Street = tokenizer.nextToken();

@@ -36,7 +36,7 @@ public class InputOutput {
 		int i=0;
 		int g=0;
 		int x=0;
-		//booleans to keep track if file is person or assett
+		//boolean arrays to keep track if file is person or asset or portfolio
 		boolean[] IsPerson=new boolean[NumOfFiles];
 		boolean[] IsAsset=new boolean[NumOfFiles];
 		boolean[] IsPortfolio=new boolean[NumOfFiles];
@@ -121,6 +121,7 @@ public class InputOutput {
 				}
 				if(x==(NumOfChars[g])-1 && fullData[i][g].lastIndexOf(";")!=NumOfChars[g]-1){
 						DelimeteredData[i][g-1]=fullData[i][g].split(";");	
+						//edge case for checking if the portfolio has a beneficiary or not, as it effects necessary input for the portfolio array when the time for that comes.
 						if(IsPortfolio[i]){
 							if(DelimeteredData[i][g-1][DelimeteredData[i][g-1].length-2].equals("")){
 								PortfolioHasBeneficiary[g]=true;
@@ -134,63 +135,57 @@ public class InputOutput {
 //Temp variables for persons, deposits, stocks, and privateinvestments		
 		
 		String HasNoData= "";//this is a string to be put in the event that a person does not have an email address.
-		JsonArrayBuilder Personbuilder= Json.createArrayBuilder();
-		JsonArrayBuilder Assetbuilder= Json.createArrayBuilder();
-		int Personcount=0;
-		int Assetscount=0;
-		double FeesSum=0;
-		double CommissionsSum=0;
-		double TotalValueSum=0;
-		double AnnualReturnSum=0;
-	
+		JsonArrayBuilder Personbuilder= Json.createArrayBuilder();//array builder for creating json object array out of persons
+		JsonArrayBuilder Assetbuilder= Json.createArrayBuilder();//array builder for creating json object array out of assets
+		int Personcount=0;//count of all persons
+		int Assetscount=0;//count of all assets
+		double FeesSum=0;//sum of fees
+		double CommissionsSum=0;//sum of commissions
+		double TotalValueSum=0;//sum of total values
+		double AnnualReturnSum=0;//sum of annual returns
+		//arrays of persons, assets, and portfolios, which are used in the following iterative loops for data storage before being used for the final outputs
+		//they are all of the length of the number of lines
 		Persons[] PersonArray= new Persons[NumberOfLines[0]];
 		Assets[] AssetsArray= new Assets[NumberOfLines[1]];
 		Portfolio[] PortfolioArray= new Portfolio[NumberOfLines[2]];
 		
 		for(i=0; i<NumOfFiles; i++){
 			for(g=0; g<NumberOfLines[i]; g++){
+				//checks if it is a portfolio and gives appropriate inputs based on boolean values and number of delimeters
 				if(IsPortfolio[i]){
-					System.out.println(g+1);
+//					System.out.println(g+1);
 					if(PortfolioHasBeneficiary[g]){
-						System.out.println("CHECK1");
+//						System.out.println("CHECK1");
 						if(NumberOfDelims[i][g]==5){
-							System.out.println("CHECK2");
-
+//							System.out.println("CHECK2");
 							PortfolioArray[g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], PersonArray, AssetsArray, Personcount, Assetscount);
 						}
 						else if(NumberOfDelims[i][g]==4){
-							System.out.println("CHECK3");
-
+//							System.out.println("CHECK3");
 							PortfolioArray[g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", DelimeteredData[i][g][3], PersonArray, AssetsArray, Personcount, Assetscount);	
 						}
 						else{
-							System.out.println("CHECK4");
-
+//							System.out.println("CHECK4");
 							PortfolioArray[g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", HasNoData, PersonArray, AssetsArray, Personcount, Assetscount);
 						}
 					}
 					else{
-						System.out.println("CHECK5");
-
+//						System.out.println("CHECK5");
 						if(NumberOfDelims[i][g]==5){
-							System.out.println("CHECK6");
-
+//							System.out.println("CHECK6");
 							PortfolioArray[g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], PersonArray, AssetsArray, Personcount, Assetscount);
 						}
 						else if(NumberOfDelims[i][g]==4){
-							System.out.println("CHECK7");
-
+//							System.out.println("CHECK7");
 							PortfolioArray[g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData,PersonArray, AssetsArray, Personcount, Assetscount);	
 						}
 						else{
-							System.out.println("CHECK8");
-
+//							System.out.println("CHECK8");
 							PortfolioArray[g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", HasNoData, PersonArray, AssetsArray, Personcount, Assetscount);
-			
 						}
 					}
-			
 				}
+				//Same as above, but for persons. Additionally, we use methods from javax.json library to produce json objects for each person
 					if(IsPerson[i]){
 						Personcount++;
 						if(DelimeteredData[i][g][1].equals("")){
@@ -240,12 +235,12 @@ public class InputOutput {
 							Personbuilder.add(tempmodel);
 						}
 					}
-				//check to see that it is an asset, and if so, check to see if the delimetered data for that asset that corresponds to type contains the character corresponding to each type of asset. Then, create a new asset of the correct type with the correct inputs for that type of asset
+					//Same as above, but for assets. We also use data that has been delimetered to determine the type of asset which we create, assets being an abstract class, just as person.
 					if(IsAsset[i]){
 						Assetscount++;
 						if(DelimeteredData[i][g][1].contains("D")){
 							AssetsArray[g]= new Deposit(DelimeteredData[i][g][0], DelimeteredData[i][g][1],DelimeteredData[i][g][2], DelimeteredData[i][g][3]);				
-							//TODO: fix this for assets
+							
 							JsonObject tempmodel = Json.createObjectBuilder()
 									   .add("code", AssetsArray[g].getCode())
 									   .add("label", AssetsArray[g].getLabel())
@@ -256,7 +251,7 @@ public class InputOutput {
 						}
 						else if(DelimeteredData[i][g][1].contains("S")){
 							AssetsArray[g]= new Stock(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6], DelimeteredData[i][g][7]);
-							//TODO: fix this for assets
+							
 							JsonObject tempmodel = Json.createObjectBuilder()
 									   .add("code", AssetsArray[g].getCode())
 									   .add("label", AssetsArray[g].getLabel())
@@ -289,15 +284,15 @@ public class InputOutput {
 		  //Takes our formatted console output and saves it as a portfolio.txt file
 		double[] PortfolioAnnualReturnSum= new double[NumberOfLines[2]];
  
-		PrintStream portfolio = new PrintStream(new FileOutputStream("data/Portfolios.txt"));
-		  System.setOut(portfolio);
-		System.out.println("############################################################################################################################################################################################################################################################################################################");
+//		PrintStream portfolio = new PrintStream(new FileOutputStream("data/output.txt"));
+//		System.setOut(portfolio);
+		System.out.println("##########################################################################################################################");
 		System.out.println();
 		System.out.println("A Collection of "+NumberOfLines[2]+" Portfolios");
 		System.out.println("# Of Persons from the Persons Datafile :"+NumberOfLines[0]);
 		System.out.println("# Of Assets from the Assets Datafile :"+NumberOfLines[1]);
 		System.out.println();
-		System.out.println("=================================================================================================================================================================================================================================================================================================");
+		System.out.println("==========================================================================================================================");
 		System.out.println();
 		for(g=0; g<NumberOfLines[2]; g++){
 			System.out.println("PORTFOLIO #"+(g+1)+"/"+NumberOfLines[2]);
@@ -318,7 +313,7 @@ public class InputOutput {
 			System.out.println();
 			System.out.println("Individual Asset Information:");
 			System.out.println();
-			System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+			System.out.println("---------------------------------------------------------------------------------------------------------------------");
 			System.out.println();
 			int q=0;
 			for(int u=0; u<PortfolioArray[g].getOccuranceOfAssetCount(); u++){
@@ -352,7 +347,7 @@ public class InputOutput {
 					System.out.println("Value :$"+DoubleFormat.format(PortfolioArray[g].getValue(u)));
 					System.out.println("Return Rate :"+DoubleFormat.format((PortfolioArray[g].getReturnRate()[u]*100))+"%");	
 					System.out.println();
-					System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+					System.out.println("---------------------------------------------------------------------------------------------------------------------");
 					System.out.println();
 				}
 			System.out.println("SUMMATIVE FINANCIAL INFORMATION FOR PORTFOLIO "+PortfolioArray[g].getPortfolioCode()+" #"+(g+1)+"/"+NumberOfLines[2]);
@@ -364,9 +359,10 @@ public class InputOutput {
 			System.out.println("Commissions :$"+DoubleFormat.format(PortfolioArray[g].getCommissions()));
 			CommissionsSum+=PortfolioArray[g].getCommissions()/2;
 			System.out.println("Portfolio Sum of Annual Returns :$"+DoubleFormat.format(PortfolioAnnualReturnSum[g]));
+			System.out.println("Value of Portfolio after Commissions and fees: $"+DoubleFormat.format(PortfolioArray[g].getTotalValue()-PortfolioArray[g].getFees()-PortfolioArray[g].getCommissions()));
 			System.out.println();
 			System.out.println("END OF PORTFOLIO #"+(g+1)+"/"+NumberOfLines[2]);
-			System.out.println("=================================================================================================================================================================================================================================================================================================");
+			System.out.println("=======================================================================================================================");
 			System.out.println("");
 		}
 		System.out.println("ALL "+NumberOfLines[2]+" PORTFOLIOS READ");
@@ -378,8 +374,8 @@ public class InputOutput {
 		System.out.println("Sum of All Portfolio Commissions :$"+DoubleFormat.format(CommissionsSum));
 		System.out.println("Sum of All Portfolio Fees :$"+DoubleFormat.format(FeesSum));
 		System.out.println();
-		System.out.println("################################################################################################################################################################################################33");
-		portfolio.close();
+		System.out.println("##########################################################################################################################");
+//		portfolio.close();
 JsonArray Persons= Personbuilder.build();
 JsonArray Assets= Assetbuilder.build();				
 

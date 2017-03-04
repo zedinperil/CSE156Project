@@ -1,24 +1,20 @@
 package dataConverter;
-
+//deposit extends assets
 public class Deposit extends Assets{
-
- 
+//apr is a double variable unique to deposit.
  private double Apr;
-  
+  //constructor
  public Deposit(String input, String code, String label, String apr) {
 		super(input, code, label);
+		//apr double is a percentage, so we divide by 100 and parse apr input string as a double
 		this.Apr=(Double.parseDouble(apr)/100);
-		// TODO Auto-generated constructor stub
+		
 	}
-
+//basic getter for the apr variable
 public double getApr() {
 	return Apr;
 }
-
-public void setApr(double apr) {
-	Apr = apr;
-}
-
+//basically just placeholder getters for asset variables unused by deposit.
 @Override
 public double getBaseRateOfReturn() {
 	// TODO Auto-generated method stub
