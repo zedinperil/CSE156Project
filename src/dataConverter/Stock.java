@@ -33,21 +33,5 @@ public class Stock extends Assets{
 	public String getSharePrice() {
 		return SharePrice;
 	}
-	//placeholder getters in the event that someone tries to use methods from other types of assets
-	@Override
-	public double getApr() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	@Override
-	public String getOmegaMeasure() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public String getTotalValue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+
 }

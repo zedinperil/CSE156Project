@@ -8,10 +8,8 @@ import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
-import java.io.BufferedReader;
-import javax.json.*;
-import javax.json.stream.JsonGenerator;
+import java.util.ArrayList;
+import java.util.List;
 //The plan
 //IMPLEMENT JDBC, CONVERT TO LISTS. ESSENTIALLY THATS WHAT WE NEED TO DO.
 public class InputOutput {
@@ -26,164 +24,48 @@ public class InputOutput {
 		RiskFormat.setMaximumFractionDigits(4);
 		RiskFormat.setMinimumFractionDigits(4);
 		
-		//ints for further use
-		
-//		int NumOfFiles= 3;
-//		int i=0;
-//		int g=0;
-//		int x=0;
-//		//boolean arrays to keep track if file is person or asset or portfolio
-//		boolean[] IsPerson=new boolean[NumOfFiles];
-//		boolean[] IsAsset=new boolean[NumOfFiles];
-//		boolean[] IsPortfolio=new boolean[NumOfFiles];
-//	
-//		String[] fileName = new String[3];
-//		//the filenames
-//		fileName[0]= "inputOutputExamples/Persons.dat";
-//		fileName[1]= "inputOutputExamples/Assets.dat";
-//		fileName[2]= "inputOutputexamples/Portfolios.dat";
-//		for(i=0; i<NumOfFiles; i++){
-//			//checks if file is a person or an asset
-//			if(fileName[i].contains("Portfolios")||fileName[i].contains("portfolios")){
-//			IsPortfolio[i]=true;	
-//			}
-//			else if(fileName[i].contains("Persons")||fileName[i].contains("persons")){
-//			IsPerson[i]=true;
-//			}
-//			else if(fileName[i].contains("Assets")||fileName[i].contains("assets")){
-//			IsAsset[i]=true;	
-//			}
-//			else{
-//			System.out.println("WRONG TYPE OF FILE");
-//			}
-//		}
-//		//variables/arrays for storing purposes
-//		//
-//		int[] size= new int[NumOfFiles];
-//		int NumberOfLines[]= new int[NumOfFiles];
-//		int[] NumOfChars= new int[10000];
-//		for(i=0; i<NumOfFiles; i++){
-//			//gets the size of the file, we don't want to store it with the data
-//			BufferedReader Buff = new BufferedReader(new FileReader(fileName[i]));
-//	        String text = Buff.readLine();
-//	        size[i] = Integer.parseInt(text);
-//	        size[i] += 1;
-//
-//	        //close the buffer
-//	        Buff.close();
-//		}
-//		boolean[] PortfolioHasBeneficiary = new boolean[size[2]];
-//		//create a string to store every piece of data pulled in
-//		String fullData[][] = new String[NumOfFiles][1000];
-//	        Scanner s = null;
-//	    for(i=0; i<NumOfFiles; i++){
-//	    	//try catch to check there is a file
-//	    	try{
-//			s = new Scanner(new File(fileName[i]));
-//		} catch(Exception e) {
-//			throw new RuntimeException(e);
-//		}
-//		x=0;
-//		//read file to the end of the line and remove the endline character
-//		while(s.hasNext()) {
-//			String line = s.nextLine(); //throw away the endline character
-//			fullData[i][x] = line;
-//			NumOfChars[x]=0;
-//		
-//			for(int q=0; q<=x; q++){	
-//			//this counts number of chars that are not null, to be used for later incrementing
-//				if(fullData[i][x].charAt(q)!='\u0000'){
-//					NumOfChars[x]++;	
-//				}
-//			}
-//			x++;//increment
-//		}
-//		NumberOfLines[i]=Integer.parseInt(fullData[i][0]);//number of lines
-//		s.close();//close s
-//			x++;	
-//			
-//		}   
-//	//TODO: Enumerate person and assets classes, and create arrays for each.
-//		//DONE ELSEWHERE
-//		String DelimeteredData[][][]= new String[4][1000][100];
-//	//TODO: Based on what each is,  use increments to save delimetered strings into the correct spaces for whatever type the data is
-//    int[][] NumberOfDelims= new int[NumOfFiles][1000];
-//	for(i=0; i<NumOfFiles; i++){
-//		for( g=1; g<=NumberOfLines[i]; g++){
-//			for(x=0; x<=NumOfChars[g]; x++){
-//				//split it every time a semicolon appears, and also at the end of the line if there is no semicolon
-//				if(fullData[i][g].charAt(x)==';'){
-//					DelimeteredData[i][g-1]=fullData[i][g].split(";");	
-//				}
-//				if(x==(NumOfChars[g])-1 && fullData[i][g].lastIndexOf(";")!=NumOfChars[g]-1){
-//						DelimeteredData[i][g-1]=fullData[i][g].split(";");	
-//						//edge case for checking if the portfolio has a beneficiary or not, as it effects necessary input for the portfolio array when the time for that comes.
-//						if(IsPortfolio[i]){
-//							if(DelimeteredData[i][g-1][DelimeteredData[i][g-1].length-2].equals("")){
-//								PortfolioHasBeneficiary[g]=true;
-//							}
-//						}
-//				}	
-//			}
-//			NumberOfDelims[i][g-1]=DelimeteredData[i][g-1].length;	//this is how many delimeters we have
-//		}
-//	}
-////Temp variables for persons, deposits, stocks, and privateinvestments		
-		//if we dont use arrays, we dont need these.
-	//	String HasNoData= "";//this is a string to be put in the event that a person does not have an email address.
-	//	JsonArrayBuilder Personbuilder= Json.createArrayBuilder();//array builder for creating json object array out of persons
-	//	JsonArrayBuilder Assetbuilder= Json.createArrayBuilder();//array builder for creating json object array out of assets
-	//  int Personcount=0;//count of all persons
-		int Assetscount=0;//count of all assets
-		double FeesSum=0;//sum of fees
-		double CommissionsSum=0;//sum of commissions
-		double TotalValueSum=0;//sum of total values
-		double AnnualReturnSum=0;//sum of annual returns
-		//arrays of persons, assets, and portfolios, which are used in the following iterative loops for data storage before being used for the final outputs
-		//they are all of the length of the number of lines
-		//make these lists lol
-		Persons[] PersonArray= new Persons[NumberOfLines[0]];
-		Assets[] AssetsArray= new Assets[NumberOfLines[1]];
-		Portfolio[] PortfolioArray= new Portfolio[NumberOfLines[2]];
+
+		List<Persons> PersonsList= new ArrayList<Persons>();
+		List<Assets> AssetsList= new ArrayList<Assets>();
+		List<Portfolio> PortfolioList= new ArrayList<Portfolio>();
+
 		//revamp this to use list increments using the database information.
-		for(i=0; i<NumOfFiles; i++){
-			for(g=0; g<NumberOfLines[i]; g++){
-				//checks if it is a portfolio and gives appropriate inputs based on boolean values and number of delimeters
-				if(IsPortfolio[i]){
-//					System.out.println(g+1);
+		for(Portfolio Portfolios : PortfolioList){
+				
 					if(PortfolioHasBeneficiary[g]){
 //						System.out.println("CHECK1");
 						if(NumberOfDelims[i][g]==5){
 //							System.out.println("CHECK2");
-							PortfolioArray[g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], PersonArray, AssetsArray, Personcount, Assetscount);
+							PortfolioList[g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], PersonArray, AssetsList, Personcount, Assetscount);
 						}
 						else if(NumberOfDelims[i][g]==4){
 //							System.out.println("CHECK3");
-							PortfolioArray[g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", DelimeteredData[i][g][3], PersonArray, AssetsArray, Personcount, Assetscount);	
+							PortfolioList[g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", DelimeteredData[i][g][3], PersonArray, AssetsList, Personcount, Assetscount);	
 						}
 						else{
 //							System.out.println("CHECK4");
-							PortfolioArray[g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", HasNoData, PersonArray, AssetsArray, Personcount, Assetscount);
+							PortfolioList[g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", HasNoData, PersonArray, AssetsList, Personcount, Assetscount);
 						}
 					}
 					else{
 //						System.out.println("CHECK5");
 						if(NumberOfDelims[i][g]==5){
 //							System.out.println("CHECK6");
-							PortfolioArray[g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], PersonArray, AssetsArray, Personcount, Assetscount);
+							PortfolioList[g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], PersonArray, AssetsList, Personcount, Assetscount);
 						}
 						else if(NumberOfDelims[i][g]==4){
 //							System.out.println("CHECK7");
-							PortfolioArray[g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData,PersonArray, AssetsArray, Personcount, Assetscount);	
+							PortfolioList[g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData,PersonArray, AssetsList, Personcount, Assetscount);	
 						}
 						else{
 //							System.out.println("CHECK8");
-							PortfolioArray[g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", HasNoData, PersonArray, AssetsArray, Personcount, Assetscount);
+							PortfolioList[g]=new Portfolio(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], "none", HasNoData, PersonArray, AssetsList, Personcount, Assetscount);
 						}
 					}
 				}
+	}
 				//Same as above, but for persons. Additionally, we use methods from javax.json library to produce json objects for each person
-					if(IsPerson[i]){
+					for(Persons Person: PersonsList){
 						Personcount++;
 						if(DelimeteredData[i][g][1].equals("")){
 							if(NumberOfDelims[i][g]==5){	
@@ -192,119 +74,59 @@ public class InputOutput {
 							else{
 								PersonArray[g]= new Beneficiaries(DelimeteredData[i][g][0],  DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData);
 							}
-								JsonObject tempmodel = Json.createObjectBuilder()
-									   .add("code", PersonArray[g].getPersonCode())									
-									   .add("firstName", PersonArray[g].getFirstName())
-									   .add("lastName", PersonArray[g].getLastName())
-									   .add("address", Json.createArrayBuilder()
-									      .add(Json.createObjectBuilder()
-									         .add("street", PersonArray[g].getStreet())
-									         .add("city", PersonArray[g].getCity())
-									         .add("state", PersonArray[g].getState())
-									         .add("country", PersonArray[g].getCountry())
-									         .add("zipcode", PersonArray[g].getZipcode())))
-									   		 .add("emails", PersonArray[g].getEmail())
-									   .build();
-							Personbuilder.add(tempmodel);
-						}
-						else{
-							if(NumberOfDelims[i][g]==5){	
-								PersonArray[g]= new Broker(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4]);							
-							}
-							else{
-									PersonArray[g]= new Broker(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], HasNoData);
-								}
-								JsonObject tempmodel = Json.createObjectBuilder()
-									   .add("code", PersonArray[g].getPersonCode())
-									   .add("secIdentifier", PersonArray[g].getSecIdentifier())
-									   .add("type", PersonArray[g].getType())
-									   .add("firstName", PersonArray[g].getFirstName())
-									   .add("lastName", PersonArray[g].getLastName())
-									   .add("address", Json.createArrayBuilder()
-									      .add(Json.createObjectBuilder()
-									         .add("street", PersonArray[g].getStreet())
-									         .add("city", PersonArray[g].getCity())
-									         .add("state", PersonArray[g].getState())
-									         .add("country", PersonArray[g].getCountry())
-									         .add("zipcode", PersonArray[g].getZipcode())))
-									   		 .add("emails", PersonArray[g].getEmail())
-									   .build();
-							Personbuilder.add(tempmodel);
+
 						}
 					}
 					//Same as above, but for assets. We also use data that has been delimetered to determine the type of asset which we create, assets being an abstract class, just as person.
-					if(IsAsset[i]){
+					
+					for( Assets Asset: AssetsList){
 						Assetscount++;
-						if(DelimeteredData[i][g][1].contains("D")){
-							AssetsArray[g]= new Deposit(DelimeteredData[i][g][0], DelimeteredData[i][g][1],DelimeteredData[i][g][2], DelimeteredData[i][g][3]);				
+						if(Asset.Type.equals("D")){
+							AssetsList[g]= new Deposit(DelimeteredData[i][g][0], DelimeteredData[i][g][1],DelimeteredData[i][g][2], DelimeteredData[i][g][3]);				
 							
-							JsonObject tempmodel = Json.createObjectBuilder()
-									   .add("code", AssetsArray[g].getCode())
-									   .add("label", AssetsArray[g].getLabel())
-									   .add("type", AssetsArray[g].getType())
-									   .add("apr", AssetsArray[g].getApr())
-									   .build();
-							Assetbuilder.add(tempmodel);
+
 						}
 						else if(DelimeteredData[i][g][1].contains("S")){
-							AssetsArray[g]= new Stock(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6], DelimeteredData[i][g][7]);
+							AssetsList[g]= new Stock(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6], DelimeteredData[i][g][7]);
 							
-							JsonObject tempmodel = Json.createObjectBuilder()
-									   .add("code", AssetsArray[g].getCode())
-									   .add("label", AssetsArray[g].getLabel())
-									   .add("type", AssetsArray[g].getType())
-									   .add("baseRateOfReturn", AssetsArray[g].getBaseRateOfReturn())
-									   .add("quarterlyDividend", AssetsArray[g].getQuarterlyDividend())
-									   .add("sharePrice", AssetsArray[g].getSharePrice())
-									   .add("symbol", AssetsArray[g].getStockSymbol())
-									   .add("beta", AssetsArray[g].getBetaMeasure())
-									   .build();
-							Assetbuilder.add(tempmodel);
+
 						}
 						else if(DelimeteredData[i][g][1].contains("P")){
-							AssetsArray[g]= new PrivateInvestment(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6]);
+							AssetsList[g]= new PrivateInvestment(DelimeteredData[i][g][0], DelimeteredData[i][g][1], DelimeteredData[i][g][2], DelimeteredData[i][g][3], DelimeteredData[i][g][4], DelimeteredData[i][g][5], DelimeteredData[i][g][6]);
 							//TODO: fix this for assets
-							JsonObject tempmodel = Json.createObjectBuilder()
-									   .add("code", AssetsArray[g].getCode())
-									   .add("label", AssetsArray[g].getLabel())
-									   .add("type", AssetsArray[g].getType())
-									   .add("baseRateOfReturn", AssetsArray[g].getBaseRateOfReturn())
-									   .add("quarterlyDividend", AssetsArray[g].getQuarterlyDividend())
-									   .add("omega", AssetsArray[g].getOmegaMeasure())
-									   .add("value", AssetsArray[g].getTotalValue())
-									   .build();
-							Assetbuilder.add(tempmodel);
-						}			
-					}	
-			}
-		}
+
+						}
+					}			
+					
+			
+		
 		  //Takes our formatted console output and saves it as a portfolio.txt file
-		double[] PortfolioAnnualReturnSum= new double[NumberOfLines[2]];
+		double[] PortfolioAnnualReturnSum= new double[PortfolioList.size()];
  
 		PrintStream portfolio = new PrintStream(new FileOutputStream("data/output.txt"));
 		System.setOut(portfolio);
 		System.out.println("##########################################################################################################################");
 		System.out.println();
-		System.out.println("A Collection of "+NumberOfLines[2]+" Portfolios");
+		System.out.println("A Collection of "+PortfolioList.size()+" Portfolios");
 		System.out.println("# Of Persons from the Persons Datafile :"+NumberOfLines[0]);
 		System.out.println("# Of Assets from the Assets Datafile :"+NumberOfLines[1]);
 		System.out.println();
 		System.out.println("==========================================================================================================================");
 		System.out.println();
-		for(g=0; g<NumberOfLines[2]; g++){
-			System.out.println("PORTFOLIO #"+(g+1)+"/"+NumberOfLines[2]);
+		for(g=0; g<PortfolioList.size(); g++){
+			System.out.println("PORTFOLIO #"+(g+1)+"/"+PortfolioList.size());
 			System.out.println();
-			System.out.println("Portfolio Code :"+PortfolioArray[g].getPortfolioCode());
-			System.out.println("Owner :"+PortfolioArray[g].getOwnerName());
-			System.out.println("Owner Code :"+PortfolioArray[g].getOwnerCode());
-			System.out.println("Manager :"+PortfolioArray[g].getManagerName());
-			System.out.println("Manager Code :"+PortfolioArray[g].getManagerCode());
-			System.out.println("Beneficiary :"+PortfolioArray[g].getBeneficiaryName());
-			if(!(PortfolioArray[g].getBeneficiaryName().equals("none"))){
-				System.out.println("Beneficiary Code :"+PortfolioArray[g].getBeneficiaryCode());
+			System.out.println("Portfolio Code :"+PortfolioList[g].getPortfolioCode());
+			System.out.println("Owner :"+PortfolioList[g].getOwnerName());
+			System.out.println("Owner Code :"+PortfolioList[g].getOwnerCode());
+			System.out.println("Manager :"+PortfolioList[g].getManagerName());
+			System.out.println("Manager Code :"+PortfolioList[g].getManagerCode());
+			System.out.println("Beneficiary :"+PortfolioList[g].getBeneficiaryName());
+			if(!(PortfolioList[g].getBeneficiaryName().equals("none"))){
+				System.out.println("Beneficiary Code :"+PortfolioList[g].getBeneficiaryCode());
 			}
-			System.out.println("Assets List And Modifier Variables :"+PortfolioArray[g].getAsset());
-			System.out.println("# Of Assets within the Portfolio :"+PortfolioArray[g].getOccuranceOfAssetCount());
+			System.out.println("Assets List And Modifier Variables :"+PortfolioList[g].getAsset());
+			System.out.println("# Of Assets within the Portfolio :"+PortfolioList[g].getOccuranceOfAssetCount());
 			System.out.println();
 			System.out.println("FINANCIAL INFORMATION");
 			System.out.println();
@@ -313,56 +135,56 @@ public class InputOutput {
 			System.out.println("---------------------------------------------------------------------------------------------------------------------");
 			System.out.println();
 			int q=0;
-			for(int u=0; u<PortfolioArray[g].getOccuranceOfAssetCount(); u++){
-					System.out.println("Asset #"+(u+1)+"/"+PortfolioArray[g].getOccuranceOfAssetCount() +" Of Portfolio "+PortfolioArray[g].getPortfolioCode()+" #"+(g+1)+"/"+NumberOfLines[2] );
-					System.out.println("Asset Code :"+PortfolioArray[g].getAssetName(u));
+			for(int u=0; u<PortfolioList[g].getOccuranceOfAssetCount(); u++){
+					System.out.println("Asset #"+(u+1)+"/"+PortfolioList[g].getOccuranceOfAssetCount() +" Of Portfolio "+PortfolioList[g].getPortfolioCode()+" #"+(g+1)+"/"+PortfolioList.size() );
+					System.out.println("Asset Code :"+PortfolioList[g].getAssetName(u));
 					q=0;
-					while(q<PortfolioArray[g].getAssetcount()){
-						if(PortfolioArray[g].getAssetName(u).equals(AssetsArray[q].getCode())){
-							System.out.println("Asset Name :"+ AssetsArray[q].getLabel());
-							System.out.println("Asset Type :"+ AssetsArray[q].getType());
+					while(q<PortfolioList[g].getAssetcount()){
+						if(PortfolioList[g].getAssetName(u).equals(AssetsList[q].getCode())){
+							System.out.println("Asset Name :"+ AssetsList[q].getLabel());
+							System.out.println("Asset Type :"+ AssetsList[q].getType());
 							q++;
 						}
 						else{
 							q++;
 						}
 					}
-					System.out.println("Asset Value Modifier :"+PortfolioArray[g].getAssetValue(u));
+					System.out.println("Asset Value Modifier :"+PortfolioList[g].getAssetValue(u));
 					q=0;
-					while(q<PortfolioArray[g].getAssetcount()){
-						if(PortfolioArray[g].getAssetName(u).equals(AssetsArray[q].getCode())){
-							System.out.println("Annual Return :$"+DoubleFormat.format(PortfolioArray[g].getAnnualReturn(u)));
-							PortfolioAnnualReturnSum[g]+=PortfolioArray[g].getAnnualReturn(u);
-							AnnualReturnSum+=PortfolioArray[g].getAnnualReturn(u);
+					while(q<PortfolioList[g].getAssetcount()){
+						if(PortfolioList[g].getAssetName(u).equals(AssetsList[q].getCode())){
+							System.out.println("Annual Return :$"+DoubleFormat.format(PortfolioList[g].getAnnualReturn(u)));
+							PortfolioAnnualReturnSum[g]+=PortfolioList[g].getAnnualReturn(u);
+							AnnualReturnSum+=PortfolioList[g].getAnnualReturn(u);
 							q++;
 						}
 						else{
 							q++;
 						}
 					}
-					System.out.println("Risk :"+DoubleFormat.format(PortfolioArray[g].getRisk(u)));
-					System.out.println("Value :$"+DoubleFormat.format(PortfolioArray[g].getValue(u)));
-					System.out.println("Return Rate :"+DoubleFormat.format((PortfolioArray[g].getReturnRate()[u]*100))+"%");	
+					System.out.println("Risk :"+DoubleFormat.format(PortfolioList[g].getRisk(u)));
+					System.out.println("Value :$"+DoubleFormat.format(PortfolioList[g].getValue(u)));
+					System.out.println("Return Rate :"+DoubleFormat.format((PortfolioList[g].getReturnRate()[u]*100))+"%");	
 					System.out.println();
 					System.out.println("---------------------------------------------------------------------------------------------------------------------");
 					System.out.println();
 				}
-			System.out.println("SUMMATIVE FINANCIAL INFORMATION FOR PORTFOLIO "+PortfolioArray[g].getPortfolioCode()+" #"+(g+1)+"/"+NumberOfLines[2]);
-			System.out.println("Total Value :$"+DoubleFormat.format(+PortfolioArray[g].getTotalValue()));
-			TotalValueSum+=PortfolioArray[g].getTotalValue();
-			System.out.println("Aggregate Risk :"+RiskFormat.format(PortfolioArray[g].getAggRisk()));
-			System.out.println("Total Fees :$"+DoubleFormat.format(PortfolioArray[g].getFees()));
-			FeesSum+=PortfolioArray[g].getFees();
-			System.out.println("Commissions :$"+DoubleFormat.format(PortfolioArray[g].getCommissions()));
-			CommissionsSum+=PortfolioArray[g].getCommissions()/2;
+			System.out.println("SUMMATIVE FINANCIAL INFORMATION FOR PORTFOLIO "+PortfolioList[g].getPortfolioCode()+" #"+(g+1)+"/"+PortfolioList.size());
+			System.out.println("Total Value :$"+DoubleFormat.format(+PortfolioList[g].getTotalValue()));
+			TotalValueSum+=PortfolioList[g].getTotalValue();
+			System.out.println("Aggregate Risk :"+RiskFormat.format(PortfolioList[g].getAggRisk()));
+			System.out.println("Total Fees :$"+DoubleFormat.format(PortfolioList[g].getFees()));
+			FeesSum+=PortfolioList[g].getFees();
+			System.out.println("Commissions :$"+DoubleFormat.format(PortfolioList[g].getCommissions()));
+			CommissionsSum+=PortfolioList[g].getCommissions()/2;
 			System.out.println("Portfolio Sum of Annual Returns :$"+DoubleFormat.format(PortfolioAnnualReturnSum[g]));
-			System.out.println("Value of Portfolio after Commissions and fees: $"+DoubleFormat.format(PortfolioArray[g].getTotalValue()-PortfolioArray[g].getFees()-PortfolioArray[g].getCommissions()));
+			System.out.println("Value of Portfolio after Commissions and fees: $"+DoubleFormat.format(PortfolioList[g].getTotalValue()-PortfolioList[g].getFees()-PortfolioList[g].getCommissions()));
 			System.out.println();
-			System.out.println("END OF PORTFOLIO #"+(g+1)+"/"+NumberOfLines[2]);
+			System.out.println("END OF PORTFOLIO #"+(g+1)+"/"+PortfolioList.size());
 			System.out.println("=======================================================================================================================");
 			System.out.println("");
 		}
-		System.out.println("ALL "+NumberOfLines[2]+" PORTFOLIOS READ");
+		System.out.println("ALL "+PortfolioList.size()+" PORTFOLIOS READ");
 		System.out.println();
 		System.out.println("SUMS OF PORTFOLIO VALUES");
 		System.out.println();
@@ -373,26 +195,6 @@ public class InputOutput {
 		System.out.println();
 		System.out.println("##########################################################################################################################");
 		portfolio.close();
-JsonArray Persons= Personbuilder.build();
-JsonArray Assets= Assetbuilder.build();				
-
-		// config Map is created for pretty printing.
-		  Map<String, Boolean> config = new HashMap<>();
-		  // Pretty printing feature is added.
-		  config.put(JsonGenerator.PRETTY_PRINTING, true);
-		  // PrintWriter and JsonWriter is being created
-		  // in try-with-resources
-		  try (PrintWriter printWriter = new PrintWriter("inputOutputExamples/Persons.json");
-		JsonWriter jsonWriter = Json.createWriterFactory(config).createWriter(printWriter)){
-		     // Json object is being sent into file system
-			  jsonWriter.write(Persons);
-		  }
-		  try (PrintWriter printWriter = new PrintWriter("inputOutputExamples/Assets.json");
-					JsonWriter jsonWriter = Json.createWriterFactory(config).createWriter(printWriter)){
-					     // Json object is being sent into file system
-						  jsonWriter.write(Assets);
-					  }
-	
 	}
 }
 //TODO: IMPLEMENT WHAT WE NEED TO WITH THE PORTFOLIO STUFF. WE MADE GOOD PROGRESS IN MAKING OUR CODE LESS SHIT

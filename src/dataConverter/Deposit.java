@@ -14,47 +14,5 @@ public class Deposit extends Assets{
 public double getApr() {
 	return Apr;
 }
-//basically just placeholder getters for asset variables unused by deposit.
-@Override
-public double getBaseRateOfReturn() {
-	// TODO Auto-generated method stub
-	return 0;
-}
 
-@Override
-public String getBetaMeasure() {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public String getStockSymbol() {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public String getSharePrice() {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public String getQuarterlyDividend() {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public String getOmegaMeasure() {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public String getTotalValue() {
-	// TODO Auto-generated method stub
-	return null;
-}
- 
 }
