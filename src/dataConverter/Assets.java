@@ -34,6 +34,27 @@ public abstract class Assets {
 	public abstract String getOmegaMeasure();
 	public abstract String getTotalValue();
 
+	/**
+	 * @param code the code to set
+	 */
+	public void setCode(String code) {
+		Code = code;
+	}
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(String type) {
+		Type = type;
+	}
+
+	/**
+	 * @param label the label to set
+	 */
+	public void setLabel(String label) {
+		Label = label;
+	}
+
 	
 	
 	

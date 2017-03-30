@@ -14,5 +14,11 @@ public class Deposit extends Assets{
 public double getApr() {
 	return Apr;
 }
+/**
+ * @param apr the apr to set
+ */
+public void setApr(double apr) {
+	Apr = apr;
+}
 
 }
