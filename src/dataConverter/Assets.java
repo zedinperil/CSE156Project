@@ -5,7 +5,6 @@ public abstract class Assets {
 	private String Code;
 	private String Type;
 	private String Label;
-	private String secIdentifier;
 	//general constructor for an asset
 	public Assets(String code, String type, String label) {
 		super();

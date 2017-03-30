@@ -13,11 +13,7 @@ import java.io.BufferedReader;
 import javax.json.*;
 import javax.json.stream.JsonGenerator;
 //The plan
-//Start with grabbing the file and making classes
-//You have Persons and Assets
-//Which are further broken down into their own subclasses
-//So we bring the file in here
-//BIG NOTE: We should have used array lists. We are simply stubborn to switch from arrays
+//IMPLEMENT JDBC, CONVERT TO LISTS. ESSENTIALLY THATS WHAT WE NEED TO DO.
 public class InputOutput {
 	
 	public static void main(String[] args) throws IOException {			
@@ -32,112 +28,112 @@ public class InputOutput {
 		
 		//ints for further use
 		
-		int NumOfFiles= 3;
-		int i=0;
-		int g=0;
-		int x=0;
-		//boolean arrays to keep track if file is person or asset or portfolio
-		boolean[] IsPerson=new boolean[NumOfFiles];
-		boolean[] IsAsset=new boolean[NumOfFiles];
-		boolean[] IsPortfolio=new boolean[NumOfFiles];
-	
-		String[] fileName = new String[3];
-		//the filenames
-		fileName[0]= "data/Persons.dat";
-		fileName[1]= "data/Assets.dat";
-		fileName[2]= "data/Portfolios.dat";
-		for(i=0; i<NumOfFiles; i++){
-			//checks if file is a person or an asset
-			if(fileName[i].contains("Portfolios")||fileName[i].contains("portfolios")){
-			IsPortfolio[i]=true;	
-			}
-			else if(fileName[i].contains("Persons")||fileName[i].contains("persons")){
-			IsPerson[i]=true;
-			}
-			else if(fileName[i].contains("Assets")||fileName[i].contains("assets")){
-			IsAsset[i]=true;	
-			}
-			else{
-			System.out.println("WRONG TYPE OF FILE");
-			}
-		}
-		//variables/arrays for storing purposes
-		//
-		int[] size= new int[NumOfFiles];
-		int NumberOfLines[]= new int[NumOfFiles];
-		int[] NumOfChars= new int[10000];
-		for(i=0; i<NumOfFiles; i++){
-			//gets the size of the file, we don't want to store it with the data
-			BufferedReader Buff = new BufferedReader(new FileReader(fileName[i]));
-	        String text = Buff.readLine();
-	        size[i] = Integer.parseInt(text);
-	        size[i] += 1;
-
-	        //close the buffer
-	        Buff.close();
-		}
-		boolean[] PortfolioHasBeneficiary = new boolean[size[2]];
-		//create a string to store every piece of data pulled in
-		String fullData[][] = new String[NumOfFiles][1000];
-	        Scanner s = null;
-	    for(i=0; i<NumOfFiles; i++){
-	    	//try catch to check there is a file
-	    	try{
-			s = new Scanner(new File(fileName[i]));
-		} catch(Exception e) {
-			throw new RuntimeException(e);
-		}
-		x=0;
-		//read file to the end of the line and remove the endline character
-		while(s.hasNext()) {
-			String line = s.nextLine(); //throw away the endline character
-			fullData[i][x] = line;
-			NumOfChars[x]=0;
-		
-			for(int q=0; q<=x; q++){	
-			//this counts number of chars that are not null, to be used for later incrementing
-				if(fullData[i][x].charAt(q)!='\u0000'){
-					NumOfChars[x]++;	
-				}
-			}
-			x++;//increment
-		}
-		NumberOfLines[i]=Integer.parseInt(fullData[i][0]);//number of lines
-		s.close();//close s
-			x++;	
-			
-		}   
-	//TODO: Enumerate person and assets classes, and create arrays for each.
-		//DONE ELSEWHERE
-		String DelimeteredData[][][]= new String[4][1000][100];
-	//TODO: Based on what each is,  use increments to save delimetered strings into the correct spaces for whatever type the data is
-    int[][] NumberOfDelims= new int[NumOfFiles][1000];
-	for(i=0; i<NumOfFiles; i++){
-		for( g=1; g<=NumberOfLines[i]; g++){
-			for(x=0; x<=NumOfChars[g]; x++){
-				//split it every time a semicolon appears, and also at the end of the line if there is no semicolon
-				if(fullData[i][g].charAt(x)==';'){
-					DelimeteredData[i][g-1]=fullData[i][g].split(";");	
-				}
-				if(x==(NumOfChars[g])-1 && fullData[i][g].lastIndexOf(";")!=NumOfChars[g]-1){
-						DelimeteredData[i][g-1]=fullData[i][g].split(";");	
-						//edge case for checking if the portfolio has a beneficiary or not, as it effects necessary input for the portfolio array when the time for that comes.
-						if(IsPortfolio[i]){
-							if(DelimeteredData[i][g-1][DelimeteredData[i][g-1].length-2].equals("")){
-								PortfolioHasBeneficiary[g]=true;
-							}
-						}
-				}	
-			}
-			NumberOfDelims[i][g-1]=DelimeteredData[i][g-1].length;	//this is how many delimeters we have
-		}
-	}
-//Temp variables for persons, deposits, stocks, and privateinvestments		
-		
-		String HasNoData= "";//this is a string to be put in the event that a person does not have an email address.
-		JsonArrayBuilder Personbuilder= Json.createArrayBuilder();//array builder for creating json object array out of persons
-		JsonArrayBuilder Assetbuilder= Json.createArrayBuilder();//array builder for creating json object array out of assets
-		int Personcount=0;//count of all persons
+//		int NumOfFiles= 3;
+//		int i=0;
+//		int g=0;
+//		int x=0;
+//		//boolean arrays to keep track if file is person or asset or portfolio
+//		boolean[] IsPerson=new boolean[NumOfFiles];
+//		boolean[] IsAsset=new boolean[NumOfFiles];
+//		boolean[] IsPortfolio=new boolean[NumOfFiles];
+//	
+//		String[] fileName = new String[3];
+//		//the filenames
+//		fileName[0]= "inputOutputExamples/Persons.dat";
+//		fileName[1]= "inputOutputExamples/Assets.dat";
+//		fileName[2]= "inputOutputexamples/Portfolios.dat";
+//		for(i=0; i<NumOfFiles; i++){
+//			//checks if file is a person or an asset
+//			if(fileName[i].contains("Portfolios")||fileName[i].contains("portfolios")){
+//			IsPortfolio[i]=true;	
+//			}
+//			else if(fileName[i].contains("Persons")||fileName[i].contains("persons")){
+//			IsPerson[i]=true;
+//			}
+//			else if(fileName[i].contains("Assets")||fileName[i].contains("assets")){
+//			IsAsset[i]=true;	
+//			}
+//			else{
+//			System.out.println("WRONG TYPE OF FILE");
+//			}
+//		}
+//		//variables/arrays for storing purposes
+//		//
+//		int[] size= new int[NumOfFiles];
+//		int NumberOfLines[]= new int[NumOfFiles];
+//		int[] NumOfChars= new int[10000];
+//		for(i=0; i<NumOfFiles; i++){
+//			//gets the size of the file, we don't want to store it with the data
+//			BufferedReader Buff = new BufferedReader(new FileReader(fileName[i]));
+//	        String text = Buff.readLine();
+//	        size[i] = Integer.parseInt(text);
+//	        size[i] += 1;
+//
+//	        //close the buffer
+//	        Buff.close();
+//		}
+//		boolean[] PortfolioHasBeneficiary = new boolean[size[2]];
+//		//create a string to store every piece of data pulled in
+//		String fullData[][] = new String[NumOfFiles][1000];
+//	        Scanner s = null;
+//	    for(i=0; i<NumOfFiles; i++){
+//	    	//try catch to check there is a file
+//	    	try{
+//			s = new Scanner(new File(fileName[i]));
+//		} catch(Exception e) {
+//			throw new RuntimeException(e);
+//		}
+//		x=0;
+//		//read file to the end of the line and remove the endline character
+//		while(s.hasNext()) {
+//			String line = s.nextLine(); //throw away the endline character
+//			fullData[i][x] = line;
+//			NumOfChars[x]=0;
+//		
+//			for(int q=0; q<=x; q++){	
+//			//this counts number of chars that are not null, to be used for later incrementing
+//				if(fullData[i][x].charAt(q)!='\u0000'){
+//					NumOfChars[x]++;	
+//				}
+//			}
+//			x++;//increment
+//		}
+//		NumberOfLines[i]=Integer.parseInt(fullData[i][0]);//number of lines
+//		s.close();//close s
+//			x++;	
+//			
+//		}   
+//	//TODO: Enumerate person and assets classes, and create arrays for each.
+//		//DONE ELSEWHERE
+//		String DelimeteredData[][][]= new String[4][1000][100];
+//	//TODO: Based on what each is,  use increments to save delimetered strings into the correct spaces for whatever type the data is
+//    int[][] NumberOfDelims= new int[NumOfFiles][1000];
+//	for(i=0; i<NumOfFiles; i++){
+//		for( g=1; g<=NumberOfLines[i]; g++){
+//			for(x=0; x<=NumOfChars[g]; x++){
+//				//split it every time a semicolon appears, and also at the end of the line if there is no semicolon
+//				if(fullData[i][g].charAt(x)==';'){
+//					DelimeteredData[i][g-1]=fullData[i][g].split(";");	
+//				}
+//				if(x==(NumOfChars[g])-1 && fullData[i][g].lastIndexOf(";")!=NumOfChars[g]-1){
+//						DelimeteredData[i][g-1]=fullData[i][g].split(";");	
+//						//edge case for checking if the portfolio has a beneficiary or not, as it effects necessary input for the portfolio array when the time for that comes.
+//						if(IsPortfolio[i]){
+//							if(DelimeteredData[i][g-1][DelimeteredData[i][g-1].length-2].equals("")){
+//								PortfolioHasBeneficiary[g]=true;
+//							}
+//						}
+//				}	
+//			}
+//			NumberOfDelims[i][g-1]=DelimeteredData[i][g-1].length;	//this is how many delimeters we have
+//		}
+//	}
+////Temp variables for persons, deposits, stocks, and privateinvestments		
+		//if we dont use arrays, we dont need these.
+	//	String HasNoData= "";//this is a string to be put in the event that a person does not have an email address.
+	//	JsonArrayBuilder Personbuilder= Json.createArrayBuilder();//array builder for creating json object array out of persons
+	//	JsonArrayBuilder Assetbuilder= Json.createArrayBuilder();//array builder for creating json object array out of assets
+	//  int Personcount=0;//count of all persons
 		int Assetscount=0;//count of all assets
 		double FeesSum=0;//sum of fees
 		double CommissionsSum=0;//sum of commissions
@@ -145,10 +141,11 @@ public class InputOutput {
 		double AnnualReturnSum=0;//sum of annual returns
 		//arrays of persons, assets, and portfolios, which are used in the following iterative loops for data storage before being used for the final outputs
 		//they are all of the length of the number of lines
+		//make these lists lol
 		Persons[] PersonArray= new Persons[NumberOfLines[0]];
 		Assets[] AssetsArray= new Assets[NumberOfLines[1]];
 		Portfolio[] PortfolioArray= new Portfolio[NumberOfLines[2]];
-		
+		//revamp this to use list increments using the database information.
 		for(i=0; i<NumOfFiles; i++){
 			for(g=0; g<NumberOfLines[i]; g++){
 				//checks if it is a portfolio and gives appropriate inputs based on boolean values and number of delimeters
@@ -284,8 +281,8 @@ public class InputOutput {
 		  //Takes our formatted console output and saves it as a portfolio.txt file
 		double[] PortfolioAnnualReturnSum= new double[NumberOfLines[2]];
  
-//		PrintStream portfolio = new PrintStream(new FileOutputStream("data/output.txt"));
-//		System.setOut(portfolio);
+		PrintStream portfolio = new PrintStream(new FileOutputStream("data/output.txt"));
+		System.setOut(portfolio);
 		System.out.println("##########################################################################################################################");
 		System.out.println();
 		System.out.println("A Collection of "+NumberOfLines[2]+" Portfolios");
@@ -375,7 +372,7 @@ public class InputOutput {
 		System.out.println("Sum of All Portfolio Fees :$"+DoubleFormat.format(FeesSum));
 		System.out.println();
 		System.out.println("##########################################################################################################################");
-//		portfolio.close();
+		portfolio.close();
 JsonArray Persons= Personbuilder.build();
 JsonArray Assets= Assetbuilder.build();				
 
@@ -385,12 +382,12 @@ JsonArray Assets= Assetbuilder.build();
 		  config.put(JsonGenerator.PRETTY_PRINTING, true);
 		  // PrintWriter and JsonWriter is being created
 		  // in try-with-resources
-		  try (PrintWriter printWriter = new PrintWriter("data/Persons.json");
+		  try (PrintWriter printWriter = new PrintWriter("inputOutputExamples/Persons.json");
 		JsonWriter jsonWriter = Json.createWriterFactory(config).createWriter(printWriter)){
 		     // Json object is being sent into file system
 			  jsonWriter.write(Persons);
 		  }
-		  try (PrintWriter printWriter = new PrintWriter("data/Assets.json");
+		  try (PrintWriter printWriter = new PrintWriter("inputOutputExamples/Assets.json");
 					JsonWriter jsonWriter = Json.createWriterFactory(config).createWriter(printWriter)){
 					     // Json object is being sent into file system
 						  jsonWriter.write(Assets);

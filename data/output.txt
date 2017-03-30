@@ -1,141 +1,256 @@
-Portfolio Summary Report
-===============================================================================================================================
-Portfolio  Owner                Manager                       Fees     Commisions  Weighted Risk         Return          Total
-PD102      Baker, C.            Fox, Bud             $      100.00  $     1432.63         1.0962  $    71631.25  $   544375.00
-PF007      Baker, Tom           Baker, Tom           $       40.00  $    18851.24         1.1576  $   377024.79  $  2879363.50
-PT001      Castro, Starlin      Gekko, Gordon        $       30.00  $      269.51         0.2578  $     5390.28  $    42203.78
-PF200      Hurndall, Richard    Eccleston, Chris     $        0.00  $        0.00         0.0000  $        0.00  $        0.00
-PF006      McCoy, Sylvester     Baker, Tom           $        0.00  $        0.00         0.0000  $        0.00  $        0.00
-PF300      McCoy, Sylvester     Hurndall, Richard    $      300.00  $     3476.55         0.7745  $   173827.33  $  1948104.05
-PF001      O'Brien, Miles       Gekko, Gordon        $       20.00  $      404.68         0.2897  $     8093.54  $   112516.32
-PF002      Smith, Matt          Baker, Tom           $       10.00  $       29.42         0.6800  $      588.37  $     1047.54
-PF003      Tennant, David       Baker, Tom           $       10.00  $        0.46         1.2800  $        9.29  $      743.40
-PF004      Tennant, David       Hurndall, Richard    $       50.00  $        0.71         0.0000  $       35.70  $     1032.12
-                                                     -------------------------------------------------------------------------
-                                              Totals $      560.00  $    24465.20                 $   636600.54  $  5529385.71
+##########################################################################################################################
 
+A Collection of 5 Portfolios
+# Of Persons from the Persons Datafile :3
+# Of Assets from the Assets Datafile :4
 
+==========================================================================================================================
 
-Portfolio Details
-================================================================================================================
-Portfolio PD102
-------------------------------------------
-Owner:          Baker, C.
-Manager:        Fox, Bud
-Beneficiary:    Gekko, Gordon
-Assets 
-Code       Asset                           Return Rate          Risk  Annual Return          Value
-RENT445    Rental Property                       8.25%          0.58  $     9900.00  $   120000.00
-FOOD12     Cluckin's restaurant chain           14.55%          1.24  $    61731.25  $   424375.00
-                                                        --------------------------------------------
-                                                Totals        1.0962  $    71631.25  $   544375.00
+PORTFOLIO #1/5
 
-Portfolio PF007
-------------------------------------------
-Owner:          Baker, Tom
-Manager:        Baker, Tom
-Beneficiary:    Ehrmantraut, Kaylee
-Assets 
-Code       Asset                           Return Rate          Risk  Annual Return          Value
-REALStr12  Fred's Fabulous Hardware Store       10.31%          0.29  $      671.51  $     6516.00
-321CC      Coca-Cola                            56.17%          0.68  $   230734.80  $   410800.00
-CMPROP0121 Commercial Property-Red Oaks Mall        5.89%          1.24  $   144843.66  $  2457160.00
-wOOWoo1S   Canadian National Railway            15.85%          0.79  $      774.83  $     4887.50
-                                                        --------------------------------------------
-                                                Totals        1.1576  $   377024.79  $  2879363.50
+Portfolio Code :PT001
+Owner : Redmond Mann
+Owner Code :redman
+Manager : Gray Mann
+Manager Code :grayman
+Beneficiary : Gray Mann
+Beneficiary Code :grayman
+Assets List And Modifier Variables :TWOSHORTS:12,MANNCO:100
+# Of Assets within the Portfolio :2
 
-Portfolio PT001
-------------------------------------------
-Owner:          Castro, Starlin
-Manager:        Gekko, Gordon
-Beneficiary:    Sveum, Dale
-Assets 
-Code       Asset                           Return Rate          Risk  Annual Return          Value
-B0oWM      Costco                               39.94%          0.82  $     5298.49  $    13266.25
-BX001-23   Money Market Savings                  1.06%          0.00  $       25.37  $     2403.32
-AGTSAV     Savings Account                       0.25%          0.00  $       66.42  $    26534.21
-                                                        --------------------------------------------
-                                                Totals        0.2578  $     5390.28  $    42203.78
+FINANCIAL INFORMATION
 
-Portfolio PF200
-------------------------------------------
-Owner:          Hurndall, Richard
-Manager:        Eccleston, Chris
-Beneficiary:    Ehrmantraut, Kaylee
-Assets 
-Code       Asset                           Return Rate          Risk  Annual Return          Value
-                                                        --------------------------------------------
-                                                Totals        0.0000  $        0.00  $        0.00
+Individual Asset Information:
 
-Portfolio PF006
-------------------------------------------
-Owner:          McCoy, Sylvester
-Manager:        Baker, Tom
-Beneficiary:    none
-Assets 
-Code       Asset                           Return Rate          Risk  Annual Return          Value
-                                                        --------------------------------------------
-                                                Totals        0.0000  $        0.00  $        0.00
+---------------------------------------------------------------------------------------------------------------------
 
-Portfolio PF300
-------------------------------------------
-Owner:          McCoy, Sylvester
-Manager:        Hurndall, Richard
-Beneficiary:    none
-Assets 
-Code       Asset                           Return Rate          Risk  Annual Return          Value
-123APP     Apple                                27.10%          1.25  $   116481.40  $   429800.00
-RIRA01     Roth IRA                              3.46%          0.00  $     4150.15  $   120000.00
-RSTOR322   7" Vinyl Records                     74.79%          0.54  $    10096.34  $    13500.00
-IND321     Industrial Widget Manufacturers Inc.        3.00%          0.83  $    31566.67  $  1053333.25
-GOOG001    Google Inc.                           5.60%          1.15  $     4562.36  $    81470.80
-CD1Y3X     1-year Rollover CD                    2.79%          0.00  $     6970.40  $   250000.00
-                                                        --------------------------------------------
-                                                Totals        0.7745  $   173827.33  $  1948104.05
+Asset #1/2 Of Portfolio PT001 #1/5
+Asset Code :TWOSHORTS
+Asset Name :Short's Eatery(Family Owned)
+Asset Type :P
+Asset Value Modifier :12.0
+Annual Return :$18,785.15
+Risk :1.15
+Value :$109,081.20
+Return Rate :17.22%
 
-Portfolio PF001
-------------------------------------------
-Owner:          O'Brien, Miles
-Manager:        Gekko, Gordon
-Beneficiary:    none
-Assets 
-Code       Asset                           Return Rate          Risk  Annual Return          Value
-BERK-B     Berkshire Hathaway                    7.20%          0.29  $     8092.22  $   112392.00
-BX001-23   Money Market Savings                  1.06%          0.00  $        1.31  $      124.32
-                                                        --------------------------------------------
-                                                Totals        0.2897  $     8093.54  $   112516.32
+---------------------------------------------------------------------------------------------------------------------
 
-Portfolio PF002
-------------------------------------------
-Owner:          Smith, Matt
-Manager:        Baker, Tom
-Beneficiary:    McCoy, Sylvester
-Assets 
-Code       Asset                           Return Rate          Risk  Annual Return          Value
-321CC      Coca-Cola                            56.17%          0.68  $      588.37  $     1047.54
-                                                        --------------------------------------------
-                                                Totals        0.6800  $      588.37  $     1047.54
+Asset #2/2 Of Portfolio PT001 #1/5
+Asset Code :MANNCO
+Asset Name :MannCo
+Asset Type :S
+Asset Value Modifier :100.0
+Annual Return :$2,452.63
+Risk :8.35
+Value :$14,593.00
+Return Rate :16.81%
 
-Portfolio PF003
-------------------------------------------
-Owner:          Tennant, David
-Manager:        Baker, Tom
-Beneficiary:    McCoy, Sylvester
-Assets 
-Code       Asset                           Return Rate          Risk  Annual Return          Value
-N0TPIX     3D Systems                            1.25%          1.28  $        9.29  $      743.40
-                                                        --------------------------------------------
-                                                Totals        1.2800  $        9.29  $      743.40
+---------------------------------------------------------------------------------------------------------------------
 
-Portfolio PF004
-------------------------------------------
-Owner:          Tennant, David
-Manager:        Hurndall, Richard
-Beneficiary:    Ehrmantraut, Kaylee
-Assets 
-Code       Asset                           Return Rate          Risk  Annual Return          Value
-RIRA01     Roth IRA                              3.46%          0.00  $       35.70  $     1032.12
-                                                        --------------------------------------------
-                                                Totals        0.0000  $       35.70  $     1032.12
+SUMMATIVE FINANCIAL INFORMATION FOR PORTFOLIO PT001 #1/5
+Total Value :$123,674.20
+Aggregate Risk :1.9959
+Total Fees :$20.00
+Commissions :$1,061.89
+Portfolio Sum of Annual Returns :$21,237.78
+Value of Portfolio after Commissions and fees: $120,468.53
 
+END OF PORTFOLIO #1/5
+=======================================================================================================================
 
+PORTFOLIO #2/5
+
+Portfolio Code :PT002
+Owner : Blutarch Mann
+Owner Code :bluman
+Manager : Gray Mann
+Manager Code :grayman
+Beneficiary : Gray Mann
+Beneficiary Code :grayman
+Assets List And Modifier Variables :TWOSHORTS:10,MANNCO:150
+# Of Assets within the Portfolio :2
+
+FINANCIAL INFORMATION
+
+Individual Asset Information:
+
+---------------------------------------------------------------------------------------------------------------------
+
+Asset #1/2 Of Portfolio PT002 #2/5
+Asset Code :TWOSHORTS
+Asset Name :Short's Eatery(Family Owned)
+Asset Type :P
+Asset Value Modifier :10.0
+Annual Return :$15,654.29
+Risk :1.15
+Value :$90,901.00
+Return Rate :17.22%
+
+---------------------------------------------------------------------------------------------------------------------
+
+Asset #2/2 Of Portfolio PT002 #2/5
+Asset Code :MANNCO
+Asset Name :MannCo
+Asset Type :S
+Asset Value Modifier :150.0
+Annual Return :$3,678.94
+Risk :8.35
+Value :$21,889.50
+Return Rate :16.81%
+
+---------------------------------------------------------------------------------------------------------------------
+
+SUMMATIVE FINANCIAL INFORMATION FOR PORTFOLIO PT002 #2/5
+Total Value :$112,790.50
+Aggregate Risk :2.5440
+Total Fees :$20.00
+Commissions :$966.66
+Portfolio Sum of Annual Returns :$19,333.23
+Value of Portfolio after Commissions and fees: $109,870.52
+
+END OF PORTFOLIO #2/5
+=======================================================================================================================
+
+PORTFOLIO #3/5
+
+Portfolio Code :PT103
+Owner : Redmond Mann
+Owner Code :redman
+Manager : Redmond Mann
+Manager Code :redman
+Beneficiary :none
+Assets List And Modifier Variables :GRAVEL:10000
+# Of Assets within the Portfolio :1
+
+FINANCIAL INFORMATION
+
+Individual Asset Information:
+
+---------------------------------------------------------------------------------------------------------------------
+
+Asset #1/1 Of Portfolio PT103 #3/5
+Asset Code :GRAVEL
+Asset Name :GravelPit Gravel Pits
+Asset Type :S
+Asset Value Modifier :10000.0
+Annual Return :$40.00
+Risk :9.02
+Value :$40.00
+Return Rate :100.00%
+
+---------------------------------------------------------------------------------------------------------------------
+
+SUMMATIVE FINANCIAL INFORMATION FOR PORTFOLIO PT103 #3/5
+Total Value :$40.00
+Aggregate Risk :9.0150
+Total Fees :$50.00
+Commissions :$0.80
+Portfolio Sum of Annual Returns :$40.00
+Value of Portfolio after Commissions and fees: $-12.40
+
+END OF PORTFOLIO #3/5
+=======================================================================================================================
+
+PORTFOLIO #4/5
+
+Portfolio Code :PT004
+Owner : Blutarch Mann
+Owner Code :bluman
+Manager : Gray Mann
+Manager Code :grayman
+Beneficiary :none
+Assets List And Modifier Variables :GRAVEL:10000
+# Of Assets within the Portfolio :1
+
+FINANCIAL INFORMATION
+
+Individual Asset Information:
+
+---------------------------------------------------------------------------------------------------------------------
+
+Asset #1/1 Of Portfolio PT004 #4/5
+Asset Code :GRAVEL
+Asset Name :GravelPit Gravel Pits
+Asset Type :S
+Asset Value Modifier :10000.0
+Annual Return :$40.00
+Risk :9.02
+Value :$40.00
+Return Rate :100.00%
+
+---------------------------------------------------------------------------------------------------------------------
+
+SUMMATIVE FINANCIAL INFORMATION FOR PORTFOLIO PT004 #4/5
+Total Value :$40.00
+Aggregate Risk :9.0150
+Total Fees :$10.00
+Commissions :$2.00
+Portfolio Sum of Annual Returns :$40.00
+Value of Portfolio after Commissions and fees: $24.00
+
+END OF PORTFOLIO #4/5
+=======================================================================================================================
+
+PORTFOLIO #5/5
+
+Portfolio Code :PT005
+Owner : Gray Mann
+Owner Code :grayman
+Manager : Gray Mann
+Manager Code :grayman
+Beneficiary :none
+Assets List And Modifier Variables :MANNCO:100000,RIRA:1200000
+# Of Assets within the Portfolio :2
+
+FINANCIAL INFORMATION
+
+Individual Asset Information:
+
+---------------------------------------------------------------------------------------------------------------------
+
+Asset #1/2 Of Portfolio PT005 #5/5
+Asset Code :MANNCO
+Asset Name :MannCo
+Asset Type :S
+Asset Value Modifier :100000.0
+Annual Return :$2,452,626.00
+Risk :8.35
+Value :$14,593,000.00
+Return Rate :16.81%
+
+---------------------------------------------------------------------------------------------------------------------
+
+Asset #2/2 Of Portfolio PT005 #5/5
+Asset Code :RIRA
+Asset Name :Roth IRA
+Asset Type :D
+Asset Value Modifier :1200000.0
+Annual Return :$116,164.15
+Risk :0.00
+Value :$1,200,000.00
+Return Rate :9.68%
+
+---------------------------------------------------------------------------------------------------------------------
+
+SUMMATIVE FINANCIAL INFORMATION FOR PORTFOLIO PT005 #5/5
+Total Value :$15,793,000.00
+Aggregate Risk :7.7155
+Total Fees :$20.00
+Commissions :$128,439.51
+Portfolio Sum of Annual Returns :$2,568,790.15
+Value of Portfolio after Commissions and fees: $15,407,661.48
+
+END OF PORTFOLIO #5/5
+=======================================================================================================================
+
+ALL 5 PORTFOLIOS READ
+
+SUMS OF PORTFOLIO VALUES
+
+Sum of All Portfolio Total Asset Values :$16,029,544.70
+Sum of All Portfolio Annual Returns :$2,609,441.16
+Sum of All Portfolio Commissions :$130,470.86
+Sum of All Portfolio Fees :$120.00
+
+##########################################################################################################################
