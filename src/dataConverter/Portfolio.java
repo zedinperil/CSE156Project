@@ -53,7 +53,12 @@ public class Portfolio {
 	}
 	//this gets beneficiary name by iterating through all persons until the personcode of the person is equal to beneficiarycode
 	public String getBeneficiaryName(){
+		if(getBeneficiaryCode().equals("none")){
+			return "none";
+		}
+		else{
 		return beneficiaryName;
+		}
 	}
 	//basic getter for managercode
 	public String getManagerCode() {
@@ -61,12 +66,10 @@ public class Portfolio {
 	}
 	//getter for beneficiary code. has edge case for when it is blank, makes it "none"
 	public String getBeneficiaryCode() {
-		
-		if(BeneficiaryCode.equals("")){
+		if(BeneficiaryCode==null){
 			return "none";
 		}
 		else{
-		
 		return BeneficiaryCode;
 		}
 	}
