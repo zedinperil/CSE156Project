@@ -8,7 +8,6 @@ public class Portfolio {
 	private String OwnerCode;
 	private String ManagerCode;
 	private String BeneficiaryCode;
-	private String Asset;
 	private Assets[] Ass;
 	private Persons[] Per;
 	private String ownerName;
@@ -39,7 +38,6 @@ public class Portfolio {
 		this.OwnerCode = ownCode;
 		this.ManagerCode = managCode;
 		this.BeneficiaryCode = beneficiaryCode;
-		this.Asset = assetsA;
 		this.Ass = asset;
 		this.Per = persons;
 		this.personcount = PersonsCount;
@@ -141,18 +139,7 @@ public class Portfolio {
 		return BeneficiaryCode;
 		}
 	}
-	//basic asset string getter, for the unedited input asset string
-	public String getAsset() {
-		return Asset;
-	}
-	//Ass[] is the array of assets. this one takes in an input of which asset among assets you are getting. It just returns a memory address though.
-	public Assets getAss(int i) {
-		return Ass[i];
-	}
-	//Per[] is the array of persons. This getter takes in an input of which person among persons you are getting. It just returns the memory address of the person, though.
-	public Persons getPer(int i) {
-		return Per[i];
-	}
+
 	//this getter returns fees, which iterates through persons, and checks when a persons personcode is euqal to manager code, and then calculates the fees based on whether the type of the person is expert or junior, denoted by 'E' or 'J', respectively
 	public double getFees() {
 		int k=0;
