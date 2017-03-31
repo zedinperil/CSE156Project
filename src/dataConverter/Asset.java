@@ -1,6 +1,7 @@
 package dataConverter;
 
 public class Asset {
+	String portfolioCode;
 	String assetCode; 
 	String assetName; 
 	String assetType; 
@@ -9,7 +10,8 @@ public class Asset {
 	double annualReturn;
 	double risk;
 	double assetModifier; 
-	public Asset(String code, String Name, String Type, double Value, double RETURNRATE, double ANNUALRETURN, double RISK,double modifier) {
+	public Asset(String portfolio, String code, String Name, String Type, double Value, double RETURNRATE, double ANNUALRETURN, double RISK,double modifier) {
+		this.portfolioCode= portfolio;
 		this.assetCode = code;
 		this.assetName= Name;
 		this.assetType= Type;

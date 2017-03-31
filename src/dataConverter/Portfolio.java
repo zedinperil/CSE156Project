@@ -29,7 +29,7 @@ public class Portfolio {
 	private double[] AssetValue=new double[100];
 	private String[] temporaryString=new String[1000];
 	private int OccuranceOfAssetCount=0;
-	
+	private String managerType;
 	//constructor
 	public Portfolio(String portCode, String ownCode, String managCode, String beneficiaryCode, 
 					 String assetsA, Persons[] persons, Assets[] asset, int PersonsCount, int AssetsCount) {
@@ -325,4 +325,34 @@ public class Portfolio {
 		}
 		return ManagerCount;
 	}	
+	public void setPortfolioCode(String PORTFOLIOCODE){
+		this.PortfolioCode=PORTFOLIOCODE;
+	}
+	public void setOwnerName(String OWNERNAME){
+		this.ownerName=OWNERNAME;
+	}
+	public void setManagerName(String MANAGERNAME){
+		this.managerName=MANAGERNAME;
+	}
+	public void setManagerType(String MANAGERTYPE){
+		this.managerType=MANAGERTYPE;
+	}
+	public void setBeneficiaryName(String BENEFICIARYNAME){
+		this.beneficiaryName=BENEFICIARYNAME;
+	}
+	public void setFees(double FEES){
+		this.fees=FEES;
+	}
+	public void setAggRisk(double AGGRISK){
+		this.AggRisk=AGGRISK;
+	}
+	public void setCommissions(double COMMISSIONS){
+		this.commissions=COMMISSIONS;
+	}
+	public void setTotalValue(double TOTALVALUE){
+		this.TotalValue=TOTALVALUE;
+	}
+	public void setSumOfAnnualReturns(double SUMOFANNUALRETURNS){
+		this.sumOfAnnualReturn=SUMOFANNUALRETURNS;
+	}
 }	

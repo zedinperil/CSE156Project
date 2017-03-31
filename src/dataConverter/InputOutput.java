@@ -33,7 +33,7 @@ public class InputOutput {
 		
 		getPortfolios();
 		getAsset();
-		getPersons();
+		
 		
 
 			
