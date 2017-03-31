@@ -33,7 +33,7 @@ public class databaseinfoandmethods {
 		return conn;
 	}
 	
-	public static int getAssets(){
+	public static int getAsset(){
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 		} catch (InstantiationException e) {
@@ -76,13 +76,13 @@ public class databaseinfoandmethods {
 			String assetCode = rs.getString("assetCode");
 			String assetName = rs.getString("assetName");
 			String assetType  = rs.getString("assetType");
-			String assetValue = rs.getString("assetValue");
-			String returnRate = rs.getString("returnRate");
-			String annualReturn = rs.getString("annualReturn");
-			String risk = rs.getString("risk");
-			String assetModifier = rs.getString("assetModifier");
+			double assetValue = rs.getDouble("assetValue");
+			double returnRate = rs.getDouble("returnRate");
+			double annualReturn = rs.getDouble("annualReturn");
+			double risk = rs.getDouble("risk");
+			double assetModifier = rs.getDouble("assetModifier");
 			//remake assets
-			a = new Assets(albumId, albumTitle, albumYear, b, albumNumber);
+			a = new Asset(assetCode, assetName, assetType, assetValue, returnRate, annualReturn, risk, assetModifier);
 		} else {
 			throw new IllegalStateException("No such asset in database with id = " + albumId);
 		}
@@ -98,18 +98,18 @@ public class databaseinfoandmethods {
 
 	return a;
 	}
- select p.portfolioCode, p.portfolioId, p.ownerId, q.lastName as OwnerLastName, q.firstName as OwnerFirstName, m.lastName as ManagerLastName, m.firstName as ManagerFirstName, m.persontype, b.lastName as BeneficiaryLastName, b.firstName as BeneficiaryFirstName, p.managerId, p.beneficiaryId, p.fees, p.commissions, p.totalValue, p.sumOfAnnualReturns, p.aggRisk, L.assetCode, L.assetName, L.assetType, a.assetValue, a.returnRate, a.annualReturn, a.risk, a.assetModifier from Assets a JOIN Portfolio p ON p.portfolioId = a.portfolioId
-	JOIN AssetsList L ON L.assetListId = a.assetListId Join Person q on q.personId=p.ownerId join Person m on m.personId=p.managerId join Person b on b.personId=p.beneficiaryId;
-
-	public static ArrayList<Assets> getAssets(){
-		ArrayList<Assets> AssetsList= new ArrayList<Assets>();
-		select L.assetCode, L.assetName, L.assetType, a.assetValue, a.returnRate, a.annualReturn, a.risk, a.assetModifier from Assets a JOIN Portfolio p ON p.portfolioId = a.portfolioId
-		 JOIN AssetsList L ON L.assetListId = a.assetListId Join Person q on q.personId=p.ownerId join Person m on m.personId=p.managerId join Person b on b.personId=p.beneficiaryId;
-
-		
-		
-		return AssetsList;
-	}
-	 
+// select p.portfolioCode, p.portfolioId, p.ownerId, q.lastName as OwnerLastName, q.firstName as OwnerFirstName, m.lastName as ManagerLastName, m.firstName as ManagerFirstName, m.persontype, b.lastName as BeneficiaryLastName, b.firstName as BeneficiaryFirstName, p.managerId, p.beneficiaryId, p.fees, p.commissions, p.totalValue, p.sumOfAnnualReturns, p.aggRisk, L.assetCode, L.assetName, L.assetType, a.assetValue, a.returnRate, a.annualReturn, a.risk, a.assetModifier from Assets a JOIN Portfolio p ON p.portfolioId = a.portfolioId
+//	JOIN AssetsList L ON L.assetListId = a.assetListId Join Person q on q.personId=p.ownerId join Person m on m.personId=p.managerId join Person b on b.personId=p.beneficiaryId;
+//
+//	public static ArrayList<Assets> getAssets(){
+//		ArrayList<Assets> AssetsList= new ArrayList<Assets>();
+//		select L.assetCode, L.assetName, L.assetType, a.assetValue, a.returnRate, a.annualReturn, a.risk, a.assetModifier from Assets a JOIN Portfolio p ON p.portfolioId = a.portfolioId
+//		 JOIN AssetsList L ON L.assetListId = a.assetListId Join Person q on q.personId=p.ownerId join Person m on m.personId=p.managerId join Person b on b.personId=p.beneficiaryId;
+//
+//		
+//		
+//		return AssetsList;
+//	}
+//	 
 
 }
