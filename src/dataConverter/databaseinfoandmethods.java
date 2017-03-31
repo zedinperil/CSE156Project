@@ -7,12 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import com.mysql.*;
 
-import unl.cse.albums.Album;
-import unl.cse.albums.Band;
-import unl.cse.albums.DatabaseInfo;
-
-public class databaseinfoandmethods {
+public interface databaseinfoandmethods {
 
 	public static final String url = "jdbc:mysql://cse.unl.edu/tzinsmaster";
 	public static final String username = "tzinsmaster";
@@ -32,8 +29,8 @@ public class databaseinfoandmethods {
 		
 		return conn;
 	}
-	
-	public static int getPortfolio(int PortfolioId){
+
+	public static List<Portfolio> getPortfolios(){
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 		} catch (InstantiationException e) {
@@ -60,19 +57,25 @@ public class databaseinfoandmethods {
 			throw new RuntimeException(e);
 		}
 		
-		String query =  "select p.portfolioCode, p.portfolioId, q.lastName as OwnerLastName, q.firstName as OwnerFirstName, m.lastName as ManagerLastName, m.firstName as ManagerFirstName, m.persontype as ManagerType, b.lastName as BeneficiaryLastName, b.firstName as BeneficiaryFirstName, p.fees,c
-						+"join Person m on m.personId=p.ownerId join Person b on b.personId=p.beneficiaryId where p.portfolioId= ?";
+		String query =  "select p.portfolioCode, p.portfolioId, q.personCode as OwnerCode, m.personCode as ManagerCode, b.personCode as BeneficiaryCode,s q.lastName as OwnerLastName, q.firstName as OwnerFirstName,"
+				+ " m.lastName as ManagerLastName, m.firstName as ManagerFirstName, m.persontype as ManagerType, b.lastName as BeneficiaryLastName, b.firstName as BeneficiaryFirstName,"
+				+ " p.fees, p.aggRisk, p.commissions, p.totalValue, p.sumOfAnnualReturns from Portfolio p"
+				+ " join Person q on q.personId=p.ownerId join Person m on m.personId=p.managerId join Person b on b.personId=p.beneficiaryId";
+		
+		List<Portfolio> portfolios= new ArrayList<Portfolio>();
 		
 	PreparedStatement ps = null;
 	ResultSet rs = null;
 
 	try {
 		ps = conn.prepareStatement(query);
-		ps.setInt(1, PortfolioId);
 		rs = ps.executeQuery();
 		if(rs.next()) {
 			String PortfolioCode = rs.getString("portfolioCode");
 			String OwnerLastName = rs.getString("OwnerLastName");
+			String ownerCode= rs.getString("OwnerCode");
+			String managerCode= rs.getString("ManagerCode");
+			String beneficiaryCode= rs.getString("BeneficiaryCode");
 			String OwnerFirstName = rs.getString("OwnerFirstName");
 			String managerType= rs.getString("ManagerType");
 			String ManagerLastName = rs.getString("ManagerLastName");
@@ -85,8 +88,10 @@ public class databaseinfoandmethods {
 			double totalValue= rs.getDouble("totalValue");
 			double sumOfAnnualReturns= rs.getDouble("sumOfAnnualReturns");
 			
-			Portfolio port = new Portfolio();
-			port.setPortfolioCode(PortfolioCode);
+		
+			
+			Portfolio port = new Portfolio(PortfolioCode, ownerCode, managerCode, beneficiaryCode);
+		
 			port.setOwnerName(OwnerFirstName+" "+OwnerLastName);
 			port.setManagerName(ManagerFirstName+" "+ManagerLastName);
 			port.setManagerType(managerType);
@@ -96,8 +101,10 @@ public class databaseinfoandmethods {
 			port.setCommissions(commissions);
 			port.setTotalValue(totalValue);
 			port.setSumOfAnnualReturns(sumOfAnnualReturns);
+			
+			portfolios.add(port);
 		} else {
-			throw new IllegalStateException("No such Portfolio in database with id = " + PortfolioId);
+			throw new IllegalStateException("No such Portfolios in database");
 		}
 		rs.close();
 		ps.close();
@@ -106,13 +113,10 @@ public class databaseinfoandmethods {
 		e.printStackTrace();
 		throw new RuntimeException(e);
 	}
-	
-
-
-	return port;
+	return portfolios;
 	}
 	
-	public static int getAsset(int assetId){
+	public static List<Asset> getAssets(){
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 		} catch (InstantiationException e) {
@@ -141,18 +145,17 @@ public class databaseinfoandmethods {
 		
 		String query = "select p.portfolioCode L.assetCode, L.assetName, L.assetType, a.assetValue, a.returnRate, a.annualReturn, a.risk, a.assetModifier"+
 		"from Assets a JOIN Portfolio p ON p.portfolioId = a.portfolioId JOIN AssetsList L ON L.assetListId = a.assetListId Join Person q on"+
-		"q.personId=p.ownerId join Person m on m.personId=p.managerId join Person b on b.personId=p.beneficiaryId where a.assetId=?";
+		"q.personId=p.ownerId join Person m on m.personId=p.managerId join Person b on b.personId=p.beneficiaryId";
 
-		
+	List<Asset> assets= new ArrayList<Asset>();	
 	PreparedStatement ps = null;
 	ResultSet rs = null;
-
+	
 	try {
 		ps = conn.prepareStatement(query);
-		ps.setInt(1, assetId);
 		rs = ps.executeQuery();
-		if(rs.next()) {
-			String assetPortfolioCode = rs.getInt("portfolioCode");
+		while(rs.next()) {
+			String assetPortfolioCode = rs.getString("portfolioCode");
 			String assetCode = rs.getString("assetCode");
 			String assetName = rs.getString("assetName");
 			String assetType  = rs.getString("assetType");
@@ -162,9 +165,11 @@ public class databaseinfoandmethods {
 			double risk = rs.getDouble("risk");
 			double assetModifier = rs.getDouble("assetModifier");
 			//remake assets
-			a = new Asset(assetPortfolioCode, assetCode, assetName, assetType, assetValue, returnRate, annualReturn, risk, assetModifier);
+			Asset a = new Asset(assetPortfolioCode, assetCode, assetName, assetType, assetValue, returnRate, annualReturn, risk, assetModifier);
+		
+			assets.add(a);
 		} else {
-			throw new IllegalStateException("No such asset in database with id = " + assetId);
+			throw new IllegalStateException("No such asset in database with asset ");
 		}
 		rs.close();
 		ps.close();
@@ -176,20 +181,7 @@ public class databaseinfoandmethods {
 	
 
 
-	return a;
+	return assets;
 	}
- select p.portfolioCode, p.portfolioId, p.ownerId, q.lastName as OwnerLastName, q.firstName as OwnerFirstName, m.lastName as ManagerLastName, m.firstName as ManagerFirstName, m.persontype, b.lastName as BeneficiaryLastName, b.firstName as BeneficiaryFirstName, p.managerId, p.beneficiaryId, p.fees, p.commissions, p.totalValue, p.sumOfAnnualReturns, p.aggRisk, L.assetCode, L.assetName, L.assetType, a.assetValue, a.returnRate, a.annualReturn, a.risk, a.assetModifier from Assets a JOIN Portfolio p ON p.portfolioId = a.portfolioId
-	JOIN AssetsList L ON L.assetListId = a.assetListId Join Person q on q.personId=p.ownerId join Person m on m.personId=p.managerId join Person b on b.personId=p.beneficiaryId;
-//
-//	public static ArrayList<Assets> getAssets(){
-//		ArrayList<Assets> AssetsList= new ArrayList<Assets>();
-//		select L.assetCode, L.assetName, L.assetType, a.assetValue, a.returnRate, a.annualReturn, a.risk, a.assetModifier from Assets a JOIN Portfolio p ON p.portfolioId = a.portfolioId
-//		 JOIN AssetsList L ON L.assetListId = a.assetListId Join Person q on q.personId=p.ownerId join Person m on m.personId=p.managerId join Person b on b.personId=p.beneficiaryId;
-//
-//		
-//		
-//		return AssetsList;
-//	}
-//	 
-
+ 
 }
