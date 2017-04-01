@@ -1,6 +1,10 @@
 package dataConverter;
 
 //the portfolio is a class with a lot of variables and getter functions in which those variables are calculated
+//this is a complete rework of our old portfolio, which was severly complicated and incredibly redundant.  For future versions, it will need to 
+//be expanded upon for more complicated procedures.  For future edits, where more person data will want to be pulled,
+//we will need to slightly rework this class and how it pulls its data. 
+//But for now, it does a good job of getting the information we need to get from our data
 public class Portfolio {
 	//these variables are all parts of a portfolio or inputs into a portfolio
 	private String PortfolioCode;
@@ -64,7 +68,7 @@ public class Portfolio {
 	public String getManagerCode() {
 		return ManagerCode;
 	}
-	//getter for beneficiary code. has edge case for when it is blank, makes it "none"
+	//getter for beneficiary code. ha
 	public String getBeneficiaryCode() {
 		if(BeneficiaryCode==null){
 			return "none";
@@ -74,32 +78,32 @@ public class Portfolio {
 		}
 	}
 
-	//this getter returns fees, which iterates through persons, and checks when a persons personcode is euqal to manager code, and then calculates the fees based on whether the type of the person is expert or junior, denoted by 'E' or 'J', respectively
+	//this getter returns fees, 
 	public double getFees() {
 		return fees;
 	}
-	//this getter returns commissions, which goes through the number of assets which we have, denoted by occuranceofassetcount
+	//this getter returns commissions
 	public double getCommissions() {
 		return commissions;
 	}
-	//risk getter function,c, then we check to see the type of asset, and calculate risk based on what type of asset it is.
+	//risk getter function,c, then we check to
 	public double getRisk(int u) {
 		return Risk;
 }
 
-	//for every value of o until o is the same as the number of assets in the portfolio, add the value of the asset o, return the sum.
+	//for every value of
 	public double getTotalValue(){
 		return TotalValue;
 	}
-	//returns annual return. Takes in int o, iterates through assets until assetcode is equal to the assetname at index o, then, check what type of asset it is, and calculate annual return based on the type of asset. return it.
+	//e of asset it is, and calculate annual return based on the type of asset. return it.
 	public double getAnnualReturn(int o) {
 		return AnnualReturn;
 	}
-	//returns return rate. For all assets in the portfolio, iterated through a loop, goes through a loop of all assets, if the assetcode is equal to the name of the asset in the portfolio, then we get annual return with input o. then, we calculate the return rate array by dividing annual return by the value of the asset for every asset.
+	//returns return rate. t by the value of sset.
 	public double getReturnRate() {	
 		return ReturnRate;
 	}
-	//using loop, for every asset in the portfolio, we find a temp risk by taking risk multiplied by value over total value, and then summing them together for each asset.
+	//ng them together for each asset.
 	public double getAggRisk() {
 		return AggRisk;
 	}
@@ -118,7 +122,8 @@ public class Portfolio {
 	//for every person, we iterate until the personcode of the person is equal to the ownercode from our portfolio. then we increase the counter variable by one. After all persons have been gone through, we return managercount
 	public int getManagerCount() {
 		return ManagerCount;
-	}	
+	}
+	//these getters are all very basic getters to get names that are stored in the portfolio.
 	public void setPortfolioCode(String PORTFOLIOCODE){
 		this.PortfolioCode=PORTFOLIOCODE;
 	}
