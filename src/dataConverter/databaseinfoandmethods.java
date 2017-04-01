@@ -1,5 +1,4 @@
 package dataConverter;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import com.mysql.*;
 //This will be where our jdbc will be done, bringing in our sql data from the previous assignment and storing it for later output use
 //The plan is to read 2 querries, one that will gather all the data from the Assets, and the gathering portfolio information and names of 
 //owners, managers, and beneficiaries. Both of these will be stored into arraylists.
@@ -16,7 +14,6 @@ public interface databaseinfoandmethods {
 	public static final String url = "jdbc:mysql://cse.unl.edu/tzinsmaster";
 	public static final String username = "tzinsmaster";
 	public static final String password = "c8Mxbo";
-	
 	public static Connection connectionMethod(){
 		//this method is just to save some clutter.  It will make a connection for us when called
 		Connection conn = null;
@@ -27,14 +24,11 @@ public interface databaseinfoandmethods {
 			System.out.println("SQLException: ");
 			e.printStackTrace();
 			throw new RuntimeException(e);
-		}
-		
+		}	
 		return conn;
 	}
-
 	public static List<Portfolio> getPortfolios(){
-		//this method will get store the information we need for portfolios.
-		
+		//this method will get store the information we need for portfolios.	
 		//these are a series of try catch statements meant to catch fatal errors.  It will help us for bug testing tremendously
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -83,11 +77,7 @@ public interface databaseinfoandmethods {
 			double commissions= rs.getDouble("commissions");
 			double totalValue= rs.getDouble("totalValue");
 			double sumOfAnnualReturns= rs.getDouble("sumOfAnnualReturns");
-			
-		
-			
 			Portfolio port = new Portfolio(PortfolioCode, ownerCode, managerCode, beneficiaryCode);
-		
 			port.setOwnerName(OwnerFirstName+" "+OwnerLastName);
 			port.setManagerName(ManagerFirstName+" "+ManagerLastName);
 			port.setManagerType(managerType);
@@ -97,7 +87,6 @@ public interface databaseinfoandmethods {
 			port.setCommissions(commissions);
 			port.setTotalValue(totalValue);
 			port.setSumOfAnnualReturns(sumOfAnnualReturns);
-			
 			portfolios.add(port);
 		} 
 		//close the result set and preparedstatement
@@ -109,11 +98,9 @@ public interface databaseinfoandmethods {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
-		
 	//return the portfolio arraylist
 	return portfolios;
 	}
-	
 	//this is a very similar method. We are gathering all the data for assets
 	public static List<Asset> getAssets(){
 		//these are a series of try catch statements meant to catch fatal errors.  It will help us for bug testing tremendously
@@ -131,8 +118,7 @@ public interface databaseinfoandmethods {
 			System.out.println("ClassNotFoundException: ");
 			e.printStackTrace();
 			throw new RuntimeException(e);
-		}
-		
+		}	
 		//call connection method
 		Connection conn = connectionMethod();;
 		//this query will gather all the asset information
@@ -159,7 +145,6 @@ public interface databaseinfoandmethods {
 			double assetModifier = rs.getDouble("assetModifier");
 			//remake assets
 			Asset a = new Asset(assetPortfolioCode, assetCode, assetName, assetType, assetValue, returnRate, annualReturn, risk, assetModifier);
-		
 			assets.add(a);
 		}
 		//close ps and rs
@@ -174,5 +159,4 @@ public interface databaseinfoandmethods {
 	//return the asset arraylist
 	return assets;
 	}
-	
 }
