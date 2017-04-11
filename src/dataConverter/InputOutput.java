@@ -59,7 +59,7 @@ public class InputOutput implements databaseinfoandmethods{
 			System.out.println("Manager Code :"+PortfolioList.get(g).getManagerCode());
 			System.out.println("Beneficiary :"+PortfolioList.get(g).getBeneficiaryName());
 			System.out.println("Beneficiary Code :"+PortfolioList.get(g).getBeneficiaryCode());
-			System.out.println("# Of Asset within the Portfolio :"+NumOfAssetInPortfolio);
+			System.out.println("# Of Assets within the Portfolio :"+NumOfAssetInPortfolio);
 			System.out.println();
 			System.out.println("FINANCIAL INFORMATION");
 			System.out.println();
@@ -83,7 +83,7 @@ public class InputOutput implements databaseinfoandmethods{
 							System.out.println("Asset Value Modifier :"+AssetList.get(t).getAssetValue());
 							//these are formatted using our formatter for doubles
 							System.out.println("Annual Return :$"+DoubleFormat.format(AssetList.get(t).getAnnualReturn()));
-						    System.out.println("Risk :"+DoubleFormat.format(AssetList.get(t).getRisk()));
+						    System.out.println("Risk :"+RiskFormat.format(AssetList.get(t).getRisk()));
 						    System.out.println("Value :$"+DoubleFormat.format(AssetList.get(t).getAssetValue()));
 						    System.out.println("Return Rate :"+DoubleFormat.format((AssetList.get(t).getReturnRate()*100))+"%");	
 						    System.out.println();
