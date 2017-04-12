@@ -1,11 +1,13 @@
 package dataConverter;
 //this is a rework of our assets class.  It is much more simplified, and is designed largely around the sql.  For future works it will need to be
 //expanded, but for now, it does the job very well.
-public abstract class Assets {
+public interface Assets {
 	//variables that are used in the three types of assets
 	private String Code;
 	private String Type;
 	private String Label;
+	private Investment investment;
+	private Deposit deposit;
 	//general constructor for an asset
 	public Assets(String code, String type, String label) {
 		super();

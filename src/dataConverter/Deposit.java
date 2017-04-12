@@ -1,6 +1,6 @@
 package dataConverter;
 //deposit extends assets
-public class Deposit extends Assets{
+public class Deposit implements Assets{
 //apr is a double variable unique to deposit.
  private double Apr;
   //constructor
