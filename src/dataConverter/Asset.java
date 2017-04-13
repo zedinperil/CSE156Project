@@ -1,6 +1,8 @@
 package dataConverter;
 
-public class Asset {
+import java.awt.List;
+
+public class Asset implements databaseinfoandmethods{
 	String portfolioCode;
 	
 	String assetCode; 
@@ -62,6 +64,30 @@ public class Asset {
 	 * @return the assetType
 	 */
 	public String getAssetType() {
+		List<Deposit> Depositlist= new ArrayList<Deposit>();
+		List<Stock> Stocklist= new ArrayList<Stock>();
+		List<PrivateInvestment> PIlist= new ArrayList<PrivateInvestment>();
+		Depositlist= getDeposits();
+		Stocklist= getStocks();
+		PIlist= getPrivateInvestments();
+		int q=0;
+		for(q=0; q<Depositlist.size(); q++){
+			if(this.assetCode.equals(Depositlist(q).getAssetCode())){
+				assetType="D";
+			}
+		}
+		for(q=0; q<Stocklist.size(); q++){
+			if(this.assetCode.equals(Stocklist(q).getAssetCode())){
+				assetType="S";
+			}
+		}
+		for(q=0; q<PIlist.size(); q++){
+			if(this.assetCode.equals(PIlist(q).getAssetCode())){
+				assetType="P";
+			}
+		}
+		
+		
 		return assetType;
 	}
 	/**

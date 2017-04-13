@@ -1,7 +1,6 @@
 
 //NOTE, We wanted to make this abstract and create a subclass, but we had several problems with it and decided to keep it simpler
 package dataConverter;
-import java.util.StringTokenizer;
 
 //persons is an abstract class with two subclasses: brokers and beneficiaries
 public class Persons{

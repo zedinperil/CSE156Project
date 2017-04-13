@@ -211,8 +211,6 @@ public interface databaseinfoandmethods {
 //  zip varchar(10)
 //);
 
-				
-				String personsPortfolioCode = rs.getString("portfolioCode");
 				String personCode = rs.getString("personCode");
 				String firstName = rs.getString("lastName");
 				String lastName = rs.getString("lastName");
