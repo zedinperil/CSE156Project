@@ -180,9 +180,9 @@ public interface databaseinfoandmethods {
 				throw new RuntimeException(e);
 			}	
 			//call connection method
-			Connection conn = connectionMethod();;
+			Connection conn = connectionMethod();
 			//this query will gather all the persons information
-			String query = "select p.portfolioCode, L.personsCode, L.personsName, L.personsType, a.personsValue, a.returnRate, a.annualReturn, a.risk, a.personsModifier from persons a JOIN Portfolio p ON p.portfolioId = a.portfolioId JOIN personsList L ON L.personsListId = a.personsListId;";
+			String query = "select p.personCode, p.firstName, p.lastName, p.persontype, p.secId, p.street, p.city, p.state, p.country, p.zip from persons p;";
 			//declare a new array list of type persons
 		List<Persons> persons= new ArrayList<Persons>();	
 			//new ps and rs
@@ -225,7 +225,7 @@ public interface databaseinfoandmethods {
 				String secBrokerId = rs.getString("secId");
 		
 				//remake persons
-				Persons p= new Persons(String personCode, String firstName, String lastName, String street, String city, String state, String zip, String country, String brokerType, String secBrokerId) {}
+				Persons p= new Persons(personCode,firstName,lastName,street,city,state,zip,country,brokerType,secBrokerId);
 				persons.add(p);
 			}
 			//close ps and rs

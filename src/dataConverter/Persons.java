@@ -6,12 +6,19 @@ import java.util.StringTokenizer;
 //persons is an abstract class with two subclasses: brokers and beneficiaries
 public abstract class Persons{
 	//basic variables. Address has it's own class
-private String Code;
-private Name Name;
-private Address Address;
-private String Email;
+private String code;
+private String firstName;
+private String lastName;
+private String Street;
+private String City;
+private String State;
+private String Zip;
+private String Country;
+private String personType;
+private String SECID;
+
 	//constructor
-	public Persons(String PersonCode, String name, String address, String email){
+    public Persons(String personCode, String FirstName, String LastName, String street, String city, String state, String zip, String country, String persontype, String secId){
 		super();
 		this.Code= PersonCode;		 
 		this.Name= new Name(name);						
