@@ -159,4 +159,85 @@ public interface databaseinfoandmethods {
 	//return the asset arraylist
 	return assets;
 	}
+	
+	
+	//this is a very similar method. We are gathering all the data for persons
+		public static List<Persons> getPersons(){
+			//these are a series of try catch statements meant to catch fatal errors.  It will help us for bug testing tremendously
+			try {
+				Class.forName("com.mysql.jdbc.Driver").newInstance();
+			} catch (InstantiationException e) {
+				System.out.println("InstantiationException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (IllegalAccessException e) {
+				System.out.println("IllegalAccessException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (ClassNotFoundException e) {
+				System.out.println("ClassNotFoundException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}	
+			//call connection method
+			Connection conn = connectionMethod();;
+			//this query will gather all the persons information
+			String query = "select p.portfolioCode, L.personsCode, L.personsName, L.personsType, a.personsValue, a.returnRate, a.annualReturn, a.risk, a.personsModifier from persons a JOIN Portfolio p ON p.portfolioId = a.portfolioId JOIN personsList L ON L.personsListId = a.personsListId;";
+			//declare a new array list of type persons
+		List<Persons> persons= new ArrayList<Persons>();	
+			//new ps and rs
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		//this try statement will execute the query.  Using this, we are able to define our variables and store the variables into an a new 
+			//persons object. Then we store the object into the arraylist.
+		try {
+			ps = conn.prepareStatement(query);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+
+//create table Person (
+//  personId integer not null primary key auto_increment,
+//  #primary key is auto incremented, the work is done for us and gurantees no repeats
+//  #basic data, personCode must be unique and everyone must have names
+//  personCode varchar(10) not null unique,
+//  firstName varchar(10) not null,
+//  lastName varchar(50) not null,
+//  persontype varchar(50),
+//  secId varchar(15),
+//  street varchar(100),
+//  city varchar(70),
+//  state varchar(2),
+//  country varchar(50),
+//  zip varchar(10)
+//);
+
+				
+				String personsPortfolioCode = rs.getString("portfolioCode");
+				String personCode = rs.getString("personCode");
+				String firstName = rs.getString("lastName");
+				String lastName = rs.getString("lastName");
+				String street = rs.getString("street");
+				String city = rs.getString("city");
+				String state =rs.getString("state");
+				String zip =rs.getString("zip");
+				String country =rs.getString("country");
+				String brokerType = rs.getString("persontype");
+				String secBrokerId = rs.getString("secId");
+		
+				//remake persons
+				Persons p= new Persons(String personCode, String firstName, String lastName, String street, String city, String state, String zip, String country, String brokerType, String secBrokerId) {}
+				persons.add(p);
+			}
+			//close ps and rs
+			rs.close();
+			ps.close();
+			//catch any fatal erros in the sql
+		} catch (SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		//return the persons arraylist
+		return persons;
+		}
 }
