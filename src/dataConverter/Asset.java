@@ -1,7 +1,7 @@
 package dataConverter;
 
-import java.awt.List;
-
+import java.util.List;
+import java.util.ArrayList;
 public class Asset implements databaseinfoandmethods{
 	String portfolioCode;
 	
@@ -86,8 +86,6 @@ public class Asset implements databaseinfoandmethods{
 				assetType="P";
 			}
 		}
-		
-		
 		return assetType;
 	}
 	/**

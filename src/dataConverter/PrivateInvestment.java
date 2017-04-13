@@ -7,8 +7,8 @@ public class PrivateInvestment extends Assets{
 	private String OmegaMeasure;
 	private String TotalValue;
 	//constructor, inherits from asset abstract class
-	public PrivateInvestment(String code, String type, String label, String quarterlydividend, String baserateofreturn, String omegameasure, String totalvalue){
-		super(code, type, label);
+	public PrivateInvestment(String code,String label, String quarterlydividend, String baserateofreturn, String omegameasure, String totalvalue){
+		super(code, label);
 	//the constructor calls setter methods to set the various parts of a Private Investment
 		this.setQuarterlyDividend(quarterlydividend);
 		this.setBaseRateOfReturn(Double.parseDouble(baserateofreturn)/100);

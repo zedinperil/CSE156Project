@@ -8,8 +8,8 @@ public class Stock extends Assets{
 	private String StockSymbol;
 	private String SharePrice;
 	//constructor
-	public Stock(String code, String type, String label, String quarterlydividend, String baserateofreturn,String betameasure,String stocksymbol, String shareprice){
-		super(code,type,label);
+	public Stock(String code, String label, String quarterlydividend, String baserateofreturn,String betameasure,String stocksymbol, String shareprice){
+		super(code, label);
 		//inherits three variables from superclass, the other variables are taken from input, and saved. Baserateofreturn string is parsed as a double and divided by 100 as it is a percent.
 		this.QuarterlyDividend=quarterlydividend;
 		this.BaseRateOfReturn=Double.parseDouble(baserateofreturn)/100;
