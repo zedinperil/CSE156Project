@@ -9,6 +9,146 @@ public class Persons{
 private String code;
 private String firstName;
 private String lastName;
+/**
+ * @return the code
+ */
+public String getCode() {
+	return code;
+}
+
+/**
+ * @param code the code to set
+ */
+public void setCode(String code) {
+	this.code = code;
+}
+
+/**
+ * @return the firstName
+ */
+public String getFirstName() {
+	return firstName;
+}
+
+/**
+ * @param firstName the firstName to set
+ */
+public void setFirstName(String firstName) {
+	this.firstName = firstName;
+}
+
+/**
+ * @return the lastName
+ */
+public String getLastName() {
+	return lastName;
+}
+
+/**
+ * @param lastName the lastName to set
+ */
+public void setLastName(String lastName) {
+	this.lastName = lastName;
+}
+
+/**
+ * @return the street
+ */
+public String getStreet() {
+	return Street;
+}
+
+/**
+ * @param street the street to set
+ */
+public void setStreet(String street) {
+	Street = street;
+}
+
+/**
+ * @return the city
+ */
+public String getCity() {
+	return City;
+}
+
+/**
+ * @param city the city to set
+ */
+public void setCity(String city) {
+	City = city;
+}
+
+/**
+ * @return the state
+ */
+public String getState() {
+	return State;
+}
+
+/**
+ * @param state the state to set
+ */
+public void setState(String state) {
+	State = state;
+}
+
+/**
+ * @return the zip
+ */
+public String getZip() {
+	return Zip;
+}
+
+/**
+ * @param zip the zip to set
+ */
+public void setZip(String zip) {
+	Zip = zip;
+}
+
+/**
+ * @return the country
+ */
+public String getCountry() {
+	return Country;
+}
+
+/**
+ * @param country the country to set
+ */
+public void setCountry(String country) {
+	Country = country;
+}
+
+/**
+ * @return the personType
+ */
+public String getPersonType() {
+	return personType;
+}
+
+/**
+ * @param personType the personType to set
+ */
+public void setPersonType(String personType) {
+	this.personType = personType;
+}
+
+/**
+ * @return the sECID
+ */
+public String getSECID() {
+	return SECID;
+}
+
+/**
+ * @param sECID the sECID to set
+ */
+public void setSECID(String sECID) {
+	SECID = sECID;
+}
+
 private String Street;
 private String City;
 private String State;
