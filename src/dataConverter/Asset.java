@@ -8,12 +8,13 @@ public class Asset implements databaseinfoandmethods{
 	String assetCode; 
 	String assetName; 
 	String assetType; 
+	double sharePrice;
 	double assetValue;
 	double returnRate;
 	double annualReturn;
 	double risk;
 	double baseRateOfReturn;
-	double assetModifier; 
+	double privateValue;
 	public Asset(String PortfolioCode, String AssetCode, double Value) {
 		this.portfolioCode= PortfolioCode;
 		this.assetCode = AssetCode;
@@ -60,10 +61,10 @@ public class Asset implements databaseinfoandmethods{
 	/**
 	 * @return the assetType
 	 */
-	public String getAssetType(String assetPortCode) {
+	public String getAssetType(String assetCode) {
 		List<Assets> assetList=	databaseinfoandmethods.getAssetList();
 		for(int i=0; i<assetList.size();i++){
-			if(assetList.get(i).getPortfolioCode().equals(assetPortCode)){
+			if(assetList.get(i).getAssetCode().equals(assetCode)){
 				assetType=assetList.get(i).getAssetType();
 			}	
 		}
@@ -124,16 +125,34 @@ public class Asset implements databaseinfoandmethods{
 	public void setRisk(double risk) {
 		this.risk = risk;
 	}
-	/**
-	 * @return the assetModifier
-	 */
-	public double getAssetModifier() {
-		return assetModifier;
+	
+	public double getPrivateValue(String assetcode){
+	privateValue=0;
+		assetType= getAssetType(assetcode);
+		if(assetType.equals("P")){
+			List<Assets> assetList=	databaseinfoandmethods.getAssetList();
+			for(int i=0; i<assetList.size();i++){
+				if(assetList.get(i).getAssetType().equals(assetType)&& assetList.get(i).getAssetCode().equals(assetcode)){
+					PrivateInvestment Priv= (PrivateInvestment) assetList.get(i);	
+					privateValue= Priv.getTotalValue();
+				}
+			}	
+		}
+		return privateValue;
 	}
-	/**
-	 * @param assetModifier the assetModifier to set
-	 */
-	public void setAssetModifier(double assetModifier) {
-		this.assetModifier = assetModifier;
+	public double getSharePrice(String assetcode){
+		sharePrice=0;
+		assetType= getAssetType(assetcode);
+		if(assetType.equals("S")){
+			List<Assets> assetList=	databaseinfoandmethods.getAssetList();
+			for(int i=0; i<assetList.size();i++){
+				if(assetList.get(i).getAssetType().equals(assetType)&& assetList.get(i).getAssetCode().equals(assetcode)){
+					Stock Stok= (Stock) assetList.get(i);	
+					sharePrice= Stok.getSharePrice();
+				}
+			}	
+		}
+		return sharePrice;
+		
 	}
 }

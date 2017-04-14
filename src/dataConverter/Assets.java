@@ -23,7 +23,7 @@ public abstract class Assets {
 		assetType= assettype;
 	}
 
-	public Object getPortfolioCode() {
+	public Object getAssetCode() {
 		// TODO Auto-generated method stub
 		return Code;
 	}
