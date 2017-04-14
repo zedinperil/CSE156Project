@@ -46,7 +46,9 @@ public class Asset implements databaseinfoandmethods{
 	/**
 	 * @return the assetName
 	 */
-	public String getAssetName() {
+	public String getAssetName(Asset theAsset) {
+	
+		
 		return assetName;
 	}
 	/**
@@ -58,15 +60,21 @@ public class Asset implements databaseinfoandmethods{
 	/**
 	 * @return the assetType
 	 */
-	public String getAssetType() {
-
+	public String getAssetType(String assetPortCode) {
+		List<Assets> assetList=	databaseinfoandmethods.getAssetList();
+		for(int i=0; i<assetList.size();i++){
+			if(assetList.get(i).getPortfolioCode().equals(assetPortCode)){
+				assetType=assetList.get(i).getAssetType();
+			}	
+		}
 		return assetType;
 	}
 	/**
 	 * @param assetType the assetType to set
 	 */
-	public void setAssetType(String assetType) {
-		this.assetType = assetType;
+	public void setAssetType(String assettype) {
+
+		this.assetType = assettype;
 	}
 	/**
 	 * @return the assetValue

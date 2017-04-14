@@ -13,11 +13,6 @@ public abstract class Assets {
 	}
 
 	//below are three getters for code, type, and label
-	public String getCode() {
-		return Code;
-	}
-
-
 	public String getLabel() {
 		return Label;
 	}
@@ -26,6 +21,11 @@ public abstract class Assets {
 	}
 	public void setType(String assettype){
 		assetType= assettype;
+	}
+
+	public Object getPortfolioCode() {
+		// TODO Auto-generated method stub
+		return Code;
 	}
 	
 	
