@@ -49,7 +49,16 @@ public interface databaseinfoandmethods {
 		Connection conn = connectionMethod();
 		//this is our portfolio querry. It gathers all portfolio information, along with the names for the codes to eliminate the need to 
 		//generate a person arraylist for information
-		String query =  "select p.portfolioCode, p.portfolioId, q.personCode as OwnerCode, m.personCode as ManagerCode, b.personCode as BeneficiaryCode, q.lastName as OwnerLastName, q.firstName as OwnerFirstName, m.lastName as ManagerLastName, m.firstName as ManagerFirstName, m.persontype as ManagerType, b.lastName as BeneficiaryLastName, b.firstName as BeneficiaryFirstName, p.fees, p.aggRisk, p.commissions, p.totalValue, p.sumOfAnnualReturns from Portfolio p join Person q on q.personId=p.ownerId LEFT JOIN Person m on m.personId=p.managerId LEFT JOIN Person b on b.personId=p.beneficiaryId;";
+		String query =  "select p.portfolioCode, p.portfolioId, "
+				+ "q.personCode as OwnerCode, m.personCode as ManagerCode, "
+				+ "b.personCode as BeneficiaryCode, q.lastName as OwnerLastName, "
+				+ "q.firstName as OwnerFirstName, m.lastName as ManagerLastName, "
+				+ "m.firstName as ManagerFirstName, m.persontype as ManagerType, "
+				+ "b.lastName as BeneficiaryLastName, b.firstName as BeneficiaryFirstName, "
+				+ "p.fees, p.aggRisk, p.commissions, p.totalValue, p.sumOfAnnualReturns "
+				+ "from Portfolio p join Person q on q.personId=p.ownerId "
+				+ "LEFT JOIN Person m on m.personId=p.managerId "
+				+ "LEFT JOIN Person b on b.personId=p.beneficiaryId;";
 		//declare a new portfolio arraylist
 		List<Portfolio> portfolios= new ArrayList<Portfolio>();
 		//declare a result set and preparedstatement to use the querry and get the information
@@ -122,7 +131,10 @@ public interface databaseinfoandmethods {
 		//call connection method
 		Connection conn = connectionMethod();;
 		//this query will gather all the asset information
-		String query = "select p.portfolioCode, L.assetCode, L.assetName, L.assetType, a.assetValue, a.returnRate, a.annualReturn, a.risk, a.assetModifier from Assets a JOIN Portfolio p ON p.portfolioId = a.portfolioId JOIN AssetsList L ON L.assetListId = a.assetListId;";
+		String query = "select p.portfolioCode, L.assetCode, L.assetName, L.assetType, "
+				+ "a.assetValue, a.returnRate, a.annualReturn, a.risk, "
+				+ "a.assetModifier from Assets a JOIN Portfolio p ON p.portfolioId = a.portfolioId "
+				+ "JOIN AssetsList L ON L.assetListId = a.assetListId;";
 		//declare a new array list of type asset
 	List<Asset> assets= new ArrayList<Asset>();	
 		//new ps and rs
@@ -283,15 +295,17 @@ public interface databaseinfoandmethods {
 				String query2= new String();
 				//remake assets
 				if(assetType.equals("P")){
-					query2="";
+					query2="select P.assetCode, P.assetName, P.quarterlyDividend, P.baseRateofReturn, "
+							+ "P.totalValue, P.omegaMeasure FROM PrivateInvestment P";
 				
 				}
 				if(assetType.equals("S")){
-					query2="";
+					query2="select S.assetCode, S.assetName, S.quarterlyDividend, S.baseRateofReturn, "
+							+ "S.betaMeasure, S.stockSymbol, S.sharePrice FROM Stock S";
 				
 				}
 				if(assetType.equals("D")){
-					query2="";
+					query2="select D.assetCode, D.assetName, D.apr FROM Deposit D";
 				
 				}
 				//EXECUTE ORDER 66, WHICH MEANS TO RUN THE SECOND QUERY, DUN DUN DUUUNES BOY
