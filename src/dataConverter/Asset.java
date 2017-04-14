@@ -12,6 +12,7 @@ public class Asset implements databaseinfoandmethods{
 	double returnRate;
 	double annualReturn;
 	double risk;
+	double baseRateOfReturn;
 	double assetModifier; 
 	public Asset(String PortfolioCode, String AssetCode, double Value) {
 		this.portfolioCode= PortfolioCode;

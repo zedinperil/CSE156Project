@@ -87,7 +87,7 @@ public class Portfolio {
 		return commissions;
 	}
 	//risk getter function,c, then we check to
-	public double getRisk(int u) {
+	public double getRisk() {
 		return Risk;
 }
 
@@ -96,7 +96,7 @@ public class Portfolio {
 		return TotalValue;
 	}
 	//e of asset it is, and calculate annual return based on the type of asset. return it.
-	public double getAnnualReturn(int o) {
+	public double getAnnualReturn() {
 		return AnnualReturn;
 	}
 	//returns return rate. t by the value of sset.

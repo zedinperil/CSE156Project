@@ -199,7 +199,7 @@ public interface databaseinfoandmethods {
 			//call connection method
 			Connection conn = connectionMethod();
 			//this query will gather all the persons information
-			String query = "select p.personCode, p.firstName, p.lastName, p.persontype, p.secId, p.street, p.city, p.state, p.country, p.zip from persons p;";
+			String query = "select p.personCode, p.firstName, p.lastName, p.persontype, p.secId, p.street, p.city, p.state, p.country, p.zip from Person p;";
 			//declare a new array list of type persons
 		List<Persons> persons= new ArrayList<Persons>();	
 			//new ps and rs
@@ -212,21 +212,6 @@ public interface databaseinfoandmethods {
 			rs = ps.executeQuery();
 			while(rs.next()) {
 
-//create table Person (
-//  personId integer not null primary key auto_increment,
-//  #primary key is auto incremented, the work is done for us and gurantees no repeats
-//  #basic data, personCode must be unique and everyone must have names
-//  personCode varchar(10) not null unique,
-//  firstName varchar(10) not null,
-//  lastName varchar(50) not null,
-//  persontype varchar(50),
-//  secId varchar(15),
-//  street varchar(100),
-//  city varchar(70),
-//  state varchar(2),
-//  country varchar(50),
-//  zip varchar(10)
-//);
 
 				String personCode = rs.getString("personCode");
 				String firstName = rs.getString("lastName");
@@ -257,7 +242,7 @@ public interface databaseinfoandmethods {
 		}
 		
 		
-		//this is a very similar method. We are gathering all the data for assets
+		//this is a very similar method. We are gathering all the data for assetsList
 		public static List<Assets> getAssetList(){
 			//these are a series of try catch statements meant to catch fatal errors.  It will help us for bug testing tremendously
 			try {
@@ -296,7 +281,7 @@ public interface databaseinfoandmethods {
 				//remake assets
 				if(assetType.equals("P")){
 					query2="select P.assetCode, P.assetName, P.quarterlyDividend, P.baseRateofReturn, "
-							+ "P.totalValue, P.omegaMeasure FROM PrivateInvestment P";
+							+ "P.pValue, P.omegaMeasure FROM PrivateInvestment P";
 				
 				}
 				if(assetType.equals("S")){
@@ -329,7 +314,7 @@ public interface databaseinfoandmethods {
 					
 					double quarterlydividend=rs2.getDouble("quarterlyDividend");
 					double baserateofreturn=rs2.getDouble("baseRateOfReturn");
-					double totalvalue=rs2.getDouble("totalValue");
+					double totalvalue=rs2.getDouble("pValue");
 					double omegameasure=rs2.getDouble("omegaMeasure");
 					
 					
@@ -379,7 +364,61 @@ public interface databaseinfoandmethods {
 		return assetList;
 		}
 		
+
+		//this is a very similar method. We are gathering all the data for persons
+			public static List<Email> getEmail(){
+				//these are a series of try catch statements meant to catch fatal errors.  It will help us for bug testing tremendously
+				try {
+					Class.forName("com.mysql.jdbc.Driver").newInstance();
+				} catch (InstantiationException e) {
+					System.out.println("InstantiationException: ");
+					e.printStackTrace();
+					throw new RuntimeException(e);
+				} catch (IllegalAccessException e) {
+					System.out.println("IllegalAccessException: ");
+					e.printStackTrace();
+					throw new RuntimeException(e);
+				} catch (ClassNotFoundException e) {
+					System.out.println("ClassNotFoundException: ");
+					e.printStackTrace();
+					throw new RuntimeException(e);
+				}	
+				//call connection method
+				Connection conn = connectionMethod();
+				//this query will gather all the persons information
+				String query = "select e.personCode, e.email from Emails e;";
+				//declare a new array list of type persons
+			List<Email> emails= new ArrayList<Email>();	
+				//new ps and rs
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			//this try statement will execute the query.  Using this, we are able to define our variables and store the variables into an a new 
+				//persons object. Then we store the object into the arraylist.
+			try {
+				ps = conn.prepareStatement(query);
+				rs = ps.executeQuery();
+				while(rs.next()) {
+
+
+					String personCode = rs.getString("personCode");
+					String email = rs.getString("email");
 		
+					//remake persons
+					Email e= new Email(personCode,email);
+					emails.add(e);
+				}
+				//close ps and rs
+				rs.close();
+				ps.close();
+				//catch any fatal erros in the sql
+			} catch (SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			//return the persons arraylist
+			return emails;
+			}
 		
 		
 
