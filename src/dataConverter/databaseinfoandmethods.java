@@ -144,7 +144,12 @@ public interface databaseinfoandmethods {
 			double risk = rs.getDouble("risk");
 			double assetModifier = rs.getDouble("assetModifier");
 			//remake assets
-			Asset a = new Asset(assetPortfolioCode, assetCode, assetName, assetType, assetValue, returnRate, annualReturn, risk, assetModifier);
+			Asset a = new Asset(assetPortfolioCode, assetCode, assetValue);
+			a.setAssetType(assetType);
+			a.setReturnRate(returnRate);
+			a.setAnnualReturn(annualReturn);
+			a.setRisk(risk);
+			a.setAssetModifier(assetModifier);
 			assets.add(a);
 		}
 		//close ps and rs
@@ -275,7 +280,7 @@ public interface databaseinfoandmethods {
 			while(rs.next()) {
 				// MAKE SOME NEW QUERIES FOR THIS SERIOUSLY MAKE IT TO GET THEM FROM EACH THING REEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
 				String assetType  = rs.getString("assetType");
-				String query2= new String;
+				String query2= new String();
 				//remake assets
 				if(assetType.equals("P")){
 					query2="";
