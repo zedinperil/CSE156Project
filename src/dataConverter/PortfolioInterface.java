@@ -27,10 +27,10 @@ public interface PortfolioInterface extends databaseinfoandmethods {
 		
 		for(int k=0; k<RelevantAssets.size(); k++){
 				if(RelevantAssets.get(k).getAssetType(RelevantAssets.get(k).assetCode).equals("P")){
-					Value = Double.parseDouble(RelevantAssets.getPrivateValue(RelevantAssets.get(k).assetCode)) * RelevantAssets.get(k).assetValue * .01;
+					Value = RelevantAssets.get(k).getPrivateValue(RelevantAssets.get(k).assetCode) * RelevantAssets.get(k).assetValue * .01;
 				}
 				if(RelevantAssets.get(k).getAssetType(RelevantAssets.get(k).assetCode).equals("S")){
-					Value = Double.parseDouble(RelevantAssets.get(k).getSharePrice(RelevantAssets.get(k).assetCode)) * RelevantAssets.get(k).assetValue;
+					Value = RelevantAssets.get(k).getSharePrice(RelevantAssets.get(k).assetCode) * RelevantAssets.get(k).assetValue;
 				}
 				if(RelevantAssets.get(k).getAssetType(RelevantAssets.get(k).assetCode).equals("D")){
 					Value = RelevantAssets.get(k).assetValue;
@@ -41,37 +41,22 @@ public interface PortfolioInterface extends databaseinfoandmethods {
 
 
 
-	public static double getAnnualReturn(List<Asset> RelevantAssets) {
-		double AnnualReturn = 0;
+	public static double getAnnualReturnSum(List<Asset> RelevantAssets) {
+		double AnnualReturnSum = 0;
 		for(int k=0; k<RelevantAssets.size(); k++){
-				if(RelevantAssets.get(k).getAssetType(RelevantAssets.get(k).assetCode).equals("P")){
-						AnnualReturn = RelevantAssets.get(k).getBaseRateOfReturn()* (Double.parseDouble(RelevantAssets.get(k).getTotalValue()) * AssetValue[o] * .01)+ (4 *(Double.parseDouble(RevelantAssets.get(k).getQuarterlyDividend()) * AssetValue[o] * .01));				
-					}
-				if(RelevantAssets.get(k).getAssetType(RelevantAssets.get(k).assetCode).equals("S")){
-						AnnualReturn = (RelevantAssets.get(k).getBaseRateOfReturn()* (Double.parseDouble(RelevantAssets.get(k).getSharePrice()) * AssetValue[o])+ (4 *(Double.parseDouble(RevelantAssets.get(k).getQuarterlyDividend()) * AssetValue[o] )));	
-				}
-				if(RelevantAssets.get(k).getAssetType(RelevantAssets.get(k).assetCode).equals("D")){
-						AnnualReturn = (Math.pow(Math.E, RelevantAssets.get(k).getApr()) - 1)*AssetValue[o];					
-				}
+				AnnualReturnSum+= RelevanAssets.get(k).getAnnualReturn(RelevantAssets.get(k).portfolioCode);
 			}
-		
-		return AnnualReturn;
+		return AnnualReturnSum;
 	}
 
 	public static double getReturnRate(List<Asset> RelevantAssets) {
 		int o=0;	
-		int r=0;
 		double ReturnRate = 0;
 				o=0;
 				while(o<RelevantAssets.size()){
-					r=0;
-					while(r<assetcount){
-						if(Ass[r].getCode().equals(AssetName[o])){
-							AnnualReturn = getAnnualReturn(o);
-							ReturnRate= AnnualReturn/getValue(o);			
-						}
-					r++;			
-					}
+						
+						double	AnnualReturn = getAnnualReturn(RelevantAssets);
+							ReturnRate= AnnualReturn/ ValueMethod(RelevantAssets);			
 				o++;
 				}		
 		return ReturnRate;
