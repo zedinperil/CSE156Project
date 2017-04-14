@@ -15,6 +15,9 @@ public class Asset implements databaseinfoandmethods{
 	double risk;
 	double baseRateOfReturn;
 	double privateValue;
+	double quarterlyDividends;
+	double apr;
+	double risk;
 	public Asset(String PortfolioCode, String AssetCode, double Value) {
 		this.portfolioCode= PortfolioCode;
 		this.assetCode = AssetCode;
@@ -155,4 +158,136 @@ public class Asset implements databaseinfoandmethods{
 		return sharePrice;
 		
 	}
+	public double getBaseRateOfReturn(String assetcode){
+		baseRateOfReturn=0;
+		assetType= getAssetType(assetcode);
+		if(assetType.equals("P")){
+			List<Assets> assetList=	databaseinfoandmethods.getAssetList();
+			for(int i=0; i<assetList.size();i++){
+				if(assetList.get(i).getAssetType().equals(assetType)&& assetList.get(i).getAssetCode().equals(assetcode)){
+					PrivateInvestment Priv= (PrivateInvestment) assetList.get(i);	
+					baseRateOfReturn= Priv.getBaseRateOfReturn();
+				}
+			}	
+		}
+		if(assetType.equals("S")){
+			List<Assets> assetList=	databaseinfoandmethods.getAssetList();
+			for(int i=0; i<assetList.size();i++){
+				if(assetList.get(i).getAssetType().equals(assetType)&& assetList.get(i).getAssetCode().equals(assetcode)){
+					Stock Stok= (Stock) assetList.get(i);	
+					baseRateOfReturn= Stok.getBaseRateOfReturn();
+				}
+			}	
+		}
+		return baseRateOfReturn;
+	}
+	public double getQuarterlyDividend(String assetcode){
+		quarterlyDividends=0;
+		assetType= getAssetType(assetcode);
+		if(assetType.equals("P")){
+			List<Assets> assetList=	databaseinfoandmethods.getAssetList();
+			for(int i=0; i<assetList.size();i++){
+				if(assetList.get(i).getAssetType().equals(assetType)&& assetList.get(i).getAssetCode().equals(assetcode)){
+					PrivateInvestment Priv= (PrivateInvestment) assetList.get(i);	
+					quarterlyDividends= Priv.getQuarterlyDividend();
+				}
+			}	
+		}
+		if(assetType.equals("S")){
+			List<Assets> assetList=	databaseinfoandmethods.getAssetList();
+			for(int i=0; i<assetList.size();i++){
+				if(assetList.get(i).getAssetType().equals(assetType)&& assetList.get(i).getAssetCode().equals(assetcode)){
+					Stock Stok= (Stock) assetList.get(i);	
+					quarterlyDividends= Stok.getQuarterlyDividend();
+				}
+			}	
+		}
+		return quarterlyDividends;
+	}
+	
+	public double getApr(String assetcode){
+		assetType= getAssetType(assetcode);
+		if(assetType.equals("D")){
+			List<Assets> assetList= databaseinfoandmethods.getAssetList();
+			for(int i=0; i<assetList.size(); i++){
+				if(assetList.get(i).getAssetType().equals(assetType)&& assetList.get(i).getAssetCode().equals(assetcode)){
+					Deposit Dep= (Deposit) assetList.get(i);
+					apr= Dep.getApr();
+				}
+			}
+		}
+		return apr;
+	}
+	 public double getAnnualReturn(String assetcode) {
+		 double AnnualReturn = 0;
+		 assetType= getAssetType(assetcode);
+		 List<Assets> assetList= databaseinfoandmethods.getAssetList();
+
+		 for(int i=0; i<assetList.size(); i++){
+			if(assetList.get(i).getAssetCode().equals(assetCode)){
+				 if(assetType.equals("P")){
+					 PrivateInvestment Priv= (PrivateInvestment) assetList.get(i);
+					 AnnualReturn = Priv.getBaseRateOfReturn()*(Priv.getTotalValue() * getValue(assetcode) * .01)+ (4 *(Priv.getQuarterlyDividend() * getValue(assetcode) * .01));
+				 }
+				 if(assetType.equals("S")){
+					 Stock Stok= (Stock) assetList.get(i);
+					 AnnualReturn = (Stok.getBaseRateOfReturn()* (Stok.getSharePrice() * getValue(assetcode) + (4 *(Stok.getQuarterlyDividend() * getValue(assetcode) ))));
+				 }
+				 if(assetType.equals("D")){
+					 Deposit Dep= (Deposit) assetList.get(i);
+					 AnnualReturn = (Math.pow(Math.E, Dep.getApr() - 1)*getValue(assetcode));
+				 }	 
+			}
+		 } 
+		 return AnnualReturn;
+		 }
+
+	 public double getValue(String assetcode){
+		 double Value = 0;
+		 assetType= getAssetType(assetcode);
+		 List<Asset> assets= databaseinfoandmethods.getAssets();
+		 List<Assets> assetList= databaseinfoandmethods.getAssetList();
+		 for(int k=0; k<assetList.size(); k++){
+			if(assetList.get(k).getAssetCode().equals(assetCode)){
+				for(int i=0; i<assets.size(); i++){
+					if(assets.get(i).getAssetCode().equals(assetCode)){
+						if(assetType.equals("P")){
+							PrivateInvestment Priv= (PrivateInvestment)assetList.get(k);
+							Value = Priv.getTotalValue() * assets.get(i).getAssetValue() * .01;
+							 return Value;
+						}
+						if(assetType.equals("S")){
+							Stock Stok= (Stock) assetList.get(k);
+							Value = Stok.getSharePrice() * assets.get(i).getAssetValue();
+							 return Value;
+						}
+						if(assetType.equals("D")){
+							Value = assets.get(i).getAssetValue();
+							 return Value;
+						}	
+					}
+				}
+		
+			}
+		 }
+		 return Value;
+	 }
+	 public double getRisk(String assetcode) {
+		 assetType= getAssetType(assetcode);
+		 List<Assets> assetList= databaseinfoandmethods.getAssetList();
+		 for(int i=0; i<assetList.size(); i++){
+			 if(assetType.equals("P")){
+				 PrivateInvestment Priv= (PrivateInvestment) assetList.get(i);
+				 risk = Priv.getOmegaMeasure()+ Math.pow(java.lang.Math.E,(-100000/Priv.getTotalValue()));
+			 }
+			 if(assetType.equals("S")){
+				 Stock Stok= (Stock) assetList.get(i);
+				 risk = Stok.getBetaMeasure();
+			 }
+			 if(assetType.equals("D")){
+				 risk = 0;
+			 } 
+		 }
+		 return risk;		 
+	 }
 }
