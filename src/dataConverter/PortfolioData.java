@@ -1,23 +1,104 @@
 package com.sdb; //DO NOT CHANGE THIS
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 /**
  * This is a collection of utility methods that define a general API for
  * interacting with the database supporting this application.
  *
  */
-public class PortfolioData {
+public class PortfolioData implements databaseinfoandmethods{
 
 	/**
 	 * Method that removes every person record from the database
 	 */
-	public static void removeAllPersons() {}
-	
+	public static void removeAllPersons() {
+		try {
+		Class.forName("com.mysql.jdbc.Driver").newInstance();
+		} catch (InstantiationException e) {
+			System.out.println("InstantiationException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			System.out.println("IllegalAccessException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		} catch (ClassNotFoundException e) {
+			System.out.println("ClassNotFoundException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		Connection conn = null;
+	//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
+		try {
+			conn = DriverManager.getConnection(url, username, password);
+		} catch (SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}	
+		String query = "DELETE * FROM Person";
+		PreparedStatement ps = null;
+		try {
+			ps = conn.prepareStatement(query);
+			conn.close();
+			ps.close();
+		}catch(SQLException e) {
+			System.out.println("SQLException: ");
+			e.printStackTrace();
+			throw new RuntimeException(e);
+			
+		}
+		
+	}
+				
 	/**
 	 * Removes the person record from the database corresponding to the
 	 * provided <code>personCode</code>
 	 * @param personCode
 	 */
-	public static void removePerson(String personCode) {}
+	public static void removePerson(String personCode) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			} catch (InstantiationException e) {
+				System.out.println("InstantiationException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (IllegalAccessException e) {
+				System.out.println("IllegalAccessException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (ClassNotFoundException e) {
+				System.out.println("ClassNotFoundException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			Connection conn = null;
+		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
+			try {
+				conn = DriverManager.getConnection(url, username, password);
+			} catch (SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}	
+			String query = "DELETE * FROM Person P WHERE P.personCode EQUALS "+personCode+"";
+			PreparedStatement ps = null;
+			try {
+				ps = conn.prepareStatement(query);
+				
+				conn.close();
+				ps.close();
+			}catch(SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+				
+			}
+	}
 	
 	/**
 	 * Method to add a person record to the database with the provided data. The
@@ -33,7 +114,47 @@ public class PortfolioData {
 	 * @param country
 	 * @param brokerType
 	 */
-	public static void addPerson(String personCode, String firstName, String lastName, String street, String city, String state, String zip, String country, String brokerType, String secBrokerId) {}
+		
+	public static void addPerson(String personCode, String firstName, String lastName, String street, String city, String state, String zip, String country, String brokerType, String secBrokerId) {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			} catch (InstantiationException e) {
+				System.out.println("InstantiationException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (IllegalAccessException e) {
+				System.out.println("IllegalAccessException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (ClassNotFoundException e) {
+				System.out.println("ClassNotFoundException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			Connection conn = null;
+		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
+			try {
+				conn = DriverManager.getConnection(url, username, password);
+			} catch (SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}	
+			String query = "";
+			PreparedStatement ps = null;
+			try {
+				ps = conn.prepareStatement(query);
+			
+				conn.close();
+				ps.close();
+			}catch(SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+		
+	}
 	
 	/**
 	 * Adds an email record corresponding person record corresponding to the
@@ -41,19 +162,139 @@ public class PortfolioData {
 	 * @param personCode
 	 * @param email
 	 */
-	public static void addEmail(String personCode, String email) {}
+	public static void addEmail(String personCode, String email) {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			} catch (InstantiationException e) {
+				System.out.println("InstantiationException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (IllegalAccessException e) {
+				System.out.println("IllegalAccessException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (ClassNotFoundException e) {
+				System.out.println("ClassNotFoundException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			Connection conn = null;
+		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
+			try {
+				conn = DriverManager.getConnection(url, username, password);
+			} catch (SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}	
+			String query = "DELETE * FROM Person P WHERE P.personCode EQUALS "+personCode+"";
+			PreparedStatement ps = null;
+			try {
+				ps = conn.prepareStatement(query);
+				
+				conn.close();
+				ps.close();
+			}catch(SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+				
+			}
+		
+	}
 
 	/**
 	 * Removes all asset records from the database
 	 */
-	public static void removeAllAssets() {}
+	public static void removeAllAssets() {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			} catch (InstantiationException e) {
+				System.out.println("InstantiationException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (IllegalAccessException e) {
+				System.out.println("IllegalAccessException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (ClassNotFoundException e) {
+				System.out.println("ClassNotFoundException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			Connection conn = null;
+		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
+			try {
+				conn = DriverManager.getConnection(url, username, password);
+			} catch (SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}	
+			String query = "";
+			PreparedStatement ps = null;
+			try {
+				ps = conn.prepareStatement(query);
+				
+				conn.close();
+				ps.close();
+			}catch(SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+				
+			}
+		
+	}
 
 	/**
 	 * Removes the asset record from the database corresponding to the
 	 * provided <code>assetCode</code>
 	 * @param assetCode
 	 */
-	public static void removeAsset(String assetCode) {}
+	public static void removeAsset(String assetCode) {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			} catch (InstantiationException e) {
+				System.out.println("InstantiationException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (IllegalAccessException e) {
+				System.out.println("IllegalAccessException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (ClassNotFoundException e) {
+				System.out.println("ClassNotFoundException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			Connection conn = null;
+		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
+			try {
+				conn = DriverManager.getConnection(url, username, password);
+			} catch (SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}	
+			String query = "";
+			PreparedStatement ps = null;
+			try {
+				ps = conn.prepareStatement(query);
+				
+				conn.close();
+				ps.close();
+			}catch(SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+				
+			}
+		
+	}
 	
 	/**
 	 * Adds a deposit account asset record to the database with the
@@ -62,7 +303,47 @@ public class PortfolioData {
 	 * @param label
 	 * @param apr
 	 */
-	public static void addDepositAccount(String assetCode, String label, double apr) {}
+	public static void addDepositAccount(String assetCode, String label, double apr) {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			} catch (InstantiationException e) {
+				System.out.println("InstantiationException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (IllegalAccessException e) {
+				System.out.println("IllegalAccessException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (ClassNotFoundException e) {
+				System.out.println("ClassNotFoundException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			Connection conn = null;
+		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
+			try {
+				conn = DriverManager.getConnection(url, username, password);
+			} catch (SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}	
+			String query = "";
+			PreparedStatement ps = null;
+			try {
+				ps = conn.prepareStatement(query);
+				
+				conn.close();
+				ps.close();
+			}catch(SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+				
+			}
+		
+	}
 	
 	/**
 	 * Adds a private investment asset record to the database with the
@@ -76,7 +357,46 @@ public class PortfolioData {
 	 * @param totalValue
 	 */
 	public static void addPrivateInvestment(String assetCode, String label, Double quarterlyDividend, 
-			Double baseRateOfReturn, Double baseOmega, Double totalValue) {}
+			Double baseRateOfReturn, Double baseOmega, Double totalValue) {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			} catch (InstantiationException e) {
+				System.out.println("InstantiationException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (IllegalAccessException e) {
+				System.out.println("IllegalAccessException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (ClassNotFoundException e) {
+				System.out.println("ClassNotFoundException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			Connection conn = null;
+		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
+			try {
+				conn = DriverManager.getConnection(url, username, password);
+			} catch (SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}	
+			String query = "";
+			PreparedStatement ps = null;
+			try {
+				ps = conn.prepareStatement(query);
+				
+				conn.close();
+				ps.close();
+			}catch(SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+				
+			}
+	}
 	
 	/**
 	 * Adds a stock asset record to the database with the
@@ -91,19 +411,134 @@ public class PortfolioData {
 	 * @param sharePrice
 	 */
 	public static void addStock(String assetCode, String label, Double quarterlyDividend, 
-			Double baseRateOfReturn, Double beta, String stockSymbol, Double sharePrice) {}
+			Double baseRateOfReturn, Double beta, String stockSymbol, Double sharePrice) {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			} catch (InstantiationException e) {
+				System.out.println("InstantiationException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (IllegalAccessException e) {
+				System.out.println("IllegalAccessException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (ClassNotFoundException e) {
+				System.out.println("ClassNotFoundException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			Connection conn = null;
+		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
+			try {
+				conn = DriverManager.getConnection(url, username, password);
+			} catch (SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}	
+			String query = "";
+			PreparedStatement ps = null;
+			try {
+				ps = conn.prepareStatement(query);
+				
+				conn.close();
+				ps.close();
+			}catch(SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+				
+			}
+	}
 
 	/**
 	 * Removes all portfolio records from the database
 	 */
-	public static void removeAllPortfolios() {}
+	public static void removeAllPortfolios() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			} catch (InstantiationException e) {
+				System.out.println("InstantiationException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (IllegalAccessException e) {
+				System.out.println("IllegalAccessException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (ClassNotFoundException e) {
+				System.out.println("ClassNotFoundException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			Connection conn = null;
+		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
+			try {
+				conn = DriverManager.getConnection(url, username, password);
+			} catch (SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}	
+			String query = "";
+			PreparedStatement ps = null;
+			try {
+				ps = conn.prepareStatement(query);
+				conn.close();
+				ps.close();
+			}catch(SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+				
+			}
+	}
 	
 	/**
 	 * Removes the portfolio record from the database corresponding to the
 	 * provided <code>portfolioCode</code>
 	 * @param portfolioCode
 	 */
-	public static void removePortfolio(String portfolioCode) {}
+	public static void removePortfolio(String portfolioCode) {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			} catch (InstantiationException e) {
+				System.out.println("InstantiationException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (IllegalAccessException e) {
+				System.out.println("IllegalAccessException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (ClassNotFoundException e) {
+				System.out.println("ClassNotFoundException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			Connection conn = null;
+		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
+			try {
+				conn = DriverManager.getConnection(url, username, password);
+			} catch (SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}	
+			String query = "";
+			PreparedStatement ps = null;
+			try {
+				ps = conn.prepareStatement(query);
+				conn.close();
+				ps.close();
+			}catch(SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+				
+			}
+		
+	}
 	
 	/**
 	 * Adds a portfolio records to the database with the given data.  If the portfolio has no
@@ -113,7 +548,46 @@ public class PortfolioData {
 	 * @param managerCode
 	 * @param beneficiaryCode
 	 */
-	public static void addPortfolio(String portfolioCode, String ownerCode, String managerCode, String beneficiaryCode) {}
+	public static void addPortfolio(String portfolioCode, String ownerCode, String managerCode, String beneficiaryCode) {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			} catch (InstantiationException e) {
+				System.out.println("InstantiationException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (IllegalAccessException e) {
+				System.out.println("IllegalAccessException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (ClassNotFoundException e) {
+				System.out.println("ClassNotFoundException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			Connection conn = null;
+		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
+			try {
+				conn = DriverManager.getConnection(url, username, password);
+			} catch (SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}	
+			String query = "";
+			PreparedStatement ps = null;
+			try {
+				ps = conn.prepareStatement(query);
+				conn.close();
+				ps.close();
+			}catch(SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+				
+			}
+		
+	}
 	
 	/**
 	 * Associates the asset record corresponding to <code>assetCode</code> with the 
@@ -125,7 +599,46 @@ public class PortfolioData {
 	 * @param assetCode
 	 * @param value
 	 */
-	public static void addAsset(String portfolioCode, String assetCode, double value) {}
+	public static void addAsset(String portfolioCode, String assetCode, double value) {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			} catch (InstantiationException e) {
+				System.out.println("InstantiationException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (IllegalAccessException e) {
+				System.out.println("IllegalAccessException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			} catch (ClassNotFoundException e) {
+				System.out.println("ClassNotFoundException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			Connection conn = null;
+		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
+			try {
+				conn = DriverManager.getConnection(url, username, password);
+			} catch (SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}	
+			String query = "";
+			PreparedStatement ps = null;
+			try {
+				ps = conn.prepareStatement(query);
+				
+				conn.close();
+				ps.close();
+			}catch(SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+				
+			}
+	}
 	
 	
 }
