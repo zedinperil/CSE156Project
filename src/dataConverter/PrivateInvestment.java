@@ -2,12 +2,12 @@ package dataConverter;
 
 public class PrivateInvestment extends Assets{
 	//privateInvestment specific variables
-	private String QuarterlyDividend;
+	private double QuarterlyDividend;
 	private double BaseRateOfReturn;
-	private String OmegaMeasure;
-	private String TotalValue;
+	private double OmegaMeasure;
+	private double TotalValue;
 	//constructor, inherits from asset abstract class
-	public PrivateInvestment(String code,String label, String quarterlydividend, String baserateofreturn, String omegameasure, String totalvalue){
+	public PrivateInvestment(String code,String label, double quarterlydividend, double baserateofreturn, double omegameasure, double totalvalue){
 		super(code, label);
 	//the constructor calls setter methods to set the various parts of a Private Investment
 		this.setQuarterlyDividend(quarterlydividend);
@@ -16,11 +16,11 @@ public class PrivateInvestment extends Assets{
 		this.setTotalValue(totalvalue);
 	}
 //getter and setter methods for the above private investment variables. all pretty self-explanatory  
-	public String getQuarterlyDividend() {
+	public double getQuarterlyDividend() {
 		return QuarterlyDividend;
 	}
 
-	public void setQuarterlyDividend(String quarterlyDividend) {
+	public void setQuarterlyDividend(double quarterlyDividend) {
 		QuarterlyDividend = quarterlyDividend;
 	}
 
@@ -32,19 +32,19 @@ public class PrivateInvestment extends Assets{
 		BaseRateOfReturn = baseRateOfReturn;
 	}
 
-	public String getOmegaMeasure() {
+	public double getOmegaMeasure() {
 		return OmegaMeasure;
 	}
 
-	public void setOmegaMeasure(String omegaMeasure) {
+	public void setOmegaMeasure(double omegaMeasure) {
 		OmegaMeasure = omegaMeasure;
 	}
 
-	public String getTotalValue() {
+	public double getTotalValue() {
 		return TotalValue;
 	}
 
-	public void setTotalValue(String totalValue) {
+	public void setTotalValue(double totalValue) {
 		TotalValue = totalValue;
 	}
 

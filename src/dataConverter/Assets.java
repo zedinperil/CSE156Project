@@ -5,6 +5,7 @@ public abstract class Assets {
 	//variables that are used in the three types of assets
 	private String Code;
 	private String Label;
+	private String assetType;
 	//general constructor for an asset
 	public Assets(String code, String label) {
 		this.Code = code;
@@ -20,7 +21,12 @@ public abstract class Assets {
 	public String getLabel() {
 		return Label;
 	}
-
+	public String getAssetType(){
+		return assetType;
+	}
+	public void setType(String assettype){
+		assetType= assettype;
+	}
 	
 	
 }

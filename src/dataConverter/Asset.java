@@ -13,16 +13,10 @@ public class Asset implements databaseinfoandmethods{
 	double annualReturn;
 	double risk;
 	double assetModifier; 
-	public Asset(String portfolio, String code, String Name, String Type, double Value, double RETURNRATE, double ANNUALRETURN, double RISK,double modifier) {
-		this.portfolioCode= portfolio;
-		this.assetCode = code;
-		this.assetName= Name;
-		this.assetType= Type;
+	public Asset(String PortfolioCode, String AssetCode, double Value) {
+		this.portfolioCode= PortfolioCode;
+		this.assetCode = AssetCode;
 		this.assetValue= Value;
-		this.returnRate= RETURNRATE;
-		this.annualReturn= ANNUALRETURN;
-		this.risk= RISK;
-		this.assetModifier= modifier;
 	}	
 	/**
 	 * @return the portfolioCode
@@ -64,28 +58,7 @@ public class Asset implements databaseinfoandmethods{
 	 * @return the assetType
 	 */
 	public String getAssetType() {
-		List<Deposit> Depositlist= new ArrayList<Deposit>();
-		List<Stock> Stocklist= new ArrayList<Stock>();
-		List<PrivateInvestment> PIlist= new ArrayList<PrivateInvestment>();
-		Depositlist= getDeposits();
-		Stocklist= getStocks();
-		PIlist= getPrivateInvestments();
-		int q=0;
-		for(q=0; q<Depositlist.size(); q++){
-			if(this.assetCode.equals(Depositlist(q).getAssetCode())){
-				assetType="D";
-			}
-		}
-		for(q=0; q<Stocklist.size(); q++){
-			if(this.assetCode.equals(Stocklist(q).getAssetCode())){
-				assetType="S";
-			}
-		}
-		for(q=0; q<PIlist.size(); q++){
-			if(this.assetCode.equals(PIlist(q).getAssetCode())){
-				assetType="P";
-			}
-		}
+
 		return assetType;
 	}
 	/**

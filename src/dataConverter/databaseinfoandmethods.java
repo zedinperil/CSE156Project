@@ -144,17 +144,6 @@ public interface databaseinfoandmethods {
 			double risk = rs.getDouble("risk");
 			double assetModifier = rs.getDouble("assetModifier");
 			//remake assets
-			if(assetType.equals("P")){
-				Asset a= new PrivateInvestment()
-			}
-			if(assetType.equals("S")){
-				Asset a= new  Stock()
-			}
-			if(assetType.equals("D")){
-				Asset a = new Deposit()
-			}
-			
-			
 			Asset a = new Asset(assetPortfolioCode, assetCode, assetName, assetType, assetValue, returnRate, annualReturn, risk, assetModifier);
 			assets.add(a);
 		}
@@ -251,8 +240,8 @@ public interface databaseinfoandmethods {
 		}
 		
 		
-		//this is a very similar method. We are gathering all the data for Deposits
-		public static List<Deposit> getDeposits(){
+		//this is a very similar method. We are gathering all the data for assets
+		public static List<Assets> getAssetList(){
 			//these are a series of try catch statements meant to catch fatal errors.  It will help us for bug testing tremendously
 			try {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -271,39 +260,92 @@ public interface databaseinfoandmethods {
 			}	
 			//call connection method
 			Connection conn = connectionMethod();;
-			//this query will gather all the Deposit information
-			String query = "select p.portfolioCode, L.DepositCode, L.DepositName, L.DepositType, a.DepositValue, a.returnRate, a.annualReturn, a.risk, a.DepositModifier from Deposits a JOIN Portfolio p ON p.portfolioId = a.portfolioId JOIN DepositsList L ON L.DepositListId = a.DepositListId;";
-			//declare a new array list of type Deposit
-		List<Deposit> Deposits= new ArrayList<Deposit>();	
+			//this query will gather all the asset information
+			String query = "select L.assetType from AssetsList L;";
+			//declare a new array list of type asset
+		List<Assets> assetList= new ArrayList<Assets>();	
 			//new ps and rs
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		//this try statement will execute the query.  Using this, we are able to define our variables and store the variables into an a new 
-			//Deposit object. Then we store the object into the arraylist.
-//		public static void addDepositAccount(String assetCode, String label, double apr) {}
-//		create table Deposit (
-//				  depositId int not null primary key auto_increment,
-//				  assetListId int not null,
-//				  FOREIGN KEY (assetListId) REFERENCES AssetsList(assetListId),
-//				  apr double not null
-//				  );
-		
+			//asset object. Then we store the object into the arraylist.
 		try {
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				String DepositPortfolioCode = rs.getString("portfolioCode");
-				String DepositCode = rs.getString("DepositCode");
-				String DepositName = rs.getString("DepositName");
-				String DepositType  = rs.getString("DepositType");
-				double DepositValue = rs.getDouble("DepositValue");
-				double returnRate = rs.getDouble("returnRate");
-				double annualReturn = rs.getDouble("annualReturn");
-				double risk = rs.getDouble("risk");
-				double DepositModifier = rs.getDouble("DepositModifier");
-				//remake Deposits
-				Deposit a = new Deposit(DepositPortfolioCode, DepositCode, DepositName, DepositType, DepositValue, returnRate, annualReturn, risk, DepositModifier);
-				Deposits.add(a);
+				// MAKE SOME NEW QUERIES FOR THIS SERIOUSLY MAKE IT TO GET THEM FROM EACH THING REEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+				String assetType  = rs.getString("assetType");
+				String query2= new String;
+				//remake assets
+				if(assetType.equals("P")){
+					query2="";
+				
+				}
+				if(assetType.equals("S")){
+					query2="";
+				
+				}
+				if(assetType.equals("D")){
+					query2="";
+				
+				}
+				//EXECUTE ORDER 66, WHICH MEANS TO RUN THE SECOND QUERY, DUN DUN DUUUNES BOY
+				
+				PreparedStatement ps2 = null;
+				ResultSet rs2 = null;
+				//this try statement will execute the query.  Using this, we are able to define our variables and store the variables into an a new 
+					//asset object. Then we store the object into the arraylist.
+				try {
+					ps2 = conn.prepareStatement(query2);
+					rs2 = ps2.executeQuery();
+					while(rs.next()) {
+				
+				
+						
+						String code=rs2.getString("assetCode");
+						String label=rs2.getString("assetName");
+						
+				Assets b= null;
+				if(assetType.equals("P")){
+					
+					double quarterlydividend=rs2.getDouble("quarterlyDividend");
+					double baserateofreturn=rs2.getDouble("baseRateOfReturn");
+					double totalvalue=rs2.getDouble("totalValue");
+					double omegameasure=rs2.getDouble("omegaMeasure");
+					
+					
+					
+					 b= new PrivateInvestment(code, label, quarterlydividend, baserateofreturn, omegameasure, totalvalue);
+				}
+				if(assetType.equals("S")){
+					double quarterlydividend=rs2.getDouble("quarterlyDividend");
+					double baserateofreturn=rs2.getDouble("baseRateOfReturn");
+					double shareprice=rs2.getDouble("sharePrice");
+					double betameasure=rs2.getDouble("betaMeasure");
+					String stocksymbol= rs2.getString("stockSymbol");
+					
+					
+					 b= new Stock(code,label, quarterlydividend,baserateofreturn, betameasure,stocksymbol, shareprice);
+				}
+				if(assetType.equals("D")){
+				
+					double apr= rs2.getDouble("apr");
+					 b = new Deposit(code,label, apr);
+				}
+				b.setType(assetType);
+				assetList.add(b);
+				
+				}
+				//close ps and rs
+				rs2.close();
+				ps2.close();
+				//catch any fatal erros in the sql
+			} catch (SQLException e) {
+				System.out.println("SQLException: ");
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+				
 			}
 			//close ps and rs
 			rs.close();
@@ -314,152 +356,12 @@ public interface databaseinfoandmethods {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
-		//return the Deposit arraylist
-		return Deposits;
+		//return the asset arraylist
+		return assetList;
 		}
 		
 		
-		//this is a very similar method. We are gathering all the data for Stocks
-		public static List<Stock> getStocks(){
-			//these are a series of try catch statements meant to catch fatal errors.  It will help us for bug testing tremendously
-			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
-			} catch (InstantiationException e) {
-				System.out.println("InstantiationException: ");
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			} catch (IllegalAccessException e) {
-				System.out.println("IllegalAccessException: ");
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			} catch (ClassNotFoundException e) {
-				System.out.println("ClassNotFoundException: ");
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			}	
-			//call connection method
-			Connection conn = connectionMethod();;
-			//this query will gather all the Stock information
-			String query = "select p.portfolioCode, L.StockCode, L.StockName, L.StockType, a.StockValue, a.returnRate, a.annualReturn, a.risk, a.StockModifier from Stocks a JOIN Portfolio p ON p.portfolioId = a.portfolioId JOIN StocksList L ON L.StockListId = a.StockListId;";
-			//declare a new array list of type Stock
-		List<Stock> Stocks= new ArrayList<Stock>();	
-			//new ps and rs
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		//this try statement will execute the query.  Using this, we are able to define our variables and store the variables into an a new 
-			//Stock object. Then we store the object into the arraylist.
-///		public static void addStock(String assetCode, String label, Double quarterlyDividend, 
-//				Double baseRateOfReturn, Double beta, String stockSymbol, Double sharePrice) {}
-//		create table Stock (
-//				  stockId int not null primary key auto_increment,
-//				  assetListId int not null,
-//				  FOREIGN KEY (assetListId) REFERENCES AssetsList(assetListId),
-//				  quarterlyDividend double not null,
-//				  baseRateOfReturn double not null,
-//				  betaMeasure double not null,
-//				  stockSymbol varchar(10) not null,
-//				  sharePrice double not null
-//				  );
-		try {
-			ps = conn.prepareStatement(query);
-			rs = ps.executeQuery();
-			while(rs.next()) {
-				String StockPortfolioCode = rs.getString("portfolioCode");
-				String StockCode = rs.getString("StockCode");
-				String StockName = rs.getString("StockName");
-				String StockType  = rs.getString("StockType");
-				double StockValue = rs.getDouble("StockValue");
-				double returnRate = rs.getDouble("returnRate");
-				double annualReturn = rs.getDouble("annualReturn");
-				double risk = rs.getDouble("risk");
-				double StockModifier = rs.getDouble("StockModifier");
-				//remake Stocks
-				Stock a = new Stock(StockPortfolioCode, StockCode, StockName, StockType, StockValue, returnRate, annualReturn, risk, StockModifier);
-				Stocks.add(a);
-			}
-			//close ps and rs
-			rs.close();
-			ps.close();
-			//catch any fatal erros in the sql
-		} catch (SQLException e) {
-			System.out.println("SQLException: ");
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-		//return the Stock arraylist
-		return Stocks;
-		}
 		
 		
-		//this is a very similar method. We are gathering all the data for PrivateInvestments
-		public static List<PrivateInvestment> getPrivateInvestments(){
-			//these are a series of try catch statements meant to catch fatal errors.  It will help us for bug testing tremendously
-			try {
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
-			} catch (InstantiationException e) {
-				System.out.println("InstantiationException: ");
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			} catch (IllegalAccessException e) {
-				System.out.println("IllegalAccessException: ");
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			} catch (ClassNotFoundException e) {
-				System.out.println("ClassNotFoundException: ");
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			}	
-			//call connection method
-			Connection conn = connectionMethod();;
-			//this query will gather all the PrivateInvestment information
-			String query = "select p.portfolioCode, L.PrivateInvestmentCode, L.PrivateInvestmentName, L.PrivateInvestmentType, a.PrivateInvestmentValue, a.returnRate, a.annualReturn, a.risk, a.PrivateInvestmentModifier from PrivateInvestments a JOIN Portfolio p ON p.portfolioId = a.portfolioId JOIN PrivateInvestmentsList L ON L.PrivateInvestmentListId = a.PrivateInvestmentListId;";
-			//declare a new array list of type PrivateInvestment
-		List<PrivateInvestment> PrivateInvestments= new ArrayList<PrivateInvestment>();	
-			//new ps and rs
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		//this try statement will execute the query.  Using this, we are able to define our variables and store the variables into an a new 
-			//PrivateInvestment object. Then we store the object into the arraylist.
-		
-		//	public static void addPrivateInvestment(String assetCode, String label, Double quarterlyDividend, 
-		//			Double baseRateOfReturn, Double baseOmega, Double totalValue) {}
-//		create table PrivateInvestment (
-//				  privateInvestmentId int not null primary key auto_increment,
-//				  assetListId int not null,
-//				  FOREIGN KEY (assetListId) REFERENCES AssetsList(assetListId),
-//				  quarterlyDividend double not null,
-//				  baseRateOfReturn double not null,
-//				  omegaMeasure double not null,
-//				  pValue double not null
-//				  );
-		try {
-			ps = conn.prepareStatement(query);
-			rs = ps.executeQuery();
-			while(rs.next()) {
-				String PrivateInvestmentPortfolioCode = rs.getString("portfolioCode");
-				String PrivateInvestmentCode = rs.getString("PrivateInvestmentCode");
-				String PrivateInvestmentName = rs.getString("PrivateInvestmentName");
-				String PrivateInvestmentType  = rs.getString("PrivateInvestmentType");
-				double PrivateInvestmentValue = rs.getDouble("PrivateInvestmentValue");
-				double returnRate = rs.getDouble("returnRate");
-				double annualReturn = rs.getDouble("annualReturn");
-				double risk = rs.getDouble("risk");
-				double PrivateInvestmentModifier = rs.getDouble("PrivateInvestmentModifier");
-				//remake PrivateInvestments
-				PrivateInvestment a = new PrivateInvestment(PrivateInvestmentPortfolioCode, PrivateInvestmentCode, PrivateInvestmentName, PrivateInvestmentType, PrivateInvestmentValue, returnRate, annualReturn, risk, PrivateInvestmentModifier);
-				PrivateInvestments.add(a);
-			}
-			//close ps and rs
-			rs.close();
-			ps.close();
-			//catch any fatal erros in the sql
-		} catch (SQLException e) {
-			System.out.println("SQLException: ");
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-		//return the PrivateInvestment arraylist
-		return PrivateInvestments;
-		}
-		
+
 }
