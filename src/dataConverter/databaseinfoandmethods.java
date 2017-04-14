@@ -49,13 +49,9 @@ public interface databaseinfoandmethods {
 		Connection conn = connectionMethod();
 		//this is our portfolio querry. It gathers all portfolio information, along with the names for the codes to eliminate the need to 
 		//generate a person arraylist for information
-		String query =  "select p.portfolioCode, p.portfolioId, "
+		String query =  "select p.portfolioCode,  "
 				+ "q.personCode as OwnerCode, m.personCode as ManagerCode, "
-				+ "b.personCode as BeneficiaryCode, q.lastName as OwnerLastName, "
-				+ "q.firstName as OwnerFirstName, m.lastName as ManagerLastName, "
-				+ "m.firstName as ManagerFirstName, m.persontype as ManagerType, "
-				+ "b.lastName as BeneficiaryLastName, b.firstName as BeneficiaryFirstName, "
-				+ "p.fees, p.aggRisk, p.commissions, p.totalValue, p.sumOfAnnualReturns "
+				+ "b.personCode as BeneficiaryCode "
 				+ "from Portfolio p join Person q on q.personId=p.ownerId "
 				+ "LEFT JOIN Person m on m.personId=p.managerId "
 				+ "LEFT JOIN Person b on b.personId=p.beneficiaryId;";
@@ -71,36 +67,23 @@ public interface databaseinfoandmethods {
 		rs = ps.executeQuery();
 		while(rs.next()) {
 			String PortfolioCode = rs.getString("portfolioCode");
-			String OwnerLastName = rs.getString("OwnerLastName");
 			String ownerCode= rs.getString("OwnerCode");
 			String managerCode= rs.getString("ManagerCode");
-			String beneficiaryCode= rs.getString("BeneficiaryCode");
-			String OwnerFirstName = rs.getString("OwnerFirstName");
-			String managerType= rs.getString("ManagerType");
-			String ManagerLastName = rs.getString("ManagerLastName");
-			String ManagerFirstName = rs.getString("ManagerFirstName");
-			String BeneficiaryLastName = rs.getString("BeneficiaryLastName");
-			String BeneficiaryFirstName = rs.getString("BeneficiaryFirstName");
-			double fees= rs.getDouble("fees");
-			double AggRisk= rs.getDouble("aggRisk");
-			double commissions= rs.getDouble("commissions");
-			double totalValue= rs.getDouble("totalValue");
-			double sumOfAnnualReturns= rs.getDouble("sumOfAnnualReturns");
+			
+			String beneficiaryCode=null;
+			beneficiaryCode= rs.getString("BeneficiaryCode");
+			if(beneficiaryCode==null){
+				beneficiaryCode="none";
+			}
 			Portfolio port = new Portfolio(PortfolioCode, ownerCode, managerCode, beneficiaryCode);
-			port.setOwnerName(OwnerFirstName+" "+OwnerLastName);
-			port.setManagerName(ManagerFirstName+" "+ManagerLastName);
-			port.setManagerType(managerType);
-			port.setBeneficiaryName(BeneficiaryFirstName+" "+BeneficiaryLastName);
-			port.setFees(fees);
-			port.setAggRisk(AggRisk);
-			port.setCommissions(commissions);
-			port.setTotalValue(totalValue);
-			port.setSumOfAnnualReturns(sumOfAnnualReturns);
+			
 			portfolios.add(port);
 		} 
 		//close the result set and preparedstatement
 		rs.close();
 		ps.close();
+		conn.close();
+
 		//catch a potential fatal error
 		}catch (SQLException e) {
 			System.out.println("SQLException: ");
@@ -129,10 +112,9 @@ public interface databaseinfoandmethods {
 			throw new RuntimeException(e);
 		}	
 		//call connection method
-		Connection conn = connectionMethod();;
+		Connection conn = connectionMethod();
 		//this query will gather all the asset information
-		String query = "select p.portfolioCode, L.assetCode, L.assetName, L.assetType, "
-				+ "a.assetValue, a.returnRate, a.annualReturn, a.risk, "
+		String query = "select p.portfolioCode, L.assetCode, a.assetValue,"
 				+ "a.assetModifier from Assets a JOIN Portfolio p ON p.portfolioId = a.portfolioId "
 				+ "JOIN AssetsList L ON L.assetListId = a.assetListId;";
 		//declare a new array list of type asset
@@ -148,23 +130,15 @@ public interface databaseinfoandmethods {
 		while(rs.next()) {
 			String assetPortfolioCode = rs.getString("portfolioCode");
 			String assetCode = rs.getString("assetCode");
-			String assetName = rs.getString("assetName");
-			String assetType  = rs.getString("assetType");
-			double assetValue = rs.getDouble("assetValue");
-			double returnRate = rs.getDouble("returnRate");
-			double annualReturn = rs.getDouble("annualReturn");
-			double risk = rs.getDouble("risk");
-			double assetModifier = rs.getDouble("assetModifier");
+		
+			double assetValue = rs.getDouble("assetModifier");
 			//remake assets
 			Asset a = new Asset(assetPortfolioCode, assetCode, assetValue);
-			a.setAssetType(assetType);
-			a.setReturnRate(returnRate);
-			a.setAnnualReturn(annualReturn);
-			a.setRisk(risk);
-			a.setAssetModifier(assetModifier);
+	
 			assets.add(a);
 		}
 		//close ps and rs
+		conn.close();
 		rs.close();
 		ps.close();
 		//catch any fatal erros in the sql
@@ -173,6 +147,7 @@ public interface databaseinfoandmethods {
 		e.printStackTrace();
 		throw new RuntimeException(e);
 	}
+
 	//return the asset arraylist
 	return assets;
 	}
@@ -214,7 +189,7 @@ public interface databaseinfoandmethods {
 
 
 				String personCode = rs.getString("personCode");
-				String firstName = rs.getString("lastName");
+				String firstName = rs.getString("firstName");
 				String lastName = rs.getString("lastName");
 				String street = rs.getString("street");
 				String city = rs.getString("city");
@@ -229,6 +204,7 @@ public interface databaseinfoandmethods {
 				persons.add(p);
 			}
 			//close ps and rs
+			conn.close();
 			rs.close();
 			ps.close();
 			//catch any fatal erros in the sql
@@ -302,7 +278,7 @@ public interface databaseinfoandmethods {
 				try {
 					ps2 = conn.prepareStatement(query2);
 					rs2 = ps2.executeQuery();
-					while(rs.next()) {
+					while(rs2.next()) {
 				
 				
 						
@@ -352,6 +328,7 @@ public interface databaseinfoandmethods {
 				
 			}
 			//close ps and rs
+			conn.close();
 			rs.close();
 			ps.close();
 			//catch any fatal erros in the sql
@@ -408,6 +385,7 @@ public interface databaseinfoandmethods {
 					emails.add(e);
 				}
 				//close ps and rs
+				conn.close();
 				rs.close();
 				ps.close();
 				//catch any fatal erros in the sql

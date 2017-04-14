@@ -4,21 +4,59 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface PortfolioInterface extends databaseinfoandmethods {
+	List<Asset> Assets= databaseinfoandmethods.getAssets();
 	
 	
-	
-	public static List<Asset> gitGud(String PortfolioCode){
-		List<Asset> Assets= new ArrayList<Asset>();
-		Assets = databaseinfoandmethods.getAssets();
+	public static List<Asset> getRelevantAssets(String PortfolioCode){
+		
 		List<Asset> NewAssets= new ArrayList<Asset>();
 		int i = 0;
 		for(i=0; i<Assets.size(); i++){
-		if(PortfolioCode.equals(NewAssets.get(i).getPortfolioCode())){
+		if(PortfolioCode.equals(Assets.get(i).getPortfolioCode())){
 			NewAssets.add(Assets.get(i));
 		}
 			
 		}
 		return NewAssets;
+	}
+	public static Persons getOwner(String ownerCode){
+		List<Persons> Persons= new ArrayList<Persons>();
+		Persons = databaseinfoandmethods.getPersons();
+		Persons owner= null; 
+		int i = 0;
+		for(i=0; i<Persons.size(); i++){
+		if(ownerCode.equals(Persons.get(i).getCode())){
+			owner=Persons.get(i);
+		}	
+		}
+		return owner;
+	}
+	public static Persons getBeneficiary(String beneficiaryCode){
+		List<Persons> Persons = databaseinfoandmethods.getPersons();
+		Persons beneficiary= null;
+		int i = 0;
+		while(i<Persons.size()){		
+				if(beneficiaryCode.equals(Persons.get(i).getCode())){
+					beneficiary=Persons.get(i);
+				}
+			i++;	
+			
+		}
+		return beneficiary;
+	
+	}
+	public static Persons getManager(String managerCode){
+		List<Persons> Persons= new ArrayList<Persons>();
+		Persons = databaseinfoandmethods.getPersons();
+		Persons manager= null; 
+		int i = 0;
+		for(i=0; i<Persons.size(); i++){
+		if(managerCode.equals(Persons.get(i).getCode())){
+			manager=Persons.get(i);
+		}
+			
+		}
+		return manager;
 	}
 	
 	
@@ -44,7 +82,7 @@ public interface PortfolioInterface extends databaseinfoandmethods {
 	public static double getAnnualReturnSum(List<Asset> RelevantAssets) {
 		double AnnualReturnSum = 0;
 		for(int k=0; k<RelevantAssets.size(); k++){
-				AnnualReturnSum+= RelevanAssets.get(k).getAnnualReturn(RelevantAssets.get(k).portfolioCode);
+				AnnualReturnSum+= RelevantAssets.get(k).getAnnualReturn(RelevantAssets.get(k).portfolioCode);
 			}
 		return AnnualReturnSum;
 	}
@@ -55,19 +93,19 @@ public interface PortfolioInterface extends databaseinfoandmethods {
 				o=0;
 				while(o<RelevantAssets.size()){
 						
-						double	AnnualReturn = getAnnualReturn(RelevantAssets);
+						double	AnnualReturn = RelevantAssets.get(o).getAnnualReturn(RelevantAssets.get(o).getAssetCode());
 							ReturnRate= AnnualReturn/ ValueMethod(RelevantAssets);			
 				o++;
 				}		
 		return ReturnRate;
 	}
 
-	public double getAggRisk() {
+	public static double getAggRisk(List<Asset> RelevantAssets) {
 		double temprisk=0;
 		double risksum=0;
-		AggRisk=0;
-			for(int o=0; o<OccuranceOfAssetCount; o++){
-					temprisk= (getRisk(o)*getValue(o))/getTotalValue();
+		double AggRisk=0;
+			for(int o=0; o<RelevantAssets.size(); o++){
+					temprisk= (RelevantAssets.get(o).getRisk(RelevantAssets.get(o).getAssetCode())*RelevantAssets.get(o).getValue(RelevantAssets.get(o).getAssetCode()))/ValueMethod(RelevantAssets);
 					risksum+=temprisk;
 				}
 			AggRisk=risksum;

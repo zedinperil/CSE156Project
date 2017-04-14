@@ -16,9 +16,10 @@ public class InputOutput implements databaseinfoandmethods{
 		RiskFormat.setMinimumFractionDigits(4);
 		List<Asset> AssetList= new ArrayList<Asset>();
 		List<Portfolio> PortfolioList= new ArrayList<Portfolio>();
+
 		//create two array lists, one of portfolios and one of assets, calling methods in our interface class
 		PortfolioList= databaseinfoandmethods.getPortfolios();
-		AssetList= databaseinfoandmethods.getAssets();
+		//AssetList= databaseinfoandmethods.getAssets();
 		
 		//print formatted data. Many of the lines are formatting to make it look pretty.
 		System.out.println("##########################################################################################################################");
@@ -59,6 +60,12 @@ public class InputOutput implements databaseinfoandmethods{
 			System.out.println("Manager Code :"+PortfolioList.get(g).getManagerCode());
 			System.out.println("Beneficiary :"+PortfolioList.get(g).getBeneficiaryName());
 			System.out.println("Beneficiary Code :"+PortfolioList.get(g).getBeneficiaryCode());
+			System.out.print("Owner Emails: ");
+			List<String>ownersEmails= PortfolioList.get(g).owner.getEmails(PortfolioList.get(g).getOwnerCode());
+			for(int y=0; y<ownersEmails.size(); y++){
+				System.out.print(ownersEmails.get(y)+" ");
+			}
+			System.out.println();
 			System.out.println("# Of Assets within the Portfolio :"+NumOfAssetInPortfolio);
 			System.out.println();
 			System.out.println("FINANCIAL INFORMATION");
@@ -78,8 +85,8 @@ public class InputOutput implements databaseinfoandmethods{
 							//printed information about asset which fulfilled above conditions
 							System.out.println("Asset #"+(a+1)+"/"+NumOfAssetInPortfolio +" in portfolio "+AssetList.get(t).getPortfolioCode()+" (#"+(g+1)+"/"+PortfolioList.size()+")");
 							System.out.println("Asset Code :"+AssetList.get(t).getAssetCode());
-							System.out.println("Asset Name :"+ AssetList.get(t).getAssetName());
-							System.out.println("Asset Type :"+ AssetList.get(t).getAssetType());
+							System.out.println("Asset Name :"+ AssetList.get(t).getAssetName(AssetList.get(t).getAssetCode()));
+							System.out.println("Asset Type :"+ AssetList.get(t).getAssetType(AssetList.get(t).getAssetCode()));
 							System.out.println("Asset Value Modifier :"+AssetList.get(t).getAssetValue());
 							//these are formatted using our formatter for doubles
 							System.out.println("Annual Return :$"+DoubleFormat.format(AssetList.get(t).getAnnualReturn()));

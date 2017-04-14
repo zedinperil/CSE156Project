@@ -31,14 +31,20 @@ public class Portfolio {
 	private double sumOfAnnualReturns;	
 	private String managerType;
 	List<Asset> PortfolioAssets= new ArrayList<Asset>();
+	Persons owner;
+	Persons manager;
+	Persons beneficiary;
+	
 	//constructor
 	public Portfolio(String portCode, String ownCode, String managCode, String beneficiaryCode) {
-		super();	
 		this.PortfolioCode = portCode;
 		this.OwnerCode = ownCode;
 		this.ManagerCode = managCode;
 		this.BeneficiaryCode = beneficiaryCode;
-		this.PortfolioAssets = PortfolioInterface.gitGud(this.PortfolioCode);
+		this.PortfolioAssets = PortfolioInterface.getRelevantAssets(this.PortfolioCode);
+		this.owner= PortfolioInterface.getOwner(ownCode);		
+		this.manager= PortfolioInterface.getManager(managCode);
+		this.beneficiary= PortfolioInterface.getBeneficiary(beneficiaryCode);
 	}
 	//these are basic getters
 	public String getPortfolioCode() {
@@ -53,11 +59,13 @@ public class Portfolio {
 	//end of basic getters
 	//this gets owner name by iterating through all persons until the personcode of the person is equal to ownercode
 	public String getOwnerName(){
+		ownerName= owner.getFirstName()+" "+owner.getLastName();
 		return ownerName;
 	}
 	//this gets manager name by iterating through all persons until the personcode of the person is equal to managercode
 
 	public String getManagerName(){
+		managerName= manager.getFirstName()+" "+manager.getLastName();
 		return managerName;
 	}
 	//this gets beneficiary name by iterating through all persons until the personcode of the person is equal to beneficiarycode
@@ -66,7 +74,8 @@ public class Portfolio {
 			return "none";
 		}
 		else{
-		return beneficiaryName;
+			beneficiaryName= beneficiary.getFirstName()+" "+beneficiary.getLastName();
+			return beneficiaryName;
 		}
 	}
 	//basic getter for managercode

@@ -11,7 +11,7 @@ public class PrivateInvestment extends Assets{
 		super(code, label);
 	//the constructor calls setter methods to set the various parts of a Private Investment
 		this.setQuarterlyDividend(quarterlydividend);
-		this.setBaseRateOfReturn(Double.parseDouble(baserateofreturn)/100);
+		this.setBaseRateOfReturn((baserateofreturn)/100);
 		this.setOmegaMeasure(omegameasure);
 		this.setTotalValue(totalvalue);
 	}

@@ -17,7 +17,9 @@ public class Asset implements databaseinfoandmethods{
 	double privateValue;
 	double quarterlyDividends;
 	double apr;
-	double risk;
+	List<Assets>assetList=databaseinfoandmethods.getAssetList();
+    List<Asset> assets= databaseinfoandmethods.getAssets();
+
 	public Asset(String PortfolioCode, String AssetCode, double Value) {
 		this.portfolioCode= PortfolioCode;
 		this.assetCode = AssetCode;
@@ -50,9 +52,12 @@ public class Asset implements databaseinfoandmethods{
 	/**
 	 * @return the assetName
 	 */
-	public String getAssetName(Asset theAsset) {
-	
-		
+	public String getAssetName(String assetCode) {
+		for(int i=0; i<assetList.size();i++){
+			if(assetList.get(i).getAssetCode().equals(assetCode)){
+				assetType=assetList.get(i).getLabel();
+			}	
+		}
 		return assetName;
 	}
 	/**
@@ -65,7 +70,7 @@ public class Asset implements databaseinfoandmethods{
 	 * @return the assetType
 	 */
 	public String getAssetType(String assetCode) {
-		List<Assets> assetList=	databaseinfoandmethods.getAssetList();
+
 		for(int i=0; i<assetList.size();i++){
 			if(assetList.get(i).getAssetCode().equals(assetCode)){
 				assetType=assetList.get(i).getAssetType();
@@ -133,7 +138,6 @@ public class Asset implements databaseinfoandmethods{
 	privateValue=0;
 		assetType= getAssetType(assetcode);
 		if(assetType.equals("P")){
-			List<Assets> assetList=	databaseinfoandmethods.getAssetList();
 			for(int i=0; i<assetList.size();i++){
 				if(assetList.get(i).getAssetType().equals(assetType)&& assetList.get(i).getAssetCode().equals(assetcode)){
 					PrivateInvestment Priv= (PrivateInvestment) assetList.get(i);	
@@ -147,7 +151,6 @@ public class Asset implements databaseinfoandmethods{
 		sharePrice=0;
 		assetType= getAssetType(assetcode);
 		if(assetType.equals("S")){
-			List<Assets> assetList=	databaseinfoandmethods.getAssetList();
 			for(int i=0; i<assetList.size();i++){
 				if(assetList.get(i).getAssetType().equals(assetType)&& assetList.get(i).getAssetCode().equals(assetcode)){
 					Stock Stok= (Stock) assetList.get(i);	
@@ -162,7 +165,6 @@ public class Asset implements databaseinfoandmethods{
 		baseRateOfReturn=0;
 		assetType= getAssetType(assetcode);
 		if(assetType.equals("P")){
-			List<Assets> assetList=	databaseinfoandmethods.getAssetList();
 			for(int i=0; i<assetList.size();i++){
 				if(assetList.get(i).getAssetType().equals(assetType)&& assetList.get(i).getAssetCode().equals(assetcode)){
 					PrivateInvestment Priv= (PrivateInvestment) assetList.get(i);	
@@ -171,7 +173,6 @@ public class Asset implements databaseinfoandmethods{
 			}	
 		}
 		if(assetType.equals("S")){
-			List<Assets> assetList=	databaseinfoandmethods.getAssetList();
 			for(int i=0; i<assetList.size();i++){
 				if(assetList.get(i).getAssetType().equals(assetType)&& assetList.get(i).getAssetCode().equals(assetcode)){
 					Stock Stok= (Stock) assetList.get(i);	
@@ -185,7 +186,6 @@ public class Asset implements databaseinfoandmethods{
 		quarterlyDividends=0;
 		assetType= getAssetType(assetcode);
 		if(assetType.equals("P")){
-			List<Assets> assetList=	databaseinfoandmethods.getAssetList();
 			for(int i=0; i<assetList.size();i++){
 				if(assetList.get(i).getAssetType().equals(assetType)&& assetList.get(i).getAssetCode().equals(assetcode)){
 					PrivateInvestment Priv= (PrivateInvestment) assetList.get(i);	
@@ -194,7 +194,6 @@ public class Asset implements databaseinfoandmethods{
 			}	
 		}
 		if(assetType.equals("S")){
-			List<Assets> assetList=	databaseinfoandmethods.getAssetList();
 			for(int i=0; i<assetList.size();i++){
 				if(assetList.get(i).getAssetType().equals(assetType)&& assetList.get(i).getAssetCode().equals(assetcode)){
 					Stock Stok= (Stock) assetList.get(i);	
@@ -208,7 +207,6 @@ public class Asset implements databaseinfoandmethods{
 	public double getApr(String assetcode){
 		assetType= getAssetType(assetcode);
 		if(assetType.equals("D")){
-			List<Assets> assetList= databaseinfoandmethods.getAssetList();
 			for(int i=0; i<assetList.size(); i++){
 				if(assetList.get(i).getAssetType().equals(assetType)&& assetList.get(i).getAssetCode().equals(assetcode)){
 					Deposit Dep= (Deposit) assetList.get(i);
@@ -221,7 +219,6 @@ public class Asset implements databaseinfoandmethods{
 	 public double getAnnualReturn(String assetcode) {
 		 double AnnualReturn = 0;
 		 assetType= getAssetType(assetcode);
-		 List<Assets> assetList= databaseinfoandmethods.getAssetList();
 
 		 for(int i=0; i<assetList.size(); i++){
 			if(assetList.get(i).getAssetCode().equals(assetCode)){
@@ -245,8 +242,6 @@ public class Asset implements databaseinfoandmethods{
 	 public double getValue(String assetcode){
 		 double Value = 0;
 		 assetType= getAssetType(assetcode);
-		 List<Asset> assets= databaseinfoandmethods.getAssets();
-		 List<Assets> assetList= databaseinfoandmethods.getAssetList();
 		 for(int k=0; k<assetList.size(); k++){
 			if(assetList.get(k).getAssetCode().equals(assetCode)){
 				for(int i=0; i<assets.size(); i++){
@@ -274,7 +269,6 @@ public class Asset implements databaseinfoandmethods{
 	 }
 	 public double getRisk(String assetcode) {
 		 assetType= getAssetType(assetcode);
-		 List<Assets> assetList= databaseinfoandmethods.getAssetList();
 		 for(int i=0; i<assetList.size(); i++){
 			 if(assetType.equals("P")){
 				 PrivateInvestment Priv= (PrivateInvestment) assetList.get(i);
