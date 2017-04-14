@@ -1,5 +1,8 @@
 package dataConverter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //the portfolio is a class with a lot of variables and getter functions in which those variables are calculated
 //this is a complete rework of our old portfolio, which was severly complicated and incredibly redundant.  For future versions, it will need to 
 //be expanded upon for more complicated procedures.  For future edits, where more person data will want to be pulled,
@@ -27,6 +30,7 @@ public class Portfolio {
 	private int ManagerCount=0;
 	private double sumOfAnnualReturns;	
 	private String managerType;
+	List<Asset> PortfolioAssets= new ArrayList<Asset>();
 	//constructor
 	public Portfolio(String portCode, String ownCode, String managCode, String beneficiaryCode) {
 		super();	
@@ -34,6 +38,7 @@ public class Portfolio {
 		this.OwnerCode = ownCode;
 		this.ManagerCode = managCode;
 		this.BeneficiaryCode = beneficiaryCode;
+		this.PortfolioAssets = PortfolioInterface.gitGud(this.PortfolioCode);
 	}
 	//these are basic getters
 	public String getPortfolioCode() {
