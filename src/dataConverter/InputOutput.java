@@ -38,8 +38,6 @@ public class InputOutput implements databaseinfoandmethods{
 		double CommissionsSum = 0;
 		//this is the sum of the annual returns of all portfolios
 		double AnnualReturnSum=0;
-		//this is an array of the sums of annual returns for each individual portfolio. It is the same size as the portfolio array list
-		double[] PortfolioAnnualReturnSum= new double[PortfolioList.size()];
 		//while loop iterates through each portfolio
 		while( g<PortfolioList.size()){
 			//this little for loop is used to determine how many assets are within each portfolio, by checking the number of times in our asset arraylist has the same portfolio code as the current portfolio, and incrementing
@@ -97,8 +95,6 @@ public class InputOutput implements databaseinfoandmethods{
 						    System.out.println("---------------------------------------------------------------------------------------------------------------------");
 						    System.out.println();  
 						    //these are here to add the annual return of the asset to the sums for the portfolio, and for the total sum for all portfolios
-						    PortfolioAnnualReturnSum[g]+=AssetList.get(t).getAnnualReturn(AssetList.get(t).getAssetCode());
-						    AnnualReturnSum+= AssetList.get(t).getAnnualReturn(AssetList.get(t).getAssetCode());
 						   //increment a
 						    a++;
 						}
@@ -117,7 +113,8 @@ public class InputOutput implements databaseinfoandmethods{
 			System.out.println("Commissions :$"+DoubleFormat.format(PortfolioList.get(g).getCommissions()));
 			//adds the commissions of current portfolio to the sum of commissions for all portfolios
 			CommissionsSum+=PortfolioList.get(g).getCommissions()/2;
-			System.out.println("Portfolio Sum of Annual Returns :$"+DoubleFormat.format(PortfolioAnnualReturnSum[g]));
+			System.out.println("Portfolio Sum of Annual Returns :$"+DoubleFormat.format(PortfolioList.get(g).getAnnualReturnSum()));
+			AnnualReturnSum += PortfolioList.get(g).getAnnualReturnSum();
 			System.out.println("Value of Portfolio after Commissions and fees: $"+DoubleFormat.format(PortfolioList.get(g).getTotalValue()-PortfolioList.get(g).getFees()-PortfolioList.get(g).getCommissions()));
 			System.out.println();
 			System.out.println("END OF PORTFOLIO #"+(g+1)+"/"+PortfolioList.size());

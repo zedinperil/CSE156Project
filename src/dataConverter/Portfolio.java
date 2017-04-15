@@ -18,10 +18,8 @@ public class Portfolio {
 	private String ownerName;
 	private double fees;
 	private double commissions;
-	private double Risk;
 	private double TotalValue;
-	private double AnnualReturn;
-	private double ReturnRate; 
+	private double AnnualReturnSum;
 	private double AggRisk;
 	private int personcount;
 	private int assetcount;
@@ -104,10 +102,6 @@ public class Portfolio {
 
 		return commissions;
 	}
-	//risk getter function,c, then we check to
-	public double getRisk() {
-		return Risk;
-}
 
 	//for every value of
 	public double getTotalValue(){
@@ -115,15 +109,12 @@ public class Portfolio {
 		return TotalValue;
 	}
 	//e of asset it is, and calculate annual return based on the type of asset. return it.
-	public double getAnnualReturn() {
-		AnnualReturn= PortfolioInterface.getAnnualReturnSum(PortfolioAssets);
+	public double getAnnualReturnSum() {
+		AnnualReturnSum= PortfolioInterface.getAnnualReturnSum(PortfolioAssets);
 
-		return AnnualReturn;
+		return AnnualReturnSum;
 	}
-	//returns return rate. t by the value of sset.
-	public double getReturnRate() {	
-		return ReturnRate;
-	}
+
 	//ng them together for each asset.
 	public double getAggRisk() {
 		AggRisk= PortfolioInterface.getAggRisk(PortfolioAssets);
