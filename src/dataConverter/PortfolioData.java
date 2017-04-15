@@ -50,12 +50,16 @@ public class PortfolioData implements databaseinfoandmethods{
 		PreparedStatement ps4 = null;
 		try {
 			ps = conn.prepareStatement(query);
+			ps.executeQuery();
 			ps.close();
 			ps2 = conn.prepareStatement(query2);
+			ps2.executeQuery();
 			ps2.close();
 			ps3 = conn.prepareStatement(query3);
+			ps3.executeQuery();
 			ps3.close();
 			ps4 = conn.prepareStatement(query4);
+			ps4.executeQuery;
 			conn.close();
 			ps4.close();
 			
@@ -98,11 +102,11 @@ public class PortfolioData implements databaseinfoandmethods{
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}	
-			String query = "delete Emails from Emails where Emails.personId = "+personCode+"";
-			String query2 = "DELETE Pesron FROM Person P WHERE P.personCode EQUALS "+personCode+"";
-			String query3 = "DELETE p, a from Portfolio p join Assets a on p.portfolioCode=a.portfolioCode where p.ownerCode = "+personCode+"";
-			String query4 = "delete Portfolio, Assets from Portfolio where Portfolio.managerCode = "+personCode+"";
-			String query5 = "delete Portfolio, Assets from Portfolio where Portfolio.beneficiaryCode = "+personCode+"";
+			String query = "delete Emails from Emails where Emails.personId = '"+personCode+"'";
+			String query2 = "DELETE Pesron FROM Person P WHERE P.personCode EQUALS '"+personCode+"'";
+			String query3 = "DELETE p, a from Portfolio p join Assets a on p.portfolioCode=a.portfolioCode where p.ownerCode = '"+personCode+"'";
+			String query4 = "delete Portfolio, Assets from Portfolio where Portfolio.managerCode = '"+personCode+"'";
+			String query5 = "delete Portfolio, Assets from Portfolio where Portfolio.beneficiaryCode = '"+personCode+"'";
 			
 			PreparedStatement ps = null;
 			PreparedStatement ps2 = null;
@@ -116,6 +120,11 @@ public class PortfolioData implements databaseinfoandmethods{
 				ps3 = conn.prepareStatement(query3);
 				ps4 = conn.prepareStatement(query4);
 				ps5 = conn.prepareStatement(query5);
+				ps.executeQuery();
+				ps2.executeQuery();
+				ps3.executeQuery();
+				ps4.executeQuery();
+				ps5.executeQuery();
 				conn.close();
 				ps.close();
 				ps2.close();
@@ -171,11 +180,11 @@ public class PortfolioData implements databaseinfoandmethods{
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}	
-			String query = "";
+			String query = "insert into Person(personCode, firstName, lastName, persontype, secId, street, city, state, country, zip) values('"+personCode+"','"+firstName+"','"+lastName+"','"+brokerType+"','"+secBrokerId+"','"+street+"',' "+city+"','"+state+"','"+country+"','"+zip+"');";
 			PreparedStatement ps = null;
 			try {
 				ps = conn.prepareStatement(query);
-			
+				ps.executeQuery();
 				conn.close();
 				ps.close();
 			}catch(SQLException e) {
@@ -218,11 +227,11 @@ public class PortfolioData implements databaseinfoandmethods{
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}	
-			String query = "";
+			String query = " insert into Emails(personCode, email) values ('"+personCode+"','"+email+"');";
 			PreparedStatement ps = null;
 			try {
 				ps = conn.prepareStatement(query);
-				
+				ps.executeQuery();
 				conn.close();
 				ps.close();
 			}catch(SQLException e) {
@@ -268,7 +277,7 @@ public class PortfolioData implements databaseinfoandmethods{
 			PreparedStatement ps = null;
 			try {
 				ps = conn.prepareStatement(query);
-				
+				ps.executeQuery();
 				conn.close();
 				ps.close();
 			}catch(SQLException e) {
@@ -311,11 +320,11 @@ public class PortfolioData implements databaseinfoandmethods{
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}	
-			String query = "delete PrivateInvestment FROM PrivateInvestments WHERE PrivateInvestment.assetCode EQUALS "+assetCode+"";
-			String query2 = "delete Stock FROM Stocks WHERE Stock.assetCode EQUALS "+assetCode+"";
-			String query3 = "delete Depoist FROM Stock WHERE Stock.assetCode EQUALS "+assetCode+"";
-			String query4 = "delete AnAsset From AssetList WHERE AnAsset.assetCode EQUALS"+assetCode+"";
-			String query5 = "delete aAsset From Assets WHERE aAsset.assetCode EQUALS "+assetCode+"";
+			String query = "delete PrivateInvestment FROM PrivateInvestments WHERE PrivateInvestment.assetCode EQUALS '"+assetCode+"'";
+			String query2 = "delete Stock FROM Stocks WHERE Stock.assetCode EQUALS '"+assetCode+"'";
+			String query3 = "delete Depoist FROM Stock WHERE Stock.assetCode EQUALS '"+assetCode+"'";
+			String query4 = "delete AnAsset From AssetList WHERE AnAsset.assetCode EQUALS '"+assetCode+"'";
+			String query5 = "delete aAsset From Assets WHERE aAsset.assetCode EQUALS '"+assetCode+"'";
 			PreparedStatement ps = null;
 			PreparedStatement ps2 = null;
 			PreparedStatement ps3 = null;
@@ -328,6 +337,11 @@ public class PortfolioData implements databaseinfoandmethods{
 				ps4 = conn.prepareStatement(query4);
 				ps5 = conn.prepareStatement(query5);
 				
+				ps.executeQuery();
+				ps2.executeQuery();
+				ps3.executeQuery();
+				ps4.executeQuery();
+				ps5.executeQuery();
 				conn.close();
 				ps.close();
 				ps2.close();
@@ -376,13 +390,18 @@ public class PortfolioData implements databaseinfoandmethods{
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}	
-			String query = "";
+			String query = "insert into Deposit( assetCode, assetName, apr) values('"+assetCode+"', '"+label+"',"+apr+");";
+			String query2= "insert into AssetsList(assetCode, assetType, assetName) values("+assetCode+",'D','"+label+"');";
 			PreparedStatement ps = null;
+			PreparedStatement ps2= null;
 			try {
 				ps = conn.prepareStatement(query);
-				
+				ps2 = conn.prepareStatement(query2);
+				ps.executeQuery();
+				ps2.executeQuery();
 				conn.close();
 				ps.close();
+				ps2.close();
 			}catch(SQLException e) {
 				System.out.println("SQLException: ");
 				e.printStackTrace();
@@ -430,13 +449,19 @@ public class PortfolioData implements databaseinfoandmethods{
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}	
-			String query = "";
+			String query = "insert into PrivateInvestment(assetCode, assetName, quarterlyDividend, baseRateOfReturn, omegaMeasure, pValue) values('"+assetCode+"','"+label+"',"+quarterlyDividend+","+baseRateOfReturn+","+baseOmega+","+totalValue+");";
+			String query2= "insert into AssetsList(assetCode, assetType, assetName) values("+assetCode+",'P','"+label+"');";
+
 			PreparedStatement ps = null;
+			PreparedStatement ps2=null;
 			try {
 				ps = conn.prepareStatement(query);
-				
+				ps2= conn.prepareStatement(query2);
+				ps.executeQuery();
+				ps2.executeQuery();
 				conn.close();
 				ps.close();
+				ps2.close();
 			}catch(SQLException e) {
 				System.out.println("SQLException: ");
 				e.printStackTrace();
@@ -484,13 +509,20 @@ public class PortfolioData implements databaseinfoandmethods{
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}	
-			String query = "";
+			String query = "insert into Stock(assetCode, assetName, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice) values('"+assetCode+"','"+label+"',"+quarterlyDividend+","+baseRateOfReturn+","+beta+",'"+stockSymbol+"',"+sharePrice+");";
+			String query2= "insert into AssetsList(assetCode, assetType, assetName) values("+assetCode+",'S','"+label+"');";
+
 			PreparedStatement ps = null;
+			PreparedStatement ps2 = null;
 			try {
 				ps = conn.prepareStatement(query);
+				ps2 = conn.prepareStatement(query2);
+				ps.executeQuery();
+				ps2.executeQuery();
 				
 				conn.close();
 				ps.close();
+				ps2.close();
 			}catch(SQLException e) {
 				System.out.println("SQLException: ");
 				e.printStackTrace();
@@ -531,10 +563,13 @@ public class PortfolioData implements databaseinfoandmethods{
 			String query2 = "DELETE * FROM Assets";
 			PreparedStatement ps = null;
 			PreparedStatement ps2 = null;
-			
+		
 			try {
 				ps = conn.prepareStatement(query);
 				ps2 = conn.prepareStatement(query2);
+				ps.executeQuery();
+				ps2.executeQuery();
+				
 				conn.close();
 				ps.close();
 				ps2.close();
@@ -584,6 +619,8 @@ public class PortfolioData implements databaseinfoandmethods{
 			try {
 				ps = conn.prepareStatement(query);
 				ps2 = conn.prepareStatement(query2);
+				ps.executeQuery();
+				ps2.executeQuery();
 				conn.close();
 				ps.close();
 				ps2.close();
@@ -630,10 +667,11 @@ public class PortfolioData implements databaseinfoandmethods{
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}	
-			String query = "";
+			String query = " insert into Portfolio(portfolioCode, ownerCode, managerCode, beneficiaryCode) values('"+portfolioCode+"','"+ownerCode+"','"+managerCode+"','"+beneficiaryCode+"');";
 			PreparedStatement ps = null;
 			try {
 				ps = conn.prepareStatement(query);
+				ps.executeQuery();
 				conn.close();
 				ps.close();
 			}catch(SQLException e) {
@@ -681,11 +719,11 @@ public class PortfolioData implements databaseinfoandmethods{
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}	
-			String query = "";
+			String query = " insert into Assets(portfolioCode, assetCode, assetValue) values('"+portfolioCode+"','"+assetCode+"',"+value+");";
 			PreparedStatement ps = null;
 			try {
 				ps = conn.prepareStatement(query);
-				
+				ps.executeQuery();
 				conn.close();
 				ps.close();
 			}catch(SQLException e) {
