@@ -16,6 +16,7 @@ public class PrivateInvestment extends Assets{
 		this.setTotalValue(totalvalue);
 	}
 //getter and setter methods for the above private investment variables. all pretty self-explanatory  
+
 	public double getQuarterlyDividend() {
 		return QuarterlyDividend;
 	}

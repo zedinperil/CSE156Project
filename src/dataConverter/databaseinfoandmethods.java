@@ -80,10 +80,12 @@ public interface databaseinfoandmethods {
 			portfolios.add(port);
 		} 
 		//close the result set and preparedstatement
-		rs.close();
-		ps.close();
-		conn.close();
-
+		 if ( rs != null && ! rs . isClosed () )
+			 rs . close () ;
+			 if ( ps != null && ! ps . isClosed () )
+			 ps . close () ;
+			 if ( conn != null && ! conn . isClosed () )
+			 conn . close () ;
 		//catch a potential fatal error
 		}catch (SQLException e) {
 			System.out.println("SQLException: ");
@@ -138,9 +140,12 @@ public interface databaseinfoandmethods {
 			assets.add(a);
 		}
 		//close ps and rs
-		conn.close();
-		rs.close();
-		ps.close();
+		 if ( rs != null && ! rs . isClosed () )
+			 rs . close () ;
+			 if ( ps != null && ! ps . isClosed () )
+			 ps . close () ;
+			 if ( conn != null && ! conn . isClosed () )
+			 conn . close () ;
 		//catch any fatal erros in the sql
 	} catch (SQLException e) {
 		System.out.println("SQLException: ");
@@ -204,9 +209,12 @@ public interface databaseinfoandmethods {
 				persons.add(p);
 			}
 			//close ps and rs
-			conn.close();
-			rs.close();
-			ps.close();
+			 if ( rs != null && ! rs . isClosed () )
+				 rs . close () ;
+				 if ( ps != null && ! ps . isClosed () )
+				 ps . close () ;
+				 if ( conn != null && ! conn . isClosed () )
+				 conn . close () ;
 			//catch any fatal erros in the sql
 		} catch (SQLException e) {
 			System.out.println("SQLException: ");
@@ -237,7 +245,7 @@ public interface databaseinfoandmethods {
 				throw new RuntimeException(e);
 			}	
 			//call connection method
-			Connection conn = connectionMethod();;
+			Connection conn = connectionMethod();
 			//this query will gather all the asset information
 			String query = "select L.assetType from AssetsList L;";
 			//declare a new array list of type asset
@@ -296,6 +304,7 @@ public interface databaseinfoandmethods {
 					
 					
 					 b= new PrivateInvestment(code, label, quarterlydividend, baserateofreturn, omegameasure, totalvalue);
+					 b.setType("P");
 				}
 				if(assetType.equals("S")){
 					double quarterlydividend=rs2.getDouble("quarterlyDividend");
@@ -306,11 +315,13 @@ public interface databaseinfoandmethods {
 					
 					
 					 b= new Stock(code,label, quarterlydividend,baserateofreturn, betameasure,stocksymbol, shareprice);
+					 b.setType("S");
 				}
 				if(assetType.equals("D")){
 				
 					double apr= rs2.getDouble("apr");
 					 b = new Deposit(code,label, apr);
+					 b.setType("D");
 				}
 				b.setType(assetType);
 				assetList.add(b);
@@ -328,9 +339,12 @@ public interface databaseinfoandmethods {
 				
 			}
 			//close ps and rs
-			conn.close();
-			rs.close();
-			ps.close();
+			 if ( rs != null && ! rs . isClosed () )
+				 rs . close () ;
+				 if ( ps != null && ! ps . isClosed () )
+				 ps . close () ;
+				 if ( conn != null && ! conn . isClosed () )
+				 conn . close () ;
 			//catch any fatal erros in the sql
 		} catch (SQLException e) {
 			System.out.println("SQLException: ");
@@ -384,10 +398,14 @@ public interface databaseinfoandmethods {
 					Email e= new Email(personCode,email);
 					emails.add(e);
 				}
-				//close ps and rs
-				conn.close();
-				rs.close();
-				ps.close();
+				//close ps and rsry {
+				 if ( rs != null && ! rs . isClosed () )
+					 rs . close () ;
+					 if ( ps != null && ! ps . isClosed () )
+					 ps . close () ;
+					 if ( conn != null && ! conn . isClosed () )
+					 conn . close () ;
+				
 				//catch any fatal erros in the sql
 			} catch (SQLException e) {
 				System.out.println("SQLException: ");

@@ -19,7 +19,7 @@ public class InputOutput implements databaseinfoandmethods{
 
 		//create two array lists, one of portfolios and one of assets, calling methods in our interface class
 		PortfolioList= databaseinfoandmethods.getPortfolios();
-		//AssetList= databaseinfoandmethods.getAssets();
+		AssetList= databaseinfoandmethods.getAssets();
 		
 		//print formatted data. Many of the lines are formatting to make it look pretty.
 		System.out.println("##########################################################################################################################");
@@ -89,16 +89,16 @@ public class InputOutput implements databaseinfoandmethods{
 							System.out.println("Asset Type :"+ AssetList.get(t).getAssetType(AssetList.get(t).getAssetCode()));
 							System.out.println("Asset Value Modifier :"+AssetList.get(t).getAssetValue());
 							//these are formatted using our formatter for doubles
-							System.out.println("Annual Return :$"+DoubleFormat.format(AssetList.get(t).getAnnualReturn()));
-						    System.out.println("Risk :"+RiskFormat.format(AssetList.get(t).getRisk()));
-						    System.out.println("Value :$"+DoubleFormat.format(AssetList.get(t).getAssetValue()));
-						    System.out.println("Return Rate :"+DoubleFormat.format((AssetList.get(t).getReturnRate()*100))+"%");	
+							System.out.println("Annual Return :$"+DoubleFormat.format(AssetList.get(t).getAnnualReturn(AssetList.get(t).getAssetCode())));
+						    System.out.println("Risk :"+RiskFormat.format(AssetList.get(t).getRisk(AssetList.get(t).getAssetCode())));
+						    System.out.println("Value :$"+DoubleFormat.format(AssetList.get(t).getValue(AssetList.get(t).getAssetCode())));
+						    System.out.println("Return Rate :"+DoubleFormat.format((AssetList.get(t).getReturnRate(AssetList.get(t).getAssetCode())*100))+"%");	
 						    System.out.println();
 						    System.out.println("---------------------------------------------------------------------------------------------------------------------");
 						    System.out.println();  
 						    //these are here to add the annual return of the asset to the sums for the portfolio, and for the total sum for all portfolios
-						    PortfolioAnnualReturnSum[g]+=AssetList.get(t).getAnnualReturn();
-						    AnnualReturnSum+= AssetList.get(t).getAnnualReturn();
+						    PortfolioAnnualReturnSum[g]+=AssetList.get(t).getAnnualReturn(AssetList.get(t).getAssetCode());
+						    AnnualReturnSum+= AssetList.get(t).getAnnualReturn(AssetList.get(t).getAssetCode());
 						   //increment a
 						    a++;
 						}

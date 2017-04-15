@@ -1,7 +1,6 @@
 package dataConverter;
 
 import java.util.List;
-import java.util.ArrayList;
 public class Asset implements databaseinfoandmethods{
 	String portfolioCode;
 	
@@ -18,7 +17,6 @@ public class Asset implements databaseinfoandmethods{
 	double quarterlyDividends;
 	double apr;
 	List<Assets>assetList=databaseinfoandmethods.getAssetList();
-    List<Asset> assets= databaseinfoandmethods.getAssets();
 
 	public Asset(String PortfolioCode, String AssetCode, double Value) {
 		this.portfolioCode= PortfolioCode;
@@ -55,7 +53,7 @@ public class Asset implements databaseinfoandmethods{
 	public String getAssetName(String assetCode) {
 		for(int i=0; i<assetList.size();i++){
 			if(assetList.get(i).getAssetCode().equals(assetCode)){
-				assetType=assetList.get(i).getLabel();
+				assetName=assetList.get(i).getLabel();
 			}	
 		}
 		return assetName;
@@ -100,7 +98,11 @@ public class Asset implements databaseinfoandmethods{
 	/**
 	 * @return the returnRate
 	 */
-	public double getReturnRate() {
+	public double getReturnRate(String assetcode) {
+	//annual return /value of individual asset
+		returnRate= getAnnualReturn(assetcode)/getValue(assetcode);
+			
+		
 		return returnRate;
 	}
 	/**
@@ -109,12 +111,7 @@ public class Asset implements databaseinfoandmethods{
 	public void setReturnRate(double returnRate) {
 		this.returnRate = returnRate;
 	}
-	/**
-	 * @return the annualReturn
-	 */
-	public double getAnnualReturn() {
-		return annualReturn;
-	}
+	
 	/**
 	 * @param annualReturn the annualReturn to set
 	 */
@@ -224,11 +221,11 @@ public class Asset implements databaseinfoandmethods{
 			if(assetList.get(i).getAssetCode().equals(assetCode)){
 				 if(assetType.equals("P")){
 					 PrivateInvestment Priv= (PrivateInvestment) assetList.get(i);
-					 AnnualReturn = Priv.getBaseRateOfReturn()*(Priv.getTotalValue() * getValue(assetcode) * .01)+ (4 *(Priv.getQuarterlyDividend() * getValue(assetcode) * .01));
+					 AnnualReturn = getBaseRateOfReturn(assetcode)*(Priv.getTotalValue() * getValue(assetcode) * .01)+ (4 *(getQuarterlyDividend(assetcode) * getValue(assetcode) * .01));
 				 }
 				 if(assetType.equals("S")){
 					 Stock Stok= (Stock) assetList.get(i);
-					 AnnualReturn = (Stok.getBaseRateOfReturn()* (Stok.getSharePrice() * getValue(assetcode) + (4 *(Stok.getQuarterlyDividend() * getValue(assetcode) ))));
+					 AnnualReturn = (getBaseRateOfReturn(assetcode)* (Stok.getSharePrice() * getValue(assetcode) + (4 *(getQuarterlyDividend(assetcode) * getValue(assetcode) ))));
 				 }
 				 if(assetType.equals("D")){
 					 Deposit Dep= (Deposit) assetList.get(i);
@@ -244,43 +241,43 @@ public class Asset implements databaseinfoandmethods{
 		 assetType= getAssetType(assetcode);
 		 for(int k=0; k<assetList.size(); k++){
 			if(assetList.get(k).getAssetCode().equals(assetCode)){
-				for(int i=0; i<assets.size(); i++){
-					if(assets.get(i).getAssetCode().equals(assetCode)){
 						if(assetType.equals("P")){
 							PrivateInvestment Priv= (PrivateInvestment)assetList.get(k);
-							Value = Priv.getTotalValue() * assets.get(i).getAssetValue() * .01;
+							Value = Priv.getTotalValue() * getAssetValue() * .01;
 							 return Value;
 						}
 						if(assetType.equals("S")){
 							Stock Stok= (Stock) assetList.get(k);
-							Value = Stok.getSharePrice() * assets.get(i).getAssetValue();
-							 return Value;
+							Value = Stok.getSharePrice() * getAssetValue();							
+							return Value;
 						}
 						if(assetType.equals("D")){
-							Value = assets.get(i).getAssetValue();
+							Value = getAssetValue();
 							 return Value;
 						}	
-					}
-				}
-		
 			}
+				
+		
+			
 		 }
 		 return Value;
 	 }
 	 public double getRisk(String assetcode) {
 		 assetType= getAssetType(assetcode);
 		 for(int i=0; i<assetList.size(); i++){
-			 if(assetType.equals("P")){
-				 PrivateInvestment Priv= (PrivateInvestment) assetList.get(i);
-				 risk = Priv.getOmegaMeasure()+ Math.pow(java.lang.Math.E,(-100000/Priv.getTotalValue()));
+			 if(assetList.get(i).getAssetCode().equals(assetcode)){
+				 if(assetType.equals("P")){
+					 PrivateInvestment Priv= (PrivateInvestment) assetList.get(i);
+					 risk = Priv.getOmegaMeasure()+ Math.pow(java.lang.Math.E,(-100000/Priv.getTotalValue()));
+				 }
+				 if(assetType.equals("S")){
+					 Stock Stok= (Stock) assetList.get(i);
+					 risk = Stok.getBetaMeasure();
+				 }
+				 if(assetType.equals("D")){
+					 risk = 0;
+				 } 
 			 }
-			 if(assetType.equals("S")){
-				 Stock Stok= (Stock) assetList.get(i);
-				 risk = Stok.getBetaMeasure();
-			 }
-			 if(assetType.equals("D")){
-				 risk = 0;
-			 } 
 		 }
 		 return risk;		 
 	 }
