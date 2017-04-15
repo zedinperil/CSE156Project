@@ -52,9 +52,9 @@ public interface databaseinfoandmethods {
 		String query =  "select p.portfolioCode,  "
 				+ "q.personCode as OwnerCode, m.personCode as ManagerCode, "
 				+ "b.personCode as BeneficiaryCode "
-				+ "from Portfolio p join Person q on q.personId=p.ownerId "
-				+ "LEFT JOIN Person m on m.personId=p.managerId "
-				+ "LEFT JOIN Person b on b.personId=p.beneficiaryId;";
+				+ "from Portfolio p join Person q on q.personCode=p.ownerCode "
+				+ "LEFT JOIN Person m on m.personCode=p.managerCode "
+				+ "LEFT JOIN Person b on b.personCode=p.beneficiaryCode;";
 		//declare a new portfolio arraylist
 		List<Portfolio> portfolios= new ArrayList<Portfolio>();
 		//declare a result set and preparedstatement to use the querry and get the information
@@ -117,8 +117,8 @@ public interface databaseinfoandmethods {
 		Connection conn = connectionMethod();
 		//this query will gather all the asset information
 		String query = "select p.portfolioCode, L.assetCode, a.assetValue,"
-				+ "a.assetModifier from Assets a JOIN Portfolio p ON p.portfolioId = a.portfolioId "
-				+ "JOIN AssetsList L ON L.assetListId = a.assetListId;";
+				+ "a.assetModifier from Assets a JOIN Portfolio p ON p.portfolioCode = a.portfolioCode "
+				+ "JOIN AssetsList L ON L.assetCode = a.assetCode;";
 		//declare a new array list of type asset
 	List<Asset> assets= new ArrayList<Asset>();	
 		//new ps and rs

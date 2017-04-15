@@ -100,9 +100,9 @@ public class PortfolioData implements databaseinfoandmethods{
 			}	
 			String query = "delete Emails from Emails where Emails.personId = "+personCode+"";
 			String query2 = "DELETE Pesron FROM Person P WHERE P.personCode EQUALS "+personCode+"";
-			String query3 = "DELETE p, a from Portfolio p join Assets a on p.portfolioId=a.portfolioId where p.ownerId = "+personCode+"";
-			String query4 = "delete Portfolio, Assets from Portfolio where Portfolio.managerId = "+personCode+"";
-			String query5 = "delete Portfolio, Assets from Portfolio where Portfolio.beneficiaryId = "+personCode+"";
+			String query3 = "DELETE p, a from Portfolio p join Assets a on p.portfolioCode=a.portfolioCode where p.ownerCode = "+personCode+"";
+			String query4 = "delete Portfolio, Assets from Portfolio where Portfolio.managerCode = "+personCode+"";
+			String query5 = "delete Portfolio, Assets from Portfolio where Portfolio.beneficiaryCode = "+personCode+"";
 			
 			PreparedStatement ps = null;
 			PreparedStatement ps2 = null;
