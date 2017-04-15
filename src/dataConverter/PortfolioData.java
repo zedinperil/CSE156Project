@@ -218,7 +218,7 @@ public class PortfolioData implements databaseinfoandmethods{
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}	
-			String query = "DELETE * FROM Person P WHERE P.personCode EQUALS "+personCode+"";
+			String query = "";
 			PreparedStatement ps = null;
 			try {
 				ps = conn.prepareStatement(query);
@@ -263,7 +263,8 @@ public class PortfolioData implements databaseinfoandmethods{
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}	
-			String query = "";
+			String query = "delete * FROM PrivateInvestments, Stocks, Deposits, Assetlist, Assets";
+			
 			PreparedStatement ps = null;
 			try {
 				ps = conn.prepareStatement(query);
@@ -310,13 +311,29 @@ public class PortfolioData implements databaseinfoandmethods{
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}	
-			String query = "";
+			String query = "delete PrivateInvestment FROM PrivateInvestments WHERE PrivateInvestment.assetCode EQUALS "+assetCode+"";
+			String query2 = "delete Stock FROM Stocks WHERE Stock.assetCode EQUALS "+assetCode+"";
+			String query3 = "delete Depoist FROM Stock WHERE Stock.assetCode EQUALS "+assetCode+"";
+			String query4 = "delete AnAsset From AssetList WHERE AnAsset.assetCode EQUALS"+assetCode+"";
+			String query5 = "delete aAsset From Assets WHERE aAsset.assetCode EQUALS "+assetCode+"";
 			PreparedStatement ps = null;
+			PreparedStatement ps2 = null;
+			PreparedStatement ps3 = null;
+			PreparedStatement ps4 = null;
+			PreparedStatement ps5 = null;
 			try {
 				ps = conn.prepareStatement(query);
+				ps2 = conn.prepareStatement(query2);
+				ps3 = conn.prepareStatement(query3);
+				ps4 = conn.prepareStatement(query4);
+				ps5 = conn.prepareStatement(query5);
 				
 				conn.close();
 				ps.close();
+				ps2.close();
+				ps3.close();
+				ps4.close();
+				ps5.close();
 			}catch(SQLException e) {
 				System.out.println("SQLException: ");
 				e.printStackTrace();
@@ -510,12 +527,17 @@ public class PortfolioData implements databaseinfoandmethods{
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}	
-			String query = "";
+			String query = "DELETE * FROM Portfolios";
+			String query2 = "DELETE * FROM Assets";
 			PreparedStatement ps = null;
+			PreparedStatement ps2 = null;
+			
 			try {
 				ps = conn.prepareStatement(query);
+				ps2 = conn.prepareStatement(query2);
 				conn.close();
 				ps.close();
+				ps2.close();
 			}catch(SQLException e) {
 				System.out.println("SQLException: ");
 				e.printStackTrace();
@@ -555,12 +577,16 @@ public class PortfolioData implements databaseinfoandmethods{
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}	
-			String query = "";
+			String query = "DELETE Portfolio FROM Portfolios WHERE Portfolio.portfolioCode EQUALS "+portfolioCode+"";
+			String query2 = "DELETE aAsset FROM Assets WHERE aAsset.portfolioCode EQUALS "+portfolioCode+"";
 			PreparedStatement ps = null;
+			PreparedStatement ps2 = null;
 			try {
 				ps = conn.prepareStatement(query);
+				ps2 = conn.prepareStatement(query2);
 				conn.close();
 				ps.close();
+				ps2.close();
 			}catch(SQLException e) {
 				System.out.println("SQLException: ");
 				e.printStackTrace();
