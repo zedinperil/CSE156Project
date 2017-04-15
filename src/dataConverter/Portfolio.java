@@ -94,10 +94,14 @@ public class Portfolio {
 
 	//this getter returns fees, 
 	public double getFees() {
+		fees= PortfolioInterface.getFees(PortfolioAssets, ManagerCode);
+		
 		return fees;
 	}
 	//this getter returns commissions
 	public double getCommissions() {
+		commissions= PortfolioInterface.getCommissions(PortfolioAssets, ManagerCode);
+
 		return commissions;
 	}
 	//risk getter function,c, then we check to

@@ -6,7 +6,6 @@ import java.util.List;
 public interface PortfolioInterface extends databaseinfoandmethods {
 	List<Asset> Assets= databaseinfoandmethods.getAssets();
 	
-	
 	public static List<Asset> getRelevantAssets(String PortfolioCode){
 		
 		List<Asset> NewAssets= new ArrayList<Asset>();
@@ -58,8 +57,6 @@ public interface PortfolioInterface extends databaseinfoandmethods {
 		}
 		return manager;
 	}
-	
-	
 	public static double getTotalPortfolioValue(List<Asset> RelevantAssets){
 		double Value = 0;
 		
@@ -76,9 +73,6 @@ public interface PortfolioInterface extends databaseinfoandmethods {
 			}
 		return Value;
 	}
-
-
-
 	public static double getAnnualReturnSum(List<Asset> RelevantAssets) {
 		double AnnualReturnSum = 0;
 		for(int k=0; k<RelevantAssets.size(); k++){
@@ -111,15 +105,40 @@ public interface PortfolioInterface extends databaseinfoandmethods {
 			AggRisk=risksum;
 		return AggRisk;
 	}
-	public static double getCommissions(List<Asset>RelevantAssets){
+	public static double getCommissions(List<Asset>RelevantAssets, String ManagerCode){
 		double commissions=0;
-		
+		int k=0;	
+		List<Persons> Person= databaseinfoandmethods.getPersons();
+		while(k<Person.size()){
+		if(Person.get(k).getCode().equals(ManagerCode)){
+			if(Person.get(k).getPersonType().equals("E")){
+				commissions = (.05 * getAnnualReturnSum(RelevantAssets));
+			}
+			if(Person.get(k).getPersonType().equals("J")){
+				commissions = (.02 * getAnnualReturnSum(RelevantAssets));
+			}
+		}
+		k++;
+		}	
+
 		return commissions;
 	}
-	public static double getFees(List<Asset>RelevantAssets){
+	public static double getFees(List<Asset>RelevantAssets, String ManagerCode){
 		double fees=0;
-		
-		
+		int k=0;
+		List<Persons> Person= databaseinfoandmethods.getPersons();
+
+		while(k<Person.size()){
+			if(Person.get(k).getCode().equals(ManagerCode)){
+						if(Person.get(k).getPersonType().equals("E")){
+							fees = 10 * RelevantAssets.size();
+						}
+						if(Person.get(k).getPersonType().equals("J")){
+							fees = 50 * RelevantAssets.size();
+						}
+			}
+			k++;		
+		}
 		return fees;
 	}
 }
