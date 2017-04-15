@@ -1,8 +1,8 @@
-////package dataConverter;
+package dataConverter;
 //
 //import java.util.StringTokenizer;
 //
-//public class OLDPORTFOLIO {
+public class OLDPORTFOLIO {
 //		
 //		private String PortfolioCode;
 //		private String OwnerCode;
@@ -331,5 +331,5 @@
 //		
 //
 //		
-//}	
+}	
 //

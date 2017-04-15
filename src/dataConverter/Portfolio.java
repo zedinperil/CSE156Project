@@ -107,10 +107,13 @@ public class Portfolio {
 
 	//for every value of
 	public double getTotalValue(){
+	TotalValue= PortfolioInterface.getTotalPortfolioValue(PortfolioAssets);
 		return TotalValue;
 	}
 	//e of asset it is, and calculate annual return based on the type of asset. return it.
 	public double getAnnualReturn() {
+		AnnualReturn= PortfolioInterface.getAnnualReturnSum(PortfolioAssets);
+
 		return AnnualReturn;
 	}
 	//returns return rate. t by the value of sset.
@@ -119,6 +122,8 @@ public class Portfolio {
 	}
 	//ng them together for each asset.
 	public double getAggRisk() {
+		AggRisk= PortfolioInterface.getAggRisk(PortfolioAssets);
+
 		return AggRisk;
 	}
 	//basic getter for persons count

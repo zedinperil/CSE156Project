@@ -60,18 +60,18 @@ public interface PortfolioInterface extends databaseinfoandmethods {
 	}
 	
 	
-	public static double ValueMethod(List<Asset> RelevantAssets){
+	public static double getTotalPortfolioValue(List<Asset> RelevantAssets){
 		double Value = 0;
 		
 		for(int k=0; k<RelevantAssets.size(); k++){
 				if(RelevantAssets.get(k).getAssetType(RelevantAssets.get(k).assetCode).equals("P")){
-					Value = RelevantAssets.get(k).getPrivateValue(RelevantAssets.get(k).assetCode) * RelevantAssets.get(k).assetValue * .01;
+					Value += RelevantAssets.get(k).getPrivateValue(RelevantAssets.get(k).assetCode) * RelevantAssets.get(k).assetValue * .01;
 				}
 				if(RelevantAssets.get(k).getAssetType(RelevantAssets.get(k).assetCode).equals("S")){
-					Value = RelevantAssets.get(k).getSharePrice(RelevantAssets.get(k).assetCode) * RelevantAssets.get(k).assetValue;
+					Value += RelevantAssets.get(k).getSharePrice(RelevantAssets.get(k).assetCode) * RelevantAssets.get(k).assetValue;
 				}
 				if(RelevantAssets.get(k).getAssetType(RelevantAssets.get(k).assetCode).equals("D")){
-					Value = RelevantAssets.get(k).assetValue;
+					Value += RelevantAssets.get(k).assetValue;
 				}
 			}
 		return Value;
@@ -82,7 +82,7 @@ public interface PortfolioInterface extends databaseinfoandmethods {
 	public static double getAnnualReturnSum(List<Asset> RelevantAssets) {
 		double AnnualReturnSum = 0;
 		for(int k=0; k<RelevantAssets.size(); k++){
-				AnnualReturnSum+= RelevantAssets.get(k).getAnnualReturn(RelevantAssets.get(k).portfolioCode);
+				AnnualReturnSum+= RelevantAssets.get(k).getAnnualReturn(RelevantAssets.get(k).getAssetCode());
 			}
 		return AnnualReturnSum;
 	}
@@ -94,7 +94,7 @@ public interface PortfolioInterface extends databaseinfoandmethods {
 				while(o<RelevantAssets.size()){
 						
 						double	AnnualReturn = RelevantAssets.get(o).getAnnualReturn(RelevantAssets.get(o).getAssetCode());
-							ReturnRate= AnnualReturn/ ValueMethod(RelevantAssets);			
+							ReturnRate+= AnnualReturn/ getTotalPortfolioValue(RelevantAssets);			
 				o++;
 				}		
 		return ReturnRate;
@@ -105,10 +105,21 @@ public interface PortfolioInterface extends databaseinfoandmethods {
 		double risksum=0;
 		double AggRisk=0;
 			for(int o=0; o<RelevantAssets.size(); o++){
-					temprisk= (RelevantAssets.get(o).getRisk(RelevantAssets.get(o).getAssetCode())*RelevantAssets.get(o).getValue(RelevantAssets.get(o).getAssetCode()))/ValueMethod(RelevantAssets);
+					temprisk= (RelevantAssets.get(o).getRisk(RelevantAssets.get(o).getAssetCode())*RelevantAssets.get(o).getValue(RelevantAssets.get(o).getAssetCode()))/getTotalPortfolioValue(RelevantAssets);
 					risksum+=temprisk;
 				}
 			AggRisk=risksum;
 		return AggRisk;
+	}
+	public static double getCommissions(List<Asset>RelevantAssets){
+		double commissions=0;
+		
+		return commissions;
+	}
+	public static double getFees(List<Asset>RelevantAssets){
+		double fees=0;
+		
+		
+		return fees;
 	}
 }
