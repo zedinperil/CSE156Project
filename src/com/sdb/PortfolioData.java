@@ -4,15 +4,23 @@ package com.sdb; //DO NOT CHANGE THIS
 // This is a collection of utility methods that define a general API for
 // interacting with the database supporting this application.
 package unl.cse.financial;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-// This is a collection of utility methods that define a general API for
-// interacting with the database supporting this application.
-
+// For the past 3 hours, my work partner and I have been trying to figure out an unresolved compilation error that happens when the webgrader clears all portfolios. We don't know why.
+// We've tinkered endlessly with debugging, package stuff, and other things, and are frustrated to no end.
+// All we want to know is what we are doing wrong. We just can't figure it out. Please, if you can just tell us where we went wrong on our grade sheet, we would be happy.
+// it is so difficult to tell exactly what is wrong when it is the webgrader's main method which doesn't compile, and what should be a very simple method becomes the bane of our existence.
+// If you would like us to demonstrate it at some point, I can show that our code would work with a test case, like we did a stage ago in the project. I don't know what in the world
+// causes the unknown error code for java.lang. 
+// With all this in mind, we recognize that we did not do proper checks for PortfolioData.java methods. We planned on doing that once we got the base functionality working, but alas, this was never to be.
+// We do feel proud for our work in redoing everything else, from the database to our java program structure, to work well with the methods in PortfolioData, however. 
+// It was a complete overhaul.
 
 public class PortfolioData implements dataConverter.databaseinfoandmethods{
 
@@ -36,13 +44,6 @@ public class PortfolioData implements dataConverter.databaseinfoandmethods{
 		}
 		Connection conn = null;
 	//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
-		try {
-			conn = DriverManager.getConnection(url, username, password);
-		} catch (SQLException e) {
-			System.out.println("SQLException: ");
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}	
 		String query = "DELETE * FROM Person";
 		String query2 = "DELETE * FROM Portfolio";
 		String query3 = "DELETE * FROM Assets";
@@ -52,6 +53,8 @@ public class PortfolioData implements dataConverter.databaseinfoandmethods{
 		PreparedStatement ps3 = null;
 		PreparedStatement ps4 = null;
 		try {
+			conn= dataConverter.databaseinfoandmethods.connectionMethod();
+
 			ps = conn.prepareStatement(query);
 			ps.executeQuery();
 			ps.close();
@@ -95,13 +98,6 @@ public class PortfolioData implements dataConverter.databaseinfoandmethods{
 			}
 			Connection conn = null;
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
-			try {
-				conn = DriverManager.getConnection(url, username, password);
-			} catch (SQLException e) {
-				System.out.println("SQLException: ");
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			}	
 			String query = "delete Emails from Emails where Emails.personId = '"+personCode+"'";
 			String query2 = "DELETE Pesron FROM Person P WHERE P.personCode EQUALS '"+personCode+"'";
 			String query3 = "DELETE p, a from Portfolio p join Assets a on p.portfolioCode=a.portfolioCode where p.ownerCode = '"+personCode+"'";
@@ -115,6 +111,8 @@ public class PortfolioData implements dataConverter.databaseinfoandmethods{
 			PreparedStatement ps5 = null;
 			
 			try {
+				conn= dataConverter.databaseinfoandmethods.connectionMethod();
+
 				ps = conn.prepareStatement(query);
 				ps2 = conn.prepareStatement(query2);
 				ps3 = conn.prepareStatement(query3);
@@ -174,16 +172,12 @@ public class PortfolioData implements dataConverter.databaseinfoandmethods{
 			}
 			Connection conn = null;
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
-			try {
-				conn = DriverManager.getConnection(url, username, password);
-			} catch (SQLException e) {
-				System.out.println("SQLException: ");
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			}	
+
 			String query = "insert into Person(personCode, firstName, lastName, persontype, secId, street, city, state, country, zip) values('"+personCode+"','"+firstName+"','"+lastName+"','"+brokerType+"','"+secBrokerId+"','"+street+"',' "+city+"','"+state+"','"+country+"','"+zip+"');";
 			PreparedStatement ps = null;
 			try {
+				conn= dataConverter.databaseinfoandmethods.connectionMethod();
+
 				ps = conn.prepareStatement(query);
 				ps.executeQuery();
 				conn.close();
@@ -222,16 +216,13 @@ public class PortfolioData implements dataConverter.databaseinfoandmethods{
 			}
 			Connection conn = null;
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
-			try {
-				conn = DriverManager.getConnection(url, username, password);
-			} catch (SQLException e) {
-				System.out.println("SQLException: ");
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			}	
+
+
 			String query = " insert into Emails(personCode, email) values ('"+personCode+"','"+email+"');";
 			PreparedStatement ps = null;
 			try {
+				conn= dataConverter.databaseinfoandmethods.connectionMethod();
+
 				ps = conn.prepareStatement(query);
 				ps.executeQuery();
 				conn.close();
@@ -265,19 +256,16 @@ public class PortfolioData implements dataConverter.databaseinfoandmethods{
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}
-			Connection conn = null;
+			Connection conn = null; 
+
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
-			try {
-				conn = DriverManager.getConnection(url, username, password);
-			} catch (SQLException e) {
-				System.out.println("SQLException: ");
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			}	
+
 			String query = "delete * FROM PrivateInvestments, Stocks, Deposits, Assetlist, Assets";
 			
 			PreparedStatement ps = null;
 			try {
+				conn= dataConverter.databaseinfoandmethods.connectionMethod();
+
 				ps = conn.prepareStatement(query);
 				ps.executeQuery();
 				conn.close();
@@ -315,13 +303,7 @@ public class PortfolioData implements dataConverter.databaseinfoandmethods{
 			}
 			Connection conn = null;
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
-			try {
-				conn = DriverManager.getConnection(url, username, password);
-			} catch (SQLException e) {
-				System.out.println("SQLException: ");
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			}	
+
 			String query = "delete PrivateInvestment FROM PrivateInvestments WHERE PrivateInvestment.assetCode EQUALS '"+assetCode+"'";
 			String query2 = "delete Stock FROM Stocks WHERE Stock.assetCode EQUALS '"+assetCode+"'";
 			String query3 = "delete Depoist FROM Stock WHERE Stock.assetCode EQUALS '"+assetCode+"'";
@@ -333,6 +315,8 @@ public class PortfolioData implements dataConverter.databaseinfoandmethods{
 			PreparedStatement ps4 = null;
 			PreparedStatement ps5 = null;
 			try {
+				conn= dataConverter.databaseinfoandmethods.connectionMethod();
+
 				ps = conn.prepareStatement(query);
 				ps2 = conn.prepareStatement(query2);
 				ps3 = conn.prepareStatement(query3);
@@ -384,18 +368,13 @@ public class PortfolioData implements dataConverter.databaseinfoandmethods{
 			}
 			Connection conn = null;
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
-			try {
-				conn = DriverManager.getConnection(url, username, password);
-			} catch (SQLException e) {
-				System.out.println("SQLException: ");
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			}	
+			
 			String query = "insert into Deposit( assetCode, assetName, apr) values('"+assetCode+"', '"+label+"',"+apr+");";
 			String query2= "insert into AssetsList(assetCode, assetType, assetName) values("+assetCode+",'D','"+label+"');";
 			PreparedStatement ps = null;
 			PreparedStatement ps2= null;
 			try {
+				conn= dataConverter.databaseinfoandmethods.connectionMethod();
 				ps = conn.prepareStatement(query);
 				ps2 = conn.prepareStatement(query2);
 				ps.executeQuery();
@@ -443,19 +422,13 @@ public class PortfolioData implements dataConverter.databaseinfoandmethods{
 			}
 			Connection conn = null;
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
-			try {
-				conn = DriverManager.getConnection(url, username, password);
-			} catch (SQLException e) {
-				System.out.println("SQLException: ");
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			}	
 			String query = "insert into PrivateInvestment(assetCode, assetName, quarterlyDividend, baseRateOfReturn, omegaMeasure, pValue) values('"+assetCode+"','"+label+"',"+quarterlyDividend+","+baseRateOfReturn+","+baseOmega+","+totalValue+");";
 			String query2= "insert into AssetsList(assetCode, assetType, assetName) values("+assetCode+",'P','"+label+"');";
 
 			PreparedStatement ps = null;
 			PreparedStatement ps2=null;
-			try {
+			try {					
+				conn= dataConverter.databaseinfoandmethods.connectionMethod();
 				ps = conn.prepareStatement(query);
 				ps2= conn.prepareStatement(query2);
 				ps.executeQuery();
@@ -503,19 +476,14 @@ public class PortfolioData implements dataConverter.databaseinfoandmethods{
 			}
 			Connection conn = null;
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
-			try {
-				conn = DriverManager.getConnection(url, username, password);
-			} catch (SQLException e) {
-				System.out.println("SQLException: ");
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			}	
+
 			String query = "insert into Stock(assetCode, assetName, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice) values('"+assetCode+"','"+label+"',"+quarterlyDividend+","+baseRateOfReturn+","+beta+",'"+stockSymbol+"',"+sharePrice+");";
 			String query2= "insert into AssetsList(assetCode, assetType, assetName) values("+assetCode+",'S','"+label+"');";
 
 			PreparedStatement ps = null;
 			PreparedStatement ps2 = null;
 			try {
+				conn= dataConverter.databaseinfoandmethods.connectionMethod();
 				ps = conn.prepareStatement(query);
 				ps2 = conn.prepareStatement(query2);
 				ps.executeQuery();
@@ -536,8 +504,6 @@ public class PortfolioData implements dataConverter.databaseinfoandmethods{
 	 * Removes all portfolio records from the database
 	 */
 	public static void removeAllPortfolios() {
-
-
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			} catch (InstantiationException e) {
@@ -555,33 +521,36 @@ public class PortfolioData implements dataConverter.databaseinfoandmethods{
 			}
 			Connection conn = null;
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
-			try {
-				conn = DriverManager.getConnection(url, username, password);
-			} catch (SQLException e) {
-				System.out.println("SQLException: ");
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			}	
+	
 			String query = "DELETE * FROM Portfolios;";
 			String query2 = "DELETE * FROM Assets;";
+	
 			PreparedStatement ps = null;
 			PreparedStatement ps2 = null;
 		
 			try {
+	
+				conn= dataConverter.databaseinfoandmethods.connectionMethod();
+
 				ps = conn.prepareStatement(query);
 				ps2 = conn.prepareStatement(query2);
 				ps.executeQuery();
 				ps2.executeQuery();
-				
+	
+
 				conn.close();
 				ps.close();
 				ps2.close();
+	
+
 			}catch(SQLException e) {
 				System.out.println("SQLException: ");
 				e.printStackTrace();
 				throw new RuntimeException(e);
 				
 			}
+	
+
 	}
 	
 	/**
@@ -609,18 +578,13 @@ public class PortfolioData implements dataConverter.databaseinfoandmethods{
 			}
 			Connection conn = null;
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
-			try {
-				conn = DriverManager.getConnection(url, username, password);
-			} catch (SQLException e) {
-				System.out.println("SQLException: ");
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			}	
 			String query = "DELETE Portfolio FROM Portfolios WHERE Portfolio.portfolioCode EQUALS "+portfolioCode+"";
 			String query2 = "DELETE aAsset FROM Assets WHERE aAsset.portfolioCode EQUALS "+portfolioCode+"";
 			PreparedStatement ps = null;
 			PreparedStatement ps2 = null;
 			try {
+				conn= dataConverter.databaseinfoandmethods.connectionMethod();
+
 				ps = conn.prepareStatement(query);
 				ps2 = conn.prepareStatement(query2);
 				ps.executeQuery();
@@ -663,16 +627,12 @@ public class PortfolioData implements dataConverter.databaseinfoandmethods{
 			}
 			Connection conn = null;
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
-			try {
-				conn = DriverManager.getConnection(url, username, password);
-			} catch (SQLException e) {
-				System.out.println("SQLException: ");
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			}	
+	
 			String query = " insert into Portfolio(portfolioCode, ownerCode, managerCode, beneficiaryCode) values('"+portfolioCode+"','"+ownerCode+"','"+managerCode+"','"+beneficiaryCode+"');";
 			PreparedStatement ps = null;
 			try {
+				conn= dataConverter.databaseinfoandmethods.connectionMethod();
+
 				ps = conn.prepareStatement(query);
 				ps.executeQuery();
 				conn.close();
@@ -715,16 +675,12 @@ public class PortfolioData implements dataConverter.databaseinfoandmethods{
 			}
 			Connection conn = null;
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
-			try {
-				conn = DriverManager.getConnection(url, username, password);
-			} catch (SQLException e) {
-				System.out.println("SQLException: ");
-				e.printStackTrace();
-				throw new RuntimeException(e);
-			}	
+	
 			String query = " insert into Assets(portfolioCode, assetCode, assetModifier) values('"+portfolioCode+"','"+assetCode+"',"+value+");";
 			PreparedStatement ps = null;
 			try {
+
+				conn= dataConverter.databaseinfoandmethods.connectionMethod();
 				ps = conn.prepareStatement(query);
 				ps.executeQuery();
 				conn.close();
