@@ -1,21 +1,24 @@
 package com.sdb; //DO NOT CHANGE THIS
 
+
+// This is a collection of utility methods that define a general API for
+// interacting with the database supporting this application.
+package unl.cse.financial;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-/**
- * This is a collection of utility methods that define a general API for
- * interacting with the database supporting this application.
- *
- */
-public class PortfolioData implements databaseinfoandmethods{
+// This is a collection of utility methods that define a general API for
+// interacting with the database supporting this application.
 
-	/**
-	 * Method that removes every person record from the database
-	 */
+
+public class PortfolioData implements dataConverter.databaseinfoandmethods{
+
+
 	public static void removeAllPersons() {
+
 		try {
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
 		} catch (InstantiationException e) {
@@ -59,7 +62,7 @@ public class PortfolioData implements databaseinfoandmethods{
 			ps3.executeQuery();
 			ps3.close();
 			ps4 = conn.prepareStatement(query4);
-			ps4.executeQuery;
+			ps4.executeQuery();
 			conn.close();
 			ps4.close();
 			
@@ -72,12 +75,9 @@ public class PortfolioData implements databaseinfoandmethods{
 		
 	}
 				
-	/**
-	 * Removes the person record from the database corresponding to the
-	 * provided <code>personCode</code>
-	 * @param personCode
-	 */
+
 	public static void removePerson(String personCode) {
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			} catch (InstantiationException e) {
@@ -155,7 +155,8 @@ public class PortfolioData implements databaseinfoandmethods{
 	 */
 		
 	public static void addPerson(String personCode, String firstName, String lastName, String street, String city, String state, String zip, String country, String brokerType, String secBrokerId) {
-		
+
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			} catch (InstantiationException e) {
@@ -202,7 +203,8 @@ public class PortfolioData implements databaseinfoandmethods{
 	 * @param email
 	 */
 	public static void addEmail(String personCode, String email) {
-		
+
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			} catch (InstantiationException e) {
@@ -247,7 +249,7 @@ public class PortfolioData implements databaseinfoandmethods{
 	 * Removes all asset records from the database
 	 */
 	public static void removeAllAssets() {
-		
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			} catch (InstantiationException e) {
@@ -295,7 +297,7 @@ public class PortfolioData implements databaseinfoandmethods{
 	 * @param assetCode
 	 */
 	public static void removeAsset(String assetCode) {
-		
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			} catch (InstantiationException e) {
@@ -365,7 +367,6 @@ public class PortfolioData implements databaseinfoandmethods{
 	 * @param apr
 	 */
 	public static void addDepositAccount(String assetCode, String label, double apr) {
-		
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			} catch (InstantiationException e) {
@@ -424,7 +425,7 @@ public class PortfolioData implements databaseinfoandmethods{
 	 */
 	public static void addPrivateInvestment(String assetCode, String label, Double quarterlyDividend, 
 			Double baseRateOfReturn, Double baseOmega, Double totalValue) {
-		
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			} catch (InstantiationException e) {
@@ -484,7 +485,7 @@ public class PortfolioData implements databaseinfoandmethods{
 	 */
 	public static void addStock(String assetCode, String label, Double quarterlyDividend, 
 			Double baseRateOfReturn, Double beta, String stockSymbol, Double sharePrice) {
-		
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			} catch (InstantiationException e) {
@@ -535,6 +536,8 @@ public class PortfolioData implements databaseinfoandmethods{
 	 * Removes all portfolio records from the database
 	 */
 	public static void removeAllPortfolios() {
+
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			} catch (InstantiationException e) {
@@ -559,8 +562,8 @@ public class PortfolioData implements databaseinfoandmethods{
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}	
-			String query = "DELETE * FROM Portfolios";
-			String query2 = "DELETE * FROM Assets";
+			String query = "DELETE * FROM Portfolios;";
+			String query2 = "DELETE * FROM Assets;";
 			PreparedStatement ps = null;
 			PreparedStatement ps2 = null;
 		
@@ -587,7 +590,8 @@ public class PortfolioData implements databaseinfoandmethods{
 	 * @param portfolioCode
 	 */
 	public static void removePortfolio(String portfolioCode) {
-		
+
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			} catch (InstantiationException e) {
@@ -630,7 +634,6 @@ public class PortfolioData implements databaseinfoandmethods{
 				throw new RuntimeException(e);
 				
 			}
-		
 	}
 	
 	/**
@@ -719,7 +722,7 @@ public class PortfolioData implements databaseinfoandmethods{
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}	
-			String query = " insert into Assets(portfolioCode, assetCode, assetValue) values('"+portfolioCode+"','"+assetCode+"',"+value+");";
+			String query = " insert into Assets(portfolioCode, assetCode, assetModifier) values('"+portfolioCode+"','"+assetCode+"',"+value+");";
 			PreparedStatement ps = null;
 			try {
 				ps = conn.prepareStatement(query);

@@ -116,7 +116,7 @@ public interface databaseinfoandmethods {
 		//call connection method
 		Connection conn = connectionMethod();
 		//this query will gather all the asset information
-		String query = "select p.portfolioCode, L.assetCode, a.assetValue,"
+		String query = "select p.portfolioCode, L.assetCode,"
 				+ "a.assetModifier from Assets a JOIN Portfolio p ON p.portfolioCode = a.portfolioCode "
 				+ "JOIN AssetsList L ON L.assetCode = a.assetCode;";
 		//declare a new array list of type asset
