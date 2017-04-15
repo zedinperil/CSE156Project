@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.ArrayList;
 
 
-//persons is an abstract class with two subclasses: brokers and beneficiaries
 public class Persons{
-	//basic variables. Address has it's own class
+	//We completely reworked our Persons class again. We think this should be the final version of it. It is much more streamlined than ever.
+	//It consists of everything a person has. While address could be its own class, it is uneccesary complication.
+	
+	//everything a person consists of
 private String code;
 private String firstName;
 private String lastName;
@@ -20,6 +22,7 @@ private String Country;
 private String personType;
 private String SECID;
 
+	//constructor
 public Persons(String personCode, String FirstName, String LastName, String street, String city, String state, String zip, String country, String persontype, String secId){
 	super();
 	this.code= personCode;
@@ -37,6 +40,7 @@ public Persons(String personCode, String FirstName, String LastName, String stre
 /**
  * @return the code
  */
+//GETTERS AND SETTERS AUTO GENERATED
 public String getCode() {
 	return code;
 }

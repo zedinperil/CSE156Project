@@ -1,8 +1,11 @@
 package dataConverter;
 
 public class Email {
+	//This is a very simple class for emails. It was the best/only design choice to use. An email consists of a string Personcode and Email.
+	//The personCode serves as a link to a person.
 private String personCode;
 private String email;
+	//constructor
 	public Email(String PCODE, String EMAIL) {
 		this.setPersonCode(PCODE);
 		this.setEmail(EMAIL);

@@ -6,7 +6,7 @@ public class PrivateInvestment extends Assets{
 	private double BaseRateOfReturn;
 	private double OmegaMeasure;
 	private double TotalValue;
-	//constructor, inherits from asset abstract class
+	//constructor, inherits from asset class
 	public PrivateInvestment(String code,String label, double quarterlydividend, double baserateofreturn, double omegameasure, double totalvalue){
 		super(code, label);
 	//the constructor calls setter methods to set the various parts of a Private Investment

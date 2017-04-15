@@ -1,9 +1,14 @@
 package dataConverter;
 
 import java.util.List;
+	//this is definitely our most complex organization of our methods. This class is essentially an instance of an asset in a portfolio. 
+	//The other class, assets, is a general collection of all the available assets, which is a superclass of the 3 types. 
+
+	//The downside of this is that getting data from the collection of assets becomes sightly more difficult. It was worth it however, as we 
+	//totally restructured everything, and this outline makes the most sense in a database sense.
 public class Asset implements databaseinfoandmethods{
+	//This is what an asset object in a portfolio consists of.
 	String portfolioCode;
-	
 	String assetCode; 
 	String assetName; 
 	String assetType; 
@@ -17,12 +22,14 @@ public class Asset implements databaseinfoandmethods{
 	double quarterlyDividends;
 	double apr;
 	List<Assets>assetList=databaseinfoandmethods.getAssetList();
-
+	
+	//constructor
 	public Asset(String PortfolioCode, String AssetCode, double Value) {
 		this.portfolioCode= PortfolioCode;
 		this.assetCode = AssetCode;
 		this.assetValue= Value;
 	}	
+	//basic getters and setters
 	/**
 	 * @return the portfolioCode
 	 */
@@ -51,6 +58,7 @@ public class Asset implements databaseinfoandmethods{
 	 * @return the assetName
 	 */
 	public String getAssetName(String assetCode) {
+		//this getter obtains the asset name with the corresponding assetCode
 		for(int i=0; i<assetList.size();i++){
 			if(assetList.get(i).getAssetCode().equals(assetCode)){
 				assetName=assetList.get(i).getLabel();
@@ -68,7 +76,8 @@ public class Asset implements databaseinfoandmethods{
 	 * @return the assetType
 	 */
 	public String getAssetType(String assetCode) {
-
+		//This is very important to work correctly for us, as it's essential when doing calculations. Getting the asset type here makes it easier
+		//when using methods than going to find it in the other class
 		for(int i=0; i<assetList.size();i++){
 			if(assetList.get(i).getAssetCode().equals(assetCode)){
 				assetType=assetList.get(i).getAssetType();
@@ -99,7 +108,7 @@ public class Asset implements databaseinfoandmethods{
 	 * @return the returnRate
 	 */
 	public double getReturnRate(String assetcode) {
-	//annual return /value of individual asset
+	//annual return /value of individual asset. Pretty simple stuff.
 		returnRate= getAnnualReturn(assetcode)/getValue(assetcode);
 			
 		
@@ -132,7 +141,9 @@ public class Asset implements databaseinfoandmethods{
 	}
 	
 	public double getPrivateValue(String assetcode){
-	privateValue=0;
+	//this method will get the value of a private investment.This is very important to work correctly for us, as it's essential when doing calculations. Getting the asset type here makes it easier
+		//when using methods than going to find it in the other class
+		privateValue=0;
 		assetType= getAssetType(assetcode);
 		if(assetType.equals("P")){
 			for(int i=0; i<assetList.size();i++){
@@ -145,6 +156,9 @@ public class Asset implements databaseinfoandmethods{
 		return privateValue;
 	}
 	public double getSharePrice(String assetcode){
+	//this method will get the shareprice of a stock
+	//This is very important to work correctly for us, as it's essential when doing calculations. Getting the asset type here makes it easier
+	//when using methods than going to find it in the other class
 		sharePrice=0;
 		assetType= getAssetType(assetcode);
 		if(assetType.equals("S")){
@@ -159,6 +173,7 @@ public class Asset implements databaseinfoandmethods{
 		
 	}
 	public double getBaseRateOfReturn(String assetcode){
+	//this method will get the Base rate of return for stocks and private investments	
 		baseRateOfReturn=0;
 		assetType= getAssetType(assetcode);
 		if(assetType.equals("P")){
@@ -180,6 +195,7 @@ public class Asset implements databaseinfoandmethods{
 		return baseRateOfReturn;
 	}
 	public double getQuarterlyDividend(String assetcode){
+		//this method will get the quarterlydividend for stocks and private investments
 		quarterlyDividends=0;
 		assetType= getAssetType(assetcode);
 		if(assetType.equals("P")){
@@ -202,6 +218,8 @@ public class Asset implements databaseinfoandmethods{
 	}
 	
 	public double getApr(String assetcode){
+		//this method will get the apr for a deposit. It will find the correct Depoist apr value for the asset in the portfolio. Makes
+		//the equations much easier to do down the road
 		assetType= getAssetType(assetcode);
 		if(assetType.equals("D")){
 			for(int i=0; i<assetList.size(); i++){
@@ -213,7 +231,10 @@ public class Asset implements databaseinfoandmethods{
 		}
 		return apr;
 	}
-	 public double getAnnualReturn(String assetcode) {
+	 public double getAnnualReturn(String assetcode){
+		 //these methods will calculate the necessary values. The previous getters made these equations a lot easier to handle. it takes an
+		 //assetcode and will find the data needed for it. the for loop iterates through the list of assets in the portfolio. Depending on the type,
+		 //it will make the correct calculation
 		 double AnnualReturn = 0;
 		 assetType= getAssetType(assetcode);
 
@@ -237,6 +258,9 @@ public class Asset implements databaseinfoandmethods{
 		 }
 
 	 public double getValue(String assetcode){
+		//these methods will calculate the necessary values. The previous getters made these equations a lot easier to handle. it takes an
+		 //assetcode and will find the data needed for it. the for loop iterates through the list of assets in the portfolio. Depending on the type,
+		 //it will make the correct calculation
 		 double Value = 0;
 		 assetType= getAssetType(assetcode);
 		 for(int k=0; k<assetList.size(); k++){
@@ -263,6 +287,9 @@ public class Asset implements databaseinfoandmethods{
 		 return Value;
 	 }
 	 public double getRisk(String assetcode) {
+		//these methods will calculate the necessary values. The previous getters made these equations a lot easier to handle. it takes an
+		 //assetcode and will find the data needed for it. the for loop iterates through the list of assets in the portfolio. Depending on the type,
+		 //it will make the correct calculation
 		 assetType= getAssetType(assetcode);
 		 for(int i=0; i<assetList.size(); i++){
 			 if(assetList.get(i).getAssetCode().equals(assetcode)){

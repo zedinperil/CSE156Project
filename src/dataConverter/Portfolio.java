@@ -9,7 +9,9 @@ import java.util.List;
 //we will need to slightly rework this class and how it pulls its data. 
 //But for now, it does a good job of getting the information we need to get from our data
 public class Portfolio {
-	//these variables are all parts of a portfolio or inputs into a portfolio
+	//these variables are some parts of a portfolio or inputs into a portfolio
+	//it is ugly and needs a some cleaning up, as many of these are now being addressed in our asset class. To be frank, we are somewhat short on
+	//time and are working on more urgent matters. These will get cleaned up next assignment.
 	private String PortfolioCode;
 	private String OwnerCode;
 	private String ManagerCode;

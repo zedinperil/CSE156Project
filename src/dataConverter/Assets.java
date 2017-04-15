@@ -1,6 +1,6 @@
 package dataConverter;
-//this is a rework of our assets class.  It is much more simplified, and is designed largely around the sql.  For future works it will need to be
-//expanded, but for now, it does the job very well.
+//this is a rework of our assets class.  It is much more simplified, and is designed largely around the sql.  It has been expanded very much from 
+//our previous assignment, and fits the strcuture very well. It has 3 subclasses for the 3 types of assets.
 public abstract class Assets {
 	//variables that are used in the three types of assets
 	private String Code;
