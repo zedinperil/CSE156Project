@@ -41,11 +41,24 @@ public class PortfolioData implements databaseinfoandmethods{
 			throw new RuntimeException(e);
 		}	
 		String query = "DELETE * FROM Person";
+		String query2 = "DELETE * FROM Portfolio";
+		String query3 = "DELETE * FROM Assets";
+		String query4 = "DELETE * FROM Emails";
 		PreparedStatement ps = null;
+		PreparedStatement ps2 = null;
+		PreparedStatement ps3 = null;
+		PreparedStatement ps4 = null;
 		try {
 			ps = conn.prepareStatement(query);
-			conn.close();
 			ps.close();
+			ps2 = conn.prepareStatement(query2);
+			ps2.close();
+			ps3 = conn.prepareStatement(query3);
+			ps3.close();
+			ps4 = conn.prepareStatement(query4);
+			conn.close();
+			ps4.close();
+			
 		}catch(SQLException e) {
 			System.out.println("SQLException: ");
 			e.printStackTrace();
@@ -85,13 +98,30 @@ public class PortfolioData implements databaseinfoandmethods{
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}	
-			String query = "DELETE * FROM Person P WHERE P.personCode EQUALS "+personCode+"";
+			String query = "delete Emails from Emails where Emails.personId = "+personCode+"";
+			String query2 = "DELETE Pesron FROM Person P WHERE P.personCode EQUALS "+personCode+"";
+			String query3 = "DELETE p, a from Portfolio p join Assets a on p.portfolioId=a.portfolioId where p.ownerId = "+personCode+"";
+			String query4 = "delete Portfolio, Assets from Portfolio where Portfolio.managerId = "+personCode+"";
+			String query5 = "delete Portfolio, Assets from Portfolio where Portfolio.beneficiaryId = "+personCode+"";
+			
 			PreparedStatement ps = null;
+			PreparedStatement ps2 = null;
+			PreparedStatement ps3 = null;
+			PreparedStatement ps4 = null;
+			PreparedStatement ps5 = null;
+			
 			try {
 				ps = conn.prepareStatement(query);
-				
+				ps2 = conn.prepareStatement(query2);
+				ps3 = conn.prepareStatement(query3);
+				ps4 = conn.prepareStatement(query4);
+				ps5 = conn.prepareStatement(query5);
 				conn.close();
 				ps.close();
+				ps2.close();
+				ps3.close();
+				ps4.close();
+				ps5.close();
 			}catch(SQLException e) {
 				System.out.println("SQLException: ");
 				e.printStackTrace();
