@@ -112,7 +112,7 @@ public class InputOutput implements databaseinfoandmethods{
 			FeesSum+=PortfolioList.get(g).getFees();
 			System.out.println("Commissions :$"+DoubleFormat.format(PortfolioList.get(g).getCommissions()));
 			//adds the commissions of current portfolio to the sum of commissions for all portfolios
-			CommissionsSum+=PortfolioList.get(g).getCommissions()/2;
+			CommissionsSum+=PortfolioList.get(g).getCommissions();
 			System.out.println("Portfolio Sum of Annual Returns :$"+DoubleFormat.format(PortfolioList.get(g).getAnnualReturnSum()));
 			AnnualReturnSum += PortfolioList.get(g).getAnnualReturnSum();
 			System.out.println("Value of Portfolio after Commissions and fees: $"+DoubleFormat.format(PortfolioList.get(g).getTotalValue()-PortfolioList.get(g).getFees()-PortfolioList.get(g).getCommissions()));

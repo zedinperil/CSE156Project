@@ -259,11 +259,10 @@ public class Asset implements databaseinfoandmethods{
 		 for(int i=0; i<assetList.size(); i++){
 			if(assetList.get(i).getAssetCode().equals(assetCode)){
 				 if(assetType.equals("P")){
-					 PrivateInvestment Priv= (PrivateInvestment) assetList.get(i);
-					 AnnualReturn = getBaseRateOfReturn(assetcode)*(Priv.getTotalValue() * getValue(assetcode) * .01)+ (4 *(getQuarterlyDividend(assetcode) * getValue(assetcode))/100);
+					 AnnualReturn = (((getBaseRateOfReturn(assetcode))*(getValue(assetcode)))+ (4 *(getQuarterlyDividend(assetcode) * getAssetValue())));
 				 }
 				 if(assetType.equals("S")){
-					 AnnualReturn = ((getBaseRateOfReturn(assetcode)* getValue(assetcode)) + (4 *(getQuarterlyDividend(assetcode) * getAssetValue() )));
+					 AnnualReturn = ((getBaseRateOfReturn(assetcode)* getValue(assetcode)) + (4*(getQuarterlyDividend(assetcode) * getAssetValue())));
 				 }
 				 if(assetType.equals("D")){
 					 AnnualReturn = ((Math.pow(Math.E, getReturnRate(assetcode))-1)*getValue(assetcode));
@@ -283,7 +282,7 @@ public class Asset implements databaseinfoandmethods{
 			if(assetList.get(k).getAssetCode().equals(assetCode)){
 						if(assetType.equals("P")){
 							PrivateInvestment Priv= (PrivateInvestment)assetList.get(k);
-							Value = Priv.getTotalValue() * getAssetValue() * .01;
+							Value = Priv.getTotalValue() * getAssetValue();
 							 return Value;
 						}
 						if(assetType.equals("S")){

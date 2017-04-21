@@ -12,7 +12,7 @@ public class Stock extends Assets{
 		super(code, label);
 		//inherits three variables from superclass, the other variables are taken from input, and saved. Baserateofreturn string is parsed as a double and divided by 100 as it is a percent.
 		this.QuarterlyDividend=quarterlydividend;
-		this.BaseRateOfReturn=(baserateofreturn)/100;
+		this.BaseRateOfReturn=(baserateofreturn);
 		this.BetaMeasure=betameasure;
 		this.StockSymbol=stocksymbol;
 		this.SharePrice=shareprice;

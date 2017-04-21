@@ -7,6 +7,7 @@ package com.sdb; //DO NOT CHANGE THIS
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 //import java.sql.ResultSet;
 import java.sql.SQLException;
 //import java.util.ArrayList;
@@ -58,10 +59,10 @@ public class PortfolioData{
 		}
 		Connection conn = null;
 	//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
-		String query = "truncate Person";
-		String query2 = "truncate Portfolio";
-		String query3 = "truncate Assets";
-		String query4 = "truncate Emails";
+		String query = "delete from Person";
+		String query2 = "delete from Portfolio";
+		String query3 = "delete from Assets";
+		String query4 = "delete from Emails";
 		PreparedStatement ps = null;
 		PreparedStatement ps2 = null;
 		PreparedStatement ps3 = null;
@@ -69,19 +70,19 @@ public class PortfolioData{
 		try {
 			conn=  connectionMethod();
 
-			ps = conn.prepareStatement(query);
-			ps.executeUpdate();
-			ps.close();
-			ps2 = conn.prepareStatement(query2);
-			ps2.executeUpdate();
-			ps2.close();
+			ps4 = conn.prepareStatement(query4);
+			ps4.executeUpdate();
+			ps4.close();
 			ps3 = conn.prepareStatement(query3);
 			ps3.executeUpdate();
 			ps3.close();
-			ps4 = conn.prepareStatement(query4);
-			ps4.executeUpdate();
+			ps2 = conn.prepareStatement(query2);
+			ps2.executeUpdate();
+			ps2.close();
+			ps = conn.prepareStatement(query);
+			ps.executeUpdate();
+			ps.close();
 			conn.close();
-			ps4.close();
 			
 		}catch(SQLException e) {
 			System.out.println("SQLException: ");
@@ -112,11 +113,11 @@ public class PortfolioData{
 			}
 			Connection conn = null;
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
-			String query = "delete Emails from Emails where Emails.personId = '"+personCode+"'";
-			String query2 = "DELETE Pesron FROM Person P WHERE P.personCode EQUALS '"+personCode+"'";
-			String query3 = "DELETE p, a from Portfolio p join Assets a on p.portfolioCode=a.portfolioCode where p.ownerCode = '"+personCode+"'";
-			String query4 = "delete Portfolio, Assets from Portfolio where Portfolio.managerCode = '"+personCode+"'";
-			String query5 = "delete Portfolio, Assets from Portfolio where Portfolio.beneficiaryCode = '"+personCode+"'";
+			String query = "delete Emails from Emails where Emails.personId = ?";
+			String query2 = "DELETE Pesron FROM Person P WHERE P.personCode EQUALS ?";
+			String query3 = "DELETE p, a from Portfolio p join Assets a on p.portfolioCode=a.portfolioCode where p.ownerCode = ?";
+			String query4 = "delete Portfolio, Assets from Portfolio where Portfolio.managerCode = ?";
+			String query5 = "delete Portfolio, Assets from Portfolio where Portfolio.beneficiaryCode = ?";
 			
 			PreparedStatement ps = null;
 			PreparedStatement ps2 = null;
@@ -132,6 +133,12 @@ public class PortfolioData{
 				ps3 = conn.prepareStatement(query3);
 				ps4 = conn.prepareStatement(query4);
 				ps5 = conn.prepareStatement(query5);
+				ps . setString (1 , personCode) ;
+				ps2 . setString (1 , personCode) ;
+				ps3 . setString (1 , personCode) ;
+				ps4 . setString (1 , personCode) ;
+				ps5 . setString (1 , personCode) ;
+
 				ps.executeUpdate();
 				ps2.executeUpdate();
 				ps3.executeUpdate();
@@ -217,12 +224,22 @@ public class PortfolioData{
 			Connection conn = null;
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
 
-			String query = "insert into Person(personCode, firstName, lastName, persontype, secId, street, city, state, country, zip) values('"+personCode+"','"+firstName+"','"+lastName+"','"+brokerType+"','"+secBrokerId+"','"+street+"','"+city+"','"+state+"','"+country+"','"+zip+"');";
+			String query = "insert into Person(personCode, firstName, lastName, persontype, secId, street, city, state, country, zip) values(?,?,?,?,?,?,?,?,?,?);";
 			PreparedStatement ps = null;
 			try {
 				conn=  connectionMethod();
 
 				ps = conn.prepareStatement(query);
+				ps . setString (1 , personCode) ;
+				ps . setString (2 , firstName) ;
+				ps . setString (3 , lastName) ;
+				ps . setString (4 , brokerType) ;
+				ps . setString (5 , secBrokerId) ;
+				ps . setString (6 , street) ;
+				ps . setString (7 , city) ;
+				ps . setString (8 , state) ;
+				ps . setString (9 , country) ;
+				ps . setString (10 , zip) ;
 				ps.executeUpdate();
 				conn.close();
 				ps.close();
@@ -268,12 +285,14 @@ public class PortfolioData{
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
 
 
-			String query = " insert into Emails(personCode, email) values ('"+personCode+"','"+email+"');";
+			String query = " insert into Emails(personCode, email) values (?,?);";
 			PreparedStatement ps = null;
 			try {
 				conn=  connectionMethod();
 
 				ps = conn.prepareStatement(query);
+				ps.setString(1, personCode);
+				ps.setString(2, email);
 				ps.executeUpdate();
 				conn.close();
 				ps.close();
@@ -310,11 +329,11 @@ public class PortfolioData{
 
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
 
-			String query = "truncate PrivateInvestment;";
-			String query2= "truncate Stock;";
-			String query3= "truncate Deposit;";
-			String query4= "truncate AssetsList;";
-			String query5= "truncate Assets;";
+			String query = "delete from PrivateInvestment;";
+			String query2= "delete from Stock;";
+			String query3= "delete from Deposit;";
+			String query4= "delete from AssetsList;";
+			String query5= "delete from Assets;";
 			
 			PreparedStatement ps = null;
 			PreparedStatement ps2= null;
@@ -374,11 +393,11 @@ public class PortfolioData{
 			Connection conn = null;
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
 
-			String query = "delete privateInvestment FROM PrivateInvestment WHERE privateInvestment.assetCode EQUALS '"+assetCode+"'";
-			String query2 = "delete stock FROM Stock WHERE stock.assetCode EQUALS '"+assetCode+"'";
-			String query3 = "delete deposit FROM Deposit WHERE deposit.assetCode EQUALS '"+assetCode+"'";
-			String query4 = "delete AnAsset From AssetsList WHERE AnAsset.assetCode EQUALS '"+assetCode+"'";
-			String query5 = "delete aAsset From Assets WHERE aAsset.assetCode EQUALS '"+assetCode+"'";
+			String query = "delete privateInvestment FROM PrivateInvestment WHERE privateInvestment.assetCode EQUALS ?";
+			String query2 = "delete stock FROM Stock WHERE stock.assetCode EQUALS ?";
+			String query3 = "delete deposit FROM Deposit WHERE deposit.assetCode EQUALS ?";
+			String query4 = "delete AnAsset From AssetsList WHERE AnAsset.assetCode EQUALS ?";
+			String query5 = "delete aAsset From Assets WHERE aAsset.assetCode EQUALS ?";
 			PreparedStatement ps = null;
 			PreparedStatement ps2 = null;
 			PreparedStatement ps3 = null;
@@ -392,7 +411,12 @@ public class PortfolioData{
 				ps3 = conn.prepareStatement(query3);
 				ps4 = conn.prepareStatement(query4);
 				ps5 = conn.prepareStatement(query5);
-				
+				ps . setString (1 , assetCode) ;
+				ps2 . setString (1 , assetCode) ;
+				ps3 . setString (1 , assetCode) ;
+				ps4 . setString (1 , assetCode) ;
+				ps5 . setString (1 , assetCode) ;
+
 				ps.executeUpdate();
 				ps2.executeUpdate();
 				ps3.executeUpdate();
@@ -447,19 +471,24 @@ public class PortfolioData{
 			Connection conn = null;
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
 			
-			String query = "insert into Deposit( assetCode, assetName, apr) values('"+assetCode+"', '"+label+"',"+apr+");";
-			String query2= "insert into AssetsList(assetCode, assetType, assetName) values('"+assetCode+"','D','"+label+"');";
+			String query = "insert into Deposit( assetCode, assetName, apr) values(?, ?,"+apr+");";
+			String query2= "insert into AssetsList(assetCode, assetType, assetName) values(?,'D',?);";
 			PreparedStatement ps = null;
 			PreparedStatement ps2= null;
 			try {
 				conn=  connectionMethod();
 				ps = conn.prepareStatement(query);
 				ps2 = conn.prepareStatement(query2);
-				ps.executeUpdate();
+				ps . setString (1 , assetCode) ;
+				ps . setString (2 , label) ;
+				ps2 . setString (1 , assetCode) ;
+				ps2 . setString (2 , label) ;
+
 				ps2.executeUpdate();
+				ps.executeUpdate();
 				conn.close();
-				ps.close();
 				ps2.close();
+				ps.close();
 			}catch(SQLException e) {
 				System.out.println("SQLException: ");
 				e.printStackTrace();
@@ -505,8 +534,8 @@ public class PortfolioData{
 			}
 			Connection conn = null;
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
-			String query = "insert into PrivateInvestment(assetCode, assetName, quarterlyDividend, baseRateOfReturn, omegaMeasure, pValue) values('"+assetCode+"','"+label+"',"+quarterlyDividend+","+baseRateOfReturn+","+baseOmega+","+totalValue+");";
-			String query2= "insert into AssetsList(assetCode, assetType, assetName) values('"+assetCode+"','P','"+label+"');";
+			String query = "insert into PrivateInvestment(assetCode, assetName, quarterlyDividend, baseRateOfReturn, omegaMeasure, pValue) values(?,?,"+quarterlyDividend+","+baseRateOfReturn+","+baseOmega+","+totalValue+");";
+			String query2= "insert into AssetsList(assetCode, assetType, assetName) values(?,'P',?);";
 
 			PreparedStatement ps = null;
 			PreparedStatement ps2=null;
@@ -514,11 +543,15 @@ public class PortfolioData{
 				conn=  connectionMethod();
 				ps = conn.prepareStatement(query);
 				ps2= conn.prepareStatement(query2);
-				ps.executeUpdate();
+				ps . setString (1 , assetCode) ;
+				ps . setString (2 , label) ;
+				ps2 . setString (1 , assetCode) ;
+				ps2 . setString (2 , label) ;
 				ps2.executeUpdate();
+				ps.executeUpdate();
 				conn.close();
-				ps.close();
 				ps2.close();
+				ps.close();
 			}catch(SQLException e) {
 				System.out.println("SQLException: ");
 				e.printStackTrace();
@@ -568,8 +601,8 @@ public class PortfolioData{
 			Connection conn = null;
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
 
-			String query = "insert into Stock(assetCode, assetName, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice) values('"+assetCode+"','"+label+"',"+quarterlyDividend+","+baseRateOfReturn+","+beta+",'"+stockSymbol+"',"+sharePrice+");";
-			String query2= "insert into AssetsList(assetCode, assetType, assetName) values('"+assetCode+"','S','"+label+"');";
+			String query = "insert into Stock(assetCode, assetName, quarterlyDividend, baseRateOfReturn, betaMeasure, stockSymbol, sharePrice) values(?,?,"+quarterlyDividend+","+baseRateOfReturn+","+beta+",?,"+sharePrice+");";
+			String query2= "insert into AssetsList(assetCode, assetType, assetName) values(?,'S',?);";
 
 			PreparedStatement ps = null;
 			PreparedStatement ps2 = null;
@@ -577,12 +610,17 @@ public class PortfolioData{
 				conn=  connectionMethod();
 				ps = conn.prepareStatement(query);
 				ps2 = conn.prepareStatement(query2);
-				ps.executeUpdate();
+				ps . setString (1 , assetCode) ;
+				ps . setString (2 , label) ;
+				ps . setString(3 , stockSymbol);
+				ps2 . setString (1 , assetCode) ;
+				ps2 . setString (2 , label) ;
 				ps2.executeUpdate();
+				ps.executeUpdate();
 				
 				conn.close();
-				ps.close();
 				ps2.close();
+				ps.close();
 			}catch(SQLException e) {
 				System.out.println("SQLException: ");
 				e.printStackTrace();
@@ -613,8 +651,8 @@ public class PortfolioData{
 			Connection conn = null;
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
 	
-			String query = "truncate Portfolio;";
-			String query2 = "truncate Assets;";
+			String query = "DELETE FROM Portfolio;";
+			String query2 = "DELETE FROM Assets;";
 	
 			PreparedStatement ps = null;
 			PreparedStatement ps2 = null;
@@ -625,10 +663,9 @@ public class PortfolioData{
 
 				ps = conn.prepareStatement(query);
 				ps2 = conn.prepareStatement(query2);
-				ps.executeUpdate();
 				ps2.executeUpdate();
+				ps.executeUpdate();
 	
-
 				conn.close();
 				ps.close();
 				ps2.close();
@@ -669,8 +706,8 @@ public class PortfolioData{
 			}
 			Connection conn = null;
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
-			String query = "DELETE portfolio FROM Portfolio WHERE portfolio.portfolioCode EQUALS "+portfolioCode+"";
-			String query2 = "DELETE aAsset FROM Assets WHERE aAsset.portfolioCode EQUALS "+portfolioCode+"";
+			String query = "DELETE portfolio FROM Portfolio WHERE portfolio.portfolioCode EQUALS ?";
+			String query2 = "DELETE aAsset FROM Assets WHERE aAsset.portfolioCode EQUALS ?";
 			PreparedStatement ps = null;
 			PreparedStatement ps2 = null;
 			try {
@@ -678,6 +715,8 @@ public class PortfolioData{
 
 				ps = conn.prepareStatement(query);
 				ps2 = conn.prepareStatement(query2);
+				ps . setString (1 , portfolioCode) ;
+				ps2 . setString (1 , portfolioCode) ;
 				ps.executeUpdate();
 				ps2.executeUpdate();
 				conn.close();
@@ -731,12 +770,54 @@ public class PortfolioData{
 			Connection conn = null;
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
 	
-			String query = " insert into Portfolio(portfolioCode, ownerCode, managerCode, beneficiaryCode) values('"+portfolioCode+"','"+ownerCode+"','"+managerCode+"','"+beneficiaryCode+"');";
+			String query = " insert into Portfolio(portfolioCode, ownerCode, managerCode, beneficiaryCode) values(?,?,?,?);";
+			String query2 = "select P.personCode from Person P;";
+			boolean pcodeExists=false;
+			boolean manCodeExists=false;
+			boolean bfcCodeExists=false;
 			PreparedStatement ps = null;
+			PreparedStatement ps2= null;
 			try {
 				conn=  connectionMethod();
 
 				ps = conn.prepareStatement(query);
+				ps2 = conn.prepareStatement(query2);
+
+				ps . setString (1 , portfolioCode) ;
+				ps . setString (2 , ownerCode) ;
+				ps . setString (3 , managerCode) ;
+				ps . setString (4 , beneficiaryCode) ;
+				ResultSet rs = null;
+				ps2= conn.prepareStatement(query2);
+
+				rs= ps2.executeQuery();
+				while(rs.next()){
+					String Pcode=rs.getString("personCode");
+					if(Pcode.equals(ownerCode)){
+						ps.setString(2, ownerCode);		
+						pcodeExists=true;
+					}
+					if(Pcode.equals(managerCode)){
+						ps.setString(3,  managerCode);
+						manCodeExists=true;
+					}
+					if(Pcode.equals(beneficiaryCode)){
+						ps.setString(4,  beneficiaryCode);
+						bfcCodeExists=true;
+					}
+				}
+				if(!pcodeExists){
+					ps.setString(2, null);		
+	
+				}
+				if(!manCodeExists){
+					ps.setString(3,  null);
+
+				}
+				if(!bfcCodeExists){
+					ps.setString(4,  null);
+
+				}
 				ps.executeUpdate();
 				conn.close();
 				ps.close();
@@ -784,13 +865,25 @@ public class PortfolioData{
 			Connection conn = null;
 		//we will try to create a connection with the server, if a connection fails, a runtime exception is thrown
 	
-			String query = " insert into Assets(portfolioCode, assetCode, assetModifier) values('"+portfolioCode+"','"+assetCode+"',"+value+");";
+			String query = " insert into Assets(portfolioCode, assetCode, assetModifier) values(?,?,"+value+");";
+			String query2 = "select L.assetCode from AssetsList L;";
 			PreparedStatement ps = null;
+			PreparedStatement ps2 = null;
+			ResultSet rs = null;
 			try {
 
 				conn=  connectionMethod();
 				ps = conn.prepareStatement(query);
+				ps2= conn.prepareStatement(query2);
+				ps . setString (1 , portfolioCode) ;
+				ps . setString (2 , assetCode) ;
+				rs= ps2.executeQuery();
+				while(rs.next()){
+				String code=rs.getString("assetCode");
+				if(code.equals(assetCode)){
 				ps.executeUpdate();
+				}
+				}
 				conn.close();
 				ps.close();
 			}catch(SQLException e) {
