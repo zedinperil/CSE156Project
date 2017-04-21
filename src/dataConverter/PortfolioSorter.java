@@ -1,12 +1,31 @@
 package dataConverter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface PortfolioSorter {
 
-	public static void addPortfolioSorted(List<Portfolio> portfolioArray, Portfolio port){
+	public static List<Portfolio> addPortfolioSortedByOwnerName(List<Portfolio> portfolioArray, Portfolio port){
+		for(int i=0; i<portfolioArray.size(); i++){
+			
+		}
 		
+		return portfolioArray;
+	}
 
+	public static List<Portfolio> addPortfolioSortedByManagerTypeAndName(List<Portfolio> portfolioArray, Portfolio port){
+		for(int i=0; i<portfolioArray.size(); i++){
+			
+		}
+		
+		return portfolioArray;
+	}
+	public static List<Portfolio> addPortfolioSortedByTotalValue(List<Portfolio> portfolioArray, Portfolio port){
+		for(int i=0; i<portfolioArray.size(); i++){
+			
+		}
+
+		return portfolioArray;
 	}
 //	public static void insertionSort (List<Portfolio> portfolioArray()) {
 //		 Portfolio tempPort;

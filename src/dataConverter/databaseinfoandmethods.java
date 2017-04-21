@@ -27,7 +27,7 @@ public interface databaseinfoandmethods extends PortfolioSorter {
 		}	
 		return conn;
 	}
-	public static List<Portfolio> getPortfolios(){
+	public static List<List<Portfolio>> getPortfolios(){
 		//this method will get store the information we need for portfolios.	
 		//these are a series of try catch statements meant to catch fatal errors.  It will help us for bug testing tremendously
 		try {
@@ -56,7 +56,11 @@ public interface databaseinfoandmethods extends PortfolioSorter {
 				+ "LEFT JOIN Person m on m.personCode=p.managerCode "
 				+ "LEFT JOIN Person b on b.personCode=p.beneficiaryCode;";
 		//declare a new portfolio arraylist
-		List<Portfolio> portfolios= new ArrayList<Portfolio>();
+		List<List<Portfolio>> portfolioListList= new ArrayList<List<Portfolio>>();
+		List<Portfolio> portfoliosSortedByOwner= new ArrayList<Portfolio>();
+		List<Portfolio> portfoliosSortedByManagerType= new ArrayList<Portfolio>();
+		List<Portfolio> portfoliosSortedByTotalValue= new ArrayList<Portfolio>();
+
 		//declare a result set and preparedstatement to use the querry and get the information
 	PreparedStatement ps = null;
 	ResultSet rs = null;
@@ -76,8 +80,13 @@ public interface databaseinfoandmethods extends PortfolioSorter {
 				beneficiaryCode="none";
 			}
 			Portfolio port = new Portfolio(PortfolioCode, ownerCode, managerCode, beneficiaryCode);
-			PortfolioSorter.addPortfolioSorted(portfolios, port);
+			portfoliosSortedByOwner= PortfolioSorter.addPortfolioSortedByOwnerName(portfoliosSortedByOwner, port);
+			portfoliosSortedByManagerType= PortfolioSorter.addPortfolioSortedByManagerTypeAndName(portfoliosSortedByManagerType, port);
+			portfoliosSortedByTotalValue= PortfolioSorter.addPortfolioSortedByTotalValue(portfoliosSortedByTotalValue, port);
 		} 
+		portfolioListList.add(portfoliosSortedByOwner);
+		portfolioListList.add(portfoliosSortedByManagerType);
+		portfolioListList.add(portfoliosSortedByTotalValue);
 		//close the result set and preparedstatement
 		 if ( rs != null && ! rs . isClosed () )
 			 rs . close () ;
@@ -92,7 +101,7 @@ public interface databaseinfoandmethods extends PortfolioSorter {
 			throw new RuntimeException(e);
 		}
 	//return the portfolio arraylist
-	return portfolios;
+	return portfolioListList;
 	}
 	//this is a very similar method. We are gathering all the data for assets
 	public static List<Asset> getAssets(){

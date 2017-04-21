@@ -16,9 +16,9 @@ public class InputOutput implements databaseinfoandmethods{
 		RiskFormat.setMinimumFractionDigits(4);
 		List<Asset> AssetList= new ArrayList<Asset>();
 		List<Portfolio> PortfolioList= new ArrayList<Portfolio>();
-
+		List<List<Portfolio>> PortfolioListList= new ArrayList<List<Portfolio>>();
 		//create two array lists, one of portfolios and one of assets, calling methods in our interface class
-		PortfolioList= databaseinfoandmethods.getPortfolios();
+		PortfolioListList= databaseinfoandmethods.getPortfolios();
 		AssetList= databaseinfoandmethods.getAssets();
 		
 		//print formatted data. Many of the lines are formatting to make it look pretty.
