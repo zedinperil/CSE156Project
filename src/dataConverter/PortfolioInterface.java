@@ -9,6 +9,7 @@ public interface PortfolioInterface extends databaseinfoandmethods {
 	List<Asset> Assets= databaseinfoandmethods.getAssets();
 	//this is a very useful method we created to avoid having to iterate through assets that are not in a portfoliocode. Returns an asset list
 	//that are only in a given portfolio code
+
 	public static List<Asset> getRelevantAssets(String PortfolioCode){
 		
 		List<Asset> NewAssets= new ArrayList<Asset>();
@@ -70,21 +71,13 @@ public interface PortfolioInterface extends databaseinfoandmethods {
 	}
 	//This method takes the assets in a portfolio and will sum the individual sums in a portfolio. Returns the sum which is a double
 	public static double getTotalPortfolioValue(List<Asset> RelevantAssets){
-		double Value = 0;
+		double totalValue=0;
 		//iterates through the list of relevant assets, checks the type, and does the according equation.
 		for(int k=0; k<RelevantAssets.size(); k++){
-				if(RelevantAssets.get(k).getAssetType(RelevantAssets.get(k).assetCode).equals("P")){
-					Value += RelevantAssets.get(k).getPrivateValue(RelevantAssets.get(k).assetCode) * RelevantAssets.get(k).assetValue * .01;
-				}
-				if(RelevantAssets.get(k).getAssetType(RelevantAssets.get(k).assetCode).equals("S")){
-					Value += RelevantAssets.get(k).getSharePrice(RelevantAssets.get(k).assetCode) * RelevantAssets.get(k).assetValue;
-				}
-				if(RelevantAssets.get(k).getAssetType(RelevantAssets.get(k).assetCode).equals("D")){
-					Value += RelevantAssets.get(k).assetValue;
-				}
+					totalValue+= RelevantAssets.get(k).getValue(RelevantAssets.get(k).assetCode);
 			}
 		//returns the sum of the values for each individual asset.
-		return Value;
+		return totalValue;
 	}
 	//Gets the sum of annual returns. Same process as the above method, just simplified as we saw a good way to make it easier. We left the above
 	//method for the sake of knowing we can do it two different ways, and that the written out method could be useful for future use.
@@ -102,7 +95,6 @@ public interface PortfolioInterface extends databaseinfoandmethods {
 		double ReturnRate = 0;
 				o=0;
 				while(o<RelevantAssets.size()){
-						
 						double	AnnualReturn = RelevantAssets.get(o).getAnnualReturn(RelevantAssets.get(o).getAssetCode());
 							ReturnRate+= AnnualReturn/ getTotalPortfolioValue(RelevantAssets);			
 				o++;
@@ -115,7 +107,7 @@ public interface PortfolioInterface extends databaseinfoandmethods {
 		double risksum=0;
 		double AggRisk=0;
 			for(int o=0; o<RelevantAssets.size(); o++){
-					temprisk= (RelevantAssets.get(o).getRisk(RelevantAssets.get(o).getAssetCode())*RelevantAssets.get(o).getValue(RelevantAssets.get(o).getAssetCode()))/getTotalPortfolioValue(RelevantAssets);
+					temprisk= ((RelevantAssets.get(o).getRisk(RelevantAssets.get(o).getAssetCode())*RelevantAssets.get(o).getValue(RelevantAssets.get(o).getAssetCode()))/getTotalPortfolioValue(RelevantAssets));
 					risksum+=temprisk;
 				}
 			AggRisk=risksum;

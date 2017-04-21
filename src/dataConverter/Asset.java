@@ -109,7 +109,25 @@ public class Asset implements databaseinfoandmethods{
 	 */
 	public double getReturnRate(String assetcode) {
 	//annual return /value of individual asset. Pretty simple stuff.
-		returnRate= getAnnualReturn(assetcode)/getValue(assetcode);
+		 assetType= getAssetType(assetcode);
+
+		 for(int i=0; i<assetList.size(); i++){
+			if(assetList.get(i).getAssetCode().equals(assetCode)){
+				 if(assetType.equals("P")){
+						returnRate= getAnnualReturn(assetcode)/getValue(assetcode);
+
+				 }
+				 if(assetType.equals("S")){
+						returnRate= getAnnualReturn(assetcode)/getValue(assetcode);
+
+				 }
+				 if(assetType.equals("D")){
+					 Deposit Dep= (Deposit) assetList.get(i);
+						returnRate= Dep.getApr();
+
+				 }	 
+			}
+		 } 
 			
 		
 		return returnRate;
@@ -242,15 +260,13 @@ public class Asset implements databaseinfoandmethods{
 			if(assetList.get(i).getAssetCode().equals(assetCode)){
 				 if(assetType.equals("P")){
 					 PrivateInvestment Priv= (PrivateInvestment) assetList.get(i);
-					 AnnualReturn = getBaseRateOfReturn(assetcode)*(Priv.getTotalValue() * getValue(assetcode) * .01)+ (4 *(getQuarterlyDividend(assetcode) * getValue(assetcode) * .01));
+					 AnnualReturn = getBaseRateOfReturn(assetcode)*(Priv.getTotalValue() * getValue(assetcode) * .01)+ (4 *(getQuarterlyDividend(assetcode) * getValue(assetcode))/100);
 				 }
 				 if(assetType.equals("S")){
-					 Stock Stok= (Stock) assetList.get(i);
-					 AnnualReturn = (getBaseRateOfReturn(assetcode)* (Stok.getSharePrice() * getValue(assetcode) + (4 *(getQuarterlyDividend(assetcode) * getValue(assetcode) ))));
+					 AnnualReturn = ((getBaseRateOfReturn(assetcode)* getValue(assetcode)) + (4 *(getQuarterlyDividend(assetcode) * getAssetValue() )));
 				 }
 				 if(assetType.equals("D")){
-					 Deposit Dep= (Deposit) assetList.get(i);
-					 AnnualReturn = (Math.pow(Math.E, Dep.getApr() - 1)*getValue(assetcode));
+					 AnnualReturn = ((Math.pow(Math.E, getReturnRate(assetcode))-1)*getValue(assetcode));
 				 }	 
 			}
 		 } 
