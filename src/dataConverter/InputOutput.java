@@ -85,7 +85,7 @@ public class InputOutput implements databaseinfoandmethods{
 							System.out.println("Asset Code :"+AssetList.get(t).getAssetCode());
 							System.out.println("Asset Name :"+ AssetList.get(t).getAssetName(AssetList.get(t).getAssetCode()));
 							System.out.println("Asset Type :"+ AssetList.get(t).getAssetType(AssetList.get(t).getAssetCode()));
-							System.out.println("Asset Value Modifier :"+AssetList.get(t).getAssetValue());
+							System.out.println("Asset Quantifier Value2 :"+AssetList.get(t).getAssetValue());
 							//these are formatted using our formatter for doubles
 							System.out.println("Annual Return :$"+DoubleFormat.format(AssetList.get(t).getAnnualReturn(AssetList.get(t).getAssetCode())));
 						    System.out.println("Risk :"+RiskFormat.format(AssetList.get(t).getRisk(AssetList.get(t).getAssetCode())));
