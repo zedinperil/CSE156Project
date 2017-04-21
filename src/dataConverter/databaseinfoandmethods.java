@@ -9,7 +9,7 @@ import java.util.List;
 //This will be where our jdbc will be done, bringing in our sql data from the previous assignment and storing it for later output use
 //The plan is to read 2 querries, one that will gather all the data from the Assets, and the gathering portfolio information and names of 
 //owners, managers, and beneficiaries. Both of these will be stored into arraylists.
-public interface databaseinfoandmethods {
+public interface databaseinfoandmethods extends PortfolioSorter {
 	//these there strings simply store login information so we can access the mysql database
 	public static final String url = "jdbc:mysql://cse.unl.edu/tzinsmaster";
 	public static final String username = "tzinsmaster";
@@ -76,8 +76,7 @@ public interface databaseinfoandmethods {
 				beneficiaryCode="none";
 			}
 			Portfolio port = new Portfolio(PortfolioCode, ownerCode, managerCode, beneficiaryCode);
-			
-			portfolios.add(port);
+			PortfolioSorter.addPortfolioSorted(portfolios, port);
 		} 
 		//close the result set and preparedstatement
 		 if ( rs != null && ! rs . isClosed () )
