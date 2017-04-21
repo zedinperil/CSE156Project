@@ -1,7 +1,0 @@
-WHAT WE NEED TO DO:
-1. FIX DATABASE FOR DIFFERENT KINDS OF ASSETS
-2. FIX OLD PROJECT TO WORK WITH NEW IMPLEMENTATION
-2a. Use calculation methods in old portfolio.java with the new database functions
-2b. Change what it means to be a person
-2c. change what it means to be an asset, use polymorphism correctly
-3. IMPLEMENT THE SHIT THAT NEEDS TO BE IMPLEMENTED FOR THE PORTFOLIODATA.JAVA
