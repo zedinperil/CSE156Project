@@ -58,14 +58,22 @@ public class Portfolio {
 	}
 	//end of basic getters
 	//this gets owner name by iterating through all persons until the personcode of the person is equal to ownercode
-	public String getOwnerName(){
-		ownerName= owner.getFirstName()+" "+owner.getLastName();
+	public String getOwnerFirstName(){
+		ownerName= owner.getFirstName();
+		return ownerName;
+	}
+	public String getOwnerLastName(){
+		ownerName= owner.getLastName();
 		return ownerName;
 	}
 	//this gets manager name by iterating through all persons until the personcode of the person is equal to managercode
 
-	public String getManagerName(){
-		managerName= manager.getFirstName()+" "+manager.getLastName();
+	public String getManagerFirstName(){
+		managerName= manager.getFirstName();
+		return managerName;
+	}
+	public String getManagerLastName(){
+		managerName= manager.getLastName();
 		return managerName;
 	}
 	//this gets beneficiary name by iterating through all persons until the personcode of the person is equal to beneficiarycode
