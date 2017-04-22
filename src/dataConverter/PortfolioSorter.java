@@ -15,7 +15,7 @@ public interface PortfolioSorter {
 			if(port.getOwnerLastName().compareTo(portfolioArray.get(i).getOwnerLastName()) == 0){
 				if(port.getOwnerFirstName().compareTo(portfolioArray.get(i).getOwnerFirstName())>0){
 					while(port.getOwnerFirstName().compareTo(portfolioArray.get(i).getOwnerFirstName()) > 0){
-						if(i<portfolioArray.size()){
+						if(i<portfolioArray.size()-1){
 						i++;
 						}
 					}
@@ -36,14 +36,14 @@ public interface PortfolioSorter {
 			}
 			if(port.getOwnerLastName().compareTo(portfolioArray.get(i).getOwnerLastName()) > 0){
 				   while(port.getOwnerLastName().compareTo(portfolioArray.get(i).getOwnerLastName()) > 0 && i<portfolioArray.size()){
-						if(i<portfolioArray.size()){
+						if(i<portfolioArray.size()-1){
 						i++;
 						}
 				    }	
 					if(port.getOwnerLastName().compareTo(portfolioArray.get(i).getOwnerLastName()) == 0){
 						if(port.getOwnerFirstName().compareTo(portfolioArray.get(i).getOwnerFirstName())>0 ){
 						while(port.getOwnerFirstName().compareTo(portfolioArray.get(i).getOwnerFirstName()) > 0 && i<portfolioArray.size()){
-							if(i<portfolioArray.size()){
+							if(i<portfolioArray.size()-1){
 							i++;
 							}
 						}
@@ -78,7 +78,150 @@ public interface PortfolioSorter {
 	
 		
 	public static List<Portfolio> addPortfolioSortedByManagerTypeAndName(List<Portfolio> portfolioArray, Portfolio port){
-//		for(int i=0; i<portfolioArray.size(); i++){
+		for(int i=0; i<portfolioArray.size(); i++ ){
+			if(port.getManagerType().equals("E")){
+				if(portfolioArray.isEmpty()){
+					portfolioArray.add(port);
+					return portfolioArray;
+				}
+				if(port.getManagerLastName().compareTo(portfolioArray.get(i).getManagerLastName()) == 0){
+					if(port.getManagerFirstName().compareTo(portfolioArray.get(i).getManagerFirstName())>0){
+						while(port.getManagerFirstName().compareTo(portfolioArray.get(i).getManagerFirstName()) > 0){
+							if(i<portfolioArray.size()-1){
+							i++;
+							}
+						}
+					    portfolioArray.add(i,port);
+						return portfolioArray;
+						}
+						if(port.getManagerFirstName().compareTo(portfolioArray.get(i).getManagerFirstName()) < 0){
+							  while(port.getManagerFirstName().compareTo(portfolioArray.get(i).getManagerFirstName()) < 0&& i>=0){	
+							    	i--;
+							    }
+							  portfolioArray.add(i,port);
+							  return portfolioArray;
+						}
+						if(port.getManagerFirstName().compareTo(portfolioArray.get(i).getManagerFirstName()) == 0){
+							portfolioArray.add(i, port);
+							return portfolioArray;
+						}		
+				}
+				if(port.getManagerLastName().compareTo(portfolioArray.get(i).getManagerLastName()) > 0){
+					   while(port.getManagerLastName().compareTo(portfolioArray.get(i).getManagerLastName()) > 0 && i<portfolioArray.size()){
+							if(i<portfolioArray.size()-1){
+							i++;
+							}
+					    }	
+						if(port.getManagerLastName().compareTo(portfolioArray.get(i).getManagerLastName()) == 0){
+							if(port.getManagerFirstName().compareTo(portfolioArray.get(i).getManagerFirstName())>0 ){
+							while(port.getManagerFirstName().compareTo(portfolioArray.get(i).getManagerFirstName()) > 0 && i<portfolioArray.size()){
+								if(i<portfolioArray.size()-1){
+								i++;
+								}
+							}
+						    portfolioArray.add(i,port);
+							return portfolioArray;
+							}
+							if(port.getManagerFirstName().compareTo(portfolioArray.get(i).getManagerFirstName()) < 0){
+								  while(port.getManagerFirstName().compareTo(portfolioArray.get(i).getManagerFirstName()) < 0&& i>=0){	
+								    	i--;
+								    }
+								  portfolioArray.add(i,port);
+								  return portfolioArray;
+							}
+							if(port.getManagerFirstName().compareTo(portfolioArray.get(i).getManagerFirstName()) == 0){
+								portfolioArray.add(i, port);
+								return portfolioArray;
+							}	
+						}
+					   	portfolioArray.add(i, port);
+						return portfolioArray;
+				}
+			
+			if(port.getManagerLastName().compareTo(portfolioArray.get(i).getManagerLastName()) <0){
+				portfolioArray.add(i,port);
+				return portfolioArray;
+			}
+			
+			
+			}
+			
+			if(port.getManagerType().equals("J")){
+				if(portfolioArray.isEmpty()){
+					portfolioArray.add(port);
+					return portfolioArray;
+				}
+				if(port.getManagerLastName().compareTo(portfolioArray.get(i).getManagerLastName()) == 0){
+					if(port.getManagerFirstName().compareTo(portfolioArray.get(i).getManagerFirstName())>0){
+						while(port.getManagerFirstName().compareTo(portfolioArray.get(i).getManagerFirstName()) > 0){
+							if(i<portfolioArray.size()-1){
+							i++;
+							}
+						}
+					    portfolioArray.add(i,port);
+						return portfolioArray;
+						}
+						if(port.getManagerFirstName().compareTo(portfolioArray.get(i).getManagerFirstName()) < 0){
+							  while(port.getManagerFirstName().compareTo(portfolioArray.get(i).getManagerFirstName()) < 0&& i>=0){	
+							    	i--;
+							    }
+							  portfolioArray.add(i,port);
+							  return portfolioArray;
+						}
+						if(port.getManagerFirstName().compareTo(portfolioArray.get(i).getManagerFirstName()) == 0){
+							portfolioArray.add(i, port);
+							return portfolioArray;
+						}		
+				}
+				if(port.getManagerLastName().compareTo(portfolioArray.get(i).getManagerLastName()) > 0){
+					   while(port.getManagerLastName().compareTo(portfolioArray.get(i).getManagerLastName()) > 0 && i<portfolioArray.size()){
+							if(i<portfolioArray.size()-1){
+							i++;
+							}
+					    }	
+						if(port.getManagerLastName().compareTo(portfolioArray.get(i).getManagerLastName()) == 0){
+							if(port.getManagerFirstName().compareTo(portfolioArray.get(i).getManagerFirstName())>0 ){
+							while(port.getManagerFirstName().compareTo(portfolioArray.get(i).getManagerFirstName()) > 0 && i<portfolioArray.size()){
+								if(i<portfolioArray.size()-1){
+								i++;
+								}
+							}
+						    portfolioArray.add(i,port);
+							return portfolioArray;
+							}
+							if(port.getManagerFirstName().compareTo(portfolioArray.get(i).getManagerFirstName()) < 0){
+								  while(port.getManagerFirstName().compareTo(portfolioArray.get(i).getManagerFirstName()) < 0&& i>=0){	
+								    	i--;
+								    }
+								  portfolioArray.add(i,port);
+								  return portfolioArray;
+							}
+							if(port.getManagerFirstName().compareTo(portfolioArray.get(i).getManagerFirstName()) == 0){
+								portfolioArray.add(i, port);
+								return portfolioArray;
+							}	
+						}
+					   	portfolioArray.add(i, port);
+						return portfolioArray;
+				}
+			
+			if(port.getManagerLastName().compareTo(portfolioArray.get(i).getManagerLastName()) <0){
+				portfolioArray.add(i,port);
+				return portfolioArray;
+			
+			}
+			
+			}
+			
+			else{
+				portfolioArray.add(portfolioArray.size(),port);
+				return portfolioArray;
+			}
+		}
+		
+		return portfolioArray;
+	}	
+		//		for(int i=0; i<portfolioArray.size(); i++){
 //			
 //			if(portfolioArray.isEmpty()){
 //				portfolioArray.add(port);
@@ -239,9 +382,9 @@ public interface PortfolioSorter {
 //						return portfolioArray;
 //			}
 //		}	
-		portfolioArray.add(port);
-		return portfolioArray;
-	}
+//		portfolioArray.add(port);
+//		return portfolioArray;
+//	}
 	
 	public static List<Portfolio> addPortfolioSortedByTotalValue(List<Portfolio> portfolioArray, Portfolio port){
 		for(int i=0; i<portfolioArray.size(); i++){
