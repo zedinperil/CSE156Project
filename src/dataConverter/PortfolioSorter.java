@@ -24,7 +24,7 @@ public interface PortfolioSorter {
 					return portfolioArray;
 				}
 				if(portfolioArray.get(i).getOwnerFirstName().compareTo(port.getOwnerFirstName()) < 0){
-					  while(i<portfolioArray.size()&& i>=0){
+					  while(i<portfolioArray.size() && i>=0){
 						  if(portfolioArray.get(i).getOwnerFirstName().compareTo(port.getOwnerFirstName()) == 0){
 								portfolioArray.add(i,port);
 								return portfolioArray;

@@ -19,11 +19,12 @@ public class InputOutput implements databaseinfoandmethods{
 		//create two array lists, one of portfolios and one of assets, calling methods in our interface class
 		PortfolioListList= databaseinfoandmethods.getPortfolios();
 		for(int i=0; i<PortfolioListList.size(); i++){
+		
 			if(i==0){
 				//print formatted data. Many of the lines are formatting to make it look pretty.
 				System.out.println("##########################################################################################################################");
 				System.out.println();
-				System.out.println("A Collection of "+PortfolioList.size()+" Portfolios, sorted by Owner First Name");
+				System.out.println("A Collection of "+PortfolioListList.get(i).size()+" Portfolios, sorted by Owner First Name");
 				System.out.println();
 				System.out.println("==========================================================================================================================");
 				System.out.println();
@@ -38,12 +39,12 @@ public class InputOutput implements databaseinfoandmethods{
 				//this is the sum of the annual returns of all portfolios
 				double AnnualReturnSum=0;
 				//while loop iterates through each portfolio
-				while( g<PortfolioList.size()){
+				while( g<PortfolioListList.get(i).size()){
 					//this little for loop is used to determine how many assets are within each portfolio, by checking the number of times in our asset arraylist has the same portfolio code as the current portfolio, and incrementing
 
 					//printing relevant info we have retrieved from our database, formatted just the same as in phase 3 of our project
 					//for retreiving information from our arraylists, we use the getter methods we have implemented into the relevant classes
-					System.out.println("PORTFOLIO #"+(g+1)+"/"+PortfolioList.size());
+					System.out.println("PORTFOLIO #"+(g+1)+"/"+PortfolioListList.get(i).size());
 					System.out.println();
 					System.out.println("Portfolio Code :"+PortfolioListList.get(i).get(g).getPortfolioCode());
 					System.out.println("Owner :"+PortfolioListList.get(i).get(g).getOwnerFirstName()+" "+PortfolioListList.get(i).get(g).getOwnerLastName());
@@ -80,7 +81,7 @@ public class InputOutput implements databaseinfoandmethods{
 					g++;
 				}
 				//now that we have gone through all of our portfolios, we list off our total summative data for all portfolios
-				System.out.println("ALL "+PortfolioList.size()+" PORTFOLIOS READ");
+				System.out.println("ALL "+PortfolioListList.get(i).size()+" PORTFOLIOS READ");
 				System.out.println();
 				System.out.println("SUMS OF PORTFOLIO VALUES");
 				System.out.println();
@@ -95,7 +96,7 @@ public class InputOutput implements databaseinfoandmethods{
 				//print formatted data. Many of the lines are formatting to make it look pretty.
 				System.out.println("##########################################################################################################################");
 				System.out.println();
-				System.out.println("A Collection of "+PortfolioList.size()+" Portfolios, Sorted by Manager Type, and then by Manager Name");
+				System.out.println("A Collection of "+PortfolioListList.get(i).size()+" Portfolios, Sorted by Manager Type, and then by Manager Name");
 				System.out.println();
 				System.out.println("==========================================================================================================================");
 				System.out.println();
@@ -110,12 +111,12 @@ public class InputOutput implements databaseinfoandmethods{
 				//this is the sum of the annual returns of all portfolios
 				double AnnualReturnSum=0;
 				//while loop iterates through each portfolio
-				while( g<PortfolioList.size()){
+				while( g<PortfolioListList.get(i).size()){
 					//this little for loop is used to determine how many assets are within each portfolio, by checking the number of times in our asset arraylist has the same portfolio code as the current portfolio, and incrementing
 				
 					//printing relevant info we have retrieved from our database, formatted just the same as in phase 3 of our project
 					//for retreiving information from our arraylists, we use the getter methods we have implemented into the relevant classes
-					System.out.println("PORTFOLIO #"+(g+1)+"/"+PortfolioList.size());
+					System.out.println("PORTFOLIO #"+(g+1)+"/"+PortfolioListList.get(i).size());
 					System.out.println();
 					System.out.println("Portfolio Code :"+PortfolioListList.get(i).get(g).getPortfolioCode());
 					System.out.println("Owner :"+PortfolioListList.get(i).get(g).getOwnerFirstName()+" "+PortfolioListList.get(i).get(g).getOwnerLastName());
@@ -146,13 +147,13 @@ public class InputOutput implements databaseinfoandmethods{
 					AnnualReturnSum += PortfolioListList.get(i).get(g).getAnnualReturnSum();
 					System.out.println("Value of Portfolio after Commissions and fees: $"+DoubleFormat.format(PortfolioListList.get(i).get(g).getTotalValue()-PortfolioListList.get(i).get(g).getFees()-PortfolioListList.get(i).get(g).getCommissions()));
 					System.out.println();
-					System.out.println("END OF PORTFOLIO #"+(g+1)+"/"+PortfolioList.size());
+					System.out.println("END OF PORTFOLIO #"+(g+1)+"/"+PortfolioListList.get(i).size());
 					System.out.println("=======================================================================================================================");
 					System.out.println("");
 					g++;
 				}
 				//now that we have gone through all of our portfolios, we list off our total summative data for all portfolios
-				System.out.println("ALL "+PortfolioList.size()+" PORTFOLIOS READ");
+				System.out.println("ALL "+PortfolioListList.get(i).size()+" PORTFOLIOS READ");
 				System.out.println();
 				System.out.println("SUMS OF PORTFOLIO VALUES");
 				System.out.println();
@@ -167,7 +168,7 @@ public class InputOutput implements databaseinfoandmethods{
 				//print formatted data. Many of the lines are formatting to make it look pretty.
 				System.out.println("##########################################################################################################################");
 				System.out.println();
-				System.out.println("A Collection of "+PortfolioList.size()+" Portfolios, sorted by Total Value");
+				System.out.println("A Collection of "+PortfolioListList.get(i).size()+" Portfolios, sorted by Total Value");
 				System.out.println();
 				System.out.println("==========================================================================================================================");
 				System.out.println();
@@ -182,12 +183,12 @@ public class InputOutput implements databaseinfoandmethods{
 				//this is the sum of the annual returns of all portfolios
 				double AnnualReturnSum=0;
 				//while loop iterates through each portfolio
-				while( g<PortfolioList.size()){
+				while( g<PortfolioListList.get(i).size()){
 					//this little for loop is used to determine how many assets are within each portfolio, by checking the number of times in our asset arraylist has the same portfolio code as the current portfolio, and incrementing
 			
 					//printing relevant info we have retrieved from our database, formatted just the same as in phase 3 of our project
 					//for retreiving information from our arraylists, we use the getter methods we have implemented into the relevant classes
-					System.out.println("PORTFOLIO #"+(g+1)+"/"+PortfolioList.size());
+					System.out.println("PORTFOLIO #"+(g+1)+"/"+PortfolioListList.get(i).size());
 					System.out.println();
 					System.out.println("Portfolio Code :"+PortfolioListList.get(i).get(g).getPortfolioCode());
 					System.out.println("Owner :"+PortfolioListList.get(i).get(g).getOwnerFirstName()+" "+PortfolioListList.get(i).get(g).getOwnerLastName());
@@ -218,13 +219,13 @@ public class InputOutput implements databaseinfoandmethods{
 					AnnualReturnSum += PortfolioListList.get(i).get(g).getAnnualReturnSum();
 					System.out.println("Value of Portfolio after Commissions and fees: $"+DoubleFormat.format(PortfolioListList.get(i).get(g).getTotalValue()-PortfolioListList.get(i).get(g).getFees()-PortfolioListList.get(i).get(g).getCommissions()));
 					System.out.println();
-					System.out.println("END OF PORTFOLIO #"+(g+1)+"/"+PortfolioList.size());
+					System.out.println("END OF PORTFOLIO #"+(g+1)+"/"+PortfolioListList.get(i).size());
 					System.out.println("=======================================================================================================================");
 					System.out.println("");
 					g++;
 				}
 				//now that we have gone through all of our portfolios, we list off our total summative data for all portfolios
-				System.out.println("ALL "+PortfolioList.size()+" PORTFOLIOS READ");
+				System.out.println("ALL "+PortfolioListList.get(i).size()+" PORTFOLIOS READ");
 				System.out.println();
 				System.out.println("SUMS OF PORTFOLIO VALUES");
 				System.out.println();
